@@ -260,7 +260,7 @@ class Solscan(DataLoader):
         return fin_df
 
     def get_account_export_transactions(self, accounts_in: Union[str, List],
-                                        type_in: str, from_time: int, to_time: int) -> pd.DataFrame:
+                                        type_in: str, from_time: int, to_time: int) -> List[str]:
         """
         Parameters
         ----------
@@ -268,7 +268,7 @@ class Solscan(DataLoader):
         -------
         """
         accounts = validate_input(accounts_in)
-        df_list=[]
+        csv_list=[]
         for account in accounts:
             params={'account': account,
                     'type': type_in,
@@ -276,12 +276,9 @@ class Solscan(DataLoader):
                     'toTime': to_time}
             # NOTE: need to do this to not return json
             response = self.session.get(ACCOUNT_EXPORT_TXNS_URL, params=params, headers=HEADERS)
-            #response = self.get_response(ACCOUNT_EXPORT_TXNS_URL, params=params, headers=HEADERS)
-            #df = pd.DataFrame(response)
-            #df_list.append(df)
-        #fin_df = pd.concat(df_list, keys=accounts, axis=1)
-        #return fin_df
-        return response
+            csv = response.content.decode('utf-8')
+            csv_list.append(csv)
+        return csv_list
 
     def get_account(self, accounts_in: Union[str, List]) -> pd.DataFrame:
         """
@@ -291,13 +288,14 @@ class Solscan(DataLoader):
         -------
         """
         accounts = validate_input(accounts_in)
-        df_list=[]
+        series_list = []
         for account in accounts:
             endpoint_url = ACCOUNT_ACCOUNT_URL.substitute(account=account)
-            response = self.get_response(endpoint_url)
-            df = pd.DataFrame(response)
-            df_list.append(df)
-        fin_df = pd.concat(df_list, keys=accounts, axis=1)
+            response = self.get_response(endpoint_url,
+                                         headers=HEADERS)
+            series = pd.Series(response)
+            series_list.append(series)
+        fin_df = pd.concat(series_list, keys=accounts, axis=1)
         return fin_df
 
     #################

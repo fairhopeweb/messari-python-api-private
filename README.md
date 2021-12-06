@@ -3,21 +3,27 @@ Messari provides a free API for crypto prices, market data metrics, on-chain met
 
 This documentation will provide the basic steps to start using messari’s python library.
 
+This repo is the private repo for internal use at Messari.
+Features in the library may or may not be 100% ready for release to the public but they can be useful internally.
+
+For any bugs, feature//integration requests, or asssistance reach out to:
+Roberto Talamas or Michael Kremer on slack.
+
 ## Remote Install
-To install the messari package remotely:
+To install the messari package remotely run this inside of any unix terminal:
 
 ```
-$> pip install git+https://github.com/messari/messari-python-api.git
+$> pip install git+https://github.com/messari/messari-python-api-private.git
 ```
 
 
 ## Local Install
 To install the messari package from the source:
 ```
-$> git clone https://github.com/messari/messari-python-api.git
-$> cd messari
-messari$> python -m pip install -r requirements.txt
-messari$> python setup.py install
+$> git clone https://github.com/messari/messari-python-api-private.git
+$> cd messari-python-api-private
+messari-python-api-private$> python -m pip install -r requirements.txt
+messari-python-api-private$> python setup.py install
 ```
 
 ## Quickstart
