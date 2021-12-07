@@ -5,7 +5,8 @@ import datetime
 import pandas as pd
 
 from messari.dataloader import DataLoader
-from messari.utils import validate_input, validate_datetime
+from messari.utils import validate_input, validate_datetime, validate_int
+from .helpers import int_to_hex
 
 # Refrence: https://docs.etherscan.io/
 
@@ -89,7 +90,7 @@ class Etherscan(DataLoader):
             response = self.get_response(BASE_URL, params=params)['result']
             tmp_df = pd.DataFrame(response)
             df_list.append(tmp_df)
-        transactions_df = pd.concat(df_list, keys=accounts, axis=1)
+        transactions_df = pd.concat(df_list, keys=transactions, axis=1)
         return transactions_df
 
     def get_block_range_internal_transactions(self, start_block: int, end_block: int, page: int=0, offset: int=0, ascending:bool=True) -> pd.DataFrame:
@@ -110,32 +111,31 @@ class Etherscan(DataLoader):
         return transactions_df
 
     def get_account_token_transfers(self, accounts_in: Union[str, List], tokens_in: Union[str, List]=None, start_block: int=None, end_block: int=None, page:int=0, offset:int=0, ascending:bool=True) -> pd.DataFrame:
-        # TODO optional contract filtering
-        # TODO block filtering
         """Returns the list of ERC-20 tokens transferred by an address, with optional filtering by token contract
         """
         sort = 'asc' if ascending else 'desc'
         accounts = validate_input(accounts_in)
-        if tokens_in:
-            tokens = validate_input(tokens_in)
-        else:
-            tokens=None
         df_list=[]
         for account in accounts:
             params = {'module': 'account',
                       'action': 'tokentx',
+                      'sort': sort,
+                      'page': page,
+                      'offset': offset,
                       'address': account}
             if start_block:
-                params.update({'startblock': start_block})
+                params.update({'startblock': str(start_block)})
             if end_block:
-                params.update({'endblock': start_block})
+                params.update({'endblock': str(start_block)})
             params.update(self.api_dict)
 
 
             # iterate through optional token filters
             response=[]
-            if tokens:
+            if tokens_in:
+                tokens = validate_input(tokens_in)
                 for token in tokens:
+                    params['contractaddress'] = token
                     response += self.get_response(BASE_URL, params=params)['result']
             else:
                 response = self.get_response(BASE_URL, params=params)['result']
@@ -146,12 +146,40 @@ class Etherscan(DataLoader):
         token_transfers_df = pd.concat(df_list, keys=accounts, axis=1)
         return token_transfers_df
 
-    def get_account_nft_transfers(self) -> pd.DataFrame:
-        # TODO more args
+    def get_account_nft_transfers(self, accounts_in: Union[str, List], nfts_in: Union[str, List]=None, start_block: int=None, end_block: int=None, page:int=0, offset:int=0, ascending:bool=True) -> pd.DataFrame:
         """Returns the list of ERC-721 ( NFT ) tokens transferred by an address, with optional filtering by token contract
         """
-        # TODO, gonna be the exact same as get_account_token_transfers
-        return
+        sort = 'asc' if ascending else 'desc'
+        accounts = validate_input(accounts_in)
+        df_list=[]
+        for account in accounts:
+            params = {'module': 'account',
+                      'action': 'tokennfttx',
+                      'sort': sort,
+                      'page': page,
+                      'offset': offset,
+                      'address': account}
+            if start_block:
+                params.update({'startblock': start_block})
+            if end_block:
+                params.update({'endblock': start_block})
+            params.update(self.api_dict)
+
+
+            # iterate through optional token filters
+            response=[]
+            if nfts_in:
+                nfts = validate_input(nfts_in)
+                for nft in nfts:
+                    response += self.get_response(BASE_URL, params=params)['result']
+            else:
+                response = self.get_response(BASE_URL, params=params)['result']
+
+
+            tmp_df = pd.DataFrame(response)
+            df_list.append(tmp_df)
+        nft_transfers_df = pd.concat(df_list, keys=accounts, axis=1)
+        return nft_transfers_df
 
     def get_account_blocks_mined(self, accounts_in: Union[str, List], block_type:str='blocks', page:int=0, offset:int=0) -> pd.DataFrame:
         # TODO more args
@@ -181,7 +209,7 @@ class Etherscan(DataLoader):
         for contract in contracts:
             params = {'module': 'contract',
                       'action': 'getabi',
-                      'address': account}
+                      'address': contract}
             params.update(self.api_dict)
             abi = self.get_response(BASE_URL, params=params)['result']
             abi_dict[contract] = abi
@@ -195,7 +223,7 @@ class Etherscan(DataLoader):
         for contract in contracts:
             params = {'module': 'contract',
                       'action': 'getsourcecode',
-                      'address': account}
+                      'address': contract}
             params.update(self.api_dict)
             response = self.get_response(BASE_URL, params=params)['result']
             tmp_df = pd.DataFrame(response)
@@ -236,22 +264,26 @@ class Etherscan(DataLoader):
 
     ##### Blocks
     # TODO, get pro
-    def get_block_reward(self, blocks_in: Union[str, List]) -> pd.DataFrame:
+    def get_block_reward(self, blocks_in: Union[int, List]) -> pd.DataFrame:
         """Returns the block reward and 'Uncle' block rewards
         """
-        blocks = validate_input(blocks_in)
+        blocks = validate_int(blocks_in)
+        series_list = []
         for block in blocks:
             params = {'module': 'block',
                       'action': 'getblockreward',
                       'blockno': block}
             params.update(self.api_dict)
             response = self.get_response(BASE_URL, params=params)['result']
-        return "TODO"
+            block_reward_series = pd.Series(response)
+            series_list.append(block_reward_series)
+        reward_df = pd.concat(series_list, keys=blocks, axis=1)
+        return reward_df
 
-    def get_block_countdown(self, blocks_in: Union[str, List]) -> pd.DataFrame:
+    def get_block_countdown(self, blocks_in: Union[int, List]) -> pd.DataFrame:
         """Returns the estimated time remaining, in seconds, until a certain block is mined
         """
-        blocks = validate_input(blocks_in)
+        blocks = validate_int(blocks_in)
         countdown_list=[]
         for block in blocks:
             params = {'module': 'block',
@@ -263,11 +295,11 @@ class Etherscan(DataLoader):
         countdown_df = pd.DataFrame(countdown_list)
         return countdown_df
 
-    def get_block_by_timestamp(self, times_in: Union[str, List], before: bool=True) -> pd.DataFrame:
+    def get_block_by_timestamp(self, times_in: Union[int, List], before: bool=True) -> pd.DataFrame:
         """Returns the block number that was mined at a certain timestamp (in unix)
         """
         closest = 'before' if before else 'after'
-        times = validate_input(times_in)
+        times = validate_int(times_in)
         blocks_list=[]
         for time in times:
             params = {'module': 'block',
@@ -275,25 +307,190 @@ class Etherscan(DataLoader):
                      'timestamp': time,
                      'closest': closest}
             params.update(self.api_dict)
-            response = self.get_response(BASE_URL, params=params)
+            response = self.get_response(BASE_URL, params=params)['result']
             blocks_list.append(response)
         blocks_df = pd.DataFrame(blocks_list)
         return blocks_df
 
     ##### Logs
-    # TODO, learn this
+    def get_logs(self, address: str, from_block: Union[int, str], to_block: Union[int, str]='latest',
+                 topic0: str=None, topic1: str=None, topic2: str=None, topic3: str=None,
+                 topic0_1_opr: str=None, topic1_2_opr: str=None, topic2_3_opr: str=None,
+                 topic0_2_opr: str=None, topic0_3_opr: str=None, topic1_3_opr: str=None) -> pd.DataFrame:
+
+        params = {'module': 'logs',
+                  'action': 'getlogs',
+                  'toBlock': to_block,
+                  'fromBlock': from_block,
+                  'address': address}
+        params.update(self.api_dict)
+
+        # topics
+        if topic0:
+            params['topic0'] = topic0
+        if topic1:
+            params['topic1'] = topic1
+        if topic2:
+            params['topic2'] = topic2
+        if topic3:
+            params['topic3'] = topic3
+
+        # operators
+        valid = ['and', 'or']
+        if topic0_1_opr in valid:
+            params['topic0_1_opr'] = topic0_1_opr
+        if topic1_2_opr in valid:
+            params['topic1_2_opr'] = topic1_2_opr
+        if topic2_3_opr in valid:
+            params['topic2_3_opr'] = topic2_3_opr
+        if topic0_2_opr in valid:
+            params['topic0_2_opr'] = topic0_2_opr
+        if topic0_3_opr in valid:
+            params['topic0_3_opr'] = topic0_3_opr
+        if topic1_3_opr in valid:
+            params['topic1_3_opr'] = topic1_3_opr
+
+        logs = self.get_response(BASE_URL, params=params)['result']
+        logs_df = pd.DataFrame(logs)
+        return logs_df
 
     ##### Geth/Parity Proxy
     def get_eth_block_number(self) -> int:
         """Returns the number of most recent block
         """
-        return 0
+        params = {'module': 'proxy',
+                  'action': 'eth_blockNumber'}
+        params.update(self.api_dict)
+        block_num_hex = self.get_response(BASE_URL, params=params)['result']
+        block_num = int(block_num_hex, 16)
+        return block_num
 
-    def get_eth_block(self, blocks_in) -> pd.DataFrame:
+    def get_eth_block(self, blocks_in: Union[int, List]) -> pd.DataFrame:
         """Returns information about a block by block number
         """
-        return "TODO GETH"
-    # TODO more
+        blocks = validate_int(blocks_in)
+        blocks_hex = int_to_hex(blocks)
+
+        series_list = []
+        for block in blocks_hex:
+            params = {'module': 'proxy',
+                      'action': 'eth_getBlockByNumber',
+                      'tag': block,
+                      'boolean': 'true'}
+            params.update(self.api_dict)
+            response = self.get_response(BASE_URL, params=params)['result']
+            block_series = pd.Series(response)
+            series_list.append(block_series)
+        series_df = pd.concat(series_list, keys=blocks, axis=1)
+        return series_df
+
+    def get_eth_uncle(self, block: int, index: int):
+        """Returns information about a uncle by block number and index
+        """
+        block_hex = int_to_hex(block)[0]
+        index_hex = int_to_hex(index)[0]
+
+        params = {'module': 'proxy',
+                  'action': 'eth_getUncleByBlockNumberAndIndex',
+                  'tag': block_hex,
+                  'index': index_hex}
+        print(params)
+        params.update(self.api_dict)
+
+        response = self.get_response(BASE_URL, params=params)['result']
+        return response
+
+    def get_eth_block_transaction_count(self, blocks_in: Union[int, List]):
+        """Returns the number of transactions in a block
+        """
+        blocks = validate_int(blocks_in)
+        blocks_hex = int_to_hex(blocks)
+        count_dict={}
+        for block in blocks_hex:
+            params = {'module': 'proxy',
+                      'action': 'eth_getBlockTransactionCountByNumber',
+                      'tag': block}
+            params.update(self.api_dict)
+            count = self.get_response(BASE_URL, params=params)['result']
+            count_int = int(count, 16)
+            count_dict[block] = count_int
+        count_df = pd.Series(count_dict).to_frame(name='transaction_count')
+        return count_df
+
+    def get_eth_transaction_by_hash(self, transactions_in: Union[str, List]):
+        """Returns the information about a transaction requested by transaction hash
+        """
+        transactions = validate_input(transactions_in)
+        series_list=[]
+        for transaction in transactions:
+            params = {'module': 'proxy',
+                      'action': 'eth_getTransactionByHash',
+                      'txhash': transaction}
+            params.update(self.api_dict)
+            response = self.get_response(BASE_URL, params=params)['result']
+            tmp_series = pd.Series(response)
+            series_list.append(tmp_series)
+        transactions_df = pd.concat(series_list, keys=transactions, axis=1)
+        return transactions_df
+
+    def get_eth_transaction_by_block_index(self, block: int, index: int):
+        """Returns information about a transaction by block number and transaction index position
+        """
+        block_hex = int_to_hex(block)[0]
+        index_hex = int_to_hex(index)[0]
+
+        params = {'module': 'proxy',
+                  'action': 'eth_getTransactionByBlockNumberAndIndex',
+                  'tag': block_hex,
+                  'index': index_hex}
+        params.update(self.api_dict)
+
+        response = self.get_response(BASE_URL, params=params)['result']
+        txn_df = pd.Series(response).to_frame(name='transaction_info')
+        return txn_df
+
+    def get_eth_account_transaction_count(self, accounts_in: Union[str, List]):
+        """Returns the number of transactions performed by an address
+        """
+        accounts = validate_input(accounts_in)
+        count_dict={}
+        for account in accounts:
+            params = {'module': 'proxy',
+                      'action': 'eth_getTransactionCount',
+                      'address': account,
+                      'tag': 'latest'}
+            params.update(self.api_dict)
+            count = self.get_response(BASE_URL, params=params)['result']
+            count_int = int(count, 16)
+            count_dict[account] = count_int
+        count_df = pd.Series(count_dict).to_frame(name='transaction_count')
+        return count_df
+
+    def get_eth_transaction_receipt(self, transactions_in: Union[str, List]):
+        """Returns the receipt of a transaction by transaction hash
+        """
+        transactions = validate_input(transactions_in)
+        df_list=[]
+        for transaction in transactions:
+            params = {'module': 'proxy',
+                      'action': 'eth_getTransactionReceipt',
+                      'txhash': transaction}
+            params.update(self.api_dict)
+            response = self.get_response(BASE_URL, params=params)['result']
+            tmp_df = pd.DataFrame(response)
+            df_list.append(tmp_df)
+        transactions_df = pd.concat(df_list, keys=transactions, axis=1)
+        return transactions_df
+
+    def get_eth_gas_price(self) -> int:
+        """Returns the current price per gas in wei
+        """
+        params = {'module': 'proxy',
+                  'action': 'eth_gasPrice'}
+        params.update(self.api_dict)
+        response = self.get_response(BASE_URL, params=params)['result']
+        gas_price = int(response, 16)
+        return gas_price
 
     ##### Tokens
     # TODO pro
@@ -409,7 +606,7 @@ class Etherscan(DataLoader):
                   'sort': sort}
         params.update(self.api_dict)
         response = self.get_response(BASE_URL, params=params)['result']
-        size_df = pd.DateFrame(response)
+        size_df = pd.DataFrame(response)
         return size_df
 
     def get_total_nodes_count(self) -> int:
@@ -420,152 +617,3 @@ class Etherscan(DataLoader):
         params.update(self.api_dict)
         nodes_count = self.get_response(BASE_URL, params=params)['result']['TotalNodeCount']
         return nodes_count
-
-import time
-
-## Setup
-API_KEY='DWC3QGAEHNFQQM55Z1AYTXUTZ1GPBK51JQ'
-es = Etherscan(api_key=API_KEY)
-accounts = ['0xBa19BdFF99065d9ABF3dF8CE942390B97fd71B12', '0x503e4bfe8299D486701BC7bc7F2Ea94f50035daC']
-contracts = ['0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F', '0x0001FB050Fe7312791bF6475b96569D83F695C9f']
-txns = ['0x29f2df8ce6a0e2a93bddacdfcceb9fd847630dcd1d25ad1ec3402cc449fa1eb6', '0x0bd7f9af4f8ddb18a321ab0120a2389046b39feb67561d17378e0d4dc062decc', '0x1815a03dd8a1ce7da5a7a4304fa5fae1a8f4f3c20787e341eea230614e49ff61']
-blocks = ['13188647', '13088500']
-tokens = ['0x1f9840a85d5af5bf1d1762f925bdaddc4201f984', '0xc18360217d8f7ab5e7c516566761ea12ce7f9d72']
-
-##### Accounts
-#account_balances = es.get_account_ether_balance(accounts)
-#print(account_balances)
-#print('3 second sleep')
-#time.sleep(3)
-
-#account_normal = es.get_account_normal_transactions(accounts)
-#print(account_normal)
-#print('3 second sleep')
-#time.sleep(3)
-
-#account_internal = es.get_account_internal_transactions(accounts)
-#print(account_internal)
-#print('3 second sleep')
-#time.sleep(3)
-
-#int_txn = '0x40eb908387324f2b575b4879cd9d7188f69c8fc9d87c901b9e2daaea4b442170'
-#transaction_internals = es.get_transaction_internal_transactions(int_txn)
-#print(transaction_internals)
-#print('3 second sleep')
-#time.sleep(3)
-
-#block_range_internals = es.get_block_range_internal_transactions(10000000,10001000)
-#print(block_range_internals)
-#print('3 second sleep')
-#time.sleep(3)
-
-account_token_transfers = es.get_account_token_transfers(accounts)
-print(account_token_transfers)
-print('3 second sleep')
-time.sleep(3)
-
-account_nft_transfers = es.get_account_nft_transfers(accounts)
-print(account_nft_transfers)
-print('3 second sleep')
-time.sleep(3)
-
-# Ethermine pubkey, F2Pool Old pubkey
-miners = ['0xEA674fdDe714fd979de3EdF0F56AA9716B898ec8', '0x829BD824B016326A401d083B33D092293333A830']
-account_blocks_mined = es.get_account_blocks_mined(miners)
-print(account_blocks_mined)
-print('3 second sleep')
-time.sleep(3)
-
-##### Contracts
-abis = es.get_contract_abi(contracts)
-print(abis)
-print('3 second sleep')
-time.sleep(3)
-
-source_code = es.get_contract_source_code(contracts)
-print(source_code)
-print('3 second sleep')
-time.sleep(3)
-
-##### Transactions
-contract_execution_status = es.get_contract_execution_status(txns)
-print(contract_execution_status)
-print('3 second sleep')
-time.sleep(3)
-
-transaction_execution_status = es.get_transaction_execution_status(txns)
-print(transaction_execution_status)
-print('3 second sleep')
-time.sleep(3)
-
-##### Blocks
-block_rewards = es.get_block_reward(blocks)
-print(block_rewards)
-print('3 second sleep')
-time.sleep(3)
-
-block_countdown = es.get_block_countdown('50000000')
-print(block_countdown)
-print('3 second sleep')
-time.sleep(3)
-
-block_at_time = es.get_block_by_timestamp('1638767557')
-print(block_at_time)
-print('3 second sleep')
-time.sleep(3)
-
-##### Logs
-# TODO
-
-##### Geth/Parity Proxy
-# TODO
-
-##### Tokens
-total_supply = es.get_token_total_supply(tokens)
-print(total_supply)
-print('3 second sleep')
-time.sleep(3)
-
-#pickle, xSushi
-t2 = ['0x429881672B9AE42b8EbA0E26cD9C73711b891Ca5', '0x8798249c2E607446EfB7Ad49eC89dD1865Ff4272']
-account_balance = es.get_token_account_balance(t2, accounts)
-print(account_balance)
-print('3 second sleep')
-time.sleep(3)
-
-##### Gas Tracker
-est_confirmation = es.get_est_confirmation(2000000000)
-print(est_confirmation)
-print('3 second sleep')
-time.sleep(3)
-
-gas_oracle = es.get_gas_oracle()
-print(gas_oracle)
-print('3 second sleep')
-time.sleep(3)
-
-##### Stats
-total_eth_supply = es.get_total_eth_supply()
-print(total_eth_supply)
-print('3 second sleep')
-time.sleep(3)
-
-total_eth2_supply = es.get_total_eth2_supply()
-print(total_eth2_supply)
-print('3 second sleep')
-time.sleep(3)
-
-last_eth_price = es.get_last_eth_price()
-print(last_eth_price)
-print('3 second sleep')
-time.sleep(3)
-
-nodes_size = es.get_nodes_size(start_date='2021-01-01', end_date='2021-06-01')
-print(nodes_size)
-print('3 second sleep')
-time.sleep(3)
-
-total_nodes_count = es.get_total_nodes_count()
-print(total_nodes_count)
-print('3 second sleep')
-time.sleep(3)
