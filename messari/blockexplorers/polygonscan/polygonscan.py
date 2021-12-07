@@ -1,5 +1,8 @@
 """This module is meant to contain the Polygonscan class"""
 
+from typing import Union, List
+import pandas as pd
+from messari.utils import validate_input, validate_datetime
 
 from messari.blockexplorers import Scanner
 
@@ -47,6 +50,7 @@ class Polygonscan(Scanner):
             supply_dict[token] = supply
         supply_df = pd.Series(supply_dict).to_frame(name='supply')
         return supply_df
+
     ##### Gas Tracker
     def get_est_confirmation(self, gas_price: int) -> None:
         """Override: return None
@@ -57,3 +61,26 @@ class Polygonscan(Scanner):
         """Override: return None
         """
         return None
+
+    ##### Stats
+    def get_total_matic_supply(self) -> int:
+        """Returns the current amount of Matic (Wei) in circulation.
+        """
+        params = {'module': 'stats',
+                  'action': 'maticsupply'}
+        params.update(self.api_dict)
+        response = self.get_response(self.BASE_URL, params=params)['result']
+        return response
+
+    def get_last_matic_price(self) -> pd.DataFrame:
+        """Returns the latest price of 1 MATIC in BTC & USD
+        """
+        params = {'module': 'stats',
+                  'action': 'maticprice'}
+        params.update(self.api_dict)
+        response = self.get_response(self.BASE_URL, params=params)['result']
+        maticbtc = response['maticbtc']
+        maticusd = response['maticusd']
+        price_dict = {'btc': maticbtc, 'usd': maticusd}
+        price_df = pd.Series(price_dict).to_frame(name='matic_price')
+        return price_df

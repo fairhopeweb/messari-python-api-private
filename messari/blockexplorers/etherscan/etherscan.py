@@ -17,6 +17,24 @@ class Etherscan(Scanner):
     def __init__(self, api_key: str=None):
         Scanner.__init__(self, base_url=BASE_URL, api_key=api_key)
 
+    ##### Accounts
+    # NOTE: no changes
+
+    ##### Transactions
+    # NOTE: no changes
+
+    ##### Blocks
+    # NOTE: no changes
+
+    ##### Geth/Parity Proxy
+    # NOTE: no changes
+
+    ##### Tokens
+    # NOTE: no changes
+
+    ##### Gas Tracker
+    # NOTE: no changes
+
     ##### Stats
     def get_total_eth_supply(self) -> int:
         """Returns the current amount of Ether in circulation.

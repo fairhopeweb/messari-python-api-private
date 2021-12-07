@@ -544,5 +544,3 @@ class Scanner(DataLoader):
         response = self.get_response(self.BASE_URL, params=params)['result']
         oracle_df = pd.Series(response).to_frame(name='gas_oracle')
         return oracle_df
-
-
