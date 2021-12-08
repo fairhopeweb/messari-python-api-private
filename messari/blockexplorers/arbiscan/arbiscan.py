@@ -1,7 +1,10 @@
 """This module is meant to contain the arbiscan class"""
 
 
+import pandas as pd
+from typing import Union, List, Dict
 from messari.blockexplorers import Scanner
+from messari.utils import validate_input, validate_datetime, validate_int
 
 BASE_URL='https://api.arbiscan.io/api'
 class Arbiscan(Scanner):
