@@ -14,6 +14,7 @@ setup(
               'messari.messari',
               'messari.tokenterminal',
               'messari.deepdao',
+              'messari.eventmonitor',
               'messari.blockexplorers',
               'messari.blockexplorers.arbiscan',
               'messari.blockexplorers.bscscan',
