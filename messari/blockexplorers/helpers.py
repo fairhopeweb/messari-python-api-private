@@ -1,3 +1,5 @@
+"""This module is dedicated to helpers for the Scanners class"""
+
 from typing import List, Union
 from messari.utils import validate_int
 

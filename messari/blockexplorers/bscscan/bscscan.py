@@ -4,7 +4,7 @@
 import pandas as pd
 from typing import Union, List
 from messari.blockexplorers import Scanner
-from messari.utils import validate_input, validate_datetime
+from messari.utils import validate_input
 
 BASE_URL='https://api.bscscan.io/api'
 class BSCscan(Scanner):
@@ -52,7 +52,7 @@ class BSCscan(Scanner):
         return supply_df
 
     ##### Gas Tracker
-    def get_est_confirmation(self, gas_price: int) -> None:
+    def get_est_confirmation(self, gas_price: int):
         """Override: return None
         """
         return None

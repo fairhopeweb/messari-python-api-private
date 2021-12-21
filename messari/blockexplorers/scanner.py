@@ -5,7 +5,7 @@ import datetime
 import pandas as pd
 
 from messari.dataloader import DataLoader
-from messari.utils import validate_input, validate_datetime, validate_int
+from messari.utils import validate_input, validate_int
 from .helpers import int_to_hex
 
 # Refrence: https://docs.etherscan.io/
@@ -53,12 +53,12 @@ class Scanner(DataLoader):
         return account_transactions_df
 
     def get_account_internal_transactions(self, accounts_in: Union[str, List]) -> pd.DataFrame:
-        """Returns the list of internal transactions performed by an address, with optional pagination
+        """Returns the list of internal transactions performed by an address
         """
         # TODO paging
         accounts = validate_input(accounts_in)
         df_list=[]
-        for account in accounts: 
+        for account in accounts:
             params = {'module': 'account',
                       'action': 'txlistinternal',
                       'address': account}
@@ -69,7 +69,8 @@ class Scanner(DataLoader):
         account_transactions_df = pd.concat(df_list, keys=accounts, axis=1)
         return account_transactions_df
 
-    def get_transaction_internal_transactions(self, transactions_in: Union[str, List]) -> pd.DataFrame:
+    def get_transaction_internal_transactions(self,
+                                              transactions_in: Union[str, List]) -> pd.DataFrame:
         """Returns the list of internal transactions performed within a transaction
         """
         transactions = validate_input(transactions_in)
@@ -85,8 +86,9 @@ class Scanner(DataLoader):
         transactions_df = pd.concat(df_list, keys=transactions, axis=1)
         return transactions_df
 
-    def get_block_range_internal_transactions(self, start_block: int, end_block: int, page: int=0, offset: int=0, ascending:bool=True) -> pd.DataFrame:
-        """Returns the list of internal transactions performed within a block range, with optional pagination
+    def get_block_range_internal_transactions(self, start_block: int, end_block: int, page: int=0,
+                                              offset: int=0, ascending:bool=True) -> pd.DataFrame:
+        """Returns the list of internal transactions performed within a block range
         """
         # TODO check paging
         sort = 'asc' if ascending else 'desc'
@@ -102,8 +104,13 @@ class Scanner(DataLoader):
         transactions_df = pd.DataFrame(response)
         return transactions_df
 
-    def get_account_token_transfers(self, accounts_in: Union[str, List], tokens_in: Union[str, List]=None, start_block: int=None, end_block: int=None, page:int=0, offset:int=0, ascending:bool=True) -> pd.DataFrame:
-        """Returns the list of ERC-20 tokens transferred by an address, with optional filtering by token contract
+    def get_account_token_transfers(self, accounts_in: Union[str, List],
+                                    tokens_in: Union[str, List]=None,
+                                    start_block: int=None, end_block: int=None,
+                                    page:int=0, offset:int=0,
+                                    ascending:bool=True) -> pd.DataFrame:
+        """Returns the list of ERC-20 tokens transferred by an address,
+        with optional filtering by token contract
         """
         sort = 'asc' if ascending else 'desc'
         accounts = validate_input(accounts_in)
@@ -138,8 +145,12 @@ class Scanner(DataLoader):
         token_transfers_df = pd.concat(df_list, keys=accounts, axis=1)
         return token_transfers_df
 
-    def get_account_nft_transfers(self, accounts_in: Union[str, List], nfts_in: Union[str, List]=None, start_block: int=None, end_block: int=None, page:int=0, offset:int=0, ascending:bool=True) -> pd.DataFrame:
-        """Returns the list of ERC-721 ( NFT ) tokens transferred by an address, with optional filtering by token contract
+    def get_account_nft_transfers(self, accounts_in: Union[str, List],
+                                  nfts_in: Union[str, List]=None,
+                                  start_block: int=None, end_block: int=None,
+                                  page:int=0, offset:int=0, ascending:bool=True) -> pd.DataFrame:
+        """Returns the list of ERC-721 ( NFT ) tokens transferred by an address,
+        with optional filtering by token contract
         """
         sort = 'asc' if ascending else 'desc'
         accounts = validate_input(accounts_in)
@@ -163,6 +174,7 @@ class Scanner(DataLoader):
             if nfts_in:
                 nfts = validate_input(nfts_in)
                 for nft in nfts:
+                    # TODO fix filtering here
                     response += self.get_response(self.BASE_URL, params=params)['result']
             else:
                 response = self.get_response(self.BASE_URL, params=params)['result']
@@ -174,7 +186,8 @@ class Scanner(DataLoader):
         return nft_transfers_df
 
     # NOTE: this is the same as blocks validated on PoS chains
-    def get_account_blocks_mined(self, accounts_in: Union[str, List], block_type:str='blocks', page:int=0, offset:int=0) -> pd.DataFrame:
+    def get_account_blocks_mined(self, accounts_in: Union[str, List], block_type:str='blocks',
+                                 page:int=0, offset:int=0) -> pd.DataFrame:
         # TODO more args
         """Returns the list of blocks mined by an address
         """
@@ -306,10 +319,14 @@ class Scanner(DataLoader):
         return blocks_df
 
     ##### Logs
-    def get_logs(self, address: str, from_block: Union[int, str], to_block: Union[int, str]='latest',
-                 topic0: str=None, topic1: str=None, topic2: str=None, topic3: str=None,
-                 topic0_1_opr: str=None, topic1_2_opr: str=None, topic2_3_opr: str=None,
-                 topic0_2_opr: str=None, topic0_3_opr: str=None, topic1_3_opr: str=None) -> pd.DataFrame:
+    def get_logs(self, address: str,
+                 from_block: Union[int, str],
+                 to_block: Union[int, str]='latest',
+                 topic0: str=None, topic1: str=None,
+                 topic2: str=None, topic3: str=None,
+                 topic0_1_opr: str=None, topic1_2_opr: str=None,
+                 topic2_3_opr: str=None, topic0_2_opr: str=None,
+                 topic0_3_opr: str=None, topic1_3_opr: str=None) -> pd.DataFrame:
 
         params = {'module': 'logs',
                   'action': 'getlogs',
@@ -501,7 +518,8 @@ class Scanner(DataLoader):
         supply_df = pd.Series(supply_dict).to_frame(name='supply')
         return supply_df
 
-    def get_token_account_balance(self, tokens_in: Union[str, List], accounts_in: Union[str, List]) -> pd.DataFrame:
+    def get_token_account_balance(self, tokens_in: Union[str, List],
+                                  accounts_in: Union[str, List]) -> pd.DataFrame:
         """Returns the current balance of an ERC-20 token of an address
         """
         tokens = validate_input(tokens_in)
@@ -525,7 +543,8 @@ class Scanner(DataLoader):
 
     ##### Gas Tracker
     def get_est_confirmation(self, gas_price: int) -> int:
-        """Returns the estimated time, in seconds, for a transaction to be confirmed on the blockchain
+        """Returns the estimated time, in seconds,
+        for a transaction to be confirmed on the blockchain
         gas price in wei
         """
         params = {'module': 'gastracker',

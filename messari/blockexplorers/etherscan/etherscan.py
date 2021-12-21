@@ -1,10 +1,10 @@
 """This module is meant to contain the Etherscan class"""
 
-from typing import Union, List
+from typing import Union
 import datetime
 import pandas as pd
 
-from messari.utils import validate_input, validate_datetime
+from messari.utils import validate_datetime
 from messari.blockexplorers import Scanner
 
 # Refrence: https://docs.etherscan.io/

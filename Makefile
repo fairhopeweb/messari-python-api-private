@@ -10,12 +10,7 @@ install:
 # Check linting
 check:
 	$(python_ver) -m pylint messari/*py
-	$(python_ver) -m pylint messari/messari/*py
-	$(python_ver) -m pylint messari/defillama/*py
-	$(python_ver) -m pylint messari/tokenterminal/*py
-	$(python_ver) -m pylint messari/deepdao/*py
-	$(python_ver) -m pylint messari/solscan/*py
-	$(python_ver) -m pylint messari/etherscan/*py
+	$(python_ver) -m pylint messari/*/*py
 
 # Test Library
 test:

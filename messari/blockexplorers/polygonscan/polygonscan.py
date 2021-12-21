@@ -2,7 +2,7 @@
 
 from typing import Union, List
 import pandas as pd
-from messari.utils import validate_input, validate_datetime
+from messari.utils import validate_input
 
 from messari.blockexplorers import Scanner
 
@@ -37,7 +37,7 @@ class Polygonscan(Scanner):
 
     ##### Tokens
     def get_token_circulating_supply(self, tokens_in: Union[str, List]) -> pd.DataFrame:
-        """Returns ERC20-Token Circulating Supply (Applicable for Polygon Cross Chain token Types) by ContractAddress
+        """Returns ERC20 Circulating Supply (For Polygon Cross Chain token Types) by ContractAddress
         """
         tokens = validate_input(tokens_in)
         supply_dict = {}
@@ -52,7 +52,7 @@ class Polygonscan(Scanner):
         return supply_df
 
     ##### Gas Tracker
-    def get_est_confirmation(self, gas_price: int) -> None:
+    def get_est_confirmation(self, gas_price: int):
         """Override: return None
         """
         return None

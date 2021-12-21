@@ -8,28 +8,28 @@ from .helpers import unpack_dataframe_of_dicts
 import pandas as pd
 
 #### Block
-BLOCK_LAST_URL = "https://public-api.solscan.io/block/last"
-BLOCK_TRANSACTIONS_URL = "https://public-api.solscan.io/block/transactions"
-BLOCK_BLOCK_URL = Template("https://public-api.solscan.io/block/$block")
+BLOCK_LAST_URL = 'https://public-api.solscan.io/block/last'
+BLOCK_TRANSACTIONS_URL = 'https://public-api.solscan.io/block/transactions'
+BLOCK_BLOCK_URL = Template('https://public-api.solscan.io/block/$block')
 #### Transaction
-TRANSACTION_LAST_URL = "https://public-api.solscan.io/transaction/last"
-TRANSACTION_SIGNATURE_URL = Template("https://public-api.solscan.io/transaction/$signature")
+TRANSACTION_LAST_URL = 'https://public-api.solscan.io/transaction/last'
+TRANSACTION_SIGNATURE_URL = Template('https://public-api.solscan.io/transaction/$signature')
 #### Account
-ACCOUNT_TOKENS_URL = "https://public-api.solscan.io/account/tokens"
-ACCOUNT_TRANSACTIONS_URL = "https://public-api.solscan.io/account/transactions"
-ACCOUNT_STAKE_URL = "https://public-api.solscan.io/account/stakeAccounts"
-ACCOUNT_SPL_TXNS_URL = "https://public-api.solscan.io/account/splTransfers"
-ACCOUNT_SOL_TXNS_URL = "https://public-api.solscan.io/account/solTransfers"
-ACCOUNT_EXPORT_TXNS_URL = "https://public-api.solscan.io/account/exportTransactions"
-ACCOUNT_ACCOUNT_URL = Template("https://public-api.solscan.io/account/$account")
+ACCOUNT_TOKENS_URL = 'https://public-api.solscan.io/account/tokens'
+ACCOUNT_TRANSACTIONS_URL = 'https://public-api.solscan.io/account/transactions'
+ACCOUNT_STAKE_URL = 'https://public-api.solscan.io/account/stakeAccounts'
+ACCOUNT_SPL_TXNS_URL = 'https://public-api.solscan.io/account/splTransfers'
+ACCOUNT_SOL_TXNS_URL = 'https://public-api.solscan.io/account/solTransfers'
+ACCOUNT_EXPORT_TXNS_URL = 'https://public-api.solscan.io/account/exportTransactions'
+ACCOUNT_ACCOUNT_URL = Template('https://public-api.solscan.io/account/$account')
 #### Token
-TOKEN_HOLDERS_URL = "https://public-api.solscan.io/token/holders"
-TOKEN_META_URL = "https://public-api.solscan.io/token/meta"
-TOKEN_LIST_URL = "https://public-api.solscan.io/token/list"
+TOKEN_HOLDERS_URL = 'https://public-api.solscan.io/token/holders'
+TOKEN_META_URL = 'https://public-api.solscan.io/token/meta'
+TOKEN_LIST_URL = 'https://public-api.solscan.io/token/list'
 #### Market
-MARKET_INFO_URL = Template("https://public-api.solscan.io/market/token/$tokenAddress")
+MARKET_INFO_URL = Template('https://public-api.solscan.io/market/token/$tokenAddress')
 #### Chain Information
-CHAIN_INFO_URL = "https://public-api.solscan.io/chaininfo"
+CHAIN_INFO_URL = 'https://public-api.solscan.io/chaininfo'
 
 #TODO max this clean/ not hardcoded? look into how this works
 HEADERS={'accept': 'application/json', 'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36'}
@@ -53,7 +53,7 @@ class Solscan(DataLoader):
 
         # Max value is 20 or API bricks
         limit=num_blocks if num_blocks < 21 else 20
-        params = {"limit": limit}
+        params = {'limit': limit}
 
         last_blocks = self.get_response(BLOCK_LAST_URL,
                                         params=params,
@@ -78,14 +78,13 @@ class Solscan(DataLoader):
 
         df_list = []
         for block in blocks:
-            params = {"block": block,
-                      "offset": offset,
-                      "limit": num_transactions}
+            params = {'block': block,
+                      'offset': offset,
+                      'limit': num_transactions}
             txns = self.get_response(BLOCK_TRANSACTIONS_URL,
                                          params=params,
                                          headers=HEADERS)
             txns_df = pd.DataFrame(txns)
-            # TODO, unpack this
             df_list.append(txns_df)
         fin_df = pd.concat(df_list, keys=blocks, axis=1)
         fin_df = unpack_dataframe_of_dicts(fin_df)
@@ -125,7 +124,7 @@ class Solscan(DataLoader):
         """
         # 20
         limit=num_transactions if num_transactions < 21 else 20
-        params = {"limit": limit}
+        params = {'limit': limit}
         response = self.get_response(TRANSACTION_LAST_URL,
                                     params=params,
                                     headers=HEADERS)
@@ -167,7 +166,7 @@ class Solscan(DataLoader):
 
         df_list=[]
         for account in accounts:
-            params={"account":account}
+            params={'account':account}
             response = self.get_response(ACCOUNT_TOKENS_URL,
                                          params=params,
                                          headers=HEADERS)
@@ -187,7 +186,7 @@ class Solscan(DataLoader):
 
         df_list=[]
         for account in accounts:
-            params={"account":account}
+            params={'account':account}
             response = self.get_response(ACCOUNT_TRANSACTIONS_URL,
                                          params=params,
                                          headers=HEADERS)
@@ -207,7 +206,7 @@ class Solscan(DataLoader):
 
         df_list=[]
         for account in accounts:
-            params={"account":account}
+            params={'account':account}
             response = self.get_response(ACCOUNT_STAKE_URL,
                                          params=params,
                                          headers=HEADERS)
@@ -216,7 +215,11 @@ class Solscan(DataLoader):
         fin_df = pd.concat(df_list, keys=accounts, axis=1)
         return fin_df
 
-    def get_account_spl_transactions(self, accounts_in: Union[str, List], from_time: int=None, to_time: int=None, offset: int=0, limit: int=10) -> pd.DataFrame:
+    def get_account_spl_transactions(self, accounts_in: Union[str, List],
+                                     from_time: int=None,
+                                     to_time: int=None,
+                                     offset: int=0,
+                                     limit: int=10) -> pd.DataFrame:
         """
         Parameters
         ----------
@@ -227,7 +230,7 @@ class Solscan(DataLoader):
 
         df_list=[]
         for account in accounts:
-            params={"account":account}
+            params={'account':account}
             response = self.get_response(ACCOUNT_SPL_TXNS_URL,
                                          params=params,
                                          headers=HEADERS)
@@ -238,7 +241,11 @@ class Solscan(DataLoader):
         fin_df = unpack_dataframe_of_dicts(fin_df)
         return fin_df
 
-    def get_account_sol_transactions(self, accounts_in: Union[str, List], from_time: int=None, to_time: int=None, offset: int=0, limit: int=10) -> pd.DataFrame:
+    def get_account_sol_transactions(self, accounts_in: Union[str, List],
+                                     from_time: int=None,
+                                     to_time: int=None,
+                                     offset: int=0,
+                                     limit: int=10) -> pd.DataFrame:
         """
         Parameters
         ----------
@@ -249,7 +256,7 @@ class Solscan(DataLoader):
 
         df_list=[]
         for account in accounts:
-            params={"account":account}
+            params={'account':account}
             response = self.get_response(ACCOUNT_SOL_TXNS_URL,
                                          params=params,
                                          headers=HEADERS)
@@ -300,7 +307,8 @@ class Solscan(DataLoader):
 
     #################
     # Token endpoints
-    def get_token_holders(self, tokens_in: Union[str, List], limit: int=10, offset: int=0) -> pd.DataFrame:
+    def get_token_holders(self, tokens_in: Union[str, List],
+                          limit: int=10, offset: int=0) -> pd.DataFrame:
         """
         Parameters
         ----------
@@ -311,7 +319,7 @@ class Solscan(DataLoader):
 
         df_list = []
         for token in tokens:
-            params={"tokenAddress": token,
+            params={'tokenAddress': token,
                     'limit': limit,
                     'offset': offset}
             response = self.get_response(TOKEN_HOLDERS_URL,
@@ -322,7 +330,6 @@ class Solscan(DataLoader):
             df_list.append(df)
         fin_df = pd.concat(df_list, keys=tokens, axis=1)
         fin_df = unpack_dataframe_of_dicts(fin_df)
-        # TODO, unpack result
         return fin_df
 
     def get_token_meta(self, tokens_in: Union[str, List]) -> pd.DataFrame:
@@ -336,7 +343,7 @@ class Solscan(DataLoader):
 
         series_list = []
         for token in tokens:
-            params={"tokenAddress": token}
+            params={'tokenAddress': token}
             response = self.get_response(TOKEN_META_URL,
                                          params=params,
                                          headers=HEADERS)
@@ -353,7 +360,6 @@ class Solscan(DataLoader):
         Returns
         -------
         """
-        # TODO
         direction = 'asc' if ascending else 'desc'
         params={'sortBy': sort_by,
                 'direction': direction,
@@ -375,7 +381,6 @@ class Solscan(DataLoader):
         -------
         """
         tokens = validate_input(tokens_in)
-        # TODO, transalte name into address
 
         market_info_list = []
         for token in tokens:
