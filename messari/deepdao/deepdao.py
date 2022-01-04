@@ -2,7 +2,7 @@
 
 import requests
 from string import Template
-from typing import Union, List, Dict
+from typing import Union, List
 import json
 import pandas as pd
 import numpy as np
@@ -40,7 +40,8 @@ class DeepDAO(DataLoader):
         people = self.get_top_members(count=100000)
         people_dict={}
         address_dict={}
-        for index, person in people.iterrows():
+        # TODO, do this without unused variable 'index'
+        for index, person in people.iterrows(): # pylint: disable=unused-variable
             people_dict[person['address']] = person['name']
             address_dict[person['name']] = person['address']
 
@@ -133,7 +134,7 @@ class DeepDAO(DataLoader):
         old_index = overview_df.index
         new_index = []
         for index in old_index:
-            dt_string = str(index).split('T')[0]
+            dt_string = str(index).split('T', maxsplit=1)[0]
             new_index.append(dt_string)
         overview_df.index=new_index
         # drop last row because it's not formatted correctly & data is weird

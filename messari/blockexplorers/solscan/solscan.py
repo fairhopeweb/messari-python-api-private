@@ -32,7 +32,7 @@ MARKET_INFO_URL = Template('https://public-api.solscan.io/market/token/$tokenAdd
 CHAIN_INFO_URL = 'https://public-api.solscan.io/chaininfo'
 
 #TODO max this clean/ not hardcoded? look into how this works
-HEADERS={'accept': 'application/json', 'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36'}
+HEADERS={'accept': 'application/json', 'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36'} # pylint: disable=line-too-long
 
 class Solscan(DataLoader):
     """This class is a wrapper around the Solscan API
@@ -44,11 +44,17 @@ class Solscan(DataLoader):
     #################
     # Block endpoints
     def get_last_blocks(self, num_blocks=1) -> pd.DataFrame:
-        """Returns last 10 blocks
+        """returns info for last blocks (default is 1, limit is 20)
+
         Parameters
         ----------
+            num_blocks: int (default is 1)
+                number of blocks to return, max is 20
+
         Returns
         -------
+            DataFrame
+                DataFrame with block information
         """
 
         # Max value is 20 or API bricks
@@ -68,11 +74,19 @@ class Solscan(DataLoader):
 
     def get_block_last_transactions(self, blocks_in: Union[str, List],
                                offset=0, num_transactions=10) -> pd.DataFrame:
-        """
+        """get last num_transactions of given block numbers
+
         Parameters
         ----------
+            blocks_in: str, List
+                single block in or list of blocks in
+            num_transactions: int (default is 10)
+                number of transactions to return
+
         Returns
         -------
+            DataFrame
+                dataframe with transaction details
         """
         blocks = validate_input(blocks_in)
 
@@ -92,11 +106,17 @@ class Solscan(DataLoader):
         return fin_df
 
     def get_block(self, blocks_in: Union[str, List]) -> pd.DataFrame:
-        """
+        """Return information of given block(s)
+
         Parameters
         ----------
+            blocks_in: str, List
+                single block in or list of blocks in
+
         Returns
         -------
+            DataFrame
+                DataFrame with block information
         """
         blocks = validate_input(blocks_in)
 
@@ -116,11 +136,17 @@ class Solscan(DataLoader):
     #######################
     # Transaction endpoints
     def get_last_transactions(self, num_transactions=10) -> pd.DataFrame:
-        """
+        """Return last num_transactions transactions
+
         Parameters
         ----------
+            num_transactions: int (default is 10)
+                number of transactions to return, limit is 20
+
         Returns
         -------
+            DataFrame
+                dataframe with transaction details
         """
         # 20
         limit=num_transactions if num_transactions < 21 else 20
@@ -134,11 +160,17 @@ class Solscan(DataLoader):
 
 
     def get_transaction(self, signatures_in: Union[str, List]) -> pd.DataFrame:
-        """
+        """Return information of given transaction signature(s)
+
         Parameters
         ----------
+            signatures_in: str, List
+                single signature in or list of signatures in
+
         Returns
         -------
+            DataFrame
+                DataFrame with transaction details
         """
         signatures = validate_input(signatures_in)
 
@@ -156,11 +188,17 @@ class Solscan(DataLoader):
     ###################
     # Account endpoints
     def get_account_tokens(self, accounts_in: Union[str, List]) -> pd.DataFrame:
-        """
+        """Return token balances of the given account(s)
+
         Parameters
         ----------
+            accounts_in: str, List
+                single account in or list of accounts in
+
         Returns
         -------
+            DataFrame
+                DataFrame with token balances of given accounts
         """
         accounts = validate_input(accounts_in)
 
@@ -176,11 +214,17 @@ class Solscan(DataLoader):
         return fin_df
 
     def get_account_transactions(self, accounts_in: Union[str,List]) -> pd.DataFrame:
-        """
+        """Return DataFrame of transactions of the given account(s)
+
         Parameters
         ----------
+            accounts_in: str, List
+                single account in or list of accounts in
+
         Returns
         -------
+            DataFrame
+                DataFrame with transactions of given accounts
         """
         accounts = validate_input(accounts_in)
 
@@ -196,11 +240,17 @@ class Solscan(DataLoader):
         return fin_df
 
     def get_account_stake(self, accounts_in: Union[str, List]) -> pd.DataFrame:
-        """
+        """Get staking accounts of the given account(s)
+
         Parameters
         ----------
+            accounts_in: str, List
+                single account in or list of accounts in
+
         Returns
         -------
+            DataFrame
+                DataFrame with staking accounts of given accounts
         """
         accounts = validate_input(accounts_in)
 
@@ -220,17 +270,35 @@ class Solscan(DataLoader):
                                      to_time: int=None,
                                      offset: int=0,
                                      limit: int=10) -> pd.DataFrame:
-        """
+        """Return SPL transfers for given account(s)
+
         Parameters
         ----------
+            accounts_in: str, List
+                single account in or list of accounts in
+            from_time: int
+                unix time to start transaction history
+            to_time: int
+                unix time to end transaction history
+            offset: int
+                Offset starting at 0. Increment value to offset paginated results
+            limit: int
+                Limit of assets to return. Default is 10
+
         Returns
         -------
+            DataFrame
+                DataFrame with SPL transfers for given account(s)
         """
         accounts = validate_input(accounts_in)
 
         df_list=[]
         for account in accounts:
-            params={'account':account}
+            params={'account':account,
+                    'toTime': to_time,
+                    'fromTime': from_time,
+                    'offset': offset,
+                    'limit': limit}
             response = self.get_response(ACCOUNT_SPL_TXNS_URL,
                                          params=params,
                                          headers=HEADERS)
@@ -246,17 +314,35 @@ class Solscan(DataLoader):
                                      to_time: int=None,
                                      offset: int=0,
                                      limit: int=10) -> pd.DataFrame:
-        """
+        """Return SOL transfers for given account(s)
+
         Parameters
         ----------
+            accounts_in: str, List
+                single account in or list of accounts in
+            from_time: int
+                unix time to start transaction history
+            to_time: int
+                unix time to end transaction history
+            offset: int
+                Offset starting at 0. Increment value to offset paginated results
+            limit: int
+                Limit of assets to return. Default is 10
+
         Returns
         -------
+            DataFrame
+                DataFrame with SOL transfers for given account(s)
         """
         accounts = validate_input(accounts_in)
 
         df_list=[]
         for account in accounts:
-            params={'account':account}
+            params={'account':account,
+                    'toTime': to_time,
+                    'fromTime': from_time,
+                    'offset': offset,
+                    'limit': limit}
             response = self.get_response(ACCOUNT_SOL_TXNS_URL,
                                          params=params,
                                          headers=HEADERS)
@@ -268,11 +354,26 @@ class Solscan(DataLoader):
 
     def get_account_export_transactions(self, accounts_in: Union[str, List],
                                         type_in: str, from_time: int, to_time: int) -> List[str]:
-        """
+        """Export transactions to CSV style string
+
         Parameters
         ----------
+            accounts_in: str, List
+                single account in or list of accounts in
+            type_in: str
+                what type of transactions to export:
+                    - tokenchange
+                    - soltransfer
+                    - all
+            from_time: int
+                unix time to start transaction history
+            to_time: int
+                unix time to end transaction history
+
         Returns
         -------
+            List[str]
+                list of strings to make csv document
         """
         accounts = validate_input(accounts_in)
         csv_list=[]
@@ -288,11 +389,17 @@ class Solscan(DataLoader):
         return csv_list
 
     def get_account(self, accounts_in: Union[str, List]) -> pd.DataFrame:
-        """
+        """Return overall account(s) information, including program account,
+        NFT metadata information
+
         Parameters
         ----------
+            accounts_in: str, List
+                single account in or list of accounts in
         Returns
         -------
+            DataFrame
+                DataFrame with account info
         """
         accounts = validate_input(accounts_in)
         series_list = []
@@ -309,11 +416,21 @@ class Solscan(DataLoader):
     # Token endpoints
     def get_token_holders(self, tokens_in: Union[str, List],
                           limit: int=10, offset: int=0) -> pd.DataFrame:
-        """
+        """Return top token holders for given token(s)
+
         Parameters
         ----------
+            tokens_in: str, List
+                single token address in or list of token addresses, used to filter results
+            offset: int
+                Offset starting at 0. Increment value to offset paginated results
+            limit: int
+                Limit of assets to return. Default is 10
+
         Returns
         -------
+            DataFrame
+                DataFrame with top token holders
         """
         tokens = validate_input(tokens_in)
 
@@ -333,11 +450,17 @@ class Solscan(DataLoader):
         return fin_df
 
     def get_token_meta(self, tokens_in: Union[str, List]) -> pd.DataFrame:
-        """
+        """Return metadata of given token(s)
+
         Parameters
         ----------
+            tokens_in: str, List
+                single token address in or list of token addresses, used to filter results
+
         Returns
         -------
+            DataFrame
+                DataFrame with token metadata
         """
         tokens = validate_input(tokens_in)
 
@@ -354,11 +477,34 @@ class Solscan(DataLoader):
 
     def get_token_list(self, sort_by: str='market_cap', ascending: bool=True,
                        limit: int=10, offset: int=0) -> pd.DataFrame:
-        """
+        """Returns DataFrame of tokens
+
         Parameters
         ----------
+            sort_by: str (default 'market_cap')
+                how to sort results, options are:
+                    - market_cap
+                    - volume
+                    - holder
+                    - price
+                    - price_change_24h
+                    - price_change_7d
+                    - price_change_14d
+                    - price_change_30d
+                    - price_change_60d
+                    - price_change_200d
+                    - price_change_1y
+            offset: int
+                Offset starting at 0. Increment value to offset paginated results
+            limit: int
+                Limit of assets to return. Default is 10
+            ascending: bool
+                return results ascending or descending (default True)
+
         Returns
         -------
+            DataFrame
+                DataFrame with tokens
         """
         direction = 'asc' if ascending else 'desc'
         params={'sortBy': sort_by,
@@ -375,10 +521,16 @@ class Solscan(DataLoader):
     # Market endpoints
     def get_market_info(self, tokens_in: Union[str, List]) -> pd.DataFrame:
         """Get market information of the given token
+
         Parameters
         ----------
+            tokens_in: str, List
+                single token address in or list of token addresses
+
         Returns
         -------
+            DataFrame
+                DataFrame containing market info for token(s)
         """
         tokens = validate_input(tokens_in)
 
@@ -397,10 +549,11 @@ class Solscan(DataLoader):
     # Chain Information endpoints
     def get_chain_info(self) -> Dict:
         """Return Blockchain overall information
-        Parameters
-        ----------
+
         Returns
         -------
+            Dict
+                Information about Solana blockchain
         """
         chain_info = self.get_response(CHAIN_INFO_URL,
                                        headers=HEADERS)

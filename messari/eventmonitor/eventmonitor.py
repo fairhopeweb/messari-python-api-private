@@ -4,22 +4,26 @@ import time
 import logging
 import queue
 import threading
-import json
-from typing import Union, List, Dict
+from typing import Union, List
 import pandas as pd
 
 from web3 import Web3
 from web3.logs import DISCARD
 
 from messari.blockexplorers import Scanner
-from .helpers import validate_checksum
+from messari.utils import validate_input
+from .helpers import validate_checksum, build_contract_events
 
 #################
 class EventMonitor:
     """Class to monitor contract events
     """
 
-    def __init__(self, contracts_in: Union[str, List], explorer: Scanner, rpc_url: str):
+    def __init__(self, contracts_in: Union[str, List],
+                 explorer: Scanner,
+                 rpc_url: str,
+                 event_names: Union[str, List]=None):
+
 
         # More web3 setup
         self.w3 = Web3(Web3.HTTPProvider(rpc_url))
@@ -27,22 +31,57 @@ class EventMonitor:
 
         # Web3 set up, can be super streamlined
         self.contracts = validate_checksum(contracts_in)
-        self.contracts_df = self.get_contract_events()
-        self.event_filters = [self.w3.eth.filter({'address': contract}) for contract in self.contracts]
+        self.contracts_dict = {} # this is used to store contract: [topics] for recall when syncing
+        for contract in self.contracts:
+            self.contracts_dict[contract] = []
+
+        self.contracts_df = build_contract_events(self.contracts, self.explorer)
         self.abis_dict = self.explorer.get_contract_abi(self.contracts)
 
-        # For progress
+        # For progress bar when syncing
         self.sync_status = ''
 
-        # For shared data
-        # TODO, fixing typing bc linting tool
-        self.event_queue: queue.Queue = queue.Queue()
-        self.events_list: List[Dict] = []
-        # list of tuples for uniquely identifiying events that have been processed or not
-        self.event_tuples: List[tuple] = []
-        self.events_df = pd.DataFrame()
+        ####################################
+        # set filters
 
-        # set flags to kill threads
+        # Loop through given event names
+        self.event_filters = []
+        if event_names:
+            self.event_names = validate_input(event_names)
+            for event_name in self.event_names:
+
+                # Loop through monitored contracts
+                for contract in self.contracts:
+                    contract_df = self.contracts_df[contract]
+
+                    # get keccak for event name in contract event names
+                    topic_series = contract_df.loc[contract_df['name'] == event_name, 'keccak']
+
+                    # if not empty add to event topics to monitor
+                    if topic_series.any():
+                        topic_keccak = topic_series.iloc[0]
+                        self.contracts_dict[contract].append(topic_keccak)
+                        self.event_filters.append(self.w3.eth.filter({'address': contract,
+                                                                      'topics': [topic_keccak]}))
+        else:
+            self.event_filters = [self.w3.eth.filter({'address': contract}) for contract in self.contracts] # pylint: disable=line-too-long
+
+
+
+
+        # internal list of handled events
+        self.events_list = []
+        # list of tuples for uniquely identifiying events that have been processed or not
+        self.event_tuples = []
+
+
+        ###################
+        # Thread management
+
+        # For sharing data across threads
+        self.event_queue = queue.Queue()
+
+        # Unset flags to kill threads
         self.monitor_flag = False
         self.sync_flag = False
         self.handler_flag = False
@@ -61,8 +100,8 @@ class EventMonitor:
         events_df = pd.DataFrame(self.events_list)
 
         # create multiIndex (block#, log#)
-        tuples_list = [(row['block_number'], row['log_index']) for index, row in events_df.iterrows()]
-        event_index = pd.MultiIndex.from_tuples(tuples_list, names=['block_number', 'log_index'])
+        tuples = [(row['block_number'], row['log_index']) for index, row in events_df.iterrows()]
+        event_index = pd.MultiIndex.from_tuples(tuples, names=['block_number', 'log_index'])
 
         # set & sort new index
         events_df.index = event_index
@@ -80,49 +119,10 @@ class EventMonitor:
         """
         return self.event_queue.qsize()
 
-    # TODO refactor this
     def get_contract_events(self) -> pd.DataFrame:
-        """Return df about info of contract events
+        """Return size of event queue
         """
-
-        ABIs_dict = self.explorer.get_contract_abi(self.contracts)
-
-        df_list = []
-        for contract in self.contracts:
-
-            contract_ABI = json.loads(ABIs_dict[contract])
-
-            # loop through abi
-            event_list=[]
-            for entry in contract_ABI:
-                # looking for events
-                if entry['type'] == 'event':
-                    # get name & inputs
-                    event_name = entry['name']
-                    event_inputs = entry['inputs']
-
-                    # Some ugly string manipulation
-                    input_str='('
-                    for event_input in event_inputs:
-                        input_str += f"{event_input['type']},"
-                    input_str = input_str[:-1] + ')'
-
-                    # create text to get event keccak
-                    event_text = event_name+input_str
-                    event_keccak = Web3.keccak(text=event_text).hex()
-
-                    # making df
-                    event_dict = {'name': event_name,
-                                  'text': event_text,
-                                  'keccak': event_keccak,
-                                  'inputs': event_inputs}
-                    event_list.append(event_dict)
-
-            contract_event_df = pd.DataFrame(event_list)
-            df_list.append(contract_event_df)
-
-        event_df = pd.concat(df_list, keys=self.contracts, axis=1)
-        return event_df
+        return self.contracts_df
 
     ##########################
     # HANDLING
@@ -166,13 +166,14 @@ class EventMonitor:
                 self.handle_event(event)
             time.sleep(2)
 
-    def handle_event(self, event) -> pd.DataFrame:
+    def handle_event(self, event):
         """Process event when it happens
         """
         # Look for repeats, txn hash & log index uniquely identify any event
         event_tuple = (event['transactionHash'], event['logIndex'])
         if event_tuple in self.event_tuples:
             # TODO, indicate this is working
+            # TODO, its not working
             return
 
 
@@ -209,7 +210,8 @@ class EventMonitor:
                               'block': log['blockHash'].hex()}
                 self.events_list.append(event_dict)
                 self.event_tuples.append(event_tuple)
-        except:
+        # TODO get type for this except clause
+        except: # pylint: disable=bare-except
             logging.error('event handler error')
 
         return
@@ -274,7 +276,7 @@ class EventMonitor:
         start_block = int(start)
         end_block = self.w3.eth.get_block('latest')['number'] if end == 'latest' else end
 
-        self.sync_thread = threading.Thread(target=self.sync, args=(start_block, end_block))
+        self.sync_thread = threading.Thread(target=self.sync_top, args=(start_block, end_block))
         self.sync_thread.start()
 
     def stop_sync(self):
@@ -304,67 +306,85 @@ class EventMonitor:
             else:
                 return 'DEAD'
 
-    def sync(self, start_block: int, end_block: int):
-        contract_total = len(self.contracts)
-        contract_count = 1
+    def sync_top(self, start_block: int, end_block: int):
 
         for contract in self.contracts:
-
-            from_block = start_block
-            # start w/ increments of 1% bc early eth blocks are pretty empty
-            increment = (end_block - from_block) // 100
-            to_block = from_block + increment
-
-            run_filter = self.w3.eth.filter({'address': contract,
-                                             'fromBlock': from_block,
-                                             'toBlock': to_block})
-            all_events = []
-            events_caught = []
-            while from_block < end_block and self.sync_flag:
-                self.sync_status = f'Contract: {contract_count}/{contract_total}, Range: ({from_block} - {to_block}), Goal: {end_block}, Increment: {increment}'
-
-                try:
-                    events = run_filter.get_all_entries()
-                    all_events.append(events)
-                    for event in events:
-                        # Add to queue
-                        self.event_queue.put(event)
-
-                    # Optimize increasing the increment
-                    if len(events_caught) >= 10:
-                        # pop new len(events) into list
-                        events_caught.pop(0)
-                        events_caught.append(len(events))
-
-                        # get average
-                        avg_caught = sum(events_caught)//10
-
-                        diff = 5000 - avg_caught
-                        diff_percent = diff/5000
-
-                        # should work for +/- optimizing for 5000?
-                        increment = int(increment * (1 + diff_percent))
-                    else:
-                        events_caught.append(len(events))
-                        increment = increment
-
-                    from_block = to_block + 1
-                    to_block = from_block + increment
-                    run_filter = self.w3.eth.filter({'address': contract,
-                                                'fromBlock': from_block,
-                                                'toBlock': to_block})
-
-                except ValueError as error:
-                    # TODO parse this error to confirm it is the right one
-                    # really just assuming this error has to do w/ too much data being in return
-                    #logging.error(error)
-                    increment = increment // 2
-                    to_block = from_block + increment
-
-                    run_filter = self.w3.eth.filter({'address': contract,
-                                                     'fromBlock': from_block,
-                                                     'toBlock': to_block})
-            contract_count+=1
+            if self.contracts_dict[contract]:
+                topics = self.contracts_dict[contract]
+                for topic in topics:
+                    self.sync(start_block, end_block, contract, topic=topic)
+            else:
+                self.sync(start_block, end_block, contract)
 
         # self-stop sync w/ flag
         self.sync_flag = False
+
+
+    def sync(self, start_block: int, end_block: int, contract: str, topic: str=None):
+
+        from_block = start_block
+        # start w/ increments of 1% bc early eth blocks are pretty empty
+        increment = (end_block - from_block) // 100
+        to_block = from_block + increment
+
+        if topic:
+            run_filter = self.w3.eth.filter({'address': contract,
+                                             'fromBlock': from_block,
+                                             'toBlock': to_block,
+                                             'topics': [topic]})
+        else:
+            run_filter = self.w3.eth.filter({'address': contract,
+                                             'fromBlock': from_block,
+                                             'toBlock': to_block})
+        all_events = []
+        events_caught = []
+        while from_block < end_block and self.sync_flag:
+            self.sync_status = f'Contract: {contract}, Topic: {topic}, Range: ({from_block} - {to_block}), Goal: {end_block}, Increment: {increment}' # pylint: disable=line-too-long
+
+            try:
+                events = run_filter.get_all_entries()
+                all_events.append(events)
+                for event in events:
+                    # Add to queue
+                    self.event_queue.put(event)
+
+                # Optimize increasing the increment
+                if len(events_caught) >= 10:
+                    # pop new len(events) into list
+                    events_caught.pop(0)
+                    events_caught.append(len(events))
+
+                    # get average
+                    avg_caught = sum(events_caught)//10
+
+                    diff = 5000 - avg_caught
+                    diff_percent = diff/5000
+
+                    # should work for +/- optimizing for 5000?
+                    increment = int(increment * (1 + diff_percent))
+                else:
+                    events_caught.append(len(events))
+
+                from_block = to_block + 1
+                to_block = from_block + increment
+                run_filter = self.w3.eth.filter({'address': contract,
+                                            'fromBlock': from_block,
+                                            'toBlock': to_block})
+
+            except ValueError as error: # pylint: disable=unused-variable
+                # TODO parse this error to confirm it is the right one
+                # really just assuming this error has to do w/ too much data being in return
+                #logging.error(error)
+                increment = increment // 2
+                to_block = from_block + increment
+
+                if topic:
+                    run_filter = self.w3.eth.filter({'address': contract,
+                                                     'fromBlock': from_block,
+                                                     'toBlock': to_block,
+                                                     'topics': [topic]})
+                else:
+                    run_filter = self.w3.eth.filter({'address': contract,
+                                                     'fromBlock': from_block,
+                                                     'toBlock': to_block})
+

@@ -89,6 +89,16 @@ class Arbiscan(Scanner):
     ##### Tokens
     def get_token_circulating_supply(self, tokens_in: Union[str, List]) -> pd.DataFrame:
         """Get ERC20 Circulating Supply (For Arbitrum Cross Chain token Types) by ContractAddress
+
+        Parameters
+        ----------
+            tokens_in: str, List
+                single token address in or list of token addresses
+
+        Returns
+        -------
+            DataFrame
+                DataFrame containing total supply for token(s)
         """
         tokens = validate_input(tokens_in)
         supply_dict = {}
@@ -97,7 +107,7 @@ class Arbiscan(Scanner):
                       'action': 'tokenCsupply',
                       'contractaddress': token}
             params.update(self.api_dict)
-            supply = self.get_response(self.BASE_URL, params=params)['result']
+            supply = self.get_response(self.base_url, params=params)['result']
             supply_dict[token] = supply
         supply_df = pd.Series(supply_dict).to_frame(name='supply')
         return supply_df

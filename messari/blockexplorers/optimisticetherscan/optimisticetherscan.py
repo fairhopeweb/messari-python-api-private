@@ -156,11 +156,11 @@ class OptimisticEtherscan(Scanner):
         return None
 
     ##### Stats
-    def get_total_matic_supply(self) -> int:
+    def get_total_eth_supply(self) -> int:
         """Returns the current amount of ETH (Wei) in circulation on optimism
         """
         params = {'module': 'stats',
                   'action': 'optimismsupply'}
         params.update(self.api_dict)
         response = self.get_response(self.BASE_URL, params=params)['result']
-        return response
+        return int(response)

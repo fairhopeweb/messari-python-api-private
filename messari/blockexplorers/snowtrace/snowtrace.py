@@ -30,7 +30,10 @@ class SnowTrace(Scanner):
     # NOTE: no changes
 
     ##### Geth/Parity Proxy
-    # NOTE: no changes
+    def get_eth_uncle(self, block: int, index: int):
+        """Override: return None
+        """
+        return None
 
     ##### Tokens
     # NOTE: no changes
@@ -47,11 +50,15 @@ class SnowTrace(Scanner):
         return None
 
     ##### Stats
-    def get_total_avax_supply(self) -> int:
-        """Returns the current amount of Matic (Wei) in circulation.
-        """
-        params = {'module': 'stats',
-                  'action': 'AVAXsupply'}
-        params.update(self.api_dict)
-        response = self.get_response(self.BASE_URL, params=params)['result']
-        return response
+
+    # TODO, I have convinced myself through testing this is busted on SnowTrace's end
+    # Check in on this later
+
+    #def get_total_avax_supply(self) -> int:
+    #    """Returns the current amount of Matic (Wei) in circulation.
+    #    """
+    #    params = {'module': 'stats',
+    #              'action': 'AVAXsupply'}
+    #    params.update(self.api_dict)
+    #    response = self.get_response(self.base_url, params=params)['result']
+    #    return int(response)

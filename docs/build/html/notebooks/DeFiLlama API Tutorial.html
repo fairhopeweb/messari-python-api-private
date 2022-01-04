@@ -53,6 +53,10 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="TokenTerminal%20API%20Tutorial.html">Token Terminal Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DeepDAO%20API%20Tutorial.html">Deep DAO Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Etherscan%20API%20Tutorial.html">EVM Blockexplorer API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Solscan%20API%20Tutorial.html">Solscan API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Event%20Monitor%20Tutorial.html">Event Monitor Tutorial</a></li>
 </ul>
 
         </div>
@@ -379,7 +383,7 @@ dl = DeFiLlama()
 <h2>Get protocol tvl timeseries<a class="headerlink" href="#Get-protocol-tvl-timeseries" title="Permalink to this headline"></a></h2>
 <p>This function returns a timeseries of a protocol’s TVL broken down by token amounts as a pandas DataFrame. The DataFrame uses a multiindex to group relevant data together following a convenient <strong>df[protocol][chain][asset]</strong> pattern. For example, the following code returns Aave’s aggregate TVL and token amounts across all chains:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -390,7 +394,7 @@ protocol_tvls[&#39;aave&#39;][&#39;all&#39;].head()
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -413,23 +417,23 @@ protocol_tvls[&#39;aave&#39;][&#39;all&#39;].head()
     <tr style="text-align: right;">
       <th></th>
       <th>totalLiquidityUSD</th>
-      <th>ENJ</th>
-      <th>CRV</th>
+      <th>ZRX</th>
+      <th>MANA</th>
       <th>USDT</th>
+      <th>WETH</th>
       <th>LEND</th>
-      <th>AAVE</th>
-      <th>UNI</th>
-      <th>WBTC</th>
+      <th>DAI</th>
+      <th>KNCL</th>
+      <th>UNKNOWN (0x1985365e9f78359a9B6AD760e32412f4a445E862)</th>
       <th>SUSD</th>
-      <th>LINK</th>
       <th>...</th>
+      <th>REP_usd</th>
+      <th>WMATIC_usd</th>
       <th>RENFIL_usd</th>
-      <th>UNKNOWN (0x1985365e9f78359a9B6AD760e32412f4a445E862)_usd</th>
       <th>RAI_usd</th>
-      <th>AMPL_usd</th>
-      <th>PAX_usd</th>
-      <th>DPI_usd</th>
       <th>USDP_usd</th>
+      <th>AMPL_usd</th>
+      <th>DPI_usd</th>
       <th>FRAX_usd</th>
       <th>FEI_usd</th>
       <th>WAVAX_usd</th>
@@ -438,141 +442,141 @@ protocol_tvls[&#39;aave&#39;][&#39;all&#39;].head()
   <tbody>
     <tr>
       <th>2021-10-01</th>
-      <td>1.370234e+10</td>
-      <td>1.046651e+07</td>
-      <td>6.311565e+06</td>
-      <td>2.455208e+08</td>
+      <td>1.272942e+10</td>
+      <td>5.263638e+06</td>
+      <td>6.243414e+06</td>
+      <td>1.796747e+08</td>
+      <td>2.391064e+06</td>
       <td>174907.299479</td>
-      <td>1.910542e+06</td>
-      <td>3.918288e+06</td>
-      <td>41781.707197</td>
-      <td>2.544456e+07</td>
-      <td>2.200474e+07</td>
+      <td>7.078414e+08</td>
+      <td>941804.295297</td>
+      <td>NaN</td>
+      <td>2.753281e+07</td>
       <td>...</td>
-      <td>4.142907e+06</td>
       <td>NaN</td>
-      <td>1.369684e+07</td>
-      <td>1.067524e+06</td>
       <td>NaN</td>
-      <td>5.856352e+07</td>
-      <td>2.990423e+06</td>
-      <td>1.601764e+06</td>
-      <td>4.276806e+06</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>2021-10-02</th>
-      <td>1.419310e+10</td>
-      <td>1.057785e+07</td>
-      <td>6.935109e+06</td>
-      <td>2.275302e+08</td>
+      <td>1.370309e+10</td>
+      <td>5.261857e+06</td>
+      <td>6.638973e+06</td>
+      <td>2.455208e+08</td>
+      <td>2.394438e+06</td>
       <td>174907.299479</td>
-      <td>1.912798e+06</td>
-      <td>4.063942e+06</td>
-      <td>42631.168237</td>
-      <td>2.483117e+07</td>
-      <td>2.211693e+07</td>
+      <td>6.741214e+08</td>
+      <td>940890.999608</td>
+      <td>NaN</td>
+      <td>2.544456e+07</td>
       <td>...</td>
-      <td>4.275809e+06</td>
       <td>NaN</td>
-      <td>1.513579e+07</td>
-      <td>1.651881e+05</td>
       <td>NaN</td>
-      <td>4.688960e+07</td>
-      <td>2.970062e+06</td>
-      <td>3.600939e+06</td>
-      <td>4.036727e+06</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>2021-10-03</th>
-      <td>1.431644e+10</td>
-      <td>1.063210e+07</td>
-      <td>7.733310e+06</td>
-      <td>3.273912e+08</td>
+      <td>1.416550e+10</td>
+      <td>5.264670e+06</td>
+      <td>9.217338e+06</td>
+      <td>2.275303e+08</td>
+      <td>2.403221e+06</td>
       <td>174907.299479</td>
-      <td>1.910459e+06</td>
-      <td>4.060696e+06</td>
-      <td>43108.704933</td>
-      <td>2.256727e+07</td>
-      <td>2.216695e+07</td>
+      <td>6.703332e+08</td>
+      <td>940890.999608</td>
+      <td>NaN</td>
+      <td>2.483117e+07</td>
       <td>...</td>
-      <td>4.120871e+06</td>
       <td>NaN</td>
-      <td>1.513579e+07</td>
-      <td>2.528140e+05</td>
       <td>NaN</td>
-      <td>4.588331e+07</td>
-      <td>2.931041e+06</td>
-      <td>2.859444e+06</td>
-      <td>5.071526e+06</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>2021-10-04</th>
-      <td>1.481314e+10</td>
-      <td>1.062416e+07</td>
-      <td>7.951371e+06</td>
-      <td>3.380871e+08</td>
+      <td>1.431796e+10</td>
+      <td>5.283455e+06</td>
+      <td>8.766940e+06</td>
+      <td>3.273912e+08</td>
+      <td>2.400876e+06</td>
       <td>174907.299479</td>
-      <td>2.024898e+06</td>
-      <td>4.119227e+06</td>
-      <td>44953.703369</td>
-      <td>2.232785e+07</td>
-      <td>2.216039e+07</td>
+      <td>6.778497e+08</td>
+      <td>925740.999608</td>
+      <td>NaN</td>
+      <td>2.256727e+07</td>
       <td>...</td>
-      <td>4.092038e+06</td>
       <td>NaN</td>
-      <td>1.536486e+07</td>
-      <td>3.413756e+05</td>
       <td>NaN</td>
-      <td>4.441723e+07</td>
-      <td>2.931041e+06</td>
-      <td>1.647494e+06</td>
-      <td>5.114161e+06</td>
-      <td>8.102013e+07</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>2021-10-05</th>
-      <td>1.562776e+10</td>
-      <td>1.060164e+07</td>
-      <td>8.145123e+06</td>
-      <td>3.916334e+08</td>
-      <td>174296.741465</td>
-      <td>2.081462e+06</td>
-      <td>4.122575e+06</td>
-      <td>45576.912796</td>
-      <td>1.488648e+07</td>
-      <td>2.214311e+07</td>
+      <td>1.478106e+10</td>
+      <td>5.283455e+06</td>
+      <td>8.812426e+06</td>
+      <td>3.380842e+08</td>
+      <td>2.452887e+06</td>
+      <td>174907.299479</td>
+      <td>7.292846e+08</td>
+      <td>925740.999608</td>
+      <td>NaN</td>
+      <td>2.232785e+07</td>
       <td>...</td>
-      <td>4.184423e+06</td>
       <td>NaN</td>
-      <td>1.481286e+07</td>
-      <td>1.000055e+06</td>
       <td>NaN</td>
-      <td>4.478705e+07</td>
-      <td>2.931041e+06</td>
-      <td>1.834846e+06</td>
-      <td>5.018526e+06</td>
-      <td>8.322869e+07</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
   </tbody>
 </table>
-<p>5 rows × 77 columns</p>
+<p>5 rows × 75 columns</p>
 </div></div>
 </div>
 <p>We could narrow down our search by passing other supported chains as follows:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>protocol_tvls[&#39;aave&#39;][&#39;Ethereum&#39;].head()
+<span></span>protocol_tvls.head()
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -586,190 +590,365 @@ protocol_tvls[&#39;aave&#39;][&#39;all&#39;].head()
         vertical-align: top;
     }
 
-    .dataframe thead th {
-        text-align: right;
+    .dataframe thead tr th {
+        text-align: left;
     }
 </style>
 <table border="1" class="dataframe">
   <thead>
-    <tr style="text-align: right;">
+    <tr>
+      <th></th>
+      <th colspan="21" halign="left">aave</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th colspan="10" halign="left">Avalanche</th>
+      <th>...</th>
+      <th colspan="10" halign="left">all</th>
+    </tr>
+    <tr>
       <th></th>
       <th>totalLiquidityUSD</th>
-      <th>ENJ</th>
-      <th>CRV</th>
-      <th>USDT</th>
-      <th>LEND</th>
       <th>AAVE</th>
-      <th>UNI</th>
       <th>WBTC</th>
-      <th>SUSD</th>
-      <th>LINK</th>
+      <th>USDT</th>
+      <th>WETH</th>
+      <th>USDC</th>
+      <th>WAVAX</th>
+      <th>DAI</th>
+      <th>AAVE_usd</th>
+      <th>WBTC_usd</th>
       <th>...</th>
-      <th>XSUSHI_usd</th>
+      <th>REP_usd</th>
+      <th>WMATIC_usd</th>
       <th>RENFIL_usd</th>
-      <th>UNKNOWN (0x1985365e9f78359a9B6AD760e32412f4a445E862)_usd</th>
       <th>RAI_usd</th>
-      <th>AMPL_usd</th>
-      <th>PAX_usd</th>
-      <th>DPI_usd</th>
       <th>USDP_usd</th>
+      <th>AMPL_usd</th>
+      <th>DPI_usd</th>
       <th>FRAX_usd</th>
       <th>FEI_usd</th>
+      <th>WAVAX_usd</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>2021-10-01</th>
-      <td>1.176457e+10</td>
-      <td>1.046651e+07</td>
-      <td>6.311565e+06</td>
-      <td>2.097273e+08</td>
-      <td>174907.299479</td>
-      <td>1.719256e+06</td>
-      <td>3.918288e+06</td>
-      <td>33783.716382</td>
-      <td>2.544456e+07</td>
-      <td>2.200474e+07</td>
+      <td>0.000000e+00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>...</td>
-      <td>1.552155e+08</td>
-      <td>4.142907e+06</td>
       <td>NaN</td>
-      <td>1.369684e+07</td>
-      <td>1.067524e+06</td>
       <td>NaN</td>
-      <td>5.856352e+07</td>
-      <td>2.990423e+06</td>
-      <td>1.601764e+06</td>
-      <td>4.276806e+06</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>2021-10-02</th>
-      <td>1.220245e+10</td>
-      <td>1.057785e+07</td>
-      <td>6.935109e+06</td>
-      <td>1.905787e+08</td>
-      <td>174907.299479</td>
-      <td>1.721987e+06</td>
-      <td>4.063942e+06</td>
-      <td>34580.139148</td>
-      <td>2.483117e+07</td>
-      <td>2.211693e+07</td>
+      <td>0.000000e+00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>...</td>
-      <td>1.610315e+08</td>
-      <td>4.275809e+06</td>
       <td>NaN</td>
-      <td>1.513579e+07</td>
-      <td>1.651881e+05</td>
       <td>NaN</td>
-      <td>4.688960e+07</td>
-      <td>2.970062e+06</td>
-      <td>3.600939e+06</td>
-      <td>4.036727e+06</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>2021-10-03</th>
-      <td>1.232623e+10</td>
-      <td>1.063210e+07</td>
-      <td>7.733310e+06</td>
-      <td>2.923815e+08</td>
-      <td>174907.299479</td>
-      <td>1.719631e+06</td>
-      <td>4.060696e+06</td>
-      <td>35020.173599</td>
-      <td>2.256727e+07</td>
-      <td>2.216695e+07</td>
+      <td>0.000000e+00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>...</td>
-      <td>1.563189e+08</td>
-      <td>4.120871e+06</td>
       <td>NaN</td>
-      <td>1.513579e+07</td>
-      <td>2.528140e+05</td>
       <td>NaN</td>
-      <td>4.588331e+07</td>
-      <td>2.931041e+06</td>
-      <td>2.859444e+06</td>
-      <td>5.071526e+06</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>2021-10-04</th>
-      <td>1.220784e+10</td>
-      <td>1.062416e+07</td>
-      <td>7.951371e+06</td>
-      <td>2.719606e+08</td>
-      <td>174907.299479</td>
-      <td>1.699531e+06</td>
-      <td>4.119227e+06</td>
-      <td>34959.163570</td>
-      <td>2.232785e+07</td>
-      <td>2.216039e+07</td>
+      <td>0.000000e+00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>...</td>
-      <td>1.579955e+08</td>
-      <td>4.092038e+06</td>
       <td>NaN</td>
-      <td>1.536486e+07</td>
-      <td>3.413756e+05</td>
       <td>NaN</td>
-      <td>4.441723e+07</td>
-      <td>2.931041e+06</td>
-      <td>1.647494e+06</td>
-      <td>5.114161e+06</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
     <tr>
       <th>2021-10-05</th>
-      <td>1.249159e+10</td>
-      <td>1.060164e+07</td>
-      <td>8.145123e+06</td>
-      <td>2.402593e+08</td>
-      <td>174296.741465</td>
-      <td>1.694906e+06</td>
-      <td>4.122575e+06</td>
-      <td>34650.687732</td>
-      <td>1.488648e+07</td>
-      <td>2.214311e+07</td>
+      <td>6.226781e+08</td>
+      <td>138168.369027</td>
+      <td>2076.725695</td>
+      <td>3.200520e+07</td>
+      <td>61256.212777</td>
+      <td>9.497521e+07</td>
+      <td>1.268147e+06</td>
+      <td>6.108483e+07</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>...</td>
-      <td>1.633028e+08</td>
-      <td>4.184423e+06</td>
       <td>NaN</td>
-      <td>1.481286e+07</td>
-      <td>1.000055e+06</td>
       <td>NaN</td>
-      <td>4.478705e+07</td>
-      <td>2.931041e+06</td>
-      <td>1.834846e+06</td>
-      <td>5.018526e+06</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
   </tbody>
 </table>
-<p>5 rows × 73 columns</p>
+<p>5 rows × 176 columns</p>
 </div></div>
 </div>
 <p>To look at a protocol’s aggregate TVL across all tokens of one specific chain, pass ‘totalLiquidityUSD’ as the asset index. For example, if we wanted to know Aave’s total TVL in Ethereum, we would run:</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>protocol_tvls[&#39;aave&#39;][&#39;Ethereum&#39;][&#39;totalLiquidityUSD&#39;]
+<span></span>list(protocol_tvls[&#39;aave&#39;].columns)
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-2021-10-01    1.176457e+10
-2021-10-02    1.220245e+10
-2021-10-03    1.232623e+10
-2021-10-04    1.220784e+10
-2021-10-05    1.249159e+10
-2021-10-06    1.248139e+10
-2021-10-07    1.249473e+10
-2021-10-08    1.199861e+10
-2021-10-09    1.144368e+10
-2021-10-10    1.132894e+10
-Name: totalLiquidityUSD, dtype: float64
+[(&#39;Avalanche&#39;, &#39;totalLiquidityUSD&#39;),
+ (&#39;Avalanche&#39;, &#39;AAVE&#39;),
+ (&#39;Avalanche&#39;, &#39;WBTC&#39;),
+ (&#39;Avalanche&#39;, &#39;USDT&#39;),
+ (&#39;Avalanche&#39;, &#39;WETH&#39;),
+ (&#39;Avalanche&#39;, &#39;USDC&#39;),
+ (&#39;Avalanche&#39;, &#39;WAVAX&#39;),
+ (&#39;Avalanche&#39;, &#39;DAI&#39;),
+ (&#39;Avalanche&#39;, &#39;AAVE_usd&#39;),
+ (&#39;Avalanche&#39;, &#39;WBTC_usd&#39;),
+ (&#39;Avalanche&#39;, &#39;USDT_usd&#39;),
+ (&#39;Avalanche&#39;, &#39;WETH_usd&#39;),
+ (&#39;Avalanche&#39;, &#39;USDC_usd&#39;),
+ (&#39;Avalanche&#39;, &#39;WAVAX_usd&#39;),
+ (&#39;Avalanche&#39;, &#39;DAI_usd&#39;),
+ (&#39;Polygon&#39;, &#39;totalLiquidityUSD&#39;),
+ (&#39;Polygon&#39;, &#39;AAVE&#39;),
+ (&#39;Polygon&#39;, &#39;WBTC&#39;),
+ (&#39;Polygon&#39;, &#39;WMATIC&#39;),
+ (&#39;Polygon&#39;, &#39;USDT&#39;),
+ (&#39;Polygon&#39;, &#39;USDC&#39;),
+ (&#39;Polygon&#39;, &#39;WETH&#39;),
+ (&#39;Polygon&#39;, &#39;DAI&#39;),
+ (&#39;Polygon&#39;, &#39;AAVE_usd&#39;),
+ (&#39;Polygon&#39;, &#39;WBTC_usd&#39;),
+ (&#39;Polygon&#39;, &#39;WMATIC_usd&#39;),
+ (&#39;Polygon&#39;, &#39;USDT_usd&#39;),
+ (&#39;Polygon&#39;, &#39;USDC_usd&#39;),
+ (&#39;Polygon&#39;, &#39;WETH_usd&#39;),
+ (&#39;Polygon&#39;, &#39;DAI_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;totalLiquidityUSD&#39;),
+ (&#39;Ethereum&#39;, &#39;ZRX&#39;),
+ (&#39;Ethereum&#39;, &#39;MANA&#39;),
+ (&#39;Ethereum&#39;, &#39;USDT&#39;),
+ (&#39;Ethereum&#39;, &#39;WETH&#39;),
+ (&#39;Ethereum&#39;, &#39;LEND&#39;),
+ (&#39;Ethereum&#39;, &#39;DAI&#39;),
+ (&#39;Ethereum&#39;, &#39;KNCL&#39;),
+ (&#39;Ethereum&#39;, &#39;UNKNOWN (0x1985365e9f78359a9B6AD760e32412f4a445E862)&#39;),
+ (&#39;Ethereum&#39;, &#39;SUSD&#39;),
+ (&#39;Ethereum&#39;, &#39;TUSD&#39;),
+ (&#39;Ethereum&#39;, &#39;BAT&#39;),
+ (&#39;Ethereum&#39;, &#39;MKR&#39;),
+ (&#39;Ethereum&#39;, &#39;LINK&#39;),
+ (&#39;Ethereum&#39;, &#39;USDC&#39;),
+ (&#39;Ethereum&#39;, &#39;SNX&#39;),
+ (&#39;Ethereum&#39;, &#39;WBTC&#39;),
+ (&#39;Ethereum&#39;, &#39;BUSD&#39;),
+ (&#39;Ethereum&#39;, &#39;SETH&#39;),
+ (&#39;Ethereum&#39;, &#39;ENJ&#39;),
+ (&#39;Ethereum&#39;, &#39;REN&#39;),
+ (&#39;Ethereum&#39;, &#39;YFI&#39;),
+ (&#39;Ethereum&#39;, &#39;AAVE&#39;),
+ (&#39;Ethereum&#39;, &#39;UNI&#39;),
+ (&#39;Ethereum&#39;, &#39;CRV&#39;),
+ (&#39;Ethereum&#39;, &#39;GUSD&#39;),
+ (&#39;Ethereum&#39;, &#39;BAL&#39;),
+ (&#39;Ethereum&#39;, &#39;XSUSHI&#39;),
+ (&#39;Ethereum&#39;, &#39;REP&#39;),
+ (&#39;Ethereum&#39;, &#39;RENFIL&#39;),
+ (&#39;Ethereum&#39;, &#39;RAI&#39;),
+ (&#39;Ethereum&#39;, &#39;USDP&#39;),
+ (&#39;Ethereum&#39;, &#39;AMPL&#39;),
+ (&#39;Ethereum&#39;, &#39;DPI&#39;),
+ (&#39;Ethereum&#39;, &#39;FRAX&#39;),
+ (&#39;Ethereum&#39;, &#39;FEI&#39;),
+ (&#39;Ethereum&#39;, &#39;ZRX_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;MANA_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;USDT_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;WETH_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;LEND_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;DAI_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;KNCL_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;UNKNOWN (0x1985365e9f78359a9B6AD760e32412f4a445E862)_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;SUSD_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;TUSD_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;BAT_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;MKR_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;LINK_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;USDC_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;SNX_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;WBTC_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;BUSD_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;SETH_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;ENJ_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;REN_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;YFI_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;AAVE_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;UNI_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;CRV_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;GUSD_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;BAL_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;XSUSHI_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;REP_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;RENFIL_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;RAI_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;USDP_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;AMPL_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;DPI_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;FRAX_usd&#39;),
+ (&#39;Ethereum&#39;, &#39;FEI_usd&#39;),
+ (&#39;all&#39;, &#39;totalLiquidityUSD&#39;),
+ (&#39;all&#39;, &#39;ZRX&#39;),
+ (&#39;all&#39;, &#39;MANA&#39;),
+ (&#39;all&#39;, &#39;USDT&#39;),
+ (&#39;all&#39;, &#39;WETH&#39;),
+ (&#39;all&#39;, &#39;LEND&#39;),
+ (&#39;all&#39;, &#39;DAI&#39;),
+ (&#39;all&#39;, &#39;KNCL&#39;),
+ (&#39;all&#39;, &#39;UNKNOWN (0x1985365e9f78359a9B6AD760e32412f4a445E862)&#39;),
+ (&#39;all&#39;, &#39;SUSD&#39;),
+ (&#39;all&#39;, &#39;TUSD&#39;),
+ (&#39;all&#39;, &#39;BAT&#39;),
+ (&#39;all&#39;, &#39;MKR&#39;),
+ (&#39;all&#39;, &#39;LINK&#39;),
+ (&#39;all&#39;, &#39;USDC&#39;),
+ (&#39;all&#39;, &#39;SNX&#39;),
+ (&#39;all&#39;, &#39;WBTC&#39;),
+ (&#39;all&#39;, &#39;BUSD&#39;),
+ (&#39;all&#39;, &#39;SETH&#39;),
+ (&#39;all&#39;, &#39;ENJ&#39;),
+ (&#39;all&#39;, &#39;REN&#39;),
+ (&#39;all&#39;, &#39;YFI&#39;),
+ (&#39;all&#39;, &#39;AAVE&#39;),
+ (&#39;all&#39;, &#39;UNI&#39;),
+ (&#39;all&#39;, &#39;CRV&#39;),
+ (&#39;all&#39;, &#39;GUSD&#39;),
+ (&#39;all&#39;, &#39;BAL&#39;),
+ (&#39;all&#39;, &#39;XSUSHI&#39;),
+ (&#39;all&#39;, &#39;REP&#39;),
+ (&#39;all&#39;, &#39;WMATIC&#39;),
+ (&#39;all&#39;, &#39;RENFIL&#39;),
+ (&#39;all&#39;, &#39;RAI&#39;),
+ (&#39;all&#39;, &#39;USDP&#39;),
+ (&#39;all&#39;, &#39;AMPL&#39;),
+ (&#39;all&#39;, &#39;DPI&#39;),
+ (&#39;all&#39;, &#39;FRAX&#39;),
+ (&#39;all&#39;, &#39;FEI&#39;),
+ (&#39;all&#39;, &#39;WAVAX&#39;),
+ (&#39;all&#39;, &#39;ZRX_usd&#39;),
+ (&#39;all&#39;, &#39;MANA_usd&#39;),
+ (&#39;all&#39;, &#39;USDT_usd&#39;),
+ (&#39;all&#39;, &#39;WETH_usd&#39;),
+ (&#39;all&#39;, &#39;LEND_usd&#39;),
+ (&#39;all&#39;, &#39;DAI_usd&#39;),
+ (&#39;all&#39;, &#39;KNCL_usd&#39;),
+ (&#39;all&#39;, &#39;UNKNOWN (0x1985365e9f78359a9B6AD760e32412f4a445E862)_usd&#39;),
+ (&#39;all&#39;, &#39;SUSD_usd&#39;),
+ (&#39;all&#39;, &#39;TUSD_usd&#39;),
+ (&#39;all&#39;, &#39;BAT_usd&#39;),
+ (&#39;all&#39;, &#39;MKR_usd&#39;),
+ (&#39;all&#39;, &#39;LINK_usd&#39;),
+ (&#39;all&#39;, &#39;USDC_usd&#39;),
+ (&#39;all&#39;, &#39;SNX_usd&#39;),
+ (&#39;all&#39;, &#39;WBTC_usd&#39;),
+ (&#39;all&#39;, &#39;BUSD_usd&#39;),
+ (&#39;all&#39;, &#39;SETH_usd&#39;),
+ (&#39;all&#39;, &#39;ENJ_usd&#39;),
+ (&#39;all&#39;, &#39;REN_usd&#39;),
+ (&#39;all&#39;, &#39;YFI_usd&#39;),
+ (&#39;all&#39;, &#39;AAVE_usd&#39;),
+ (&#39;all&#39;, &#39;UNI_usd&#39;),
+ (&#39;all&#39;, &#39;CRV_usd&#39;),
+ (&#39;all&#39;, &#39;GUSD_usd&#39;),
+ (&#39;all&#39;, &#39;BAL_usd&#39;),
+ (&#39;all&#39;, &#39;XSUSHI_usd&#39;),
+ (&#39;all&#39;, &#39;REP_usd&#39;),
+ (&#39;all&#39;, &#39;WMATIC_usd&#39;),
+ (&#39;all&#39;, &#39;RENFIL_usd&#39;),
+ (&#39;all&#39;, &#39;RAI_usd&#39;),
+ (&#39;all&#39;, &#39;USDP_usd&#39;),
+ (&#39;all&#39;, &#39;AMPL_usd&#39;),
+ (&#39;all&#39;, &#39;DPI_usd&#39;),
+ (&#39;all&#39;, &#39;FRAX_usd&#39;),
+ (&#39;all&#39;, &#39;FEI_usd&#39;),
+ (&#39;all&#39;, &#39;WAVAX_usd&#39;)]
 </pre></div></div>
 </div>
 </section>
@@ -862,7 +1041,7 @@ global_tvl
 <h2>Get chain tvl timeseries<a class="headerlink" href="#Get-chain-tvl-timeseries" title="Permalink to this headline"></a></h2>
 <p>This function retrives timeseries TVL for a given chain or list of chains as a pandas DataFrame</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -873,7 +1052,7 @@ chain_tvls
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -903,63 +1082,63 @@ chain_tvls
   <tbody>
     <tr>
       <th>2021-10-01</th>
-      <td>3.880313e+09</td>
+      <td>3.763324e+09</td>
       <td>1.350100e+08</td>
-      <td>4.504783e+09</td>
+      <td>4.342970e+09</td>
     </tr>
     <tr>
       <th>2021-10-02</th>
-      <td>4.066595e+09</td>
+      <td>4.001220e+09</td>
       <td>1.399944e+08</td>
-      <td>4.580609e+09</td>
+      <td>4.527419e+09</td>
     </tr>
     <tr>
       <th>2021-10-03</th>
-      <td>4.075295e+09</td>
+      <td>4.071999e+09</td>
       <td>1.500492e+08</td>
-      <td>4.687820e+09</td>
+      <td>4.659061e+09</td>
     </tr>
     <tr>
       <th>2021-10-04</th>
-      <td>3.984976e+09</td>
+      <td>3.870700e+09</td>
       <td>1.497508e+08</td>
-      <td>4.663548e+09</td>
+      <td>4.658624e+09</td>
     </tr>
     <tr>
       <th>2021-10-05</th>
-      <td>4.470707e+09</td>
+      <td>4.126030e+09</td>
       <td>1.553020e+08</td>
-      <td>4.762029e+09</td>
+      <td>4.706019e+09</td>
     </tr>
     <tr>
       <th>2021-10-06</th>
-      <td>4.528760e+09</td>
+      <td>4.523881e+09</td>
       <td>1.534946e+08</td>
-      <td>4.724335e+09</td>
+      <td>4.739420e+09</td>
     </tr>
     <tr>
       <th>2021-10-07</th>
-      <td>4.483351e+09</td>
+      <td>4.509480e+09</td>
       <td>1.577545e+08</td>
-      <td>4.696261e+09</td>
+      <td>4.713894e+09</td>
     </tr>
     <tr>
       <th>2021-10-08</th>
-      <td>4.560892e+09</td>
+      <td>4.522813e+09</td>
       <td>1.645999e+08</td>
-      <td>4.651345e+09</td>
+      <td>4.647436e+09</td>
     </tr>
     <tr>
       <th>2021-10-09</th>
-      <td>5.069958e+09</td>
+      <td>5.040974e+09</td>
       <td>1.935887e+08</td>
-      <td>4.486516e+09</td>
+      <td>4.477904e+09</td>
     </tr>
     <tr>
       <th>2021-10-10</th>
-      <td>5.131014e+09</td>
+      <td>5.131507e+09</td>
       <td>1.875108e+08</td>
-      <td>4.455768e+09</td>
+      <td>4.456939e+09</td>
     </tr>
   </tbody>
 </table>

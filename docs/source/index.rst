@@ -73,6 +73,14 @@ Check out our examples `here <https://github.com/messari/messari-python-api/blob
    notebooks/Messari API Tutorial.ipynb
    notebooks/DeFiLlama API Tutorial.ipynb
    notebooks/TokenTerminal API Tutorial.ipynb
+   notebooks/DeepDAO API Tutorial.ipynb
+   notebooks/Etherscan API Tutorial.ipynb
+   notebooks/Solscan API Tutorial.ipynb
+   notebooks/Upshot API Tutorial.ipynb
+   notebooks/OpenSea API Tutorial.ipynb
+   notebooks/NonFungible API Tutorial.ipynb
+   notebooks/NFT Price Floor API Tutorial.ipynb
+   notebooks/Event Monitor Tutorial.ipynb
 
 
 Indices and tables

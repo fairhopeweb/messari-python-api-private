@@ -5,7 +5,7 @@ import pandas as pd
 from typing import Union, List
 from messari.blockexplorers import Scanner
 
-BASE_URL='https://api.ftmscan.io/api'
+BASE_URL='https://api.ftmscan.com/api'
 class FTMscan(Scanner):
     """This class is a wrapper around the FTMscan API
     """
@@ -15,26 +15,32 @@ class FTMscan(Scanner):
 
     ##### Accounts
     # NOTE: no changes
+
     ##### Contracts
     # NOTE: no changes
+
     ##### Transactions
     def get_contract_execution_status(self, transactions_in: Union[str, List]) -> pd.DataFrame:
         """Override: return None
         """
         return None
+
     def get_transaction_execution_status(self, transactions_in: Union[str, List]) -> pd.DataFrame:
         """Override: return None
         """
         return None
+
     ##### Blocks
     def get_block_reward(self, blocks_in: Union[int, List]) -> pd.DataFrame:
         """Override: return None
         """
         return None
+
     def get_block_countdown(self, blocks_in: Union[int, List]) -> pd.DataFrame:
         """Override: return None
         """
         return None
+
     def get_block_by_timestamp(self, times_in: Union[int, List], before: bool=True) -> pd.DataFrame:
         """Override: return None
         """
@@ -116,18 +122,28 @@ class FTMscan(Scanner):
     ##### Stats
     def get_total_ftm_supply(self) -> int:
         """Returns the current amount of ftm (Wei) in circulation.
+
+        Returns
+        -------
+            DataFrame
+                DataFrame with current amount of ftm circulating
         """
         params = {'module': 'stats',
                   'action': 'ftmsupply'}
         params.update(self.api_dict)
-        response = self.get_response(self.BASE_URL, params=params)['result']
-        return response
+        response = self.get_response(self.base_url, params=params)['result']
+        return int(response)
 
     def get_validators(self) -> pd.DataFrame:
         """Returns Fantom validators list
+
+        Returns
+        -------
+            DataFrame
+                DataFrame with top validators
         """
         params = {'module': 'stats',
                   'action': 'validators'}
         params.update(self.api_dict)
-        response = self.get_response(self.BASE_URL, params=params)['result']
+        response = self.get_response(self.base_url, params=params)['result']
         return pd.DataFrame(response)
