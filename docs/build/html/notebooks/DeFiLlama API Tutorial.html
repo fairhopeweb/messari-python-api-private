@@ -56,6 +56,10 @@
 <li class="toctree-l1"><a class="reference internal" href="DeepDAO%20API%20Tutorial.html">Deep DAO Python API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Etherscan%20API%20Tutorial.html">EVM Blockexplorer API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Solscan%20API%20Tutorial.html">Solscan API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upshot%20API%20Tutorial.html">Upshot Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OpenSea%20API%20Tutorial.html">OpenSea Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NonFungible%20API%20Tutorial.html">NonFungible Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NFT%20Price%20Floor%20API%20Tutorial.html">NFT Price Floor Python API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Event%20Monitor%20Tutorial.html">Event Monitor Tutorial</a></li>
 </ul>
 
@@ -358,7 +362,7 @@ div.rendered_html tbody tr:hover {
 <h1>DeFi Llama Python API Tutorial<a class="headerlink" href="#DeFi-Llama-Python-API-Tutorial" title="Permalink to this headline"></a></h1>
 <p>This tutorial aims to be a quick guide to get you started using the DeFi Llama API integrated into messari’s python library.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1207,7 +1211,7 @@ current_tvl
 <h2>Get protocols<a class="headerlink" href="#Get-protocols" title="Permalink to this headline"></a></h2>
 <p>The function returns basic information on all DeFi Llama listed protocols.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1217,7 +1221,7 @@ protocols
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1240,220 +1244,220 @@ protocols
     <tr style="text-align: right;">
       <th></th>
       <th>curve</th>
+      <th>convex-finance</th>
       <th>makerdao</th>
       <th>aave</th>
-      <th>convex-finance</th>
-      <th>wbtc</th>
-      <th>instadapp</th>
-      <th>compound</th>
-      <th>uniswap</th>
       <th>polygon-bridge-&amp;-staking</th>
       <th>lido</th>
+      <th>wbtc</th>
+      <th>instadapp</th>
+      <th>anchor</th>
+      <th>compound</th>
       <th>...</th>
-      <th>oraichain</th>
-      <th>bacondao</th>
-      <th>yel-finance</th>
-      <th>smartcoin</th>
-      <th>billion-happiness</th>
-      <th>decubate</th>
-      <th>nasdex</th>
-      <th>potluck-protocol</th>
-      <th>atmossoft</th>
-      <th>zigzag</th>
+      <th>one-cash</th>
+      <th>stand-cash</th>
+      <th>purefi</th>
+      <th>optidoge</th>
+      <th>wisteria-swap</th>
+      <th>louverture</th>
+      <th>kawaiiswap</th>
+      <th>valkyrie</th>
+      <th>umbrella-network</th>
+      <th>cyclos</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>id</th>
       <td>3</td>
+      <td>319</td>
       <td>118</td>
       <td>111</td>
-      <td>319</td>
-      <td>2</td>
-      <td>120</td>
-      <td>114</td>
-      <td>1</td>
       <td>240</td>
       <td>182</td>
+      <td>2</td>
+      <td>120</td>
+      <td>294</td>
+      <td>114</td>
       <td>...</td>
-      <td>681</td>
-      <td>682</td>
-      <td>686</td>
-      <td>715</td>
-      <td>716</td>
-      <td>717</td>
-      <td>720</td>
-      <td>723</td>
-      <td>783</td>
-      <td>800</td>
+      <td>1094</td>
+      <td>1095</td>
+      <td>1096</td>
+      <td>1102</td>
+      <td>1111</td>
+      <td>1118</td>
+      <td>1128</td>
+      <td>1138</td>
+      <td>1153</td>
+      <td>1156</td>
     </tr>
     <tr>
       <th>name</th>
       <td>Curve</td>
+      <td>Convex Finance</td>
       <td>MakerDAO</td>
       <td>AAVE</td>
-      <td>Convex Finance</td>
-      <td>WBTC</td>
-      <td>Instadapp</td>
-      <td>Compound</td>
-      <td>Uniswap</td>
       <td>Polygon Bridge &amp; Staking</td>
       <td>Lido</td>
+      <td>WBTC</td>
+      <td>Instadapp</td>
+      <td>Anchor</td>
+      <td>Compound</td>
       <td>...</td>
-      <td>OraiChain</td>
-      <td>BaconDAO</td>
-      <td>YEL Finance</td>
-      <td>SmartCoin</td>
-      <td>Billion Happiness</td>
-      <td>Decubate</td>
-      <td>Nasdex</td>
-      <td>Potluck Protocol</td>
-      <td>AtmosSoft</td>
-      <td>ZigZag</td>
+      <td>One Cash</td>
+      <td>Stand Cash</td>
+      <td>PureFi</td>
+      <td>Optidoge</td>
+      <td>Wisteria Swap</td>
+      <td>Louverture</td>
+      <td>KawaiiSwap</td>
+      <td>Valkyrie</td>
+      <td>Umbrella Network</td>
+      <td>Cyclos</td>
     </tr>
     <tr>
       <th>address</th>
       <td>0xD533a949740bb3306d119CC777fa900bA034cd52</td>
+      <td>0x4e3fbd56cd56c3e72c1403e103b45db9da5b9d2b</td>
       <td>0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2</td>
       <td>0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9</td>
-      <td>0x4e3fbd56cd56c3e72c1403e103b45db9da5b9d2b</td>
-      <td>0x2260fac5e5542a773aa44fbcfedf7c193bc2c599</td>
-      <td>0x6f40d4a6237c257fff2db00fa0510deeecd303eb</td>
-      <td>0xc00e94cb662c3520282e6f5717214004a7f26888</td>
-      <td>0x1f9840a85d5af5bf1d1762f925bdaddc4201f984</td>
       <td>0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0</td>
       <td>0x5a98fcbea516cf06857215779fd812ca3bef1b32</td>
+      <td>0x2260fac5e5542a773aa44fbcfedf7c193bc2c599</td>
+      <td>0x6f40d4a6237c257fff2db00fa0510deeecd303eb</td>
+      <td>-</td>
+      <td>0xc00e94cb662c3520282e6f5717214004a7f26888</td>
       <td>...</td>
-      <td>0x4c11249814f11b9346808179cf06e71ac328c1b5</td>
-      <td>bsc:0x0615dbba33fe61a31c7ed131bda6655ed76748b1</td>
-      <td>0x7815bda662050d84718b988735218cffd32f75ea</td>
-      <td>avax:0xCC2f1d827b18321254223dF4e84dE399D9Ff116c</td>
-      <td>bsc:0x6fd7c98458a943f469E1Cf4eA85B173f5Cd342F4</td>
-      <td>bsc:0xEAc9873291dDAcA754EA5642114151f3035c67A2</td>
-      <td>polygon:0xE8d17b127BA8b9899a160D9a07b69bCa8E08...</td>
-      <td>fantom:0x49894fcc07233957c35462cfc3418ef0cc26129f</td>
-      <td>bsc:0xC53C65C4A925039cC149fA99fD011490D40270a3</td>
-      <td>None</td>
+      <td>0xd90e69f67203ebe02c917b5128629e77b4cd92dc</td>
+      <td>0xacd8f2523a4613eee78904354187c81bb05ae2b8</td>
+      <td>bsc:0xe2a59d5e33c6540e18aaa46bf98917ac3158db0d</td>
+      <td>optimism:0x93D97dbB1BB5290C78C23885E8026047dC8...</td>
+      <td>bsc:0xaadff17d56d80312b392ced903f3e8dbe5c3ece7</td>
+      <td>avax:0xff579d6259dEDcc80488c9b89d2820bCb5609160</td>
+      <td>bsc:0x9e236b43D779B385c3279820e322ABAE249D3405</td>
+      <td>terra:terra1dy9kmlm4anr92e42mrkjwzyvfqwz66un00...</td>
+      <td>0x6fC13EACE26590B80cCCAB1ba5d51890577D83B2</td>
+      <td>solana:BRLsMczKuaR5w9vSubF4j8HwEGGprVAyyVgS4EX...</td>
     </tr>
     <tr>
       <th>symbol</th>
       <td>CRV</td>
+      <td>CVX</td>
       <td>MKR</td>
       <td>AAVE</td>
-      <td>CVX</td>
-      <td>WBTC</td>
-      <td>INST</td>
-      <td>COMP</td>
-      <td>UNI</td>
       <td>MATIC</td>
       <td>LDO</td>
+      <td>WBTC</td>
+      <td>INST</td>
+      <td>ANC</td>
+      <td>COMP</td>
       <td>...</td>
-      <td>ORAI</td>
-      <td>BACON</td>
-      <td>YEL</td>
-      <td>SMRT</td>
-      <td>BHC</td>
-      <td>DCB</td>
-      <td>NSDX</td>
-      <td>FANG</td>
-      <td>ATMSSFT</td>
-      <td>-</td>
+      <td>ONC</td>
+      <td>SAC</td>
+      <td>UFI</td>
+      <td>OPTIDOGE</td>
+      <td>WST</td>
+      <td>LVT</td>
+      <td>CALCIFIRE</td>
+      <td>VKR</td>
+      <td>UMB</td>
+      <td>CYS</td>
     </tr>
     <tr>
       <th>url</th>
       <td>https://curve.fi</td>
+      <td>https://www.convexfinance.com/</td>
       <td>https://makerdao.com/</td>
       <td>https://aave.com\r\n</td>
-      <td>https://www.convexfinance.com/</td>
-      <td>https://wbtc.network/</td>
-      <td>https://instadapp.io/</td>
-      <td>https://compound.finance</td>
-      <td>https://info.uniswap.org/</td>
       <td>https://polygon.technology/</td>
       <td>https://lido.fi/</td>
+      <td>https://wbtc.network/</td>
+      <td>https://instadapp.io/</td>
+      <td>https://anchorprotocol.com/</td>
+      <td>https://compound.finance</td>
       <td>...</td>
-      <td>https://orai.io</td>
-      <td>https://app.bacondao.com/</td>
-      <td>https://yel.finance</td>
-      <td>https://smartcoin.farm</td>
-      <td>https://billionhappiness.finance/</td>
-      <td>https://platform.decubate.com/</td>
-      <td>https://www.nasdex.xyz</td>
-      <td>http://fantom.potluckprotocol.com</td>
-      <td>https://www.atmossoftdefi.app</td>
-      <td>https://trade.zigzag.exchange</td>
+      <td>https://onecash.finance/</td>
+      <td>https://stand.cash/</td>
+      <td>https://www.purefi.io</td>
+      <td>https://optidoge.xyz/</td>
+      <td>https://wisteriaswap.com</td>
+      <td>https://www.louverture.finance/</td>
+      <td>https://www.kawaiiswap.finance/</td>
+      <td>https://valkyrieprotocol.com</td>
+      <td>https://staking.umb.network</td>
+      <td>https://cyclos.io</td>
     </tr>
     <tr>
       <th>description</th>
       <td>Curve is a decentralized exchange liquidity po...</td>
+      <td>Convex simplifies your Curve-boosting experien...</td>
       <td>Builders of Dai, a digital currency that can b...</td>
       <td>Aave is an Open Source and Non-Custodial proto...</td>
-      <td>Convex simplifies your Curve-boosting experien...</td>
-      <td>Wrapped Bitcoin (WBTC) is the first ERC20 toke...</td>
-      <td>Aims to drive interoperability between protoco...</td>
-      <td>Compound is an algorithmic, autonomous interes...</td>
-      <td>A fully decentralized protocol for automated l...</td>
       <td>Ethereum sidechain\r\n</td>
       <td>Liquidity for staked assets. Daily rewards, no...</td>
+      <td>Wrapped Bitcoin (WBTC) is the first ERC20 toke...</td>
+      <td>Aims to drive interoperability between protoco...</td>
+      <td>Money market on Terra</td>
+      <td>Compound is an algorithmic, autonomous interes...</td>
       <td>...</td>
-      <td>Oraichain is a data oracle platform that aggre...</td>
-      <td>BaconDAO (BACON) is a Decentralized Autonomous...</td>
-      <td>YEL aggregates multiple projects across severa...</td>
-      <td>SmartCoin is a yield farming protocol on Avala...</td>
-      <td>Billion Happiness is a blockchain community-ba...</td>
-      <td>Decubate is a community-powered investment pla...</td>
-      <td>NASDEX is a decentralised app on polygon, that...</td>
-      <td>Defi AMM with gamified products and features.</td>
-      <td>Atmosphere Software(AtmosSoft) is a next gener...</td>
-      <td>A Layer 2 decentralized exchange (DEX) on zkSync</td>
+      <td>Staking protocol on ethereum network</td>
+      <td>None</td>
+      <td>PureFi — one-stop compliance protocol for dece...</td>
+      <td>Optimism Dog token</td>
+      <td>WisteriaSwap is a new DeFi 2.0 (PVC) model tha...</td>
+      <td>The Opening of your yields across different ch...</td>
+      <td>KawaiiSwap enrichs traditional yield farming e...</td>
+      <td>Valkyrie Protocol is a DApp activation protoco...</td>
+      <td>Umbrella is the first truly decentralized orac...</td>
+      <td>The 1st concentrated liquidity market maker on...</td>
     </tr>
     <tr>
       <th>chain</th>
       <td>Multi-Chain</td>
       <td>Ethereum</td>
+      <td>Ethereum</td>
       <td>Multi-Chain</td>
-      <td>Ethereum</td>
-      <td>Ethereum</td>
-      <td>Ethereum</td>
-      <td>Ethereum</td>
-      <td>Ethereum</td>
       <td>Polygon</td>
       <td>Multi-Chain</td>
+      <td>Ethereum</td>
+      <td>Ethereum</td>
+      <td>Terra</td>
+      <td>Ethereum</td>
       <td>...</td>
-      <td>Multi-Chain</td>
-      <td>Multi-Chain</td>
-      <td>Multi-Chain</td>
+      <td>Ethereum</td>
+      <td>Ethereum</td>
+      <td>Ethereum</td>
+      <td>Optimism</td>
+      <td>Binance</td>
       <td>Avalanche</td>
       <td>Binance</td>
-      <td>Binance</td>
-      <td>Polygon</td>
-      <td>Fantom</td>
+      <td>Terra</td>
       <td>Multi-Chain</td>
-      <td>zkSync</td>
+      <td>Solana</td>
     </tr>
     <tr>
       <th>logo</th>
       <td>https://icons.llama.fi/curve.png</td>
+      <td>https://icons.llama.fi/convex-finance.jpg</td>
       <td>https://icons.llama.fi/makerdao.jpg</td>
       <td>https://icons.llama.fi/aave.png</td>
-      <td>https://icons.llama.fi/convex-finance.jpg</td>
-      <td>https://icons.llama.fi/wbtc.png</td>
-      <td>https://icons.llama.fi/instadapp.jpg</td>
-      <td>https://icons.llama.fi/compound.png</td>
-      <td>https://icons.llama.fi/uniswap.png</td>
       <td>https://icons.llama.fi/polygon.jpg</td>
       <td>https://icons.llama.fi/lido.png</td>
+      <td>https://icons.llama.fi/wbtc.png</td>
+      <td>https://icons.llama.fi/instadapp.jpg</td>
+      <td>https://icons.llama.fi/anchor.jpg</td>
+      <td>https://icons.llama.fi/compound.png</td>
       <td>...</td>
-      <td>https://icons.llama.fi/oraichain.jpg</td>
-      <td>https://icons.llama.fi/bacondao.png</td>
-      <td>https://icons.llama.fi/yel-finance.png</td>
-      <td>https://icons.llama.fi/smrt.png</td>
-      <td>https://icons.llama.fi/billion-happiness.png</td>
-      <td>https://icons.llama.fi/decubate.png</td>
-      <td>https://icons.llama.fi/nasdex.png</td>
-      <td>https://icons.llama.fi/potluck-protocol.png</td>
-      <td>https://icons.llama.fi/atmossoft.jpg</td>
-      <td>https://icons.llama.fi/zigzag.jpg</td>
+      <td>https://icons.llama.fi/onecash.png</td>
+      <td>https://icons.llama.fi/standcash.png</td>
+      <td>https://icons.llama.fi/purefi.png</td>
+      <td>https://icons.llama.fi/optidoge.png</td>
+      <td>https://icons.llama.fi/wisteriaswap.png</td>
+      <td>https://icons.llama.fi/louverture.jpg</td>
+      <td>https://icons.llama.fi/kawaiiswap.png</td>
+      <td>https://icons.llama.fi/valkyrie.png</td>
+      <td>https://icons.llama.fi/umbrella-network.jpg</td>
+      <td>https://icons.llama.fi/cyclos.png</td>
     </tr>
     <tr>
       <th>audits</th>
@@ -1461,20 +1465,20 @@ protocols
       <td>2</td>
       <td>2</td>
       <td>2</td>
+      <td>0</td>
+      <td>2</td>
       <td>2</td>
       <td>None</td>
       <td>2</td>
       <td>2</td>
-      <td>0</td>
-      <td>2</td>
       <td>...</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2</td>
-      <td>2</td>
       <td>0</td>
       <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
       <td>2</td>
       <td>0</td>
       <td>0</td>
@@ -1506,183 +1510,183 @@ protocols
     <tr>
       <th>gecko_id</th>
       <td>curve-dao-token</td>
+      <td>convex-finance</td>
       <td>maker</td>
       <td>aave</td>
-      <td>convex-finance</td>
-      <td>wrapped-bitcoin</td>
-      <td>instadapp</td>
-      <td>compound-governance-token</td>
-      <td>uniswap</td>
       <td>matic-network</td>
       <td>lido-dao</td>
+      <td>wrapped-bitcoin</td>
+      <td>instadapp</td>
+      <td>anchor-protocol</td>
+      <td>compound-governance-token</td>
       <td>...</td>
-      <td>oraichain-token</td>
-      <td>bacondao</td>
-      <td>yel-finance</td>
-      <td>smartcoin-2</td>
-      <td>billionhappiness</td>
-      <td>decubate</td>
-      <td>nasdex-token</td>
-      <td>fang-token</td>
+      <td>one-cash</td>
+      <td>stand-cash</td>
+      <td>purefi</td>
       <td>None</td>
+      <td>wisteria-swap</td>
+      <td>louverture</td>
       <td>None</td>
+      <td>valkyrie-protocol</td>
+      <td>umbrella-network</td>
+      <td>cyclos</td>
     </tr>
     <tr>
       <th>cmcId</th>
       <td>6538</td>
+      <td>9903</td>
       <td>1518</td>
       <td>7278</td>
-      <td>9903</td>
-      <td>3717</td>
-      <td>10508</td>
-      <td>5692</td>
-      <td>7083</td>
       <td>3890</td>
       <td>8000</td>
+      <td>3717</td>
+      <td>10508</td>
+      <td>8857</td>
+      <td>5692</td>
       <td>...</td>
-      <td>7533</td>
-      <td>10501</td>
-      <td>11301</td>
-      <td>12917</td>
-      <td>7182</td>
-      <td>10563</td>
-      <td>12312</td>
-      <td>12671</td>
+      <td>8159</td>
+      <td>None</td>
+      <td>10973</td>
+      <td>None</td>
+      <td>16289</td>
       <td>None</td>
       <td>None</td>
+      <td>12978</td>
+      <td>8385</td>
+      <td>10217</td>
     </tr>
     <tr>
       <th>category</th>
       <td>Dexes</td>
+      <td>Yield</td>
       <td>Minting</td>
       <td>Lending</td>
-      <td>Yield</td>
-      <td>Assets</td>
-      <td>Services</td>
-      <td>Lending</td>
-      <td>Dexes</td>
       <td>Chain</td>
       <td>Staking</td>
+      <td>Bridge</td>
+      <td>Services</td>
+      <td>Lending</td>
+      <td>Lending</td>
       <td>...</td>
-      <td>Yield</td>
-      <td>Yield</td>
-      <td>Yield</td>
-      <td>Yield</td>
-      <td>Yield</td>
-      <td>Launchpad</td>
-      <td>Dexes</td>
       <td>Staking</td>
-      <td>Gaming</td>
+      <td>Yield</td>
+      <td>Staking</td>
+      <td>Yield</td>
+      <td>Yield</td>
+      <td>Yield</td>
+      <td>Yield</td>
+      <td>Staking</td>
+      <td>Staking</td>
       <td>Dexes</td>
     </tr>
     <tr>
       <th>chains</th>
-      <td>[Avalanche, Harmony, Ethereum, xDai, Polygon, ...</td>
-      <td>[Ethereum]</td>
-      <td>[Ethereum, Polygon, Avalanche]</td>
+      <td>[Ethereum, Avalanche, Fantom, Arbitrum, Polygo...</td>
       <td>[Ethereum]</td>
       <td>[Ethereum]</td>
-      <td>[Ethereum]</td>
-      <td>[Ethereum]</td>
-      <td>[Optimism, Ethereum, Arbitrum]</td>
+      <td>[Ethereum, Avalanche, Polygon]</td>
       <td>[Polygon]</td>
-      <td>[Ethereum, Solana, Terra]</td>
+      <td>[Ethereum, Terra, Solana]</td>
+      <td>[Ethereum]</td>
+      <td>[Ethereum]</td>
+      <td>[Terra]</td>
+      <td>[Ethereum]</td>
       <td>...</td>
       <td>[Ethereum]</td>
-      <td>[Binance, Ethereum]</td>
       <td>[Ethereum]</td>
+      <td>[Ethereum]</td>
+      <td>[Optimism]</td>
+      <td>[Binance]</td>
       <td>[Avalanche]</td>
       <td>[Binance]</td>
-      <td>[Binance]</td>
-      <td>[Polygon]</td>
-      <td>[Fantom]</td>
-      <td>[Fantom]</td>
-      <td>[zkSync]</td>
+      <td>[Terra]</td>
+      <td>[Binance, Ethereum]</td>
+      <td>[Solana]</td>
     </tr>
     <tr>
       <th>module</th>
-      <td>curve.js</td>
+      <td>curve/index.js</td>
+      <td>convex/index.js</td>
       <td>maker/index.js</td>
       <td>aave/index.js</td>
-      <td>convex/index.js</td>
-      <td>wbtc.js</td>
-      <td>instadapp.js</td>
-      <td>compound-onchain/index.js</td>
-      <td>uniswap/index.js</td>
       <td>polygon/index.js</td>
       <td>lido/index.js</td>
+      <td>wbtc.js</td>
+      <td>instadapp.js</td>
+      <td>anchor/index.js</td>
+      <td>compound-onchain/index.js</td>
       <td>...</td>
-      <td>oraichain.js</td>
-      <td>bacondao/index.js</td>
-      <td>yel/index.js</td>
-      <td>smartcoin/index.js</td>
-      <td>billion-happiness/index.js</td>
-      <td>decubate/index.js</td>
-      <td>nasdex/index.js</td>
-      <td>potluckprotocol/index.js</td>
-      <td>atmossoft.js</td>
-      <td>zigzag/index.js</td>
+      <td>onecash/index.js</td>
+      <td>standcash/index.js</td>
+      <td>purefi/index.js</td>
+      <td>optidoge/index.js</td>
+      <td>wisteriaswap/index.js</td>
+      <td>louverture/index.js</td>
+      <td>kawaiiswap-finance/index.js</td>
+      <td>valkyrie/index.js</td>
+      <td>umbrella/index.js</td>
+      <td>cyclos/index.js</td>
     </tr>
     <tr>
       <th>twitter</th>
       <td>CurveFinance</td>
+      <td>ConvexFinance</td>
       <td>MakerDAO</td>
       <td>AaveAave</td>
-      <td>ConvexFinance</td>
-      <td>WrappedBTC</td>
-      <td>Instadapp</td>
-      <td>compoundfinance</td>
-      <td>Uniswap</td>
       <td>0xPolygon</td>
       <td>LidoFinance</td>
+      <td>WrappedBTC</td>
+      <td>Instadapp</td>
+      <td>anchor_protocol</td>
+      <td>compoundfinance</td>
       <td>...</td>
-      <td>oraichain</td>
-      <td>BaconDAO_</td>
-      <td>yel_finance</td>
-      <td>0xSmartCoin</td>
-      <td>BHC_Happiness</td>
-      <td>decubate</td>
-      <td>nasdex_xyz</td>
-      <td>PotluckProtocol</td>
-      <td>AtmosSoft</td>
-      <td>ZigZagExchange</td>
+      <td>None</td>
+      <td>None</td>
+      <td>Purefi_Protocol</td>
+      <td>NaN</td>
+      <td>robiniaswap</td>
+      <td>Louverture_fi</td>
+      <td>kawaiiswap</td>
+      <td>valkyrie_money</td>
+      <td>UmbNetwork</td>
+      <td>cyclosfi</td>
     </tr>
     <tr>
       <th>audit_links</th>
       <td>[https://curve.fi/audits]</td>
+      <td>[https://github.com/convex-eth/platform/blob/m...</td>
       <td>[https://security.makerdao.com/]</td>
       <td>[https://aave.com/security]</td>
-      <td>[https://github.com/convex-eth/platform/blob/m...</td>
-      <td>[https://wbtc.network/dashboard/audit]</td>
-      <td>[https://github.com/Instadapp/dsa-contracts/bl...</td>
-      <td>[https://compound.finance/docs/security]</td>
-      <td>[https://github.com/Uniswap/uniswap-v3-core/tr...</td>
       <td>NaN</td>
       <td>[https://github.com/lidofinance/audits]</td>
+      <td>[https://wbtc.network/dashboard/audit]</td>
+      <td>[https://github.com/Instadapp/dsa-contracts/bl...</td>
+      <td>[https://docs.anchorprotocol.com/security#audits]</td>
+      <td>[https://compound.finance/docs/security]</td>
       <td>...</td>
-      <td>[https://github.com/oraichain/audits]</td>
-      <td>[https://drive.google.com/file/d/1AVc_YuSKoaoj...</td>
-      <td>[https://yield-enhancement-labs.gitbook.io/yie...</td>
-      <td>[https://paladinsec.co/pld/assets/20211018_Pal...</td>
-      <td>[https://www.certik.org/projects/billionhappin...</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>[https://dessertswap.finance/audits/Potluck%20...</td>
+      <td>[https://www.purefi.io/files/27072021_PureFi_A...</td>
+      <td>NaN</td>
+      <td>[https://github.com/TechRate/Smart-Contract-Au...</td>
+      <td>NaN</td>
+      <td>[https://github.com/solidproof/smart-contract-...</td>
+      <td>[https://docs.valkyrieprotocol.com/security#au...</td>
       <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>oracles</th>
       <td>[Chainlink]</td>
+      <td>NaN</td>
       <td>[Maker]</td>
       <td>[Chainlink]</td>
       <td>NaN</td>
-      <td>[Chainlink]</td>
       <td>NaN</td>
       <td>[Chainlink]</td>
-      <td>[Uniswap]</td>
       <td>NaN</td>
       <td>NaN</td>
+      <td>[Chainlink]</td>
       <td>...</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -1691,46 +1695,46 @@ protocols
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>[Internal]</td>
+      <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>slug</th>
       <td>curve</td>
+      <td>convex-finance</td>
       <td>makerdao</td>
       <td>aave</td>
-      <td>convex-finance</td>
-      <td>wbtc</td>
-      <td>instadapp</td>
-      <td>compound</td>
-      <td>uniswap</td>
       <td>polygon-bridge-&amp;-staking</td>
       <td>lido</td>
+      <td>wbtc</td>
+      <td>instadapp</td>
+      <td>anchor</td>
+      <td>compound</td>
       <td>...</td>
-      <td>oraichain</td>
-      <td>bacondao</td>
-      <td>yel-finance</td>
-      <td>smartcoin</td>
-      <td>billion-happiness</td>
-      <td>decubate</td>
-      <td>nasdex</td>
-      <td>potluck-protocol</td>
-      <td>atmossoft</td>
-      <td>zigzag</td>
+      <td>one-cash</td>
+      <td>stand-cash</td>
+      <td>purefi</td>
+      <td>optidoge</td>
+      <td>wisteria-swap</td>
+      <td>louverture</td>
+      <td>kawaiiswap</td>
+      <td>valkyrie</td>
+      <td>umbrella-network</td>
+      <td>cyclos</td>
     </tr>
     <tr>
       <th>tvl</th>
-      <td>20415038798.327824</td>
-      <td>17969496759.492355</td>
-      <td>15419913267.352034</td>
-      <td>15131073490.628565</td>
-      <td>14449256853.309999</td>
-      <td>12102460033</td>
-      <td>11922059387.8978</td>
-      <td>10409755599.486263</td>
-      <td>9710159190.366772</td>
-      <td>9485282686.237036</td>
+      <td>24112003053.333878</td>
+      <td>20639232629.407154</td>
+      <td>17960975704.531418</td>
+      <td>14422567161.84828</td>
+      <td>13915459919.245523</td>
+      <td>12594153819.630789</td>
+      <td>12064003348.199999</td>
+      <td>10837826717</td>
+      <td>9235398690.89027</td>
+      <td>8867725872.200926</td>
       <td>...</td>
       <td>0</td>
       <td>0</td>
@@ -1745,40 +1749,40 @@ protocols
     </tr>
     <tr>
       <th>chainTvls</th>
-      <td>{'Avalanche': 936811028.2676972, 'Harmony': 12...</td>
-      <td>{'Ethereum': 17969496759.492355}</td>
-      <td>{'Ethereum': 10471743116.25161, 'Polygon': 182...</td>
-      <td>{'Ethereum': 15131073490.628565}</td>
-      <td>{'Ethereum': 14449256853.31}</td>
-      <td>{'Ethereum': 12102460033}</td>
-      <td>{'Ethereum': 11922059387.897799}</td>
-      <td>{'Optimism': 40914299.193099, 'Ethereum': 1030...</td>
-      <td>{'Polygon': 9710159190.366772}</td>
-      <td>{'Ethereum': 6288679048.837508, 'Solana': 2258...</td>
+      <td>{'Avalanche': 1285006817.5135474, 'Harmony': 1...</td>
+      <td>{'Ethereum': 20639232629.407154}</td>
+      <td>{'Ethereum': 17960975704.531418}</td>
+      <td>{'pool2': 326533773.79811203, 'Avalanche': 318...</td>
+      <td>{'Polygon': 13915459919.245523}</td>
+      <td>{'Ethereum': 6194879349.377187, 'Solana': 2196...</td>
+      <td>{'Ethereum': 12064003348.199999}</td>
+      <td>{'Ethereum': 10837826717}</td>
+      <td>{'Terra-borrowed': 2068288947.989085, 'Terra':...</td>
+      <td>{'Ethereum': 8867725872.200926, 'Ethereum-borr...</td>
       <td>...</td>
-      <td>{'Binance-staking': 2069241.2442397017, 'Ether...</td>
-      <td>{'pool2': 221923.15863504808, 'Binance-pool2':...</td>
-      <td>{'pool2': 6445303.662442322, 'Fantom-staking':...</td>
-      <td>{'Avalanche': 0, 'pool2': 96739.95349781934, '...</td>
-      <td>{'Binance': 0, 'Binance-staking': 4712925.0535...</td>
-      <td>{'Binance': 0, 'Binance-staking': 2304569.8020...</td>
-      <td>{'pool2': 169532.88870213774, 'staking': 92538...</td>
-      <td>{'Fantom-staking': 142474.83638762677, 'stakin...</td>
-      <td>{'pool2': 19304.101388327308, 'Fantom-pool2': ...</td>
-      <td>{'Zksync': 0, 'offers': 1636467.8193695154, 'Z...</td>
+      <td>{'Ethereum': 0, 'pool2': 43124.89514303551, 'E...</td>
+      <td>{'Ethereum': 0, 'pool2': 423016.41161172936, '...</td>
+      <td>{'Ethereum': 0, 'Ethereum-staking': 3153838.64...</td>
+      <td>{'Optimism': 0, 'Optimism-pool2': 7.9520316345...</td>
+      <td>{'Binance-Masterchef': 0, 'pool2': 0, 'Masterc...</td>
+      <td>{'Avalanche-staking': 13144900.117367093, 'Ava...</td>
+      <td>{'Binance-Masterchef': 0, 'pool2': 26024.31075...</td>
+      <td>{'Terra-staking': 12147179.037418013, 'pool2':...</td>
+      <td>{'Binance-staking': 1739.42715, 'pool2': 23718...</td>
+      <td>{'Solana-staking': 1573970.9193507198, 'Solana...</td>
     </tr>
     <tr>
       <th>change_1h</th>
-      <td>-0.44896</td>
-      <td>-0.548806</td>
-      <td>-0.572617</td>
-      <td>-0.197715</td>
-      <td>-0.743818</td>
-      <td>0</td>
-      <td>0.359498</td>
-      <td>-0.219655</td>
-      <td>-0.675755</td>
-      <td>-0.964538</td>
+      <td>0.22481</td>
+      <td>0.221851</td>
+      <td>0.199398</td>
+      <td>0.440074</td>
+      <td>-0.109915</td>
+      <td>1.061832</td>
+      <td>0.348118</td>
+      <td>-0.324168</td>
+      <td>0.997076</td>
+      <td>-0.903851</td>
       <td>...</td>
       <td>None</td>
       <td>None</td>
@@ -1787,22 +1791,22 @@ protocols
       <td>None</td>
       <td>None</td>
       <td>None</td>
-      <td>-100</td>
+      <td>None</td>
       <td>None</td>
       <td>None</td>
     </tr>
     <tr>
       <th>change_1d</th>
-      <td>-3.131439</td>
-      <td>-5.297916</td>
-      <td>-5.013928</td>
-      <td>-4.886415</td>
-      <td>-5.450934</td>
-      <td>-5.518304</td>
-      <td>-4.320109</td>
-      <td>-0.608482</td>
-      <td>-5.742343</td>
-      <td>-8.011128</td>
+      <td>0.33802</td>
+      <td>0.271311</td>
+      <td>-0.771607</td>
+      <td>-0.715227</td>
+      <td>-2.071806</td>
+      <td>1.427736</td>
+      <td>-1.462159</td>
+      <td>0.362996</td>
+      <td>2.638964</td>
+      <td>-0.972276</td>
       <td>...</td>
       <td>None</td>
       <td>None</td>
@@ -1811,22 +1815,22 @@ protocols
       <td>None</td>
       <td>None</td>
       <td>None</td>
-      <td>-100</td>
+      <td>None</td>
       <td>None</td>
       <td>None</td>
     </tr>
     <tr>
       <th>change_7d</th>
-      <td>-2.475693</td>
-      <td>-9.598398</td>
-      <td>-6.84128</td>
-      <td>None</td>
-      <td>-8.440936</td>
-      <td>-3.395067</td>
-      <td>-7.09348</td>
-      <td>None</td>
-      <td>-7.491259</td>
-      <td>-11.422413</td>
+      <td>2.653888</td>
+      <td>6.310743</td>
+      <td>-6.59762</td>
+      <td>-7.602423</td>
+      <td>-7.266393</td>
+      <td>-3.791608</td>
+      <td>-10.295178</td>
+      <td>-3.018538</td>
+      <td>3.037275</td>
+      <td>-12.394381</td>
       <td>...</td>
       <td>None</td>
       <td>None</td>
@@ -1835,64 +1839,16 @@ protocols
       <td>None</td>
       <td>None</td>
       <td>None</td>
-      <td>-100</td>
       <td>None</td>
       <td>None</td>
-    </tr>
-    <tr>
-      <th>fdv</th>
-      <td>12301661224</td>
-      <td>2840314296</td>
-      <td>4491341668</td>
-      <td>2485404838</td>
-      <td>14483125559</td>
-      <td>NaN</td>
-      <td>3153251980</td>
-      <td>21834450907</td>
-      <td>15778573102</td>
-      <td>3872965400</td>
-      <td>...</td>
-      <td>297401311</td>
-      <td>10616405</td>
-      <td>44201792</td>
-      <td>16121682</td>
-      <td>NaN</td>
-      <td>57017539</td>
-      <td>NaN</td>
-      <td>184351117</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>mcap</th>
-      <td>1459791560</td>
-      <td>2545808395</td>
-      <td>3719606083</td>
-      <td>913173794</td>
-      <td>14483125559</td>
-      <td>73522897</td>
-      <td>1940052879</td>
-      <td>9888225317</td>
-      <td>10844439988</td>
-      <td>235584083</td>
-      <td>...</td>
-      <td>33371283</td>
-      <td>0</td>
-      <td>27646000</td>
-      <td>0</td>
-      <td>10244171</td>
-      <td>3644403</td>
-      <td>0</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <td>None</td>
     </tr>
     <tr>
       <th>staking</th>
+      <td>2500230590.786564</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>1276237472.239922</td>
-      <td>NaN</td>
+      <td>790518716.472052</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -1900,15 +1856,87 @@ protocols
       <td>NaN</td>
       <td>NaN</td>
       <td>...</td>
-      <td>4812640.377482</td>
-      <td>121803.487761</td>
-      <td>11131451.1693</td>
+      <td>87591.590852</td>
+      <td>29172.952327</td>
+      <td>3153838.644674</td>
+      <td>10741.362238</td>
+      <td>13386599.020529</td>
+      <td>13144900.117367</td>
+      <td>78995.659956</td>
+      <td>12147179.037418</td>
+      <td>14885084.193486</td>
+      <td>1573970.919351</td>
+    </tr>
+    <tr>
+      <th>fdv</th>
+      <td>21227706968</td>
+      <td>4679181226</td>
+      <td>2447142707</td>
+      <td>4325672448</td>
+      <td>24639309394</td>
+      <td>3332478780</td>
+      <td>12073482278</td>
       <td>NaN</td>
-      <td>4712925.053547</td>
-      <td>2304569.802009</td>
-      <td>925380.492968</td>
-      <td>142474.836388</td>
+      <td>3498325907</td>
+      <td>2179122291</td>
+      <td>...</td>
+      <td>395326</td>
+      <td>5684.03</td>
+      <td>13157656</td>
       <td>NaN</td>
+      <td>NaN</td>
+      <td>5859185</td>
+      <td>NaN</td>
+      <td>347384197</td>
+      <td>134599735</td>
+      <td>95370304</td>
+    </tr>
+    <tr>
+      <th>mcap</th>
+      <td>2519011612</td>
+      <td>2086330311</td>
+      <td>2193403897</td>
+      <td>3640526936</td>
+      <td>16934326719</td>
+      <td>221667307</td>
+      <td>12073482278</td>
+      <td>53254445</td>
+      <td>669499140</td>
+      <td>1375137351</td>
+      <td>...</td>
+      <td>395326</td>
+      <td>4205.87</td>
+      <td>3070174</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>29880326</td>
+      <td>32781061</td>
+      <td>11093474</td>
+    </tr>
+    <tr>
+      <th>pool2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>326533773.798112</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>43124.895143</td>
+      <td>423016.411612</td>
+      <td>NaN</td>
+      <td>7.952032</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>26024.310759</td>
+      <td>12264447.932148</td>
+      <td>2371866.839791</td>
       <td>NaN</td>
     </tr>
     <tr>
@@ -1927,36 +1955,12 @@ protocols
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>[Pantherswap, Pancakeswap]</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>pool2</th>
+      <td>[ArbiNyan]</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>221923.158635</td>
-      <td>6445303.662442</td>
-      <td>96739.953498</td>
-      <td>211307.874648</td>
-      <td>NaN</td>
-      <td>169532.888702</td>
-      <td>NaN</td>
-      <td>19304.101388</td>
       <td>NaN</td>
     </tr>
     <tr>
@@ -1972,21 +1976,98 @@ protocols
       <td>NaN</td>
       <td>NaN</td>
       <td>...</td>
-      <td>1634551713</td>
-      <td>1634577126</td>
-      <td>1634674060</td>
-      <td>1635279168</td>
-      <td>1635296377</td>
-      <td>1635383289</td>
-      <td>1635463716</td>
-      <td>1635465731</td>
-      <td>1636043958</td>
-      <td>1636305888</td>
+      <td>1640525223</td>
+      <td>1640525223</td>
+      <td>1640525223</td>
+      <td>1640596078</td>
+      <td>1640631213</td>
+      <td>1640691832</td>
+      <td>1640719202</td>
+      <td>1640738674</td>
+      <td>1640829115</td>
+      <td>1640830327</td>
+    </tr>
+    <tr>
+      <th>audit</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>audits_link</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
     </tr>
   </tbody>
 </table>
-<p>30 rows × 704 columns</p>
+<p>32 rows × 1033 columns</p>
 </div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>protocols.loc[&#39;name&#39;]
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+curve                                          Curve
+convex-finance                        Convex Finance
+makerdao                                    MakerDAO
+aave                                            AAVE
+polygon-bridge-&amp;-staking    Polygon Bridge &amp; Staking
+                                      ...
+louverture                                Louverture
+kawaiiswap                                KawaiiSwap
+valkyrie                                    Valkyrie
+umbrella-network                    Umbrella Network
+cyclos                                        Cyclos
+Name: name, Length: 1033, dtype: object
+</pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:

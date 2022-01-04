@@ -44,6 +44,10 @@
 <li class="toctree-l1"><a class="reference internal" href="notebooks/DeepDAO%20API%20Tutorial.html">Deep DAO Python API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/Etherscan%20API%20Tutorial.html">EVM Blockexplorer API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/Solscan%20API%20Tutorial.html">Solscan API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Upshot%20API%20Tutorial.html">Upshot Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/OpenSea%20API%20Tutorial.html">OpenSea Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/NonFungible%20API%20Tutorial.html">NonFungible Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/NFT%20Price%20Floor%20API%20Tutorial.html">NFT Price Floor Python API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/Event%20Monitor%20Tutorial.html">Event Monitor Tutorial</a></li>
 </ul>
 
@@ -3098,6 +3102,271 @@ NFT metadata information</p>
 </dl>
 </dd>
 </dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="nft-price-floor-class">
+<h2>NFT Price Floor Class<a class="headerlink" href="#nft-price-floor-class" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="messari.nfts.nftpricefloor.NFTPriceFloor">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">messari.nfts.nftpricefloor.</span></span><span class="sig-name descname"><span class="pre">NFTPriceFloor</span></span><a class="headerlink" href="#messari.nfts.nftpricefloor.NFTPriceFloor" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">messari.dataloader.DataLoader</span></code></p>
+<p>This class is a wrapper around the NFTPriceFloor API</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_response</span></code>(endpoint_url[, params, headers])</p></td>
+<td><p>Gets response from endpoint and checks for HTTP errors when requesting data.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_api_dict</span></code>(api_dict)</p></td>
+<td><p>Sets a new dictionary to be used as an API key pair</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_taxonomy_dict</span></code>(taxonomy_dict)</p></td>
+<td><p>Sets a new dictionary to be used for taxonomy translations</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code>(input_slugs)</p></td>
+<td><p>Wrapper around messari.utils.validate_input, validate input &amp; check if it's supported by DeFi Llama</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 57%" />
+<col style="width: 43%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>get_floor</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>get_info</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>get_nfts</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.nfts.nftpricefloor.NFTPriceFloor.get_floor">
+<span class="sig-name descname"><span class="pre">get_floor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection_in</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.nftpricefloor.NFTPriceFloor.get_floor" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.nfts.nftpricefloor.NFTPriceFloor.get_info">
+<span class="sig-name descname"><span class="pre">get_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection_in</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.nftpricefloor.NFTPriceFloor.get_info" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.nfts.nftpricefloor.NFTPriceFloor.get_nfts">
+<span class="sig-name descname"><span class="pre">get_nfts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.nftpricefloor.NFTPriceFloor.get_nfts" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="nonfungible-class">
+<h2>NonFungible Class<a class="headerlink" href="#nonfungible-class" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="messari.nfts.nonfungible.NonFungible">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">messari.nfts.nonfungible.</span></span><span class="sig-name descname"><span class="pre">NonFungible</span></span><a class="headerlink" href="#messari.nfts.nonfungible.NonFungible" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">messari.dataloader.DataLoader</span></code></p>
+<p>This class is a wrapper around the NonFungible API</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_response</span></code>(endpoint_url[, params, headers])</p></td>
+<td><p>Gets response from endpoint and checks for HTTP errors when requesting data.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_api_dict</span></code>(api_dict)</p></td>
+<td><p>Sets a new dictionary to be used as an API key pair</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_taxonomy_dict</span></code>(taxonomy_dict)</p></td>
+<td><p>Sets a new dictionary to be used for taxonomy translations</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code>(input_slugs)</p></td>
+<td><p>Wrapper around messari.utils.validate_input, validate input &amp; check if it's supported by DeFi Llama</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+<section id="upshot-class">
+<h2>Upshot Class<a class="headerlink" href="#upshot-class" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="messari.nfts.upshot.Upshot">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">messari.nfts.upshot.</span></span><span class="sig-name descname"><span class="pre">Upshot</span></span><a class="headerlink" href="#messari.nfts.upshot.Upshot" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">messari.dataloader.DataLoader</span></code></p>
+<p>This class is a wrapper around the Upshot API</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.nfts.upshot.Upshot.get_asset" title="messari.nfts.upshot.Upshot.get_asset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_asset</span></code></a>(contract_address[, asset_id, ...])</p></td>
+<td><p>retrieve an asset</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.nfts.upshot.Upshot.get_asset_events" title="messari.nfts.upshot.Upshot.get_asset_events"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_asset_events</span></code></a>(contract_address, asset_id)</p></td>
+<td><p>retrieve the event history for a given asset</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.nfts.upshot.Upshot.get_pricing" title="messari.nfts.upshot.Upshot.get_pricing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_pricing</span></code></a>(contract_address, asset_id[, ...])</p></td>
+<td><p>Returns all the price information for a specified asset (or assets) based on the provided filter.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.nfts.upshot.Upshot.get_pricing_current" title="messari.nfts.upshot.Upshot.get_pricing_current"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_pricing_current</span></code></a>(contract_address, asset_id)</p></td>
+<td><p>Returns an asset's most recent price information.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_response</span></code>(endpoint_url[, params, headers])</p></td>
+<td><p>Gets response from endpoint and checks for HTTP errors when requesting data.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_api_dict</span></code>(api_dict)</p></td>
+<td><p>Sets a new dictionary to be used as an API key pair</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_taxonomy_dict</span></code>(taxonomy_dict)</p></td>
+<td><p>Sets a new dictionary to be used for taxonomy translations</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code>(input_slugs)</p></td>
+<td><p>Wrapper around messari.utils.validate_input, validate input &amp; check if it's supported by DeFi Llama</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.nfts.upshot.Upshot.get_asset">
+<span class="sig-name descname"><span class="pre">get_asset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contract_address</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.upshot.Upshot.get_asset" title="Permalink to this definition"></a></dt>
+<dd><p>retrieve an asset</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.nfts.upshot.Upshot.get_asset_events">
+<span class="sig-name descname"><span class="pre">get_asset_events</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contract_address</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">market_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.upshot.Upshot.get_asset_events" title="Permalink to this definition"></a></dt>
+<dd><p>retrieve the event history for a given asset</p>
+<blockquote>
+<div><p>PRIMARY or SECONDARY – optionally filter the events based on the market in which it occurred</p>
+</div></blockquote>
+<p>string
+Filter events by the event type: BID, ASK, SALE, or TRANSFER</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.nfts.upshot.Upshot.get_pricing">
+<span class="sig-name descname"><span class="pre">get_pricing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contract_address</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidence</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'UPSHOT'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.upshot.Upshot.get_pricing" title="Permalink to this definition"></a></dt>
+<dd><p>Returns all the price information for a specified asset (or assets)
+based on the provided filter.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.nfts.upshot.Upshot.get_pricing_current">
+<span class="sig-name descname"><span class="pre">get_pricing_current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contract_address</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'UPSHOT'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.upshot.Upshot.get_pricing_current" title="Permalink to this definition"></a></dt>
+<dd><p>Returns an asset’s most recent price information.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="opensea-class">
+<h2>OpenSea Class<a class="headerlink" href="#opensea-class" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="messari.nfts.opensea.OpenSea">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">messari.nfts.opensea.</span></span><span class="sig-name descname"><span class="pre">OpenSea</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#messari.nfts.opensea.OpenSea" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">messari.dataloader.DataLoader</span></code></p>
+<p>This class is a wrapper around the OpenSea API</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.nfts.opensea.OpenSea.get_asset" title="messari.nfts.opensea.OpenSea.get_asset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_asset</span></code></a>(contracts_in, assets_in[, account])</p></td>
+<td><p>Used to fetch more in-depth information about an individual asset</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.nfts.opensea.OpenSea.get_bundle" title="messari.nfts.opensea.OpenSea.get_bundle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_bundle</span></code></a>()</p></td>
+<td><p>Bundles are groups of items for sale on OpenSea.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.nfts.opensea.OpenSea.get_collection" title="messari.nfts.opensea.OpenSea.get_collection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_collection</span></code></a>(collections_in)</p></td>
+<td><p>Used for retrieving more in-depth information about individual collections, including real time statistics like floor price</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.nfts.opensea.OpenSea.get_collection_stats" title="messari.nfts.opensea.OpenSea.get_collection_stats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_collection_stats</span></code></a>()</p></td>
+<td><p>fetch stats for a specific collection, including realtime floor price statistics</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.nfts.opensea.OpenSea.get_contract" title="messari.nfts.opensea.OpenSea.get_contract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_contract</span></code></a>(contracts_in)</p></td>
+<td><p>Used to fetch more in-depth information about an contract asset</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.nfts.opensea.OpenSea.get_events" title="messari.nfts.opensea.OpenSea.get_events"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_events</span></code></a>()</p></td>
+<td><p>provides a list of events that occur on the assets that OpenSea tracks</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.nfts.opensea.OpenSea.get_orders" title="messari.nfts.opensea.OpenSea.get_orders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_orders</span></code></a>()</p></td>
+<td><p>fetch orders from the OpenSea system</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_response</span></code>(endpoint_url[, params, headers])</p></td>
+<td><p>Gets response from endpoint and checks for HTTP errors when requesting data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_api_dict</span></code>(api_dict)</p></td>
+<td><p>Sets a new dictionary to be used as an API key pair</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_taxonomy_dict</span></code>(taxonomy_dict)</p></td>
+<td><p>Sets a new dictionary to be used for taxonomy translations</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code>(input_slugs)</p></td>
+<td><p>Wrapper around messari.utils.validate_input, validate input &amp; check if it's supported by DeFi Llama</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.nfts.opensea.OpenSea.get_asset">
+<span class="sig-name descname"><span class="pre">get_asset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contracts_in</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assets_in</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.opensea.OpenSea.get_asset" title="Permalink to this definition"></a></dt>
+<dd><p>Used to fetch more in-depth information about an individual asset</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.nfts.opensea.OpenSea.get_bundle">
+<span class="sig-name descname"><span class="pre">get_bundle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.opensea.OpenSea.get_bundle" title="Permalink to this definition"></a></dt>
+<dd><p>Bundles are groups of items for sale on OpenSea.
+You can buy them all at once in one transaction,
+and you can create them without any transactions or gas,
+as long as you’ve already approved the assets inside.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.nfts.opensea.OpenSea.get_collection">
+<span class="sig-name descname"><span class="pre">get_collection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collections_in</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.opensea.OpenSea.get_collection" title="Permalink to this definition"></a></dt>
+<dd><p>Used for retrieving more in-depth information about individual collections,
+including real time statistics like floor price</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.nfts.opensea.OpenSea.get_collection_stats">
+<span class="sig-name descname"><span class="pre">get_collection_stats</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.opensea.OpenSea.get_collection_stats" title="Permalink to this definition"></a></dt>
+<dd><p>fetch stats for a specific collection, including realtime floor price statistics</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.nfts.opensea.OpenSea.get_contract">
+<span class="sig-name descname"><span class="pre">get_contract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contracts_in</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.opensea.OpenSea.get_contract" title="Permalink to this definition"></a></dt>
+<dd><p>Used to fetch more in-depth information about an contract asset</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.nfts.opensea.OpenSea.get_events">
+<span class="sig-name descname"><span class="pre">get_events</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.opensea.OpenSea.get_events" title="Permalink to this definition"></a></dt>
+<dd><p>provides a list of events that occur on the assets that OpenSea tracks</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.nfts.opensea.OpenSea.get_orders">
+<span class="sig-name descname"><span class="pre">get_orders</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.opensea.OpenSea.get_orders" title="Permalink to this definition"></a></dt>
+<dd><p>fetch orders from the OpenSea system</p>
 </dd></dl>
 
 </dd></dl>

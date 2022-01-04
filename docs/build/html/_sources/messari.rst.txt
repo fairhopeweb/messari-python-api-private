@@ -90,6 +90,38 @@ Solscan Class
    :undoc-members:
    :show-inheritance:
 
+NFT Price Floor Class
+=====================
+
+.. autoclass:: messari.nfts.nftpricefloor.NFTPriceFloor
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+NonFungible Class
+=================
+
+.. autoclass:: messari.nfts.nonfungible.NonFungible
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Upshot Class
+============
+
+.. autoclass:: messari.nfts.upshot.Upshot
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+OpenSea Class
+=============
+
+.. autoclass:: messari.nfts.opensea.OpenSea
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 EventMonitor Class
 ==================
 
