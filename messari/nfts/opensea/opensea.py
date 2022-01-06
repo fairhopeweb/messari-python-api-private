@@ -41,13 +41,19 @@ class OpenSea(DataLoader):
 
         contracts = validate_input(contracts_in)
         assets = validate_input(assets_in)
+        df_list=[]
         for contract in contracts:
+            series_list=[]
             for asset in assets:
                 endpoint_url = ASSET_URL.substitute(contract=contract, id=asset)
                 response = self.get_response(endpoint_url, params=params, headers=headers)
-                # TODO
 
-
+                tmp_series=pd.Series(response)
+                series_list.append(tmp_series)
+            tmp_df=pd.concat(series_list, keys=assets, axis=1)
+            df_list.append(tmp_df)
+        assets_df=pd.concat(df_list, keys=contracts, axis=1)
+        return assets_df
 
     def get_contract(self, contracts_in: Union[str, List]) -> pd.DataFrame:
         """Used to fetch more in-depth information about an contract asset"""

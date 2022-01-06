@@ -90,7 +90,7 @@ Filter events by the event type: BID, ASK, SALE, or TRANSFER
             df_list = []
             for asset in assets:
                 parameters['assetId'] = f'{contract}/{asset}'
-                response = self.get_response(ASSET_EVENTS_URL, params=parameters)['data']
+                response = self.get_response(ASSET_EVENTS_URL, params=parameters)['data'][0]
                 tmp_df = pd.DataFrame(response['events'])
                 df_list.append(tmp_df)
 
