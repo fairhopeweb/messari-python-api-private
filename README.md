@@ -30,16 +30,19 @@ messari-python-api-private$> python setup.py install
 For a quick demo, you can try the following:
 ```
 $> python
->>> from messari.timeseries import get_metric_timeseries
->>> assets = ['btc', 'eth']
->>> metric = 'price'
->>> start = '2020-06-01'
->>> end = '2021-01-01'
->>> timeseries_df = get_metric_timeseries(asset_slugs=assets, asset_metric=metric, start=start, end=end)
->>> print(timeseries_df)
+# Import Messari API wrapper
+from messari.messari import Messari
+
+# Set up Messari instance
+MESSARI_API_KEY = 'add_your_api_key'
+messari = Messari(api_key=MESSARI_API_KEY)
+
+# Run a quick demo
+markets_df = messari.get_all_markets()
+markets_df.head()
 ```
 
 ## Docs
-To open the offical docs go [here](https://objective-lalande-8ec88b.netlify.app/).
+To open the offical docs go [here](https://zen-villani-1ab617.netlify.app/).
 
-Examples can be found in [this](https://github.com/messari/messari-python-api/blob/master/examples/Messari%20API%20Tutorial.ipynb) Jupyter Notebook. 
+Examples can be found in [this](https://github.com/messari/messari-python-api-private/blob/master/examples/Messari%20API%20Tutorial.ipynb) Jupyter Notebook. 
