@@ -1,10 +1,10 @@
 """This module is meant to contain the OptimisticEtherscan class"""
 
-from typing import Union, List, Dict
+from typing import Union, List
 import pandas as pd
 
 from messari.blockexplorers import Scanner
-from messari.utils import validate_input, validate_datetime, validate_int
+from messari.utils import validate_input
 
 BASE_URL='https://api-optimistic.etherscan.io/api'
 # Reference: https://optimistic.etherscan.io/apis
@@ -16,7 +16,8 @@ class OptimisticEtherscan(Scanner):
         Scanner.__init__(self, base_url=BASE_URL, api_key=api_key)
 
     ##### Accounts
-    def get_account_l1_deposits(self, accounts_in: Union[str, List], ascending:bool=True) -> pd.DataFrame:
+    def get_account_l1_deposits(self, accounts_in: Union[str, List],
+                                ascending:bool=True) -> pd.DataFrame:
         accounts = validate_input(accounts_in)
         sort = 'asc' if ascending else 'desc'
         df_list=[]
@@ -82,21 +83,25 @@ class OptimisticEtherscan(Scanner):
         return None
 
     ##### Logs
-    def get_logs(self, address: str, from_block: Union[int, str], to_block: Union[int, str]='latest',
-                 topic0: str=None, topic1: str=None, topic2: str=None, topic3: str=None,
-                 topic0_1_opr: str=None, topic1_2_opr: str=None, topic2_3_opr: str=None,
-                 topic0_2_opr: str=None, topic0_3_opr: str=None, topic1_3_opr: str=None) -> pd.DataFrame:
+    def get_logs(self, address: str,
+                 from_block: Union[int, str],
+                 to_block: Union[int, str]='latest',
+                 topic0: str=None, topic1: str=None,
+                 topic2: str=None, topic3: str=None,
+                 topic0_1_opr: str=None, topic1_2_opr: str=None,
+                 topic2_3_opr: str=None, topic0_2_opr: str=None,
+                 topic0_3_opr: str=None, topic1_3_opr: str=None) -> pd.DataFrame:
         """Override: return None
         """
         return None
 
     ##### Geth/Parity Proxy
-    def get_eth_block_number(self) -> int:
+    def get_eth_block_number(self):
         """Override: return None
         """
         return None
 
-    def get_eth_block(self, blocks_in: Union[int, List]) -> pd.DataFrame:
+    def get_eth_block(self, blocks_in: Union[int, List]):
         """Override: return None
         """
         return None
@@ -131,7 +136,7 @@ class OptimisticEtherscan(Scanner):
         """
         return None
 
-    def get_eth_gas_price(self) -> int:
+    def get_eth_gas_price(self):
         """Override: return None
         """
         return None
@@ -140,22 +145,22 @@ class OptimisticEtherscan(Scanner):
     # NOTE: no changes
 
     ##### Gas Tracker
-    def get_est_confirmation(self, gas_price: int) -> int:
+    def get_est_confirmation(self, gas_price: int):
         """Override: return None
         """
         return None
 
-    def get_gas_oracle(self) -> pd.DataFrame:
+    def get_gas_oracle(self):
         """Override: return None
         """
         return None
 
     ##### Stats
-    def get_total_matic_supply(self) -> int:
+    def get_total_eth_supply(self) -> int:
         """Returns the current amount of ETH (Wei) in circulation on optimism
         """
         params = {'module': 'stats',
                   'action': 'optimismsupply'}
         params.update(self.api_dict)
         response = self.get_response(self.BASE_URL, params=params)['result']
-        return response
+        return int(response)

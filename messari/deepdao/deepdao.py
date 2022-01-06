@@ -2,7 +2,7 @@
 
 import requests
 from string import Template
-from typing import Union, List, Dict
+from typing import Union, List
 import json
 import pandas as pd
 import numpy as np
@@ -15,15 +15,15 @@ from .helpers import unpack_dataframe_of_lists, unpack_dataframe_of_dicts
 # URL Endpoints
 ##########################
 ## DAOs
-ORGANIZATIONS_URL = "https://backend.deepdao.io/dashboard/organizations"
-DASHBOARD_URL = "https://backend.deepdao.io/dashboard/ksdf3ksa-937slj3"
-DAO_URL = Template("https://backend.deepdao.io/dao/ksdf3ksa-937slj3/$dao_id")
+ORGANIZATIONS_URL = 'https://backend.deepdao.io/dashboard/organizations'
+DASHBOARD_URL = 'https://backend.deepdao.io/dashboard/ksdf3ksa-937slj3'
+DAO_URL = Template('https://backend.deepdao.io/dao/ksdf3ksa-937slj3/$dao_id')
 
 ## People
-PEOPLE_URL = "https://backend.deepdao.io/people/top"
-USER_URL = Template("https://backend.deepdao.io/user/$user") #user is 0xpubkey
-USER_PROPOSALS_URL = Template("https://backend.deepdao.io/user/$user/proposals")
-USER_VOTES_URL = Template("https://backend.deepdao.io/user/$user/votes")
+PEOPLE_URL = 'https://backend.deepdao.io/people/top'
+USER_URL = Template('https://backend.deepdao.io/user/$user') #user is 0xpubkey
+USER_PROPOSALS_URL = Template('https://backend.deepdao.io/user/$user/proposals')
+USER_VOTES_URL = Template('https://backend.deepdao.io/user/$user/votes')
 
 ## Governance
 
@@ -40,9 +40,10 @@ class DeepDAO(DataLoader):
         people = self.get_top_members(count=100000)
         people_dict={}
         address_dict={}
-        for index, person in people.iterrows():
-            people_dict[person["address"]] = person["name"]
-            address_dict[person["name"]] = person["address"]
+        # TODO, do this without unused variable 'index'
+        for index, person in people.iterrows(): # pylint: disable=unused-variable
+            people_dict[person['address']] = person['name']
+            address_dict[person['name']] = person['address']
 
         # get person
         self.people_tax = people_dict
@@ -53,8 +54,8 @@ class DeepDAO(DataLoader):
         name_dict={}
         id_dict={}
         for index, dao in summary.iterrows():
-            name_dict[dao["daoId"]] = dao["daoName"]
-            id_dict[dao["daoName"]] = dao["daoId"]
+            name_dict[dao['daoId']] = dao['daoName']
+            id_dict[dao['daoName']] = dao['daoId']
 
         # get name
         self.name_tax = name_dict
@@ -102,7 +103,7 @@ class DeepDAO(DataLoader):
                pandas DataFrame of Deep DAO organizations summaries
         """
         response = requests.get(DASHBOARD_URL).json()
-        summary = response["daosSummary"]
+        summary = response['daosSummary']
         summary_df = pd.DataFrame(summary)
         summary_df.drop('daosArr', axis=1, inplace=True)
         return summary_df
@@ -115,17 +116,17 @@ class DeepDAO(DataLoader):
                pandas DataFrame of DAO ecosystem overview
         """
         response = requests.get(DASHBOARD_URL).json()
-        overview = response["daoEcosystemOverview"]
+        overview = response['daoEcosystemOverview']
         dict_list = []
         count=0
-        for date in overview["datesArray"]:
-            ts_dict = {"date":date,
-                       "aum":overview["aumArray"][count],
-                       "members":overview["membersArray"][count],
-                       "over1M":overview["over1MArray"][count],
-                       "over50k":overview["over50KArray"][count],
-                       "over10Members":overview["over10MembersArray"][count],
-                       "over100Members":overview["over100MembersArray"][count]}
+        for date in overview['datesArray']:
+            ts_dict = {'date': date,
+                       'aum': overview['aumArray'][count],
+                       'members': overview['membersArray'][count],
+                       'over1M': overview['over1MArray'][count],
+                       'over50k': overview['over50KArray'][count],
+                       'over10Members': overview['over10MembersArray'][count],
+                       'over100Members': overview['over100MembersArray'][count]}
             dict_list.append(ts_dict)
             count+=1
         overview_df = pd.DataFrame(dict_list)
@@ -133,7 +134,7 @@ class DeepDAO(DataLoader):
         old_index = overview_df.index
         new_index = []
         for index in old_index:
-            dt_string = str(index).split('T')[0]
+            dt_string = str(index).split('T', maxsplit=1)[0]
             new_index.append(dt_string)
         overview_df.index=new_index
         # drop last row because it's not formatted correctly & data is weird
@@ -151,20 +152,20 @@ class DeepDAO(DataLoader):
                pandas DataFrame of Deep DAO organizations rankings
         """
         response = requests.get(DASHBOARD_URL).json()
-        rankings = response["daoEcosystemOverview"]["daoRankings"]
+        rankings = response['daoEcosystemOverview']['daoRankings']
         rankings_df = pd.DataFrame(rankings)
         rankings_df.drop('date', axis=1, inplace=True)
         return rankings_df
 
     def get_tokens(self) -> pd.DataFrame:
-        """Returns information about the utilization of different tokens across all DAOs tracked by Deep DAO
+        """Returns information about the utilization of different tokens
         Returns
         -------
            DataFrame
                pandas DataFrame with token utilization
         """
         response = requests.get(DASHBOARD_URL).json()
-        tokens = response["daoTokens"]
+        tokens = response['daoTokens']
         tokens_df = pd.DataFrame(tokens)
         return tokens_df
 
@@ -188,7 +189,7 @@ class DeepDAO(DataLoader):
         dao_info_list = []
         for slug in slugs:
             # TODO swap w/ validate
-            if slug in self.id_tax.keys():
+            if slug in self.id_tax:
                 dao_id = self.id_tax[slug]
             else:
                 dao_id = slug
@@ -198,12 +199,14 @@ class DeepDAO(DataLoader):
             dao_info_list.append(dao_info_series)
 
         dao_info_df = pd.concat(dao_info_list, keys=slugs, axis=1)
-        dao_info_df.drop(['rankings', 'indices', 'proposals', 'members', 'votersCoalition', 'financial'], inplace=True)
+        dao_info_df.drop(['rankings', 'indices', 'proposals', 'members',
+                          'votersCoalition', 'financial'], inplace=True)
         return dao_info_df
 
 
     def get_dao_indices(self, dao_slugs: Union[str, List]) -> pd.DataFrame:
-        """Returns financial indices for given DAO(s) like the Gini Index or the Herfindahl–Hirschman index
+        """Returns financial indices for given DAO(s).
+        Like the Gini Index or the Herfindahl–Hirschman index
         Parameters
         ----------
             dao_slugs: Union[str, List]
@@ -221,7 +224,7 @@ class DeepDAO(DataLoader):
         dao_info_list = []
         for slug in slugs:
             # TODO swap w/ validate
-            if slug in self.id_tax.keys():
+            if slug in self.id_tax:
                 dao_id = self.id_tax[slug]
             else:
                 dao_id = slug
@@ -271,7 +274,7 @@ class DeepDAO(DataLoader):
         dao_info_list = []
         for slug in slugs:
             # TODO swap w/ validate
-            if slug in self.id_tax.keys():
+            if slug in self.id_tax:
                 dao_id = self.id_tax[slug]
             else:
                 dao_id = slug
@@ -314,7 +317,7 @@ class DeepDAO(DataLoader):
         dao_info_list = []
         for slug in slugs:
             # TODO swap w/ validate
-            if slug in self.id_tax.keys():
+            if slug in self.id_tax:
                 dao_id = self.id_tax[slug]
             else:
                 dao_id = slug
@@ -357,7 +360,7 @@ class DeepDAO(DataLoader):
         dao_info_list = []
         for slug in slugs:
             # TODO swap w/ validate
-            if slug in self.id_tax.keys():
+            if slug in self.id_tax:
                 dao_id = self.id_tax[slug]
             else:
                 dao_id = slug
@@ -405,7 +408,7 @@ class DeepDAO(DataLoader):
         dao_info_list = []
         for slug in slugs:
             # TODO swap w/ validate
-            if slug in self.id_tax.keys():
+            if slug in self.id_tax:
                 dao_id = self.id_tax[slug]
             else:
                 dao_id = slug
@@ -436,7 +439,9 @@ class DeepDAO(DataLoader):
 
     ####### Members
     def get_top_members(self, count: int=50) -> pd.DataFrame:
-        """Returns a dataframe of basic information for the the top 'count' Members tracked by Deep DAO sorted amount of DAO's particpating in.
+        """Returns a dataframe of basic information for the the top Members
+        Sorted by amount of DAO's particpating in.
+
         Parameters
         ----------
             count: int
@@ -448,9 +453,9 @@ class DeepDAO(DataLoader):
                pandas DataFrame with top members across DAOs
         """
         #TODO can work on paging this
-        params = {"limit": count,
-                  "offset": 0,
-                  "sortBy": "daoAmount"}
+        params = {'limit': count,
+                  'offset': 0,
+                  'sortBy': 'daoAmount'}
         people = self.get_response(PEOPLE_URL, params=params)
         people_df = pd.DataFrame(people)
         return people_df
@@ -470,7 +475,7 @@ class DeepDAO(DataLoader):
         users = validate_input(pubkeys)
         user_info_list = []
         for user in users:
-            if user in self.address_tax.keys():
+            if user in self.address_tax:
                 user_address = self.address_tax[user]
             else:
                 user_address = user
@@ -497,7 +502,7 @@ class DeepDAO(DataLoader):
         users = validate_input(pubkeys)
         proposal_info_list = []
         for user in users:
-            if user in self.address_tax.keys():
+            if user in self.address_tax:
                 user_address = self.address_tax[user]
             else:
                 user_address = user
@@ -511,7 +516,7 @@ class DeepDAO(DataLoader):
         old_index = proposals_info_df.index
         new_index = []
         for old in old_index:
-            if old in self.name_tax.keys():
+            if old in self.name_tax:
                 new_index.append(self.name_tax[old])
             else:
                 new_index.append(old)
@@ -537,7 +542,7 @@ class DeepDAO(DataLoader):
         users = validate_input(pubkeys)
         votes_info_list = []
         for user in users:
-            if user in self.address_tax.keys():
+            if user in self.address_tax:
                 user_address = self.address_tax[user]
             else:
                 user_address = user
@@ -551,7 +556,7 @@ class DeepDAO(DataLoader):
         old_index = votes_info_df.index
         new_index = []
         for old in old_index:
-            if old in self.name_tax.keys():
+            if old in self.name_tax:
                 new_index.append(self.name_tax[old])
             else:
                 new_index.append(old)
@@ -560,7 +565,7 @@ class DeepDAO(DataLoader):
         old_columns = votes_info_df.columns
         new_columns = []
         for old in old_columns:
-            if old in self.people_tax.keys():
+            if old in self.people_tax:
                 new_columns.append(self.people_tax[old])
             else:
                 new_columns.append(old)

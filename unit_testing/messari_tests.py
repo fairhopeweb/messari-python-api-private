@@ -1,10 +1,11 @@
+"""Unit Tests for the Messari class"""
+
 import unittest
 from messari.messari import Messari
 from typing import Dict
 import os
 import sys
 import pandas as pd
-import time
 
 API_KEY = os.getenv('MESSARI_API_KEY')
 if API_KEY is None:
@@ -33,30 +34,25 @@ class TestDeFiLlama(unittest.TestCase):
                                                               to_dataframe=True)
         self.assertIsInstance(response_data_df_market_data, pd.DataFrame)
 
-        #dfs = [] # list to hold metric DataFrames
-        #for i in range(1, 5, 1):
-        #    df = messari.get_all_assets(page=1, limit=500,
-        #                                asset_metric='marketcap', to_dataframe=True)
-        #    dfs.append(df)
-        #merged_df = pd.concat(dfs)
-        #print(f'Number of assets in DataFrame {len(merged_df)}')
-        #self.assertIsInstance(merged_df, pd.DataFrame)
-        #print('sleeping for 60 sec')
-        #for i in range(20):
-        #    print(f'sleep {i}/19')
-        #    time.sleep(10)
+        dfs = [] # list to hold metric DataFrames
+        for i in range(1, 5, 1): # pylint: disable=unused-variable
+            df = messari.get_all_assets(page=1, limit=500,
+                                        asset_metric='marketcap', to_dataframe=True)
+            dfs.append(df)
+        merged_df = pd.concat(dfs)
+        self.assertIsInstance(merged_df, pd.DataFrame)
 
     def test_get_asset(self):
         """Test get asset"""
         messari = Messari(API_KEY)
 
         assets = ['bitcoin', 'ethereum', 'tether']
-        #asset_metadata = messari.get_asset(asset_slugs=assets)
-        #asset_metadata.head()
+        asset_metadata = messari.get_asset(asset_slugs=assets)
+        self.assertIsInstance(asset_metadata, pd.DataFrame)
 
         fields = ['id', 'name']
-        #asset_metadata_filtered = messari.get_asset(asset_slugs=assets, asset_fields=fields)
-        #asset_metadata_filtered.head()
+        asset_metadata_filtered = messari.get_asset(asset_slugs=assets, asset_fields=fields)
+        self.assertIsInstance(asset_metadata_filtered, pd.DataFrame)
 
     def test_get_asset_profile(self):
         """Test get asset profile"""
@@ -68,9 +64,9 @@ class TestDeFiLlama(unittest.TestCase):
         self.assertIsInstance(details, str)
         asset = 'Uniswap'
         profile_metric = 'investors'
-        #governance_data = messari.get_asset_profile(asset_slugs=asset,
-        #                                            asset_profile_metric=profile_metric)
-        #self.assertIsInstance(governance_data, Dict)
+        governance_data = messari.get_asset_profile(asset_slugs=asset,
+                                                    asset_profile_metric=profile_metric)
+        self.assertIsInstance(governance_data, Dict)
 
     def test_get_asset_metric(self):
         """Test get asset metirc"""
@@ -78,10 +74,10 @@ class TestDeFiLlama(unittest.TestCase):
         assets = ['bitcoin', 'ethereum', 'tether']
         asset_metric_df = messari.get_asset_metrics(asset_slugs=assets)
         self.assertIsInstance(asset_metric_df, pd.DataFrame)
-        #metric = 'marketcap'
-        #asset_metric_df_marketcap = messari.get_asset_metrics(asset_slugs=assets,
-        #                                                      asset_metric=metric)
-        #self.assertIsInstance(asset_metric_df_marketcap, pd.DataFrame)
+        metric = 'marketcap'
+        asset_metric_df_marketcap = messari.get_asset_metrics(asset_slugs=assets,
+                                                              asset_metric=metric)
+        self.assertIsInstance(asset_metric_df_marketcap, pd.DataFrame)
 
     def test_get_asset_market_data(self):
         """Test get asset market date"""

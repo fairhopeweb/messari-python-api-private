@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenSea Python API Tutorial &mdash; Messari  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="NonFungible Python API Tutorial" href="NonFungible%20API%20Tutorial.html" />
+    <link rel="prev" title="Upshot Python API Tutorial" href="Upshot%20API%20Tutorial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Messari
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Messari%20API%20Tutorial.html">Messari Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DeFiLlama%20API%20Tutorial.html">DeFi Llama Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenTerminal%20API%20Tutorial.html">Token Terminal Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DeepDAO%20API%20Tutorial.html">Deep DAO Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Etherscan%20API%20Tutorial.html">EVM Blockexplorer API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Solscan%20API%20Tutorial.html">Solscan API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upshot%20API%20Tutorial.html">Upshot Python API Tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">OpenSea Python API Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#API-Structure">API Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get_asset">get_asset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_contract">get_contract</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_collection">get_collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_events">get_events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_bundle">get_bundle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_collection_stats">get_collection_stats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_orders">get_orders</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NonFungible%20API%20Tutorial.html">NonFungible Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NFT%20Price%20Floor%20API%20Tutorial.html">NFT Price Floor Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Event%20Monitor%20Tutorial.html">Event Monitor Tutorial</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Messari</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>OpenSea Python API Tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/OpenSea API Tutorial.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="OpenSea-Python-API-Tutorial">
+<h1>OpenSea Python API Tutorial<a class="headerlink" href="#OpenSea-Python-API-Tutorial" title="Permalink to this headline"></a></h1>
+<p>This tutorial aims to be a quick guide to get you started using the OpenSea API integrated into messari’s python library.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">messari.nfts</span> <span class="kn">import</span> <span class="n">OpenSea</span>
+<span class="n">os</span> <span class="o">=</span> <span class="n">OpenSea</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;doodles-official&#39;</span><span class="p">,</span><span class="s1">&#39;phrocks&#39;</span><span class="p">]</span>
+<span class="c1"># punks, bayc</span>
+<span class="n">contracts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb&#39;</span><span class="p">,</span> <span class="s1">&#39;0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D&#39;</span><span class="p">]</span>
+<span class="n">assets</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;6529&#39;</span><span class="p">,</span> <span class="s1">&#39;555&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<section id="API-Structure">
+<h2>API Structure<a class="headerlink" href="#API-Structure" title="Permalink to this headline"></a></h2>
+<p>The OpenSea Python client contains a number of functions that wrap some of OpenSea’s API endpoints. These include:</p>
+<p>Functions</p>
+<ul class="simple">
+<li><p>get_asset</p></li>
+<li><p>get_contract</p></li>
+<li><p>get_collection</p></li>
+<li><p>get_events</p></li>
+<li><p>get_bundle</p></li>
+<li><p>get_collection_stats</p></li>
+<li><p>get_orders</p></li>
+</ul>
+<p>Below are a few examples to showcase the functionality and types of data each function generates.</p>
+</section>
+<section id="Functions">
+<h2>Functions<a class="headerlink" href="#Functions" title="Permalink to this headline"></a></h2>
+<section id="get_asset">
+<h3>get_asset<a class="headerlink" href="#get_asset" title="Permalink to this headline"></a></h3>
+<p>Used to fetch more in-depth information about an individual asset</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">asset</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">get_asset</span><span class="p">(</span><span class="n">contracts_in</span><span class="o">=</span><span class="n">contracts</span><span class="p">,</span> <span class="n">assets_in</span><span class="o">=</span><span class="n">assets</span><span class="p">)</span>
+<span class="n">asset</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="2" halign="left">0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</th>
+      <th colspan="2" halign="left">0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>6529</th>
+      <th>555</th>
+      <th>6529</th>
+      <th>555</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>id</th>
+      <td>178276</td>
+      <td>525304</td>
+      <td>23139224</td>
+      <td>23113937</td>
+    </tr>
+    <tr>
+      <th>token_id</th>
+      <td>6529</td>
+      <td>555</td>
+      <td>6529</td>
+      <td>555</td>
+    </tr>
+    <tr>
+      <th>num_sales</th>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>background_color</th>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>image_url</th>
+      <td>https://lh3.googleusercontent.com/5B85At9ud33G...</td>
+      <td>https://lh3.googleusercontent.com/V9c-ZER2iciQ...</td>
+      <td>https://lh3.googleusercontent.com/2BPAh0dbtVcU...</td>
+      <td>https://lh3.googleusercontent.com/rBFqDumiA3rH...</td>
+    </tr>
+    <tr>
+      <th>image_preview_url</th>
+      <td>https://lh3.googleusercontent.com/5B85At9ud33G...</td>
+      <td>https://lh3.googleusercontent.com/V9c-ZER2iciQ...</td>
+      <td>https://lh3.googleusercontent.com/2BPAh0dbtVcU...</td>
+      <td>https://lh3.googleusercontent.com/rBFqDumiA3rH...</td>
+    </tr>
+    <tr>
+      <th>image_thumbnail_url</th>
+      <td>https://lh3.googleusercontent.com/5B85At9ud33G...</td>
+      <td>https://lh3.googleusercontent.com/V9c-ZER2iciQ...</td>
+      <td>https://lh3.googleusercontent.com/2BPAh0dbtVcU...</td>
+      <td>https://lh3.googleusercontent.com/rBFqDumiA3rH...</td>
+    </tr>
+    <tr>
+      <th>image_original_url</th>
+      <td>https://www.larvalabs.com/cryptopunks/cryptopu...</td>
+      <td>https://www.larvalabs.com/cryptopunks/cryptopu...</td>
+      <td>https://ipfs.io/ipfs/QmTm77YMPadyHNUHaU1eTrken...</td>
+      <td>https://ipfs.io/ipfs/QmX2nxPPe3MdfVag4XK7mKrzL...</td>
+    </tr>
+    <tr>
+      <th>animation_url</th>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>animation_original_url</th>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td>CryptoPunk #6529</td>
+      <td>CryptoPunk #555</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>description</th>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>external_link</th>
+      <td>https://www.larvalabs.com/cryptopunks/details/...</td>
+      <td>https://www.larvalabs.com/cryptopunks/details/555</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>asset_contract</th>
+      <td>{'address': '0xb47e3cd837ddf8e4c57f05d70ab865d...</td>
+      <td>{'address': '0xb47e3cd837ddf8e4c57f05d70ab865d...</td>
+      <td>{'address': '0xbc4ca0eda7647a8ab7c2061c2e118a1...</td>
+      <td>{'address': '0xbc4ca0eda7647a8ab7c2061c2e118a1...</td>
+    </tr>
+    <tr>
+      <th>permalink</th>
+      <td>https://opensea.io/assets/0xb47e3cd837ddf8e4c5...</td>
+      <td>https://opensea.io/assets/0xb47e3cd837ddf8e4c5...</td>
+      <td>https://opensea.io/assets/0xbc4ca0eda7647a8ab7...</td>
+      <td>https://opensea.io/assets/0xbc4ca0eda7647a8ab7...</td>
+    </tr>
+    <tr>
+      <th>collection</th>
+      <td>{'payment_tokens': [{'id': 13689077, 'symbol':...</td>
+      <td>{'payment_tokens': [{'id': 13689077, 'symbol':...</td>
+      <td>{'payment_tokens': [{'id': 13689077, 'symbol':...</td>
+      <td>{'payment_tokens': [{'id': 13689077, 'symbol':...</td>
+    </tr>
+    <tr>
+      <th>decimals</th>
+      <td>None</td>
+      <td>None</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>token_metadata</th>
+      <td></td>
+      <td></td>
+      <td>https://ipfs.io/ipfs/QmeSjSinHpPnmXmspMjwiXyN6...</td>
+      <td>https://ipfs.io/ipfs/QmeSjSinHpPnmXmspMjwiXyN6...</td>
+    </tr>
+    <tr>
+      <th>owner</th>
+      <td>{'user': {'username': '6529Museum'}, 'profile_...</td>
+      <td>{'user': {'username': 'yilinhut'}, 'profile_im...</td>
+      <td>{'user': {'username': 'JimmyDankoVault'}, 'pro...</td>
+      <td>{'user': {'username': 'Block_Merchant'}, 'prof...</td>
+    </tr>
+    <tr>
+      <th>sell_orders</th>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>creator</th>
+      <td>{'user': None, 'profile_img_url': 'https://sto...</td>
+      <td>{'user': None, 'profile_img_url': 'https://sto...</td>
+      <td>{'user': {'username': 'BoredApeYachtClub'}, 'p...</td>
+      <td>{'user': {'username': 'BoredApeYachtClub'}, 'p...</td>
+    </tr>
+    <tr>
+      <th>traits</th>
+      <td>[{'trait_type': 'type', 'value': 'Male', 'disp...</td>
+      <td>[{'trait_type': 'type', 'value': 'Male', 'disp...</td>
+      <td>[{'trait_type': 'Fur', 'value': 'Dark Brown', ...</td>
+      <td>[{'trait_type': 'Background', 'value': 'New Pu...</td>
+    </tr>
+    <tr>
+      <th>last_sale</th>
+      <td>{'asset': {'token_id': '6529', 'decimals': Non...</td>
+      <td>{'asset': {'token_id': '555', 'decimals': None...</td>
+      <td>{'asset': {'token_id': '6529', 'decimals': 0},...</td>
+      <td>{'asset': {'token_id': '555', 'decimals': 0}, ...</td>
+    </tr>
+    <tr>
+      <th>top_bid</th>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>listing_date</th>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>is_presale</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>transfer_fee_payment_token</th>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>transfer_fee</th>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>related_assets</th>
+      <td>[]</td>
+      <td>[]</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>orders</th>
+      <td>[]</td>
+      <td>[]</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>auctions</th>
+      <td>[]</td>
+      <td>[]</td>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>supports_wyvern</th>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>top_ownerships</th>
+      <td>[{'owner': {'user': {'username': '6529Museum'}...</td>
+      <td>[{'owner': {'user': {'username': 'yilinhut'}, ...</td>
+      <td>[{'owner': {'user': {'username': 'JimmyDankoVa...</td>
+      <td>[{'owner': {'user': {'username': 'Block_Mercha...</td>
+    </tr>
+    <tr>
+      <th>ownership</th>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>highest_buyer_commitment</th>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="get_contract">
+<h3>get_contract<a class="headerlink" href="#get_contract" title="Permalink to this headline"></a></h3>
+<p>Used to fetch more in-depth information about an contract asset</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">contract</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">get_contract</span><span class="p">(</span><span class="n">contracts_in</span><span class="o">=</span><span class="n">contracts</span><span class="p">)</span>
+<span class="n">contract</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="10" halign="left">0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</th>
+      <th>...</th>
+      <th colspan="10" halign="left">0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>collection</th>
+      <th>address</th>
+      <th>asset_contract_type</th>
+      <th>created_date</th>
+      <th>name</th>
+      <th>nft_version</th>
+      <th>opensea_version</th>
+      <th>owner</th>
+      <th>schema_name</th>
+      <th>symbol</th>
+      <th>...</th>
+      <th>image_url</th>
+      <th>default_to_fiat</th>
+      <th>dev_buyer_fee_basis_points</th>
+      <th>dev_seller_fee_basis_points</th>
+      <th>only_proxied_transfers</th>
+      <th>opensea_buyer_fee_basis_points</th>
+      <th>opensea_seller_fee_basis_points</th>
+      <th>buyer_fee_basis_points</th>
+      <th>seller_fee_basis_points</th>
+      <th>payout_address</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>banner_image_url</th>
+      <td>https://lh3.googleusercontent.com/48oVuDyfe_xh...</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>chat_url</th>
+      <td>None</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>created_date</th>
+      <td>2019-04-26T22:13:09.691572</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>default_to_fiat</th>
+      <td>False</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>description</th>
+      <td>CryptoPunks launched as a fixed set of 10,000 ...</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>dev_buyer_fee_basis_points</th>
+      <td>0</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>dev_seller_fee_basis_points</th>
+      <td>0</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>discord_url</th>
+      <td>https://discord.gg/tQp4pSE</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>display_data</th>
+      <td>{'card_display_style': 'cover'}</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>external_url</th>
+      <td>https://www.larvalabs.com/cryptopunks</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>featured</th>
+      <td>False</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>featured_image_url</th>
+      <td>https://storage.opensea.io/0xb47e3cd837ddf8e4c...</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>hidden</th>
+      <td>False</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>image_url</th>
+      <td>https://lh3.googleusercontent.com/BdxvLseXcfl5...</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>instagram_username</th>
+      <td>None</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>is_subject_to_whitelist</th>
+      <td>False</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>large_image_url</th>
+      <td>https://lh3.googleusercontent.com/QB2kKuQEw04X...</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>medium_username</th>
+      <td>None</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td>CryptoPunks</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>only_proxied_transfers</th>
+      <td>False</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>opensea_buyer_fee_basis_points</th>
+      <td>0</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>opensea_seller_fee_basis_points</th>
+      <td>250</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>payout_address</th>
+      <td></td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>require_email</th>
+      <td>False</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>safelist_request_status</th>
+      <td>verified</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>short_description</th>
+      <td>None</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>slug</th>
+      <td>cryptopunks</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>telegram_url</th>
+      <td>None</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>twitter_username</th>
+      <td>larvalabs</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+    <tr>
+      <th>wiki_url</th>
+      <td>None</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>non-fungible</td>
+      <td>2018-01-23T04:51:38.832339</td>
+      <td>CryptoPunks</td>
+      <td>unsupported</td>
+      <td>None</td>
+      <td>None</td>
+      <td>CRYPTOPUNKS</td>
+      <td>PUNK</td>
+      <td>...</td>
+      <td>https://lh3.googleusercontent.com/Ju9CkWtV-1Ok...</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>False</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>500</td>
+      <td>0xaae7ac476b117bccafe2f05f582906be44bc8ff1</td>
+    </tr>
+  </tbody>
+</table>
+<p>30 rows × 46 columns</p>
+</div></div>
+</div>
+</section>
+<section id="get_collection">
+<h3>get_collection<a class="headerlink" href="#get_collection" title="Permalink to this headline"></a></h3>
+<p>Used for retrieving more in-depth information about individual collections, including real time statistics like floor price</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collection</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">get_collection</span><span class="p">(</span><span class="n">collections_in</span><span class="o">=</span><span class="n">collections</span><span class="p">)</span>
+<span class="n">collection</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>doodles-official</th>
+      <th>phrocks</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>collection</th>
+      <th>collection</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>banner_image_url</th>
+      <td>https://lh3.googleusercontent.com/svc_rQkHVGf3...</td>
+      <td>https://lh3.googleusercontent.com/hF9Co2A2c69m...</td>
+    </tr>
+    <tr>
+      <th>chat_url</th>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>created_date</th>
+      <td>2021-10-17T13:00:47.419945</td>
+      <td>2021-08-26T04:14:43.335895</td>
+    </tr>
+    <tr>
+      <th>default_to_fiat</th>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>description</th>
+      <td>A community-driven collectibles project featur...</td>
+      <td>They're phrocks.\n\nhttps://etherphrock.com/</td>
+    </tr>
+    <tr>
+      <th>dev_buyer_fee_basis_points</th>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>dev_seller_fee_basis_points</th>
+      <td>500</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>discord_url</th>
+      <td>https://discord.gg/doodles</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>display_data</th>
+      <td>{'card_display_style': 'contain'}</td>
+      <td>{'card_display_style': 'contain'}</td>
+    </tr>
+    <tr>
+      <th>editors</th>
+      <td>[0x0239769a1adf4def9f07da824b80b9c4fcb59593, 0...</td>
+      <td>[0x0239769a1adf4def9f07da824b80b9c4fcb59593, 0...</td>
+    </tr>
+    <tr>
+      <th>external_url</th>
+      <td>https://doodles.app</td>
+      <td>https://etherphrock.com/</td>
+    </tr>
+    <tr>
+      <th>featured</th>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>featured_image_url</th>
+      <td>https://lh3.googleusercontent.com/svc_rQkHVGf3...</td>
+      <td>https://lh3.googleusercontent.com/hF9Co2A2c69m...</td>
+    </tr>
+    <tr>
+      <th>hidden</th>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>image_url</th>
+      <td>https://lh3.googleusercontent.com/7B0qai02OdHA...</td>
+      <td>https://lh3.googleusercontent.com/hF9Co2A2c69m...</td>
+    </tr>
+    <tr>
+      <th>instagram_username</th>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>is_subject_to_whitelist</th>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>large_image_url</th>
+      <td>https://lh3.googleusercontent.com/svc_rQkHVGf3...</td>
+      <td>https://lh3.googleusercontent.com/hF9Co2A2c69m...</td>
+    </tr>
+    <tr>
+      <th>medium_username</th>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td>Doodles</td>
+      <td>Phrocks</td>
+    </tr>
+    <tr>
+      <th>only_proxied_transfers</th>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>opensea_buyer_fee_basis_points</th>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>opensea_seller_fee_basis_points</th>
+      <td>250</td>
+      <td>250</td>
+    </tr>
+    <tr>
+      <th>payment_tokens</th>
+      <td>[{'id': 13689077, 'symbol': 'ETH', 'address': ...</td>
+      <td>[{'id': 13689077, 'symbol': 'ETH', 'address': ...</td>
+    </tr>
+    <tr>
+      <th>payout_address</th>
+      <td>0xdcd382be6cc4f1971c667ffda85c7a287605afe4</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>primary_asset_contracts</th>
+      <td>[{'address': '0x8a90cab2b38dba80c64b7734e58ee1...</td>
+      <td>[{'address': '0x364ce4e74a1ddd42e6f96a5ee69280...</td>
+    </tr>
+    <tr>
+      <th>require_email</th>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>safelist_request_status</th>
+      <td>verified</td>
+      <td>not_requested</td>
+    </tr>
+    <tr>
+      <th>short_description</th>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>slug</th>
+      <td>doodles-official</td>
+      <td>phrocks</td>
+    </tr>
+    <tr>
+      <th>stats</th>
+      <td>{'one_day_volume': 4390.5320999999985, 'one_da...</td>
+      <td>{'one_day_volume': 0.0, 'one_day_change': 0.0,...</td>
+    </tr>
+    <tr>
+      <th>telegram_url</th>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>traits</th>
+      <td>{'background': {'blue': 726, 'blue space': 1, ...</td>
+      <td>{'Facing': {'right': 78}, 'Rock': {'yes': 78}}</td>
+    </tr>
+    <tr>
+      <th>twitter_username</th>
+      <td>doodles</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>wiki_url</th>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="get_events">
+<h3>get_events<a class="headerlink" href="#get_events" title="Permalink to this headline"></a></h3>
+<p>provides a list of events that occur on the assets that OpenSea tracks</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">events</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">get_events</span><span class="p">()</span>
+<span class="n">events</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="get_bundle">
+<h3>get_bundle<a class="headerlink" href="#get_bundle" title="Permalink to this headline"></a></h3>
+<p>Bundles are groups of items for sale on OpenSea. You can buy them all at once in one transaction, and you can create them without any transactions or gas, as long as you’ve already approved the assets inside.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bundle</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">get_bundle</span><span class="p">()</span>
+<span class="n">bundle</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="get_collection_stats">
+<h3>get_collection_stats<a class="headerlink" href="#get_collection_stats" title="Permalink to this headline"></a></h3>
+<p>Fetch stats for a specific collection, including realtime floor price statistics</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collection_stats</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">get_collection_stats</span><span class="p">()</span>
+<span class="n">collection_stats</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="get_orders">
+<h3>get_orders<a class="headerlink" href="#get_orders" title="Permalink to this headline"></a></h3>
+<p>Fetch orders from the OpenSea system</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">get_orders</span><span class="p">()</span>
+<span class="n">orders</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Upshot%20API%20Tutorial.html" class="btn btn-neutral float-left" title="Upshot Python API Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="NonFungible%20API%20Tutorial.html" class="btn btn-neutral float-right" title="NonFungible Python API Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Roberto Talamas.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

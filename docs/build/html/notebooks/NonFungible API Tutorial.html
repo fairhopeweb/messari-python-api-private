@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NonFungible Python API Tutorial &mdash; Messari  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="NFT Price Floor Python API Tutorial" href="NFT%20Price%20Floor%20API%20Tutorial.html" />
+    <link rel="prev" title="OpenSea Python API Tutorial" href="OpenSea%20API%20Tutorial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Messari
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Messari%20API%20Tutorial.html">Messari Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DeFiLlama%20API%20Tutorial.html">DeFi Llama Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenTerminal%20API%20Tutorial.html">Token Terminal Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DeepDAO%20API%20Tutorial.html">Deep DAO Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Etherscan%20API%20Tutorial.html">EVM Blockexplorer API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Solscan%20API%20Tutorial.html">Solscan API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upshot%20API%20Tutorial.html">Upshot Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OpenSea%20API%20Tutorial.html">OpenSea Python API Tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">NonFungible Python API Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#API-Structure">API Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get_collection_history">get_collection_history</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_collection_stats">get_collection_stats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_collection_summary">get_collection_summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NFT%20Price%20Floor%20API%20Tutorial.html">NFT Price Floor Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Event%20Monitor%20Tutorial.html">Event Monitor Tutorial</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Messari</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>NonFungible Python API Tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/NonFungible API Tutorial.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="NonFungible-Python-API-Tutorial">
+<h1>NonFungible Python API Tutorial<a class="headerlink" href="#NonFungible-Python-API-Tutorial" title="Permalink to this headline"></a></h1>
+<p>This tutorial aims to be a quick guide to get you started using the NonFungible API integrated into messari’s python library.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">messari.nfts</span> <span class="kn">import</span> <span class="n">NonFungible</span>
+<span class="n">nf</span> <span class="o">=</span> <span class="n">NonFungible</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cryptopunks&#39;</span><span class="p">,</span> <span class="s1">&#39;doodles&#39;</span><span class="p">]</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+<section id="API-Structure">
+<h2>API Structure<a class="headerlink" href="#API-Structure" title="Permalink to this headline"></a></h2>
+<p>The NonFungible Python client contains a number of functions that wrap some of NonFungible’s API endpoints. These include:</p>
+<p>Functions</p>
+<ul class="simple">
+<li><p>get_collection_history</p></li>
+<li><p>get_collection_stats</p></li>
+<li><p>get_collection_summary</p></li>
+</ul>
+<p>Below are a few examples to showcase the functionality and types of data each function generates.</p>
+</section>
+<section id="Functions">
+<h2>Functions<a class="headerlink" href="#Functions" title="Permalink to this headline"></a></h2>
+<section id="get_collection_history">
+<h3>get_collection_history<a class="headerlink" href="#get_collection_history" title="Permalink to this headline"></a></h3>
+<p>get collection history,</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collection_history_df</span> <span class="o">=</span> <span class="n">nf</span><span class="o">.</span><span class="n">get_collection_history</span><span class="p">(</span><span class="n">collections_in</span><span class="o">=</span><span class="n">collections</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">collection_history_df</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="10" halign="left">cryptopunks</th>
+      <th>...</th>
+      <th colspan="10" halign="left">doodles</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>blockchain</th>
+      <th>transactionHash</th>
+      <th>blockNumber</th>
+      <th>blockTimestamp</th>
+      <th>assetId</th>
+      <th>project</th>
+      <th>nftAddress</th>
+      <th>nftTicker</th>
+      <th>marketAddress</th>
+      <th>usdPrice</th>
+      <th>...</th>
+      <th>totalPrice</th>
+      <th>totalDecimalPrice</th>
+      <th>feeUSDPrice</th>
+      <th>feeTotalPrice</th>
+      <th>feeTotalDecimalPrice</th>
+      <th>feeCollectors</th>
+      <th>saleType</th>
+      <th>buyer</th>
+      <th>seller</th>
+      <th>meta</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ethereum</td>
+      <td>0xaa40b85f4a1a16fe3f6f424ada1a99053335420b167b...</td>
+      <td>13912264</td>
+      <td>2021-12-31T09:11:16.000Z</td>
+      <td>5902</td>
+      <td>cryptopunks</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>Ͼ</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>1204673.400</td>
+      <td>...</td>
+      <td>200000000000000000000</td>
+      <td>200</td>
+      <td>57190.50000</td>
+      <td>15000000000000000000</td>
+      <td>15.000</td>
+      <td>[0x5b3256965e7c3cf26e11fcaf296dfc8807c01073]</td>
+      <td>secondary</td>
+      <td>0xb3b1d2405f16afc27a83fb9a43e1da5102a363d4</td>
+      <td>0xeef9a8b628e22ade70b509c45f6f1db1d43c0dd4</td>
+      <td>{'name': 'Doodle #7751', 'artist': ['Burnt Toa...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ethereum</td>
+      <td>0xbfe47e67ab24622b809b80fa357a2e72a8e345543b6b...</td>
+      <td>13901896</td>
+      <td>2021-12-29T18:32:33.000Z</td>
+      <td>6275</td>
+      <td>cryptopunks</td>
+      <td>0xb7f7f6c52f2e2fdb1963eab30438024864c313f6</td>
+      <td>WPUNKS</td>
+      <td>0x4748495153fb86637e4fdd8e50e3c1f611f15930</td>
+      <td>1133475.000</td>
+      <td>...</td>
+      <td>150000000000000000000</td>
+      <td>150</td>
+      <td>42918.41250</td>
+      <td>11250000000000000000</td>
+      <td>11.250</td>
+      <td>[0x5b3256965e7c3cf26e11fcaf296dfc8807c01073]</td>
+      <td>secondary</td>
+      <td>0x6ec30fd91a504aad948839b985c7263888b2ad68</td>
+      <td>0x0d41f957181e584db82d2e316837b2de1738c477</td>
+      <td>{'name': 'Doodle #3954', 'artist': ['Burnt Toa...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ethereum</td>
+      <td>0x3f2066f45f5a48e95a9a87db3f1db1789553cbece2dd...</td>
+      <td>13903771</td>
+      <td>2021-12-30T01:29:09.000Z</td>
+      <td>7622</td>
+      <td>cryptopunks</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>Ͼ</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>913227.318</td>
+      <td>...</td>
+      <td>120000000000000000000</td>
+      <td>120</td>
+      <td>34460.46000</td>
+      <td>9000000000000000000</td>
+      <td>9.000</td>
+      <td>[0x5b3256965e7c3cf26e11fcaf296dfc8807c01073]</td>
+      <td>secondary</td>
+      <td>0x4b4c13434aac5e99645a4d9e59fe497b3318f50f</td>
+      <td>0xd7510a925475cb8377bc8d2a7f1c792022b68df8</td>
+      <td>{'name': 'Doodle #6343', 'artist': ['Burnt Toa...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ethereum</td>
+      <td>0xee3a243e833cdde3456a3b5bd5b9f95add2438edf737...</td>
+      <td>13923097</td>
+      <td>2022-01-02T01:35:03.000Z</td>
+      <td>4770</td>
+      <td>cryptopunks</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>Ͼ</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>822235.500</td>
+      <td>...</td>
+      <td>119000000000000000000</td>
+      <td>119</td>
+      <td>33815.30775</td>
+      <td>8925000000000000000</td>
+      <td>8.925</td>
+      <td>[0x5b3256965e7c3cf26e11fcaf296dfc8807c01073]</td>
+      <td>secondary</td>
+      <td>0x904778b44bd12a1f7c3f1b95ff3381a952296cd1</td>
+      <td>0xde2b87d1539904f4b37e98c0d5ce383e890006ef</td>
+      <td>{'name': 'Doodle #1085', 'artist': ['Burnt Toa...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ethereum</td>
+      <td>0xd22f3794e7791e3a53eaefab4cd4a37557fdeab178b2...</td>
+      <td>13912355</td>
+      <td>2021-12-31T09:31:42.000Z</td>
+      <td>642</td>
+      <td>cryptopunks</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>Ͼ</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>638379.840</td>
+      <td>...</td>
+      <td>100000000000000000000</td>
+      <td>100</td>
+      <td>28554.60000</td>
+      <td>7500000000000000000</td>
+      <td>7.500</td>
+      <td>[0x5b3256965e7c3cf26e11fcaf296dfc8807c01073]</td>
+      <td>secondary</td>
+      <td>0x30ae2012d175c6e7945a4350c57fe737d085d470</td>
+      <td>0xbde3fe2c971018a0dfde5030b611e4aeb2ce3933</td>
+      <td>{'name': 'Doodle #7802', 'artist': ['Burnt Toa...</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 44 columns</p>
+</div></div>
+</div>
+<p>can do ’’ to get all collections</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collection_history_df</span> <span class="o">=</span> <span class="n">nf</span><span class="o">.</span><span class="n">get_collection_history</span><span class="p">(</span><span class="n">collections_in</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">collection_history_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="21" halign="left"></th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>blockchain</th>
+      <th>transactionHash</th>
+      <th>blockNumber</th>
+      <th>blockTimestamp</th>
+      <th>assetId</th>
+      <th>project</th>
+      <th>nftAddress</th>
+      <th>nftTicker</th>
+      <th>marketAddress</th>
+      <th>usdPrice</th>
+      <th>...</th>
+      <th>totalPrice</th>
+      <th>totalDecimalPrice</th>
+      <th>feeUSDPrice</th>
+      <th>feeTotalPrice</th>
+      <th>feeTotalDecimalPrice</th>
+      <th>feeCollectors</th>
+      <th>saleType</th>
+      <th>buyer</th>
+      <th>seller</th>
+      <th>meta</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ethereum</td>
+      <td>0x21dcce949d7137778294d3b40797b3f0c81928bd8661...</td>
+      <td>13928090</td>
+      <td>2022-01-02T20:05:08.000Z</td>
+      <td>11</td>
+      <td>superrare</td>
+      <td>0x41a322b28d0ff354040e2cbc676f0320d8c8850d</td>
+      <td>SUPR</td>
+      <td>0x41a322b28d0ff354040e2cbc676f0320d8c8850d</td>
+      <td>6.196021e+06</td>
+      <td>...</td>
+      <td>1630000000000000000000</td>
+      <td>1630.0000</td>
+      <td>805482.756000</td>
+      <td>211900000000000000000</td>
+      <td>211.9000</td>
+      <td>[0x39cc9c86e67baf2129b80fe3414c397492ea8026, 0...</td>
+      <td>secondary</td>
+      <td>0x63fed38f5d6f6fd6a899451c72322c44b9c5acb0</td>
+      <td>0xb67994792c214039c8328bb3e0835b6a8ea7e373</td>
+      <td>{'artist': ['N/A'], 'name': 'All Time High in ...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ethereum</td>
+      <td>0x851d5ec47f2d766278193961c3fd582011af1fda286f...</td>
+      <td>13896377</td>
+      <td>2021-12-28T22:17:44.000Z</td>
+      <td>3562</td>
+      <td>boredapeclub</td>
+      <td>0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d</td>
+      <td>BAYC</td>
+      <td>0x24550d7fbe64bfdbce7704251d3fe40b8a136c91</td>
+      <td>1.636232e+06</td>
+      <td>...</td>
+      <td>430000000000000000000</td>
+      <td>430.0000</td>
+      <td>81811.585000</td>
+      <td>21500000000000000000</td>
+      <td>21.5000</td>
+      <td>[0x5b3256965e7c3cf26e11fcaf296dfc8807c01073]</td>
+      <td>secondary</td>
+      <td>0x020ca66c30bec2c4fe3861a94e4db4a498a35872</td>
+      <td>0xfbe5c1ab13e206688775f117a9a90153d7fdcfd2</td>
+      <td>{'name': 'Bored Ape #3562', 'eyes': 'Zombie', ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ethereum</td>
+      <td>0xaa40b85f4a1a16fe3f6f424ada1a99053335420b167b...</td>
+      <td>13912264</td>
+      <td>2021-12-31T09:11:16.000Z</td>
+      <td>5902</td>
+      <td>cryptopunks</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>Ͼ</td>
+      <td>0xb47e3cd837ddf8e4c57f05d70ab865de6e193bbb</td>
+      <td>1.204673e+06</td>
+      <td>...</td>
+      <td>315000000000000000000</td>
+      <td>315.0000</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>secondary</td>
+      <td>0x801b68cc9f4fb094a28b30ca25664051e50ad3a9</td>
+      <td>0x1e3685ee600983bac782b182f245efd3bbb26455</td>
+      <td>{'tags': ['Hoodie', 'Small Shades', 'Shadow Be...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ethereum</td>
+      <td>0xbfe47e67ab24622b809b80fa357a2e72a8e345543b6b...</td>
+      <td>13901896</td>
+      <td>2021-12-29T18:32:33.000Z</td>
+      <td>6275</td>
+      <td>cryptopunks</td>
+      <td>0xb7f7f6c52f2e2fdb1963eab30438024864c313f6</td>
+      <td>WPUNKS</td>
+      <td>0x4748495153fb86637e4fdd8e50e3c1f611f15930</td>
+      <td>1.133475e+06</td>
+      <td>...</td>
+      <td>300000000000000000000</td>
+      <td>300.0000</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>NaN</td>
+      <td>None</td>
+      <td>primary</td>
+      <td>0xd66fe503aebe0a9ca0d0b208453a3d7106b063f2</td>
+      <td>0x0980d5970901349d531c9fd032dfa3132b5bec48</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ethereum</td>
+      <td>0x44047731eb4993621a7fd0c3b55b46ebb7660fcf2900...</td>
+      <td>13935026</td>
+      <td>2022-01-03T21:51:13.000Z</td>
+      <td>7009</td>
+      <td>superrare</td>
+      <td>0xb932a70a57673d89f4acffbe830e8ed7f75fb9e0</td>
+      <td>SUPR</td>
+      <td>0x8c9f364bf7a56ed058fc63ef81c6cf09c833e656</td>
+      <td>9.397873e+05</td>
+      <td>...</td>
+      <td>249970700000000000000</td>
+      <td>249.9707</td>
+      <td>118613.936623</td>
+      <td>31549700000000000000</td>
+      <td>31.5497</td>
+      <td>[0x39cc9c86e67baf2129b80fe3414c397492ea8026, 0...</td>
+      <td>secondary</td>
+      <td>0xc46db2d89327d4c41eb81c43ed5e3dff111f9a8f</td>
+      <td>0x762da606029d3120735aa1eec15464e265db7a3c</td>
+      <td>{'artist': ['XCOPY'], 'name': 'Blood Run', 'de...</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 22 columns</p>
+</div></div>
+</div>
+</section>
+<section id="get_collection_stats">
+<h3>get_collection_stats<a class="headerlink" href="#get_collection_stats" title="Permalink to this headline"></a></h3>
+<p>get stats abt collection</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collection_stats_df</span> <span class="o">=</span> <span class="n">nf</span><span class="o">.</span><span class="n">get_collection_stats</span><span class="p">(</span><span class="n">collections_in</span><span class="o">=</span><span class="n">collections</span><span class="p">)</span>
+<span class="n">collection_stats_df</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cryptopunks</th>
+      <th>doodles</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count-sale-latest</th>
+      <td>99</td>
+      <td>1274</td>
+    </tr>
+    <tr>
+      <th>count-sale-daily</th>
+      <td>[[1641340800, 99], [1641254400, 101], [1641168...</td>
+      <td>[[1641340800, 1290], [1641254400, 1219], [1641...</td>
+    </tr>
+    <tr>
+      <th>count-salesprimary-latest</th>
+      <td>8</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>count-salesprimary-daily</th>
+      <td>[[1641340800, 8], [1641254400, 9], [1641168000...</td>
+      <td>[[1641340800, 0], [1641254400, 0], [1641168000...</td>
+    </tr>
+    <tr>
+      <th>count-salessecondary-latest</th>
+      <td>91</td>
+      <td>1274</td>
+    </tr>
+    <tr>
+      <th>count-salessecondary-daily</th>
+      <td>[[1641340800, 91], [1641254400, 92], [16411680...</td>
+      <td>[[1641340800, 1290], [1641254400, 1219], [1641...</td>
+    </tr>
+    <tr>
+      <th>sum-usd-latest</th>
+      <td>30753514.921924</td>
+      <td>41137137.998815</td>
+    </tr>
+    <tr>
+      <th>sum-usd-daily</th>
+      <td>[[1641340800, 30753514.9219242], [1641254400, ...</td>
+      <td>[[1641340800, 42081062.39701], [1641254400, 38...</td>
+    </tr>
+    <tr>
+      <th>avg-usd-latest</th>
+      <td>310641.564868</td>
+      <td>32289.747252</td>
+    </tr>
+    <tr>
+      <th>avg-usd-daily</th>
+      <td>[[1641340800, 310641.56486792123], [1641254400...</td>
+      <td>[[1641340800, 32620.978602333333], [1641254400...</td>
+    </tr>
+    <tr>
+      <th>sum-usdprimary-latest</th>
+      <td>2709420.2789</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>sum-usdprimary-daily</th>
+      <td>[[1641340800, 2709420.2789], [1641254400, 2709...</td>
+      <td>[[1641340800, 0], [1641254400, 0], [1641168000...</td>
+    </tr>
+    <tr>
+      <th>sum-usdsecondary-latest</th>
+      <td>28044094.643024</td>
+      <td>41137137.998815</td>
+    </tr>
+    <tr>
+      <th>sum-usdsecondary-daily</th>
+      <td>[[1641340800, 28044094.6430242], [1641254400, ...</td>
+      <td>[[1641340800, 42081062.39701], [1641254400, 38...</td>
+    </tr>
+    <tr>
+      <th>sum-feeusd-latest</th>
+      <td>242808.561914</td>
+      <td>3092240.852342</td>
+    </tr>
+    <tr>
+      <th>sum-feeusd-daily</th>
+      <td>[[1641340800, 242808.56191426094], [1641254400...</td>
+      <td>[[1641340800, 3178364.757174794], [1641254400,...</td>
+    </tr>
+    <tr>
+      <th>unique-wallets-latest</th>
+      <td>125</td>
+      <td>1607</td>
+    </tr>
+    <tr>
+      <th>unique-wallets-daily</th>
+      <td>[[1641340800, 125], [1641254400, 127], [164116...</td>
+      <td>[[1641340800, 1623], [1641254400, 1550], [1641...</td>
+    </tr>
+    <tr>
+      <th>unique-buyer-latest</th>
+      <td>65</td>
+      <td>890</td>
+    </tr>
+    <tr>
+      <th>unique-buyer-daily</th>
+      <td>[[1641340800, 65], [1641254400, 67], [16411680...</td>
+      <td>[[1641340800, 902], [1641254400, 859], [164116...</td>
+    </tr>
+    <tr>
+      <th>unique-seller-latest</th>
+      <td>71</td>
+      <td>944</td>
+    </tr>
+    <tr>
+      <th>unique-seller-daily</th>
+      <td>[[1641340800, 71], [1641254400, 72], [16411680...</td>
+      <td>[[1641340800, 951], [1641254400, 911], [164116...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="get_collection_summary">
+<h3>get_collection_summary<a class="headerlink" href="#get_collection_summary" title="Permalink to this headline"></a></h3>
+<p>Retrieve quick collection summary</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collection_summary_df</span> <span class="o">=</span> <span class="n">nf</span><span class="o">.</span><span class="n">get_collection_summary</span><span class="p">(</span><span class="n">collections_in</span><span class="o">=</span><span class="n">collections</span><span class="p">)</span>
+<span class="n">collection_summary_df</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cryptopunks</th>
+      <th>doodles</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>name</th>
+      <td>cryptopunks</td>
+      <td>doodles</td>
+    </tr>
+    <tr>
+      <th>tickers</th>
+      <td>[{'project': 'cryptopunks'}]</td>
+      <td>[{'project': 'doodles'}]</td>
+    </tr>
+    <tr>
+      <th>categories</th>
+      <td>[Collectible]</td>
+      <td>[Collectible]</td>
+    </tr>
+    <tr>
+      <th>website</th>
+      <td>https://www.larvalabs.com/cryptopunks</td>
+      <td>https://doodles.app/</td>
+    </tr>
+    <tr>
+      <th>count</th>
+      <td>19953</td>
+      <td>26059</td>
+    </tr>
+    <tr>
+      <th>traders</th>
+      <td>5667</td>
+      <td>10823</td>
+    </tr>
+    <tr>
+      <th>usd</th>
+      <td>1884762762.14</td>
+      <td>187226510.81</td>
+    </tr>
+    <tr>
+      <th>average</th>
+      <td>94460.12</td>
+      <td>7184.72</td>
+    </tr>
+    <tr>
+      <th>currencies</th>
+      <td>[{'ticker': 'ETH', 'totalDecimalPrice': 651088...</td>
+      <td>[{'ticker': 'ETH', 'totalDecimalPrice': 46751....</td>
+    </tr>
+    <tr>
+      <th>daily</th>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="OpenSea%20API%20Tutorial.html" class="btn btn-neutral float-left" title="OpenSea Python API Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="NFT%20Price%20Floor%20API%20Tutorial.html" class="btn btn-neutral float-right" title="NFT Price Floor Python API Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Roberto Talamas.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
