@@ -19,7 +19,21 @@ class NonFungible(DataLoader):
         DataLoader.__init__(self, api_dict=None, taxonomy_dict=None)
 
     def get_collection_history(self, collections_in: Union[str, List], length:int=10) -> pd.DataFrame:
-        """get collection history, can do '' to get all collections"""
+        """get collection history
+
+        Parameters
+        ----------
+            collections_in: str, List
+                single collection name in or list of collection names,
+                use '' to get all collections
+            length: int
+                optional length of history to return, default is 30
+
+        Returns
+        -------
+            DataFrame
+                DataFrame with collection history
+        """
         params = {'length': length}
 
         collections = validate_input(collections_in)
@@ -34,7 +48,20 @@ class NonFungible(DataLoader):
         return collections_df
 
     def get_collection_stats(self, collections_in: Union[str, List], length: int=30) -> pd.DataFrame:
-        """get stats abt collection"""
+        """get stats about collection
+
+        Parameters
+        ----------
+            collections_in: str, List
+                single collection name in or list of collection names 
+            length: int
+                optional length of stats to return, default is 30
+
+        Returns
+        -------
+            DataFrame
+                DataFrame with collection statistics
+        """
         # TODO get 'global' to work
         params = {'length': length}
 
@@ -54,14 +81,28 @@ class NonFungible(DataLoader):
         return collections_df
 
     def get_collection_summary(self, collections_in: Union[str, List]) -> pd.DataFrame:
-        """Retrieve quick collection summary"""
-        collections = validate_input(collections_in)
+        """Retrieve quick collection summary
 
+        Parameters
+        ----------
+            collections_in: str, List
+                single collection name in or list of collection names 
+
+        Returns
+        -------
+            DataFrame
+                DataFrame with collection summary
+        """
+
+        collections = validate_input(collections_in)
         series_list=[]
         for collection in collections:
             endpoint_url = COLLECTION_SUMMARY_URL.substitute(collection=collection)
             response = self.get_response(endpoint_url)
-            tmp_series = pd.Series(response['data']['totals'][0])
+            response_dict = response['data']['totals'][0]
+            response_dict.update(response_dict['totals']['alltime']) #upack
+            response_dict.pop('totals')
+            tmp_series = pd.Series(response_dict)
 
             series_list.append(tmp_series)
         collections_df = pd.concat(series_list, keys=collections, axis=1)

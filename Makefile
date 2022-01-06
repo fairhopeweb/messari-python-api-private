@@ -27,10 +27,13 @@ test:
 	$(python_ver) unit_testing/polygonscan_tests.py
 	$(python_ver) unit_testing/snowtrace_tests.py
 	$(python_ver) unit_testing/solscan_tests.py
+	$(python_ver) unit_testing/upshot_tests.py
+	$(python_ver) unit_testing/nftpricefloor_tests.py
+	$(python_ver) unit_testing/nonfungible_tests.py
 
 # Make documentation
 docs:
-	cd docs/ && make html
+	sphinx-apidoc -f -o docs/source/ messari
 
 # Clean up after build
 clean:

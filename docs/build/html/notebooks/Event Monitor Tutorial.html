@@ -16,7 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -322,7 +322,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt a.copybtn {
+.prompt .copybtn {
     display: none;
 }
 
@@ -387,10 +387,36 @@ div.rendered_html tbody tr:hover {
 <section id="Monitor-Structure">
 <h2>Monitor Structure<a class="headerlink" href="#Monitor-Structure" title="Permalink to this headline"></a></h2>
 <p>Description here</p>
-<p>Event Monitor * start_monitor * stop_monitor * get_monitor_status * monitor</p>
-<p>Event Sync * start_sync * stop_sync * watch_sync * get_sync_status * sync</p>
-<p>Event Handler * start_event_handler * stop_event_handler * get_event_handler_status * event_handler * handle_event</p>
-<p>Helpers * get_events_df * get_events_list * get_queue_size * get_contract_events</p>
+<p>Event Monitor</p>
+<ul class="simple">
+<li><p>start_monitor</p></li>
+<li><p>stop_monitor</p></li>
+<li><p>get_monitor_status</p></li>
+<li><p>monitor</p></li>
+</ul>
+<p>Event Sync</p>
+<ul class="simple">
+<li><p>start_sync</p></li>
+<li><p>stop_sync</p></li>
+<li><p>watch_sync</p></li>
+<li><p>get_sync_status</p></li>
+<li><p>sync</p></li>
+</ul>
+<p>Event Handler</p>
+<ul class="simple">
+<li><p>start_event_handler</p></li>
+<li><p>stop_event_handler</p></li>
+<li><p>get_event_handler_status</p></li>
+<li><p>event_handler</p></li>
+<li><p>handle_event</p></li>
+</ul>
+<p>Helpers</p>
+<ul class="simple">
+<li><p>get_events_df</p></li>
+<li><p>get_events_list</p></li>
+<li><p>get_queue_size</p></li>
+<li><p>get_contract_events</p></li>
+</ul>
 </section>
 <section id="Setup">
 <h2>Setup<a class="headerlink" href="#Setup" title="Permalink to this headline"></a></h2>
@@ -399,11 +425,10 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>from messari.blockexplorers import Etherscan
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">messari.blockexplorers</span> <span class="kn">import</span> <span class="n">Etherscan</span>
 
-API_KEY = &#39;YOUR_API_KEY&#39;
-ES = Etherscan(api_key=API_KEY)
+<span class="n">API_KEY</span> <span class="o">=</span> <span class="s1">&#39;YOUR_API_KEY&#39;</span>
+<span class="n">ES</span> <span class="o">=</span> <span class="n">Etherscan</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">API_KEY</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -412,10 +437,9 @@ ES = Etherscan(api_key=API_KEY)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>from messari.eventmonitor import EventMonitor
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">messari.eventmonitor</span> <span class="kn">import</span> <span class="n">EventMonitor</span>
 
-rpc_url = &#39;YOUR_RPC_URL&#39;
+<span class="n">rpc_url</span> <span class="o">=</span> <span class="s1">&#39;YOUR_RPC_URL&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -425,8 +449,7 @@ rpc_url = &#39;YOUR_RPC_URL&#39;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>DAI = &#39;0x6B175474E89094C44Da98b954EedeAC495271d0F&#39;
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DAI</span> <span class="o">=</span> <span class="s1">&#39;0x6B175474E89094C44Da98b954EedeAC495271d0F&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -435,8 +458,7 @@ rpc_url = &#39;YOUR_RPC_URL&#39;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>dai_monitor = EventMonitor(DAI, ES, rpc_url)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dai_monitor</span> <span class="o">=</span> <span class="n">EventMonitor</span><span class="p">(</span><span class="n">DAI</span><span class="p">,</span> <span class="n">ES</span><span class="p">,</span> <span class="n">rpc_url</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -450,8 +472,7 @@ rpc_url = &#39;YOUR_RPC_URL&#39;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>dai_monitor.start_monitor()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dai_monitor</span><span class="o">.</span><span class="n">start_monitor</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -463,8 +484,7 @@ rpc_url = &#39;YOUR_RPC_URL&#39;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>dai_monitor.stop_monitor()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dai_monitor</span><span class="o">.</span><span class="n">stop_monitor</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -476,9 +496,8 @@ rpc_url = &#39;YOUR_RPC_URL&#39;
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>monitor_status = dai_monitor.get_monitor_status()
-monitor_status
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">monitor_status</span> <span class="o">=</span> <span class="n">dai_monitor</span><span class="o">.</span><span class="n">get_monitor_status</span><span class="p">()</span>
+<span class="n">monitor_status</span>
 </pre></div>
 </div>
 </div>
@@ -500,8 +519,7 @@ monitor_status
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># dai_monitor.monitor()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># dai_monitor.monitor()</span>
 </pre></div>
 </div>
 </div>
@@ -517,8 +535,7 @@ monitor_status
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>dai_monitor.start_sync()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dai_monitor</span><span class="o">.</span><span class="n">start_sync</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -530,8 +547,7 @@ monitor_status
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>dai_monitor.stop_sync()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dai_monitor</span><span class="o">.</span><span class="n">stop_sync</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -544,8 +560,7 @@ monitor_status
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>dai_monitor.watch_sync()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dai_monitor</span><span class="o">.</span><span class="n">watch_sync</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -672,9 +687,8 @@ Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>sync_status = dai_monitor.get_sync_status()
-sync_status
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sync_status</span> <span class="o">=</span> <span class="n">dai_monitor</span><span class="o">.</span><span class="n">get_sync_status</span><span class="p">()</span>
+<span class="n">sync_status</span>
 </pre></div>
 </div>
 </div>
@@ -696,8 +710,7 @@ sync_status
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># dai_monitor.sync(0, 100)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># dai_monitor.sync(0, 100)</span>
 </pre></div>
 </div>
 </div>
@@ -713,8 +726,7 @@ sync_status
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>dai_monitor.start_event_handler()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dai_monitor</span><span class="o">.</span><span class="n">start_event_handler</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -727,8 +739,7 @@ sync_status
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>dai_monitor.stop_event_handler()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dai_monitor</span><span class="o">.</span><span class="n">stop_event_handler</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -746,9 +757,8 @@ sync_status
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>event_handler_status = dai_monitor.get_event_handler_status()
-event_handler_status
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event_handler_status</span> <span class="o">=</span> <span class="n">dai_monitor</span><span class="o">.</span><span class="n">get_event_handler_status</span><span class="p">()</span>
+<span class="n">event_handler_status</span>
 </pre></div>
 </div>
 </div>
@@ -770,8 +780,7 @@ event_handler_status
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># dai_monitor.event_handler()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># dai_monitor.event_handler()</span>
 </pre></div>
 </div>
 </div>
@@ -784,8 +793,7 @@ event_handler_status
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># dai_monitor.handle_event(event)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># dai_monitor.handle_event(event)</span>
 </pre></div>
 </div>
 </div>
@@ -800,9 +808,8 @@ event_handler_status
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>events_df = dai_monitor.get_events_df()
-events_df
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">events_df</span> <span class="o">=</span> <span class="n">dai_monitor</span><span class="o">.</span><span class="n">get_events_df</span><span class="p">()</span>
+<span class="n">events_df</span>
 </pre></div>
 </div>
 </div>
@@ -998,9 +1005,8 @@ events_df
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>events_list = dai_monitor.get_events_list()
-events_list[:2]
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">events_list</span> <span class="o">=</span> <span class="n">dai_monitor</span><span class="o">.</span><span class="n">get_events_list</span><span class="p">()</span>
+<span class="n">events_list</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1040,9 +1046,8 @@ events_list[:2]
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>event_queue_size = dai_monitor.get_queue_size()
-event_queue_size
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event_queue_size</span> <span class="o">=</span> <span class="n">dai_monitor</span><span class="o">.</span><span class="n">get_queue_size</span><span class="p">()</span>
+<span class="n">event_queue_size</span>
 </pre></div>
 </div>
 </div>
@@ -1063,9 +1068,8 @@ event_queue_size
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>contract_events = dai_monitor.get_contract_events()
-contract_events
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">contract_events</span> <span class="o">=</span> <span class="n">dai_monitor</span><span class="o">.</span><span class="n">get_contract_events</span><span class="p">()</span>
+<span class="n">contract_events</span>
 </pre></div>
 </div>
 </div>

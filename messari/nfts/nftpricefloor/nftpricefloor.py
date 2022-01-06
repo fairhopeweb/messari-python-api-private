@@ -10,7 +10,6 @@ NFTS_URL = 'https://api.nftpricefloor.com/nfts'
 COLLECTION_URL = Template('https://api.nftpricefloor.com/nft/$collection/chart/pricefloor')
 COLLECTION_PARAMS = {'interval':'all'}
 
-INFO_URL = Template('https://nftpricefloor.com/_next/data/E3AgwbZxJIVfqtDRJZtyC/$collection.json')
 
 class NFTPriceFloor(DataLoader):
     """This class is a wrapper around the NFTPriceFloor API
@@ -19,10 +18,29 @@ class NFTPriceFloor(DataLoader):
         DataLoader.__init__(self, api_dict=None, taxonomy_dict=None)
 
     def get_nfts(self) -> pd.DataFrame:
+        """Retrieve basic info for all nfts
+
+        Returns
+        -------
+            DataFrame
+                DataFrame with info on all nfts
+        """
         response = self.get_response(NFTS_URL)
         return pd.DataFrame(response)
 
     def get_floor(self, collection_in: Union[str, List]) -> pd.DataFrame:
+        """Retrive floor data for collection(s)
+
+        Parameters
+        ----------
+            collections_in: str, List
+                single collection name in or list of collection names 
+
+        Returns
+        -------
+            DataFrame
+                DataFrame with timeseries price floor
+        """
         collections = validate_input(collection_in)
         df_list = []
         for collection in collections:
@@ -33,12 +51,3 @@ class NFTPriceFloor(DataLoader):
             df_list.append(tmp_df)
         floor_df = pd.concat(df_list, keys=collections, axis=1)
         return floor_df
-
-    def get_info(self, collection_in: Union[str, List]) -> pd.DataFrame:
-        collections = validate_input(collection_in)
-        for collection in collections:
-            endpoint_url = INFO_URL.substitute(collection=collection)
-            params = {'slug': collection}
-            response = self.get_response(endpoint_url, params=params)
-            print(response)
-        return response

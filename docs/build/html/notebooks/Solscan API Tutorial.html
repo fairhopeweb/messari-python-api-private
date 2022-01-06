@@ -16,12 +16,12 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Event Monitor Tutorial" href="Event%20Monitor%20Tutorial.html" />
+    <link rel="next" title="Upshot Python API Tutorial" href="Upshot%20API%20Tutorial.html" />
     <link rel="prev" title="EVM Blockexplorer API Tutorial" href="Etherscan%20API%20Tutorial.html" /> 
 </head>
 
@@ -80,6 +80,10 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="Upshot%20API%20Tutorial.html">Upshot Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OpenSea%20API%20Tutorial.html">OpenSea Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NonFungible%20API%20Tutorial.html">NonFungible Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NFT%20Price%20Floor%20API%20Tutorial.html">NFT Price Floor Python API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Event%20Monitor%20Tutorial.html">Event Monitor Tutorial</a></li>
 </ul>
 
@@ -317,7 +321,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt a.copybtn {
+.prompt .copybtn {
     display: none;
 }
 
@@ -384,21 +388,49 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>from messari.blockexplorers import Solscan
-ss = Solscan()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">messari.blockexplorers</span> <span class="kn">import</span> <span class="n">Solscan</span>
+<span class="n">ss</span> <span class="o">=</span> <span class="n">Solscan</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <section id="API-Structure">
 <h2>API Structure<a class="headerlink" href="#API-Structure" title="Permalink to this headline"></a></h2>
 <p>The Solscan API Python client contains a number of functions that wrap some of Solscan’s API endpoints. These include:</p>
-<p>Blocks * get_last_blocks * get_block_last_transactions * get_block</p>
-<p>Transactions * get_last_transactions * get_transaction</p>
-<p>Accounts * get_account_tokens * get_account_transactions * get_account_stake * get_account_spl_transactions * get_account_sol_transactions * get_account_export_transactions * get_account</p>
-<p>Tokens * get_token_holders * get_token_meta * get_token_list</p>
-<p>Markets * get_market_info</p>
-<p>Chains * get_chain_info</p>
+<p>Blocks</p>
+<ul class="simple">
+<li><p>get_last_blocks</p></li>
+<li><p>get_block_last_transactions</p></li>
+<li><p>get_block</p></li>
+</ul>
+<p>Transactions</p>
+<ul class="simple">
+<li><p>get_last_transactions</p></li>
+<li><p>get_transaction</p></li>
+</ul>
+<p>Accounts</p>
+<ul class="simple">
+<li><p>get_account_tokens</p></li>
+<li><p>get_account_transactions</p></li>
+<li><p>get_account_stake</p></li>
+<li><p>get_account_spl_transactions</p></li>
+<li><p>get_account_sol_transactions</p></li>
+<li><p>get_account_export_transactions</p></li>
+<li><p>get_account</p></li>
+</ul>
+<p>Tokens</p>
+<ul class="simple">
+<li><p>get_token_holders</p></li>
+<li><p>get_token_meta</p></li>
+<li><p>get_token_list</p></li>
+</ul>
+<p>Markets</p>
+<ul class="simple">
+<li><p>get_market_info</p></li>
+</ul>
+<p>Chains</p>
+<ul class="simple">
+<li><p>get_chain_info</p></li>
+</ul>
 <p>Below are a few examples to showcase the functionality and types of data each function generates.</p>
 </section>
 <section id="Blocks">
@@ -410,9 +442,8 @@ ss = Solscan()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>last_blocks = ss.get_last_blocks(num_blocks=10)
-last_blocks.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">last_blocks</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">get_last_blocks</span><span class="p">(</span><span class="n">num_blocks</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">last_blocks</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -533,10 +564,9 @@ last_blocks.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>blocks = [&#39;109452586&#39;, &#39;109452587&#39;]
-block_last_transactions = ss.get_block_last_transactions(blocks, num_transactions=7)
-block_last_transactions.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">blocks</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;109452586&#39;</span><span class="p">,</span> <span class="s1">&#39;109452587&#39;</span><span class="p">]</span>
+<span class="n">block_last_transactions</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">get_block_last_transactions</span><span class="p">(</span><span class="n">blocks</span><span class="p">,</span> <span class="n">num_transactions</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">block_last_transactions</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -733,10 +763,9 @@ block_last_transactions.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>blocks = [&#39;109452586&#39;, &#39;109452587&#39;]
-blocks_info = ss.get_block(blocks)
-blocks_info
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">blocks</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;109452586&#39;</span><span class="p">,</span> <span class="s1">&#39;109452587&#39;</span><span class="p">]</span>
+<span class="n">blocks_info</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">get_block</span><span class="p">(</span><span class="n">blocks</span><span class="p">)</span>
+<span class="n">blocks_info</span>
 </pre></div>
 </div>
 </div>
@@ -823,9 +852,8 @@ blocks_info
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>last_transactions = ss.get_last_transactions(num_transactions=20)
-last_transactions.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">last_transactions</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">get_last_transactions</span><span class="p">(</span><span class="n">num_transactions</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">last_transactions</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -959,10 +987,9 @@ last_transactions.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>transactions=[&#39;T4ipYTjKUqHQpfuA8ZM5E4iJag9kX9nGhjbY974oq2ucyYRL6eWhqTjtmk3cqfqTSu8Qdce33vzKQd7bWEX3H21&#39;, &#39;5hJhu4RYQLZF3zBwTUzu6vbvt6kX71uoFTTdx6NurkESEeQsjTJNut6FzSjgBqGe8j9V4dDo2VFssbRGiwbachom&#39;]
-transactions_info = ss.get_transaction(transactions)
-transactions_info
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transactions</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;T4ipYTjKUqHQpfuA8ZM5E4iJag9kX9nGhjbY974oq2ucyYRL6eWhqTjtmk3cqfqTSu8Qdce33vzKQd7bWEX3H21&#39;</span><span class="p">,</span> <span class="s1">&#39;5hJhu4RYQLZF3zBwTUzu6vbvt6kX71uoFTTdx6NurkESEeQsjTJNut6FzSjgBqGe8j9V4dDo2VFssbRGiwbachom&#39;</span><span class="p">]</span>
+<span class="n">transactions_info</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">get_transaction</span><span class="p">(</span><span class="n">transactions</span><span class="p">)</span>
+<span class="n">transactions_info</span>
 </pre></div>
 </div>
 </div>
@@ -1104,10 +1131,9 @@ transactions_info
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>accounts = [&#39;Fhhq7AtgMsWge7oBMMWkqaF4boMLJ6Utcmc2X1oEsqJQ&#39;, &#39;7MwQuB8vsCosYiqY4NCBDiECgsv5aFDYP3Zd5zBT6oaS&#39;]
-account_tokens = ss.get_account_tokens(accounts)
-account_tokens.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accounts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Fhhq7AtgMsWge7oBMMWkqaF4boMLJ6Utcmc2X1oEsqJQ&#39;</span><span class="p">,</span> <span class="s1">&#39;7MwQuB8vsCosYiqY4NCBDiECgsv5aFDYP3Zd5zBT6oaS&#39;</span><span class="p">]</span>
+<span class="n">account_tokens</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">get_account_tokens</span><span class="p">(</span><span class="n">accounts</span><span class="p">)</span>
+<span class="n">account_tokens</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1277,10 +1303,9 @@ account_tokens.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>accounts = [&#39;5FCSMognWSsNGjmYK9D387Zz79catdwEakdNtGf2UAJS&#39;]
-account_transactions = ss.get_account_transactions(accounts)
-account_transactions
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accounts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;5FCSMognWSsNGjmYK9D387Zz79catdwEakdNtGf2UAJS&#39;</span><span class="p">]</span>
+<span class="n">account_transactions</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">get_account_transactions</span><span class="p">(</span><span class="n">accounts</span><span class="p">)</span>
+<span class="n">account_transactions</span>
 </pre></div>
 </div>
 </div>
@@ -1455,10 +1480,9 @@ account_transactions
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>accounts = [&#39;6qdpJdp6L8cCSEECt4vSUbDtRH6oe7MrMY3s1iBSJHie&#39;]
-account_stake = ss.get_account_stake(accounts)
-account_stake
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accounts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;6qdpJdp6L8cCSEECt4vSUbDtRH6oe7MrMY3s1iBSJHie&#39;</span><span class="p">]</span>
+<span class="n">account_stake</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">get_account_stake</span><span class="p">(</span><span class="n">accounts</span><span class="p">)</span>
+<span class="n">account_stake</span>
 </pre></div>
 </div>
 </div>
@@ -1536,10 +1560,9 @@ account_stake
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>accounts = [&#39;Fhhq7AtgMsWge7oBMMWkqaF4boMLJ6Utcmc2X1oEsqJQ&#39;, &#39;7MwQuB8vsCosYiqY4NCBDiECgsv5aFDYP3Zd5zBT6oaS&#39;]
-account_spl_transactions = ss.get_account_spl_transactions(accounts)
-account_spl_transactions.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accounts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Fhhq7AtgMsWge7oBMMWkqaF4boMLJ6Utcmc2X1oEsqJQ&#39;</span><span class="p">,</span> <span class="s1">&#39;7MwQuB8vsCosYiqY4NCBDiECgsv5aFDYP3Zd5zBT6oaS&#39;</span><span class="p">]</span>
+<span class="n">account_spl_transactions</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">get_account_spl_transactions</span><span class="p">(</span><span class="n">accounts</span><span class="p">)</span>
+<span class="n">account_spl_transactions</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1736,10 +1759,9 @@ account_spl_transactions.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>accounts = [&#39;Fhhq7AtgMsWge7oBMMWkqaF4boMLJ6Utcmc2X1oEsqJQ&#39;, &#39;7MwQuB8vsCosYiqY4NCBDiECgsv5aFDYP3Zd5zBT6oaS&#39;]
-account_sol_transactions = ss.get_account_sol_transactions(accounts)
-account_sol_transactions.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accounts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Fhhq7AtgMsWge7oBMMWkqaF4boMLJ6Utcmc2X1oEsqJQ&#39;</span><span class="p">,</span> <span class="s1">&#39;7MwQuB8vsCosYiqY4NCBDiECgsv5aFDYP3Zd5zBT6oaS&#39;</span><span class="p">]</span>
+<span class="n">account_sol_transactions</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">get_account_sol_transactions</span><span class="p">(</span><span class="n">accounts</span><span class="p">)</span>
+<span class="n">account_sol_transactions</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1936,12 +1958,11 @@ account_sol_transactions.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>accounts = [&#39;Fhhq7AtgMsWge7oBMMWkqaF4boMLJ6Utcmc2X1oEsqJQ&#39;, &#39;7MwQuB8vsCosYiqY4NCBDiECgsv5aFDYP3Zd5zBT6oaS&#39;]
-account_export_transactions = ss.get_account_export_transactions(accounts, type_in=&#39;all&#39;,from_time=0,to_time=1634918610)
-# Trust me this is a CSV style string but if you print the whole thing, your screen will get full
-# Recommend: write string to a file and open with an Excel like program.
-account_export_transactions[0][:100]
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accounts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Fhhq7AtgMsWge7oBMMWkqaF4boMLJ6Utcmc2X1oEsqJQ&#39;</span><span class="p">,</span> <span class="s1">&#39;7MwQuB8vsCosYiqY4NCBDiECgsv5aFDYP3Zd5zBT6oaS&#39;</span><span class="p">]</span>
+<span class="n">account_export_transactions</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">get_account_export_transactions</span><span class="p">(</span><span class="n">accounts</span><span class="p">,</span> <span class="n">type_in</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span><span class="n">from_time</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">to_time</span><span class="o">=</span><span class="mi">1634918610</span><span class="p">)</span>
+<span class="c1"># Trust me this is a CSV style string but if you print the whole thing, your screen will get full</span>
+<span class="c1"># Recommend: write string to a file and open with an Excel like program.</span>
+<span class="n">account_export_transactions</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">100</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1962,10 +1983,9 @@ account_export_transactions[0][:100]
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>accounts = [&#39;Fhhq7AtgMsWge7oBMMWkqaF4boMLJ6Utcmc2X1oEsqJQ&#39;, &#39;hz4sZFVC1MccN3WaSZ8YjHcZLewLw2JL7t1RfaRa4Pe&#39;]
-accounts = ss.get_account(accounts)
-accounts
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accounts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Fhhq7AtgMsWge7oBMMWkqaF4boMLJ6Utcmc2X1oEsqJQ&#39;</span><span class="p">,</span> <span class="s1">&#39;hz4sZFVC1MccN3WaSZ8YjHcZLewLw2JL7t1RfaRa4Pe&#39;</span><span class="p">]</span>
+<span class="n">accounts</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">get_account</span><span class="p">(</span><span class="n">accounts</span><span class="p">)</span>
+<span class="n">accounts</span>
 </pre></div>
 </div>
 </div>
@@ -2037,10 +2057,9 @@ accounts
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>tokens = [&#39;Saber2gLauYim4Mvftnrasomsv6NvAuncvMEZwcLpD1&#39;]
-token_holders = ss.get_token_holders(tokens, limit=50)
-token_holders.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Saber2gLauYim4Mvftnrasomsv6NvAuncvMEZwcLpD1&#39;</span><span class="p">]</span>
+<span class="n">token_holders</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">get_token_holders</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">token_holders</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -2142,10 +2161,9 @@ token_holders.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>tokens = [&#39;Saber2gLauYim4Mvftnrasomsv6NvAuncvMEZwcLpD1&#39;]
-token_meta = ss.get_token_meta(tokens)
-token_meta
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Saber2gLauYim4Mvftnrasomsv6NvAuncvMEZwcLpD1&#39;</span><span class="p">]</span>
+<span class="n">token_meta</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">get_token_meta</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+<span class="n">token_meta</span>
 </pre></div>
 </div>
 </div>
@@ -2224,9 +2242,8 @@ token_meta
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>token_list = ss.get_token_list(limit=50)
-token_list.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">token_list</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">get_token_list</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">token_list</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -2385,10 +2402,9 @@ token_list.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>tokens = [&#39;Saber2gLauYim4Mvftnrasomsv6NvAuncvMEZwcLpD1&#39;, &#39;2FPyTwcZLUg1MDrwsyoP4D6s1tM7hAkHYRjkNb5w6Pxk&#39;]
-market_info = ss.get_market_info(tokens)
-market_info
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Saber2gLauYim4Mvftnrasomsv6NvAuncvMEZwcLpD1&#39;</span><span class="p">,</span> <span class="s1">&#39;2FPyTwcZLUg1MDrwsyoP4D6s1tM7hAkHYRjkNb5w6Pxk&#39;</span><span class="p">]</span>
+<span class="n">market_info</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">get_market_info</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+<span class="n">market_info</span>
 </pre></div>
 </div>
 </div>
@@ -2442,9 +2458,8 @@ market_info
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>chain_info = ss.get_chain_info()
-chain_info
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain_info</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">get_chain_info</span><span class="p">()</span>
+<span class="n">chain_info</span>
 </pre></div>
 </div>
 </div>
@@ -2499,8 +2514,7 @@ chain_info
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -2513,7 +2527,7 @@ chain_info
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="Etherscan%20API%20Tutorial.html" class="btn btn-neutral float-left" title="EVM Blockexplorer API Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Event%20Monitor%20Tutorial.html" class="btn btn-neutral float-right" title="Event Monitor Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Upshot%20API%20Tutorial.html" class="btn btn-neutral float-right" title="Upshot Python API Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

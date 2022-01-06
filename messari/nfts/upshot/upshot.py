@@ -4,6 +4,7 @@ from messari.dataloader import DataLoader
 from messari.utils import validate_input, validate_int
 from typing import Union, List
 
+from .helpers import format_df
 import pandas as pd
 
 # assets
@@ -28,7 +29,24 @@ class Upshot(DataLoader):
                   asset_id: Union[int, List]=None,
                   limit: int=None,
                   offset: int=0) -> pd.DataFrame:
-        """retrieve an asset"""
+        """retrieve upshot asset data
+
+        Parameters
+        ----------
+            contract_address: str, List
+                single address in or list of addresses in 
+            asset_id: int, List
+                single asset id in or list of asset ids in
+            limit: int
+                if no asset_id is given, set number of assets to get from contracts
+            offset: int
+                for pagination
+
+        Returns
+        -------
+            DataFrame
+                DataFrame containing information about asset(s)
+        """
         # set offset & limit
         parameters = {}
         if limit:
@@ -71,10 +89,27 @@ class Upshot(DataLoader):
                          event_type=None) -> pd.DataFrame:
         """retrieve the event history for a given asset
 
-    PRIMARY or SECONDARY -- optionally filter the events based on the market in which it occurred
+        Parameters
+        ----------
+            contract_address: str, List
+                single address in or list of addresses in 
+            asset_id: int, List
+                single asset id in or list of asset ids in
+            market_type: str
+                filter the events based on the market in which it occurred
+                    - 'PRIMARY'
+                    - 'SECONDARY'
+            event_type: str
+                Filter events by the event type:
+                    - 'BID'
+                    - 'ASK'
+                    - 'SALE'
+                    - 'TRANSFER'
 
-string
-Filter events by the event type: BID, ASK, SALE, or TRANSFER
+        Returns
+        -------
+            DataFrame
+                DataFrame containing events for given asset(s)
         """
         parameters = {}
         if market_type:
@@ -109,8 +144,30 @@ Filter events by the event type: BID, ASK, SALE, or TRANSFER
                     to_time: int=None,
                     confidence: str=None,
                     source: str='UPSHOT') -> pd.DataFrame:
-        """Returns all the price information for a specified asset (or assets)
-        based on the provided filter."""
+        """Returns all the price history for given asset(s)
+        Parameters
+        ----------
+            contract_address: str, List
+                single address in or list of addresses in 
+            asset_id: int, List
+                single asset id in or list of asset ids in
+            from_time: int
+                unix time for starting time
+            to_time: int
+                unix time for ending time
+            confidence: str
+                Only return pricings above the provided confidence level.
+                0.1 is the minimum and 1 is the highest, with a default level of 0.1
+            source: str
+                A pricing can be one of the following types: 
+                    - MARKET: open-market transactions (always a confidence level of 1)
+                    - UPSHOT: sourced from Upshot's proprietary machine learning models
+
+        Returns
+        -------
+            DataFrame
+                timeseries DataFrame with price history
+        """
 
         parameters = {}
         if from_time:
@@ -130,7 +187,7 @@ Filter events by the event type: BID, ASK, SALE, or TRANSFER
             for asset in assets:
                 parameters['assetId'] = f'{contract}/{asset}'
                 response = self.get_response(PRICING_URL, params=parameters)['data']
-                tmp_df = pd.DataFrame(response['pricings'])
+                tmp_df = format_df(pd.DataFrame(response['pricings']))
                 df_list.append(tmp_df)
 
             assets_df = pd.concat(df_list, keys=assets, axis=1)
@@ -144,10 +201,33 @@ Filter events by the event type: BID, ASK, SALE, or TRANSFER
     def get_pricing_current(self,
                             contract_address: Union[str, List],
                             asset_id: Union[int, List],
+                            confidence: str=None,
                             source: str='UPSHOT') -> pd.DataFrame:
-        """Returns an asset's most recent price information."""
+        """Returns an asset's most recent price information.
+
+        Parameters
+        ----------
+            contract_address: str, List
+                single address in or list of addresses in 
+            asset_id: int, List
+                single asset id in or list of asset ids in
+            confidence: str
+                Only return pricings above the provided confidence level.
+                0.1 is the minimum and 1 is the highest, with a default level of 0.1
+            source: str
+                A pricing can be one of the following types: 
+                    - MARKET: open-market transactions (always a confidence level of 1)
+                    - UPSHOT: sourced from Upshot's proprietary machine learning models
+
+        Returns
+        -------
+            DataFrame
+                DataFrame containing recent price information
+        """
         parameters = {}
         parameters['source'] = source
+        if confidence:
+            parameters['confidence'] = confidence
 
         contracts = validate_input(contract_address)
         assets = validate_int(asset_id)
@@ -158,7 +238,7 @@ Filter events by the event type: BID, ASK, SALE, or TRANSFER
             for asset in assets:
                 parameters['assetId'] = f'{contract}/{asset}'
                 response = self.get_response(PRICING_CURRENT_URL, params=parameters)['data']
-                tmp_df = pd.DataFrame(response['pricings'])
+                tmp_df = format_df(pd.DataFrame(response['pricings']))
                 df_list.append(tmp_df)
 
             assets_df = pd.concat(df_list, keys=assets, axis=1)

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>messari.eventmonitor package &mdash; Messari  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Messari
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Messari%20API%20Tutorial.html">Messari Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/DeFiLlama%20API%20Tutorial.html">DeFi Llama Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/TokenTerminal%20API%20Tutorial.html">Token Terminal Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/DeepDAO%20API%20Tutorial.html">Deep DAO Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Etherscan%20API%20Tutorial.html">EVM Blockexplorer API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Solscan%20API%20Tutorial.html">Solscan API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Upshot%20API%20Tutorial.html">Upshot Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/OpenSea%20API%20Tutorial.html">OpenSea Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/NonFungible%20API%20Tutorial.html">NonFungible Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/NFT%20Price%20Floor%20API%20Tutorial.html">NFT Price Floor Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Event%20Monitor%20Tutorial.html">Event Monitor Tutorial</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Messari</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>messari.eventmonitor package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/messari.eventmonitor.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="messari-eventmonitor-package">
+<h1>messari.eventmonitor package<a class="headerlink" href="#messari-eventmonitor-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-messari.eventmonitor.eventmonitor">
+<span id="messari-eventmonitor-eventmonitor-module"></span><h2>messari.eventmonitor.eventmonitor module<a class="headerlink" href="#module-messari.eventmonitor.eventmonitor" title="Permalink to this headline"></a></h2>
+<p>This module is meant to contain the EventMonitor class</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="messari.eventmonitor.eventmonitor.EventMonitor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">messari.eventmonitor.eventmonitor.</span></span><span class="sig-name descname"><span class="pre">EventMonitor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contracts_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">explorer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="messari.blockexplorers.html#messari.blockexplorers.scanner.Scanner" title="messari.blockexplorers.scanner.Scanner"><span class="pre">messari.blockexplorers.scanner.Scanner</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rpc_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#messari.eventmonitor.eventmonitor.EventMonitor" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to monitor contract events</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.eventmonitor.eventmonitor.EventMonitor.event_handler" title="messari.eventmonitor.eventmonitor.EventMonitor.event_handler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">event_handler</span></code></a>()</p></td>
+<td><p>Grab events from queue and pass to handler</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.eventmonitor.eventmonitor.EventMonitor.get_contract_events" title="messari.eventmonitor.eventmonitor.EventMonitor.get_contract_events"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_contract_events</span></code></a>()</p></td>
+<td><p>Return size of event queue</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.eventmonitor.eventmonitor.EventMonitor.get_event_handler_status" title="messari.eventmonitor.eventmonitor.EventMonitor.get_event_handler_status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_event_handler_status</span></code></a>()</p></td>
+<td><p>Return status of event handler thread</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.eventmonitor.eventmonitor.EventMonitor.get_events_df" title="messari.eventmonitor.eventmonitor.EventMonitor.get_events_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_events_df</span></code></a>()</p></td>
+<td><p>Return all events as a DataFrame</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.eventmonitor.eventmonitor.EventMonitor.get_events_list" title="messari.eventmonitor.eventmonitor.EventMonitor.get_events_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_events_list</span></code></a>()</p></td>
+<td><p>Return all events as a List</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.eventmonitor.eventmonitor.EventMonitor.get_monitor_status" title="messari.eventmonitor.eventmonitor.EventMonitor.get_monitor_status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_monitor_status</span></code></a>()</p></td>
+<td><p>Return status of event monitor thread</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.eventmonitor.eventmonitor.EventMonitor.get_queue_size" title="messari.eventmonitor.eventmonitor.EventMonitor.get_queue_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_queue_size</span></code></a>()</p></td>
+<td><p>Return size of event queue</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.eventmonitor.eventmonitor.EventMonitor.get_sync_status" title="messari.eventmonitor.eventmonitor.EventMonitor.get_sync_status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_sync_status</span></code></a>()</p></td>
+<td><p>Return status of sync thread</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.eventmonitor.eventmonitor.EventMonitor.handle_event" title="messari.eventmonitor.eventmonitor.EventMonitor.handle_event"><code class="xref py py-obj docutils literal notranslate"><span class="pre">handle_event</span></code></a>(event)</p></td>
+<td><p>Process event when it happens</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.eventmonitor.eventmonitor.EventMonitor.monitor" title="messari.eventmonitor.eventmonitor.EventMonitor.monitor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">monitor</span></code></a>()</p></td>
+<td><p>Monitor for events &amp; add to queue</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.eventmonitor.eventmonitor.EventMonitor.start_event_handler" title="messari.eventmonitor.eventmonitor.EventMonitor.start_event_handler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_event_handler</span></code></a>()</p></td>
+<td><p>Start handler thread, do nothing if already started</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.eventmonitor.eventmonitor.EventMonitor.start_monitor" title="messari.eventmonitor.eventmonitor.EventMonitor.start_monitor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_monitor</span></code></a>()</p></td>
+<td><p>Start monitor thread, do nothing if already started</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.eventmonitor.eventmonitor.EventMonitor.start_sync" title="messari.eventmonitor.eventmonitor.EventMonitor.start_sync"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start_sync</span></code></a>([start, end])</p></td>
+<td><p>Start sync thread, do nothing if already started</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.eventmonitor.eventmonitor.EventMonitor.stop_event_handler" title="messari.eventmonitor.eventmonitor.EventMonitor.stop_event_handler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stop_event_handler</span></code></a>()</p></td>
+<td><p>Send flag to handler to end loop &amp; thread</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.eventmonitor.eventmonitor.EventMonitor.stop_monitor" title="messari.eventmonitor.eventmonitor.EventMonitor.stop_monitor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stop_monitor</span></code></a>()</p></td>
+<td><p>Send flag to monitor to end loop &amp; thread</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.eventmonitor.eventmonitor.EventMonitor.stop_sync" title="messari.eventmonitor.eventmonitor.EventMonitor.stop_sync"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stop_sync</span></code></a>()</p></td>
+<td><p>Send flag to monitor to end loop &amp; thread</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.eventmonitor.eventmonitor.EventMonitor.watch_sync" title="messari.eventmonitor.eventmonitor.EventMonitor.watch_sync"><code class="xref py py-obj docutils literal notranslate"><span class="pre">watch_sync</span></code></a>()</p></td>
+<td><p>Live watching &amp; printing of the sync status.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 55%" />
+<col style="width: 45%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>sync</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>sync_top</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.eventmonitor.eventmonitor.EventMonitor.event_handler">
+<span class="sig-name descname"><span class="pre">event_handler</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#messari.eventmonitor.eventmonitor.EventMonitor.event_handler" title="Permalink to this definition"></a></dt>
+<dd><p>Grab events from queue and pass to handler</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.eventmonitor.eventmonitor.EventMonitor.get_contract_events">
+<span class="sig-name descname"><span class="pre">get_contract_events</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.eventmonitor.eventmonitor.EventMonitor.get_contract_events" title="Permalink to this definition"></a></dt>
+<dd><p>Return size of event queue</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.eventmonitor.eventmonitor.EventMonitor.get_event_handler_status">
+<span class="sig-name descname"><span class="pre">get_event_handler_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#messari.eventmonitor.eventmonitor.EventMonitor.get_event_handler_status" title="Permalink to this definition"></a></dt>
+<dd><p>Return status of event handler thread</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.eventmonitor.eventmonitor.EventMonitor.get_events_df">
+<span class="sig-name descname"><span class="pre">get_events_df</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.eventmonitor.eventmonitor.EventMonitor.get_events_df" title="Permalink to this definition"></a></dt>
+<dd><p>Return all events as a DataFrame</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.eventmonitor.eventmonitor.EventMonitor.get_events_list">
+<span class="sig-name descname"><span class="pre">get_events_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#messari.eventmonitor.eventmonitor.EventMonitor.get_events_list" title="Permalink to this definition"></a></dt>
+<dd><p>Return all events as a List</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.eventmonitor.eventmonitor.EventMonitor.get_monitor_status">
+<span class="sig-name descname"><span class="pre">get_monitor_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#messari.eventmonitor.eventmonitor.EventMonitor.get_monitor_status" title="Permalink to this definition"></a></dt>
+<dd><p>Return status of event monitor thread</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.eventmonitor.eventmonitor.EventMonitor.get_queue_size">
+<span class="sig-name descname"><span class="pre">get_queue_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#messari.eventmonitor.eventmonitor.EventMonitor.get_queue_size" title="Permalink to this definition"></a></dt>
+<dd><p>Return size of event queue</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.eventmonitor.eventmonitor.EventMonitor.get_sync_status">
+<span class="sig-name descname"><span class="pre">get_sync_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#messari.eventmonitor.eventmonitor.EventMonitor.get_sync_status" title="Permalink to this definition"></a></dt>
+<dd><p>Return status of sync thread</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.eventmonitor.eventmonitor.EventMonitor.handle_event">
+<span class="sig-name descname"><span class="pre">handle_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#messari.eventmonitor.eventmonitor.EventMonitor.handle_event" title="Permalink to this definition"></a></dt>
+<dd><p>Process event when it happens</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.eventmonitor.eventmonitor.EventMonitor.monitor">
+<span class="sig-name descname"><span class="pre">monitor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#messari.eventmonitor.eventmonitor.EventMonitor.monitor" title="Permalink to this definition"></a></dt>
+<dd><p>Monitor for events &amp; add to queue</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.eventmonitor.eventmonitor.EventMonitor.start_event_handler">
+<span class="sig-name descname"><span class="pre">start_event_handler</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#messari.eventmonitor.eventmonitor.EventMonitor.start_event_handler" title="Permalink to this definition"></a></dt>
+<dd><p>Start handler thread, do nothing if already started</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.eventmonitor.eventmonitor.EventMonitor.start_monitor">
+<span class="sig-name descname"><span class="pre">start_monitor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#messari.eventmonitor.eventmonitor.EventMonitor.start_monitor" title="Permalink to this definition"></a></dt>
+<dd><p>Start monitor thread, do nothing if already started</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.eventmonitor.eventmonitor.EventMonitor.start_sync">
+<span class="sig-name descname"><span class="pre">start_sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'latest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#messari.eventmonitor.eventmonitor.EventMonitor.start_sync" title="Permalink to this definition"></a></dt>
+<dd><p>Start sync thread, do nothing if already started</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.eventmonitor.eventmonitor.EventMonitor.stop_event_handler">
+<span class="sig-name descname"><span class="pre">stop_event_handler</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#messari.eventmonitor.eventmonitor.EventMonitor.stop_event_handler" title="Permalink to this definition"></a></dt>
+<dd><p>Send flag to handler to end loop &amp; thread</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.eventmonitor.eventmonitor.EventMonitor.stop_monitor">
+<span class="sig-name descname"><span class="pre">stop_monitor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#messari.eventmonitor.eventmonitor.EventMonitor.stop_monitor" title="Permalink to this definition"></a></dt>
+<dd><p>Send flag to monitor to end loop &amp; thread</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.eventmonitor.eventmonitor.EventMonitor.stop_sync">
+<span class="sig-name descname"><span class="pre">stop_sync</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#messari.eventmonitor.eventmonitor.EventMonitor.stop_sync" title="Permalink to this definition"></a></dt>
+<dd><p>Send flag to monitor to end loop &amp; thread</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.eventmonitor.eventmonitor.EventMonitor.sync">
+<span class="sig-name descname"><span class="pre">sync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_block</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_block</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contract</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#messari.eventmonitor.eventmonitor.EventMonitor.sync" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.eventmonitor.eventmonitor.EventMonitor.sync_top">
+<span class="sig-name descname"><span class="pre">sync_top</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_block</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_block</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#messari.eventmonitor.eventmonitor.EventMonitor.sync_top" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.eventmonitor.eventmonitor.EventMonitor.watch_sync">
+<span class="sig-name descname"><span class="pre">watch_sync</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#messari.eventmonitor.eventmonitor.EventMonitor.watch_sync" title="Permalink to this definition"></a></dt>
+<dd><p>Live watching &amp; printing of the sync status. Be warned this is a blocking function</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-messari.eventmonitor.helpers">
+<span id="messari-eventmonitor-helpers-module"></span><h2>messari.eventmonitor.helpers module<a class="headerlink" href="#module-messari.eventmonitor.helpers" title="Permalink to this headline"></a></h2>
+<p>This module is dedicated to helpers for the EventMonitor class</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="messari.eventmonitor.helpers.build_contract_events">
+<span class="sig-prename descclassname"><span class="pre">messari.eventmonitor.helpers.</span></span><span class="sig-name descname"><span class="pre">build_contract_events</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contracts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">explorer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="messari.blockexplorers.html#messari.blockexplorers.scanner.Scanner" title="messari.blockexplorers.scanner.Scanner"><span class="pre">messari.blockexplorers.scanner.Scanner</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.eventmonitor.helpers.build_contract_events" title="Permalink to this definition"></a></dt>
+<dd><p>Return df about info of contract events</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="messari.eventmonitor.helpers.validate_checksum">
+<span class="sig-prename descclassname"><span class="pre">messari.eventmonitor.helpers.</span></span><span class="sig-name descname"><span class="pre">validate_checksum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hex_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#messari.eventmonitor.helpers.validate_checksum" title="Permalink to this definition"></a></dt>
+<dd><p>Checks if input is list of checksum addresses.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>asset_input</strong> – str, list
+Single asset slug string or list of asset slugs (i.e. BTC).</p>
+</dd>
+</dl>
+<p>:return List of asset slugs.
+:raises ValueError if input is neither a string or list</p>
+</dd></dl>
+
+</section>
+<section id="module-messari.eventmonitor">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-messari.eventmonitor" title="Permalink to this headline"></a></h2>
+<p>Module to handle initialization, imports, for EventMonitor class</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Roberto Talamas.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

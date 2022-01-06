@@ -16,7 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -297,7 +297,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt a.copybtn {
+.prompt .copybtn {
     display: none;
 }
 
@@ -365,9 +365,8 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>from messari.defillama import DeFiLlama
-dl = DeFiLlama()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">messari.defillama</span> <span class="kn">import</span> <span class="n">DeFiLlama</span>
+<span class="n">dl</span> <span class="o">=</span> <span class="n">DeFiLlama</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -390,10 +389,9 @@ dl = DeFiLlama()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>protocols = [&#39;aave&#39;]
-protocol_tvls = dl.get_protocol_tvl_timeseries(protocols, start_date=&quot;2021-10-01&quot;, end_date=&quot;2021-10-10&quot;)
-protocol_tvls[&#39;aave&#39;][&#39;all&#39;].head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">protocols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;aave&#39;</span><span class="p">]</span>
+<span class="n">protocol_tvls</span> <span class="o">=</span> <span class="n">dl</span><span class="o">.</span><span class="n">get_protocol_tvl_timeseries</span><span class="p">(</span><span class="n">protocols</span><span class="p">,</span> <span class="n">start_date</span><span class="o">=</span><span class="s2">&quot;2021-10-01&quot;</span><span class="p">,</span> <span class="n">end_date</span><span class="o">=</span><span class="s2">&quot;2021-10-10&quot;</span><span class="p">)</span>
+<span class="n">protocol_tvls</span><span class="p">[</span><span class="s1">&#39;aave&#39;</span><span class="p">][</span><span class="s1">&#39;all&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -574,8 +572,7 @@ protocol_tvls[&#39;aave&#39;][&#39;all&#39;].head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>protocol_tvls.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">protocol_tvls</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -766,8 +763,7 @@ protocol_tvls[&#39;aave&#39;][&#39;all&#39;].head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>list(protocol_tvls[&#39;aave&#39;].columns)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">protocol_tvls</span><span class="p">[</span><span class="s1">&#39;aave&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -963,9 +959,8 @@ protocol_tvls[&#39;aave&#39;][&#39;all&#39;].head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>global_tvl = dl.get_global_tvl_timeseries(start_date=&quot;2021-10-01&quot;, end_date=&quot;2021-10-10&quot;)
-global_tvl
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">global_tvl</span> <span class="o">=</span> <span class="n">dl</span><span class="o">.</span><span class="n">get_global_tvl_timeseries</span><span class="p">(</span><span class="n">start_date</span><span class="o">=</span><span class="s2">&quot;2021-10-01&quot;</span><span class="p">,</span> <span class="n">end_date</span><span class="o">=</span><span class="s2">&quot;2021-10-10&quot;</span><span class="p">)</span>
+<span class="n">global_tvl</span>
 </pre></div>
 </div>
 </div>
@@ -1048,10 +1043,9 @@ global_tvl
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>chains = [&quot;Avalanche&quot;, &quot;Harmony&quot;, &quot;Polygon&quot;]
-chain_tvls = dl.get_chain_tvl_timeseries(chains, start_date=&quot;2021-10-01&quot;, end_date=&quot;2021-10-10&quot;)
-chain_tvls
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chains</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Avalanche&quot;</span><span class="p">,</span> <span class="s2">&quot;Harmony&quot;</span><span class="p">,</span> <span class="s2">&quot;Polygon&quot;</span><span class="p">]</span>
+<span class="n">chain_tvls</span> <span class="o">=</span> <span class="n">dl</span><span class="o">.</span><span class="n">get_chain_tvl_timeseries</span><span class="p">(</span><span class="n">chains</span><span class="p">,</span> <span class="n">start_date</span><span class="o">=</span><span class="s2">&quot;2021-10-01&quot;</span><span class="p">,</span> <span class="n">end_date</span><span class="o">=</span><span class="s2">&quot;2021-10-10&quot;</span><span class="p">)</span>
+<span class="n">chain_tvls</span>
 </pre></div>
 </div>
 </div>
@@ -1156,10 +1150,9 @@ chain_tvls
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>protocols = [&quot;uniswap&quot;, &quot;curve&quot;, &quot;aave&quot;]
-current_tvl = dl.get_current_tvl(protocols)
-current_tvl
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">protocols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;uniswap&quot;</span><span class="p">,</span> <span class="s2">&quot;curve&quot;</span><span class="p">,</span> <span class="s2">&quot;aave&quot;</span><span class="p">]</span>
+<span class="n">current_tvl</span> <span class="o">=</span> <span class="n">dl</span><span class="o">.</span><span class="n">get_current_tvl</span><span class="p">(</span><span class="n">protocols</span><span class="p">)</span>
+<span class="n">current_tvl</span>
 </pre></div>
 </div>
 </div>
@@ -1214,9 +1207,8 @@ current_tvl
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>protocols = dl.get_protocols()
-protocols
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">protocols</span> <span class="o">=</span> <span class="n">dl</span><span class="o">.</span><span class="n">get_protocols</span><span class="p">()</span>
+<span class="n">protocols</span>
 </pre></div>
 </div>
 </div>
@@ -2044,8 +2036,7 @@ protocols
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>protocols.loc[&#39;name&#39;]
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">protocols</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -2073,8 +2064,7 @@ Name: name, Length: 1033, dtype: object
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>

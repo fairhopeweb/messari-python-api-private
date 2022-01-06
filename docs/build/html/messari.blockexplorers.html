@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>messari.blockexplorers package &mdash; Messari  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Messari
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Messari%20API%20Tutorial.html">Messari Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/DeFiLlama%20API%20Tutorial.html">DeFi Llama Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/TokenTerminal%20API%20Tutorial.html">Token Terminal Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/DeepDAO%20API%20Tutorial.html">Deep DAO Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Etherscan%20API%20Tutorial.html">EVM Blockexplorer API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Solscan%20API%20Tutorial.html">Solscan API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Upshot%20API%20Tutorial.html">Upshot Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/OpenSea%20API%20Tutorial.html">OpenSea Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/NonFungible%20API%20Tutorial.html">NonFungible Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/NFT%20Price%20Floor%20API%20Tutorial.html">NFT Price Floor Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Event%20Monitor%20Tutorial.html">Event Monitor Tutorial</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Messari</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>messari.blockexplorers package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/messari.blockexplorers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="messari-blockexplorers-package">
+<h1>messari.blockexplorers package<a class="headerlink" href="#messari-blockexplorers-package" title="Permalink to this headline"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="messari.blockexplorers.arbiscan.html">messari.blockexplorers.arbiscan package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.arbiscan.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.arbiscan.html#module-messari.blockexplorers.arbiscan.arbiscan">messari.blockexplorers.arbiscan.arbiscan module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.arbiscan.html#module-messari.blockexplorers.arbiscan">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="messari.blockexplorers.bscscan.html">messari.blockexplorers.bscscan package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.bscscan.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.bscscan.html#module-messari.blockexplorers.bscscan.bscscan">messari.blockexplorers.bscscan.bscscan module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.bscscan.html#module-messari.blockexplorers.bscscan">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="messari.blockexplorers.etherscan.html">messari.blockexplorers.etherscan package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.etherscan.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.etherscan.html#module-messari.blockexplorers.etherscan.etherscan">messari.blockexplorers.etherscan.etherscan module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.etherscan.html#module-messari.blockexplorers.etherscan">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="messari.blockexplorers.ftmscan.html">messari.blockexplorers.ftmscan package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.ftmscan.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.ftmscan.html#module-messari.blockexplorers.ftmscan.ftmscan">messari.blockexplorers.ftmscan.ftmscan module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.ftmscan.html#module-messari.blockexplorers.ftmscan">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="messari.blockexplorers.optimisticetherscan.html">messari.blockexplorers.optimisticetherscan package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.optimisticetherscan.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.optimisticetherscan.html#module-messari.blockexplorers.optimisticetherscan.optimisticetherscan">messari.blockexplorers.optimisticetherscan.optimisticetherscan module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.optimisticetherscan.html#module-messari.blockexplorers.optimisticetherscan">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="messari.blockexplorers.polygonscan.html">messari.blockexplorers.polygonscan package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.polygonscan.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.polygonscan.html#module-messari.blockexplorers.polygonscan.polygonscan">messari.blockexplorers.polygonscan.polygonscan module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.polygonscan.html#module-messari.blockexplorers.polygonscan">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="messari.blockexplorers.snowtrace.html">messari.blockexplorers.snowtrace package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.snowtrace.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.snowtrace.html#module-messari.blockexplorers.snowtrace.snowtrace">messari.blockexplorers.snowtrace.snowtrace module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.snowtrace.html#module-messari.blockexplorers.snowtrace">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="messari.blockexplorers.solscan.html">messari.blockexplorers.solscan package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.solscan.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.solscan.html#module-messari.blockexplorers.solscan.helpers">messari.blockexplorers.solscan.helpers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.solscan.html#module-messari.blockexplorers.solscan.solscan">messari.blockexplorers.solscan.solscan module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messari.blockexplorers.solscan.html#module-messari.blockexplorers.solscan">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-messari.blockexplorers.helpers">
+<span id="messari-blockexplorers-helpers-module"></span><h2>messari.blockexplorers.helpers module<a class="headerlink" href="#module-messari.blockexplorers.helpers" title="Permalink to this headline"></a></h2>
+<p>This module is dedicated to helpers for the Scanners class</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="messari.blockexplorers.helpers.int_to_hex">
+<span class="sig-prename descclassname"><span class="pre">messari.blockexplorers.helpers.</span></span><span class="sig-name descname"><span class="pre">int_to_hex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ints_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#messari.blockexplorers.helpers.int_to_hex" title="Permalink to this definition"></a></dt>
+<dd><p>Converts a lits of integers to a list of hex strings ‘0x’</p>
+</dd></dl>
+
+</section>
+<section id="module-messari.blockexplorers.scanner">
+<span id="messari-blockexplorers-scanner-module"></span><h2>messari.blockexplorers.scanner module<a class="headerlink" href="#module-messari.blockexplorers.scanner" title="Permalink to this headline"></a></h2>
+<p>This module is meant to contain the Scanner class</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">messari.blockexplorers.scanner.</span></span><span class="sig-name descname"><span class="pre">Scanner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="messari.html#messari.dataloader.DataLoader" title="messari.dataloader.DataLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">messari.dataloader.DataLoader</span></code></a></p>
+<p>This class is a wrapper around the blockexplorer APIs</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_account_blocks_mined" title="messari.blockexplorers.scanner.Scanner.get_account_blocks_mined"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_account_blocks_mined</span></code></a>(accounts_in[, ...])</p></td>
+<td><p>Returns the list of blocks mined by an address</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_account_internal_transactions" title="messari.blockexplorers.scanner.Scanner.get_account_internal_transactions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_account_internal_transactions</span></code></a>(accounts_in)</p></td>
+<td><p>Returns the list of internal transactions performed by an address</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_account_native_balance" title="messari.blockexplorers.scanner.Scanner.get_account_native_balance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_account_native_balance</span></code></a>(accounts_in)</p></td>
+<td><p>Returns the native token balance of a given address</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_account_nft_transfers" title="messari.blockexplorers.scanner.Scanner.get_account_nft_transfers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_account_nft_transfers</span></code></a>(accounts_in[, ...])</p></td>
+<td><p>Returns the list of ERC-721 ( NFT ) tokens transferred by an address, with optional filtering by token contract</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_account_normal_transactions" title="messari.blockexplorers.scanner.Scanner.get_account_normal_transactions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_account_normal_transactions</span></code></a>(accounts_in)</p></td>
+<td><p>Returns the list of transactions performed by an address, with optional pagination</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_account_token_transfers" title="messari.blockexplorers.scanner.Scanner.get_account_token_transfers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_account_token_transfers</span></code></a>(accounts_in[, ...])</p></td>
+<td><p>Returns the list of ERC-20 tokens transferred by an address, with optional filtering by token contract</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_block_by_timestamp" title="messari.blockexplorers.scanner.Scanner.get_block_by_timestamp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_block_by_timestamp</span></code></a>(times_in[, before])</p></td>
+<td><p>Returns the block number that was mined at a certain timestamp (in unix)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_block_countdown" title="messari.blockexplorers.scanner.Scanner.get_block_countdown"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_block_countdown</span></code></a>(blocks_in)</p></td>
+<td><p>Returns the estimated time remaining, in seconds, until a certain block is mined</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_block_range_internal_transactions" title="messari.blockexplorers.scanner.Scanner.get_block_range_internal_transactions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_block_range_internal_transactions</span></code></a>(...[, ...])</p></td>
+<td><p>Returns the list of internal transactions performed within a block range Parameters ----------     start_block: int         block to start search     end_block: int         block to end search     page: int         Page number starting at 0. Increment value to paginate through results     offset: int         Offset starting at 0. Increment value to offset paginated results     ascending: bool         return results ascending or descending (default True).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_block_reward" title="messari.blockexplorers.scanner.Scanner.get_block_reward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_block_reward</span></code></a>(blocks_in)</p></td>
+<td><p>Returns the block reward and 'Uncle' block rewards</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_contract_abi" title="messari.blockexplorers.scanner.Scanner.get_contract_abi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_contract_abi</span></code></a>(contracts_in)</p></td>
+<td><p>Returns the Contract Application Binary Interface (ABI) of a verified smart contract</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_contract_execution_status" title="messari.blockexplorers.scanner.Scanner.get_contract_execution_status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_contract_execution_status</span></code></a>(transactions_in)</p></td>
+<td><p>Returns the status code of a contract execution</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_contract_source_code" title="messari.blockexplorers.scanner.Scanner.get_contract_source_code"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_contract_source_code</span></code></a>(contracts_in)</p></td>
+<td><p>Returns the Solidity source code of a verified smart contract</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_est_confirmation" title="messari.blockexplorers.scanner.Scanner.get_est_confirmation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_est_confirmation</span></code></a>(gas_price)</p></td>
+<td><p>Returns the estimated time, in seconds, for a transaction to be confirmed on the blockchain gas price in wei</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_eth_account_transaction_count" title="messari.blockexplorers.scanner.Scanner.get_eth_account_transaction_count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_eth_account_transaction_count</span></code></a>(accounts_in)</p></td>
+<td><p>Returns the number of transactions performed by an address</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_eth_block" title="messari.blockexplorers.scanner.Scanner.get_eth_block"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_eth_block</span></code></a>(blocks_in)</p></td>
+<td><p>Returns information about a block by block number</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_eth_block_number" title="messari.blockexplorers.scanner.Scanner.get_eth_block_number"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_eth_block_number</span></code></a>()</p></td>
+<td><p>Returns the number of most recent block</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_eth_block_transaction_count" title="messari.blockexplorers.scanner.Scanner.get_eth_block_transaction_count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_eth_block_transaction_count</span></code></a>(blocks_in)</p></td>
+<td><p>Returns the number of transactions in a block</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_eth_gas_price" title="messari.blockexplorers.scanner.Scanner.get_eth_gas_price"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_eth_gas_price</span></code></a>()</p></td>
+<td><p>Returns the current price per gas in wei</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_eth_transaction_by_block_index" title="messari.blockexplorers.scanner.Scanner.get_eth_transaction_by_block_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_eth_transaction_by_block_index</span></code></a>(block, index)</p></td>
+<td><p>Returns information about a transaction by block number and transaction index position</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_eth_transaction_by_hash" title="messari.blockexplorers.scanner.Scanner.get_eth_transaction_by_hash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_eth_transaction_by_hash</span></code></a>(transactions_in)</p></td>
+<td><p>Returns the information about a transaction requested by transaction hash</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_eth_transaction_receipt" title="messari.blockexplorers.scanner.Scanner.get_eth_transaction_receipt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_eth_transaction_receipt</span></code></a>(transactions_in)</p></td>
+<td><p>Returns the receipt of a transaction by transaction hash</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_eth_uncle" title="messari.blockexplorers.scanner.Scanner.get_eth_uncle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_eth_uncle</span></code></a>(block, index)</p></td>
+<td><p>Returns information about an uncle by block number and index</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_gas_oracle" title="messari.blockexplorers.scanner.Scanner.get_gas_oracle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_gas_oracle</span></code></a>()</p></td>
+<td><p>Returns the current Safe, Proposed and Fast gas prices</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_logs" title="messari.blockexplorers.scanner.Scanner.get_logs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_logs</span></code></a>(address, from_block[, to_block, ...])</p></td>
+<td><p>This function is a wrapper around the Etherscan API which is a wrapper around the native eth_getLogs.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_response</span></code>(endpoint_url[, params, headers])</p></td>
+<td><p>Gets response from endpoint and checks for HTTP errors when requesting data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_token_account_balance" title="messari.blockexplorers.scanner.Scanner.get_token_account_balance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_token_account_balance</span></code></a>(tokens_in, accounts_in)</p></td>
+<td><p>Returns the current balance of an ERC-20 token of an address</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_token_total_supply" title="messari.blockexplorers.scanner.Scanner.get_token_total_supply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_token_total_supply</span></code></a>(tokens_in)</p></td>
+<td><p>Returns the current amount of an ERC-20 token in circulation</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_transaction_execution_status" title="messari.blockexplorers.scanner.Scanner.get_transaction_execution_status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_transaction_execution_status</span></code></a>(transactions_in)</p></td>
+<td><p>Returns the status code of a transaction execution.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.blockexplorers.scanner.Scanner.get_transaction_internal_transactions" title="messari.blockexplorers.scanner.Scanner.get_transaction_internal_transactions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_transaction_internal_transactions</span></code></a>(...)</p></td>
+<td><p>Returns the list of internal transactions performed within a transaction Parameters ----------     transactions_in: str, List         single transaction in or list of transactions in</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_api_dict</span></code>(api_dict)</p></td>
+<td><p>Sets a new dictionary to be used as an API key pair</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_taxonomy_dict</span></code>(taxonomy_dict)</p></td>
+<td><p>Sets a new dictionary to be used for taxonomy translations</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code>(input_slugs)</p></td>
+<td><p>Wrapper around messari.utils.validate_input, validate input &amp; check if it's supported by DeFi Llama</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_account_blocks_mined">
+<span class="sig-name descname"><span class="pre">get_account_blocks_mined</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accounts_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">block_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'blocks'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_account_blocks_mined" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the list of blocks mined by an address</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>accounts_in: str, List</strong></dt><dd><blockquote>
+<div><p>single account in or list of accounts in</p>
+</div></blockquote>
+<dl class="simple">
+<dt>page: int</dt><dd><p>Page number starting at 0. Increment value to paginate through results</p>
+</dd>
+<dt>offset: int</dt><dd><p>Offset starting at 0. Increment value to offset paginated results</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with blocks mined by given account(s)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_account_internal_transactions">
+<span class="sig-name descname"><span class="pre">get_account_internal_transactions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accounts_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_account_internal_transactions" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the list of internal transactions performed by an address</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>accounts_in: str, List</strong></dt><dd><p>single account in or list of accounts in</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with internal transactions performed in given account(s)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_account_native_balance">
+<span class="sig-name descname"><span class="pre">get_account_native_balance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accounts_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_account_native_balance" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the native token balance of a given address</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>accounts_in: str, List</strong></dt><dd><p>single account in or list of accounts in</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame containing accounts_in native (sol) balance</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_account_nft_transfers">
+<span class="sig-name descname"><span class="pre">get_account_nft_transfers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accounts_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfts_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_block</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_block</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ascending</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_account_nft_transfers" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the list of ERC-721 ( NFT ) tokens transferred by an address,
+with optional filtering by token contract</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>accounts_in: str, List</strong></dt><dd><blockquote>
+<div><p>single account in or list of accounts in</p>
+</div></blockquote>
+<dl class="simple">
+<dt>nfts_in: str, List</dt><dd><p>single nft in or list of nfts in, used to filter results</p>
+</dd>
+<dt>start_block: int</dt><dd><p>block to start search</p>
+</dd>
+<dt>end_block: int</dt><dd><p>block to end search</p>
+</dd>
+<dt>page: int</dt><dd><p>Page number starting at 0. Increment value to paginate through results</p>
+</dd>
+<dt>offset: int</dt><dd><p>Offset starting at 0. Increment value to offset paginated results</p>
+</dd>
+<dt>ascending: bool</dt><dd><p>return results ascending or descending (default True)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with NFT transfers for given account(s)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_account_normal_transactions">
+<span class="sig-name descname"><span class="pre">get_account_normal_transactions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accounts_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_account_normal_transactions" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the list of transactions performed by an address, with optional pagination</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>accounts_in: str, List</strong></dt><dd><p>single account in or list of accounts in</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame containing accounts_in normal transactions</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_account_token_transfers">
+<span class="sig-name descname"><span class="pre">get_account_token_transfers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accounts_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokens_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_block</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_block</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ascending</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_account_token_transfers" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the list of ERC-20 tokens transferred by an address,
+with optional filtering by token contract</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>accounts_in: str, List</strong></dt><dd><blockquote>
+<div><p>single account in or list of accounts in</p>
+</div></blockquote>
+<dl class="simple">
+<dt>tokens_in: str, List</dt><dd><p>single token address in or list of token addresses, used to filter results</p>
+</dd>
+<dt>start_block: int</dt><dd><p>block to start search</p>
+</dd>
+<dt>end_block: int</dt><dd><p>block to end search</p>
+</dd>
+<dt>page: int</dt><dd><p>Page number starting at 0. Increment value to paginate through results</p>
+</dd>
+<dt>offset: int</dt><dd><p>Offset starting at 0. Increment value to offset paginated results</p>
+</dd>
+<dt>ascending: bool</dt><dd><p>return results ascending or descending (default True)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with token transfers for given account(s)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_block_by_timestamp">
+<span class="sig-name descname"><span class="pre">get_block_by_timestamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">times_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">before</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_block_by_timestamp" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the block number that was mined at a certain timestamp (in unix)</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>timess_in: int, List</strong></dt><dd><blockquote>
+<div><p>single time in or list of times in as unix timestamp(s)</p>
+</div></blockquote>
+<dl class="simple">
+<dt>before: bool (default True)</dt><dd><p>Return block immediately before or after given times_in</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with block number(s) closest to times_in</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_block_countdown">
+<span class="sig-name descname"><span class="pre">get_block_countdown</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blocks_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_block_countdown" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the estimated time remaining, in seconds, until a certain block is mined</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>blocks_in: int, List</strong></dt><dd><p>single block in or list of blocks in</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with time(s) remaining until block confirmation</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_block_range_internal_transactions">
+<span class="sig-name descname"><span class="pre">get_block_range_internal_transactions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_block</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_block</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ascending</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_block_range_internal_transactions" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the list of internal transactions performed within a block range
+Parameters
+———-</p>
+<blockquote>
+<div><dl class="simple">
+<dt>start_block: int</dt><dd><p>block to start search</p>
+</dd>
+<dt>end_block: int</dt><dd><p>block to end search</p>
+</dd>
+<dt>page: int</dt><dd><p>Page number starting at 0. Increment value to paginate through results</p>
+</dd>
+<dt>offset: int</dt><dd><p>Offset starting at 0. Increment value to offset paginated results</p>
+</dd>
+<dt>ascending: bool</dt><dd><p>return results ascending or descending (default True)</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with internal transactions for a given block range</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_block_reward">
+<span class="sig-name descname"><span class="pre">get_block_reward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blocks_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_block_reward" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the block reward and ‘Uncle’ block rewards</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>blocks_in: int, List</strong></dt><dd><p>single block in or list of blocks in</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with block reward(s)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_contract_abi">
+<span class="sig-name descname"><span class="pre">get_contract_abi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contracts_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_contract_abi" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the Contract Application Binary Interface (ABI) of a verified smart contract</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>contracts_in: str, List</strong></dt><dd><p>single contract in or list of contracts in</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Dict</dt><dd><p>Dictionary with {contract: contract_abi}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_contract_execution_status">
+<span class="sig-name descname"><span class="pre">get_contract_execution_status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactions_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_contract_execution_status" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the status code of a contract execution</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>transactions_in: str, List</strong></dt><dd><p>single transaction in or list of transactions in</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with contract execution status</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_contract_source_code">
+<span class="sig-name descname"><span class="pre">get_contract_source_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contracts_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_contract_source_code" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the Solidity source code of a verified smart contract</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>contracts_in: str, List</strong></dt><dd><p>single contract in or list of contracts in</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with contract source code</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_est_confirmation">
+<span class="sig-name descname"><span class="pre">get_est_confirmation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gas_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_est_confirmation" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the estimated time, in seconds,
+for a transaction to be confirmed on the blockchain
+gas price in wei</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>gas_price: int</strong></dt><dd><p>Gas price (in Wei) used for transaction</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>int</dt><dd><p>The estimated time (in seconds) for a transaction to be confirmed</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_eth_account_transaction_count">
+<span class="sig-name descname"><span class="pre">get_eth_account_transaction_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accounts_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_eth_account_transaction_count" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the number of transactions performed by an address</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>accounts_in: str, List</strong></dt><dd><p>single account in or list of accounts in</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame containing transaction count(s) for the given account(s)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_eth_block">
+<span class="sig-name descname"><span class="pre">get_eth_block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blocks_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_eth_block" title="Permalink to this definition"></a></dt>
+<dd><p>Returns information about a block by block number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>blocks_in: int, List</strong></dt><dd><p>single block in or list of blocks in</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame containing information about block(s)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_eth_block_number">
+<span class="sig-name descname"><span class="pre">get_eth_block_number</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_eth_block_number" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the number of most recent block</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>int</dt><dd><p>Number of the most recent block</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_eth_block_transaction_count">
+<span class="sig-name descname"><span class="pre">get_eth_block_transaction_count</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blocks_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_eth_block_transaction_count" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the number of transactions in a block</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>blocks_in: int, List</strong></dt><dd><p>single block in or list of blocks in</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame containing transaction count(s) for the given block(s)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_eth_gas_price">
+<span class="sig-name descname"><span class="pre">get_eth_gas_price</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_eth_gas_price" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the current price per gas in wei</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>int</dt><dd><p>Current price per gas in wei</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_eth_transaction_by_block_index">
+<span class="sig-name descname"><span class="pre">get_eth_transaction_by_block_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">block</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_eth_transaction_by_block_index" title="Permalink to this definition"></a></dt>
+<dd><p>Returns information about a transaction by block number and transaction index position</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>blocks: int</strong></dt><dd><p>single block in</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame containing transaction details</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_eth_transaction_by_hash">
+<span class="sig-name descname"><span class="pre">get_eth_transaction_by_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactions_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_eth_transaction_by_hash" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the information about a transaction requested by transaction hash</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>transactions_in: str, List</strong></dt><dd><p>single contract in or list of transactions in</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame containing transaction details</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_eth_transaction_receipt">
+<span class="sig-name descname"><span class="pre">get_eth_transaction_receipt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactions_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_eth_transaction_receipt" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the receipt of a transaction by transaction hash</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>transactions_in: str, List</strong></dt><dd><p>single contract in or list of transactions in</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with transaction receipts</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_eth_uncle">
+<span class="sig-name descname"><span class="pre">get_eth_uncle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">block</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_eth_uncle" title="Permalink to this definition"></a></dt>
+<dd><p>Returns information about an uncle by block number and index</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>block: int</strong></dt><dd><blockquote>
+<div><p>single block in</p>
+</div></blockquote>
+<dl class="simple">
+<dt>index: int</dt><dd><p>single index in</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Dict</dt><dd><p>Information about an uncle by block number and index</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_gas_oracle">
+<span class="sig-name descname"><span class="pre">get_gas_oracle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_gas_oracle" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the current Safe, Proposed and Fast gas prices</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame containing the current Safe, Proposed and Fast gas prices</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_logs">
+<span class="sig-name descname"><span class="pre">get_logs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_block</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_block</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'latest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic3</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic0_1_opr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic1_2_opr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic2_3_opr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic0_2_opr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic0_3_opr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic1_3_opr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_logs" title="Permalink to this definition"></a></dt>
+<dd><p>This function is a wrapper around the Etherscan API which is a wrapper
+around the native eth_getLogs. Please check out their documentation for a
+more in depth explanation: <a class="reference external" href="https://docs.etherscan.io/api-endpoints/logs">https://docs.etherscan.io/api-endpoints/logs</a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_token_account_balance">
+<span class="sig-name descname"><span class="pre">get_token_account_balance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accounts_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_token_account_balance" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the current balance of an ERC-20 token of an address</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>tokens_in: str, List</strong></dt><dd><blockquote>
+<div><p>single token address in or list of token addresses</p>
+</div></blockquote>
+<dl class="simple">
+<dt>accounts_in: str, List</dt><dd><p>single account in or list of accounts in</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame containing token balance(s) for given account(s)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_token_total_supply">
+<span class="sig-name descname"><span class="pre">get_token_total_supply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_token_total_supply" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the current amount of an ERC-20 token in circulation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>tokens_in: str, List</strong></dt><dd><p>single token address in or list of token addresses</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame containing total supply for token(s)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_transaction_execution_status">
+<span class="sig-name descname"><span class="pre">get_transaction_execution_status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactions_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_transaction_execution_status" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the status code of a transaction execution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>transactions_in: str, List</strong></dt><dd><p>single transaction in or list of transactions in</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with transaction execution status</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.scanner.Scanner.get_transaction_internal_transactions">
+<span class="sig-name descname"><span class="pre">get_transaction_internal_transactions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transactions_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.scanner.Scanner.get_transaction_internal_transactions" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the list of internal transactions performed within a transaction
+Parameters
+———-</p>
+<blockquote>
+<div><dl class="simple">
+<dt>transactions_in: str, List</dt><dd><p>single transaction in or list of transactions in</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with internal transactions performed in given transaction(s)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-messari.blockexplorers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-messari.blockexplorers" title="Permalink to this headline"></a></h2>
+<p>Module to handle initialization, imports, for scanner class</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Roberto Talamas.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

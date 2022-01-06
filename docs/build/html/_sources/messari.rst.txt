@@ -1,131 +1,43 @@
 messari package
-***************
-
-Messari Class
-=============
-
-.. autoclass:: messari.messari.messari.Messari
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-DeFiLlama Class
 ===============
 
-.. autoclass:: messari.defillama.defillama.DeFiLlama
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   messari.blockexplorers
+   messari.deepdao
+   messari.defillama
+   messari.eventmonitor
+   messari.messari
+   messari.nfts
+   messari.tokenterminal
+
+Submodules
+----------
+
+messari.dataloader module
+-------------------------
+
+.. automodule:: messari.dataloader
    :members:
    :undoc-members:
    :show-inheritance:
 
-TokenTerminal Class
-===================
+messari.utils module
+--------------------
 
-.. autoclass:: messari.tokenterminal.tokenterminal.TokenTerminal
+.. automodule:: messari.utils
    :members:
    :undoc-members:
    :show-inheritance:
 
-Etherscan Class
-===============
+Module contents
+---------------
 
-.. autoclass:: messari.blockexplorers.etherscan.Etherscan
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-SnowTrace Class
-===============
-
-.. autoclass:: messari.blockexplorers.snowtrace.SnowTrace
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-
-BSCscan Class
-=============
-
-.. autoclass:: messari.blockexplorers.bscscan.BSCscan
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-FTMscan Class
-=============
-
-.. autoclass:: messari.blockexplorers.ftmscan.FTMscan
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Arbiscan Class
-==============
-
-.. autoclass:: messari.blockexplorers.arbiscan.Arbiscan
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Polygonscan Class
-=================
-
-.. autoclass:: messari.blockexplorers.polygonscan.Polygonscan
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-OptimisticEtherscan Class
-=========================
-
-.. autoclass:: messari.blockexplorers.optimisticetherscan.OptimisticEtherscan
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Solscan Class
-=============
-
-.. autoclass:: messari.blockexplorers.solscan.Solscan
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-NFT Price Floor Class
-=====================
-
-.. autoclass:: messari.nfts.nftpricefloor.NFTPriceFloor
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-NonFungible Class
-=================
-
-.. autoclass:: messari.nfts.nonfungible.NonFungible
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Upshot Class
-============
-
-.. autoclass:: messari.nfts.upshot.Upshot
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-OpenSea Class
-=============
-
-.. autoclass:: messari.nfts.opensea.OpenSea
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-EventMonitor Class
-==================
-
-.. autoclass:: messari.eventmonitor.EventMonitor
+.. automodule:: messari
    :members:
    :undoc-members:
    :show-inheritance:

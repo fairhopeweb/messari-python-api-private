@@ -16,7 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -80,6 +80,10 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Etherscan%20API%20Tutorial.html">EVM Blockexplorer API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Solscan%20API%20Tutorial.html">Solscan API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upshot%20API%20Tutorial.html">Upshot Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OpenSea%20API%20Tutorial.html">OpenSea Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NonFungible%20API%20Tutorial.html">NonFungible Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NFT%20Price%20Floor%20API%20Tutorial.html">NFT Price Floor Python API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Event%20Monitor%20Tutorial.html">Event Monitor Tutorial</a></li>
 </ul>
 
@@ -317,7 +321,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt a.copybtn {
+.prompt .copybtn {
     display: none;
 }
 
@@ -384,9 +388,8 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>from messari.deepdao import DeepDAO
-dd = DeepDAO()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">messari.deepdao</span> <span class="kn">import</span> <span class="n">DeepDAO</span>
+<span class="n">dd</span> <span class="o">=</span> <span class="n">DeepDAO</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -409,9 +412,8 @@ dd = DeepDAO()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>dao_list = dd.get_dao_list()
-dao_list[:5]
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dao_list</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_dao_list</span><span class="p">()</span>
+<span class="n">dao_list</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -432,9 +434,8 @@ dao_list[:5]
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>member_list = dd.get_member_list()
-member_list[:5]
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">member_list</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_member_list</span><span class="p">()</span>
+<span class="n">member_list</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -459,9 +460,8 @@ member_list[:5]
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>organizations = dd.get_organizations()
-organizations.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">organizations</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_organizations</span><span class="p">()</span>
+<span class="n">organizations</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -560,9 +560,8 @@ organizations.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>summary = dd.get_summary()
-summary.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">summary</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_summary</span><span class="p">()</span>
+<span class="n">summary</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -697,9 +696,8 @@ summary.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>overview = dd.get_overview()
-overview.tail()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">overview</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_overview</span><span class="p">()</span>
+<span class="n">overview</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -792,9 +790,8 @@ overview.tail()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>rankings = dd.get_rankings()
-rankings.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rankings</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_rankings</span><span class="p">()</span>
+<span class="n">rankings</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -978,9 +975,8 @@ rankings.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>tokens = dd.get_tokens()
-tokens.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tokens</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_tokens</span><span class="p">()</span>
+<span class="n">tokens</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1074,9 +1070,8 @@ tokens.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># DAOs tracked by Deep DAO
-daos = [&quot;Uniswap&quot;, &quot;Compound&quot;]
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># DAOs tracked by Deep DAO</span>
+<span class="n">daos</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Uniswap&quot;</span><span class="p">,</span> <span class="s2">&quot;Compound&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1087,9 +1082,8 @@ daos = [&quot;Uniswap&quot;, &quot;Compound&quot;]
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>info = dd.get_dao_info(dao_slugs=daos)
-info
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_dao_info</span><span class="p">(</span><span class="n">dao_slugs</span><span class="o">=</span><span class="n">daos</span><span class="p">)</span>
+<span class="n">info</span>
 </pre></div>
 </div>
 </div>
@@ -1208,9 +1202,8 @@ info
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>indices = dd.get_dao_indices(dao_slugs=[&quot;Uniswap&quot;, &quot;Compound&quot;, &quot;Olympus DAO&quot;, &quot;Aave&quot;, &quot;Gnosis&quot;])
-indices
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">indices</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_dao_indices</span><span class="p">(</span><span class="n">dao_slugs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Uniswap&quot;</span><span class="p">,</span> <span class="s2">&quot;Compound&quot;</span><span class="p">,</span> <span class="s2">&quot;Olympus DAO&quot;</span><span class="p">,</span> <span class="s2">&quot;Aave&quot;</span><span class="p">,</span> <span class="s2">&quot;Gnosis&quot;</span><span class="p">])</span>
+<span class="n">indices</span>
 </pre></div>
 </div>
 </div>
@@ -1281,9 +1274,8 @@ indices
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>proposals = dd.get_dao_proposals(dao_slugs=daos)
-proposals.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proposals</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_dao_proposals</span><span class="p">(</span><span class="n">dao_slugs</span><span class="o">=</span><span class="n">daos</span><span class="p">)</span>
+<span class="n">proposals</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1473,9 +1465,8 @@ proposals.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>members = dd.get_dao_members(dao_slugs=daos)
-members.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">members</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_dao_members</span><span class="p">(</span><span class="n">dao_slugs</span><span class="o">=</span><span class="n">daos</span><span class="p">)</span>
+<span class="n">members</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1665,9 +1656,8 @@ members.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>coalitions = dd.get_dao_voter_coalitions(dao_slugs=daos)
-coalitions.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coalitions</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_dao_voter_coalitions</span><span class="p">(</span><span class="n">dao_slugs</span><span class="o">=</span><span class="n">daos</span><span class="p">)</span>
+<span class="n">coalitions</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1789,9 +1779,8 @@ coalitions.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>financials = dd.get_dao_financials(dao_slugs=daos)
-financials.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">financials</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_dao_financials</span><span class="p">(</span><span class="n">dao_slugs</span><span class="o">=</span><span class="n">daos</span><span class="p">)</span>
+<span class="n">financials</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1974,9 +1963,8 @@ financials.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># pubkey&#39;s for users active in governanace
-pubkeys = [&quot;Ven Gist&quot;, &quot;scottrepreneur&quot;]
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># pubkey&#39;s for users active in governanace</span>
+<span class="n">pubkeys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Ven Gist&quot;</span><span class="p">,</span> <span class="s2">&quot;scottrepreneur&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1987,9 +1975,8 @@ pubkeys = [&quot;Ven Gist&quot;, &quot;scottrepreneur&quot;]
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>people = dd.get_top_members(count=10)
-people.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">people</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_top_members</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">people</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -2112,9 +2099,8 @@ people.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>members = dd.get_member_info(pubkeys=pubkeys)
-members
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">members</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_member_info</span><span class="p">(</span><span class="n">pubkeys</span><span class="o">=</span><span class="n">pubkeys</span><span class="p">)</span>
+<span class="n">members</span>
 </pre></div>
 </div>
 </div>
@@ -2253,9 +2239,8 @@ members
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>member_proposals = dd.get_member_proposals(pubkeys=pubkeys)
-member_proposals.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">member_proposals</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_member_proposals</span><span class="p">(</span><span class="n">pubkeys</span><span class="o">=</span><span class="n">pubkeys</span><span class="p">)</span>
+<span class="n">member_proposals</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -2445,9 +2430,8 @@ member_proposals.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>member_votes = dd.get_member_votes(pubkeys=pubkeys)
-member_votes.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">member_votes</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">get_member_votes</span><span class="p">(</span><span class="n">pubkeys</span><span class="o">=</span><span class="n">pubkeys</span><span class="p">)</span>
+<span class="n">member_votes</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -2633,8 +2617,7 @@ member_votes.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>

@@ -16,7 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -60,6 +60,10 @@
 <li class="toctree-l1"><a class="reference internal" href="DeepDAO%20API%20Tutorial.html">Deep DAO Python API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Etherscan%20API%20Tutorial.html">EVM Blockexplorer API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Solscan%20API%20Tutorial.html">Solscan API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upshot%20API%20Tutorial.html">Upshot Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OpenSea%20API%20Tutorial.html">OpenSea Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NonFungible%20API%20Tutorial.html">NonFungible Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NFT%20Price%20Floor%20API%20Tutorial.html">NFT Price Floor Python API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Event%20Monitor%20Tutorial.html">Event Monitor Tutorial</a></li>
 </ul>
 
@@ -297,7 +301,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt a.copybtn {
+.prompt .copybtn {
     display: none;
 }
 
@@ -367,9 +371,8 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>from messari.messari import Messari
-messari = Messari(&#39;your_api_key&#39;)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">messari.messari</span> <span class="kn">import</span> <span class="n">Messari</span>
+<span class="n">messari</span> <span class="o">=</span> <span class="n">Messari</span><span class="p">(</span><span class="s1">&#39;your_api_key&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -462,8 +465,7 @@ messari = Messari(&#39;your_api_key&#39;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>response_data = messari.get_all_assets()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response_data</span> <span class="o">=</span> <span class="n">messari</span><span class="o">.</span><span class="n">get_all_assets</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -473,9 +475,8 @@ messari = Messari(&#39;your_api_key&#39;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>response_data_df = messari.get_all_assets(asset_fields=[&#39;metrics&#39;], to_dataframe=True)
-response_data_df.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response_data_df</span> <span class="o">=</span> <span class="n">messari</span><span class="o">.</span><span class="n">get_all_assets</span><span class="p">(</span><span class="n">asset_fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;metrics&#39;</span><span class="p">],</span> <span class="n">to_dataframe</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">response_data_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -656,10 +657,9 @@ response_data_df.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>metric = &#39;mining_stats&#39;
-response_data_df_market_data = messari.get_all_assets(asset_metric=metric, to_dataframe=True)
-response_data_df_market_data.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metric</span> <span class="o">=</span> <span class="s1">&#39;mining_stats&#39;</span>
+<span class="n">response_data_df_market_data</span> <span class="o">=</span> <span class="n">messari</span><span class="o">.</span><span class="n">get_all_assets</span><span class="p">(</span><span class="n">asset_metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span> <span class="n">to_dataframe</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">response_data_df_market_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -821,15 +821,14 @@ response_data_df_market_data.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>import pandas as pd
-dfs = [] # list to hold metric DataFrames
-for i in range(1, 5, 1):
-    df = messari.get_all_assets(page=1, limit=500, asset_metric=&#39;marketcap&#39;, to_dataframe=True)
-    dfs.append(df)
-merged_df = pd.concat(dfs)
-print(f&#39;Number of assets in DataFrame {len(merged_df)}&#39;)
-merged_df.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">dfs</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># list to hold metric DataFrames</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">messari</span><span class="o">.</span><span class="n">get_all_assets</span><span class="p">(</span><span class="n">page</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">asset_metric</span><span class="o">=</span><span class="s1">&#39;marketcap&#39;</span><span class="p">,</span> <span class="n">to_dataframe</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">dfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">merged_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">dfs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of assets in DataFrame </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">merged_df</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">merged_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -967,10 +966,9 @@ Number of assets in DataFrame 2000
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>assets = [&#39;bitcoin&#39;, &#39;ethereum&#39;, &#39;tether&#39;]
-asset_metadata = messari.get_asset(asset_slugs=assets)
-asset_metadata.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">assets</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;bitcoin&#39;</span><span class="p">,</span> <span class="s1">&#39;ethereum&#39;</span><span class="p">,</span> <span class="s1">&#39;tether&#39;</span><span class="p">]</span>
+<span class="n">asset_metadata</span> <span class="o">=</span> <span class="n">messari</span><span class="o">.</span><span class="n">get_asset</span><span class="p">(</span><span class="n">asset_slugs</span><span class="o">=</span><span class="n">assets</span><span class="p">)</span>
+<span class="n">asset_metadata</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1042,10 +1040,9 @@ asset_metadata.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>fields = [&#39;id&#39;, &#39;name&#39;]
-asset_metadata_filtered = messari.get_asset(asset_slugs=assets, asset_fields=fields)
-asset_metadata_filtered.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="n">asset_metadata_filtered</span> <span class="o">=</span> <span class="n">messari</span><span class="o">.</span><span class="n">get_asset</span><span class="p">(</span><span class="n">asset_slugs</span><span class="o">=</span><span class="n">assets</span><span class="p">,</span> <span class="n">asset_fields</span><span class="o">=</span><span class="n">fields</span><span class="p">)</span>
+<span class="n">asset_metadata_filtered</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1125,9 +1122,8 @@ asset_metadata_filtered.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>asset_profile_data = messari.get_asset_profile(asset_slugs=assets)
-asset_profile_data[&#39;bitcoin&#39;][&#39;profile_general_overview_project_details&#39;]
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">asset_profile_data</span> <span class="o">=</span> <span class="n">messari</span><span class="o">.</span><span class="n">get_asset_profile</span><span class="p">(</span><span class="n">asset_slugs</span><span class="o">=</span><span class="n">assets</span><span class="p">)</span>
+<span class="n">asset_profile_data</span><span class="p">[</span><span class="s1">&#39;bitcoin&#39;</span><span class="p">][</span><span class="s1">&#39;profile_general_overview_project_details&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1145,11 +1141,10 @@ asset_profile_data[&#39;bitcoin&#39;][&#39;profile_general_overview_project_deta
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>asset = &#39;Uniswap&#39;
-profile_metric = &#39;investors&#39;
-governance_data = messari.get_asset_profile(asset_slugs=asset, asset_profile_metric=profile_metric)
-governance_data
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">asset</span> <span class="o">=</span> <span class="s1">&#39;Uniswap&#39;</span>
+<span class="n">profile_metric</span> <span class="o">=</span> <span class="s1">&#39;investors&#39;</span>
+<span class="n">governance_data</span> <span class="o">=</span> <span class="n">messari</span><span class="o">.</span><span class="n">get_asset_profile</span><span class="p">(</span><span class="n">asset_slugs</span><span class="o">=</span><span class="n">asset</span><span class="p">,</span> <span class="n">asset_profile_metric</span><span class="o">=</span><span class="n">profile_metric</span><span class="p">)</span>
+<span class="n">governance_data</span>
 </pre></div>
 </div>
 </div>
@@ -1228,9 +1223,8 @@ governance_data
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>asset_metric_df = messari.get_asset_metrics(asset_slugs=assets)
-asset_metric_df.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">asset_metric_df</span> <span class="o">=</span> <span class="n">messari</span><span class="o">.</span><span class="n">get_asset_metrics</span><span class="p">(</span><span class="n">asset_slugs</span><span class="o">=</span><span class="n">assets</span><span class="p">)</span>
+<span class="n">asset_metric_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1363,10 +1357,9 @@ asset_metric_df.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>metric = &#39;marketcap&#39;
-asset_metric_df_marketcap = messari.get_asset_metrics(asset_slugs=assets, asset_metric=metric)
-asset_metric_df_marketcap.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metric</span> <span class="o">=</span> <span class="s1">&#39;marketcap&#39;</span>
+<span class="n">asset_metric_df_marketcap</span> <span class="o">=</span> <span class="n">messari</span><span class="o">.</span><span class="n">get_asset_metrics</span><span class="p">(</span><span class="n">asset_slugs</span><span class="o">=</span><span class="n">assets</span><span class="p">,</span> <span class="n">asset_metric</span><span class="o">=</span><span class="n">metric</span><span class="p">)</span>
+<span class="n">asset_metric_df_marketcap</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1466,9 +1459,8 @@ asset_metric_df_marketcap.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>market_data = messari.get_asset_market_data(asset_slugs=assets)
-market_data.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">market_data</span> <span class="o">=</span> <span class="n">messari</span><span class="o">.</span><span class="n">get_asset_market_data</span><span class="p">(</span><span class="n">asset_slugs</span><span class="o">=</span><span class="n">assets</span><span class="p">)</span>
+<span class="n">market_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1611,9 +1603,8 @@ market_data.head()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>markets_df = messari.get_all_markets()
-markets_df.head()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">markets_df</span> <span class="o">=</span> <span class="n">messari</span><span class="o">.</span><span class="n">get_all_markets</span><span class="p">()</span>
+<span class="n">markets_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -2048,12 +2039,11 @@ exchanges to discount the volume believed to come from wash trading activity. Fo
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>metric = &#39;price&#39;
-start = &#39;2020-06-01&#39;
-end = &#39;2021-01-01&#39;
-timeseries_df = messari.get_metric_timeseries(asset_slugs=assets, asset_metric=metric, start=start, end=end)
-timeseries_df
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metric</span> <span class="o">=</span> <span class="s1">&#39;price&#39;</span>
+<span class="n">start</span> <span class="o">=</span> <span class="s1">&#39;2020-06-01&#39;</span>
+<span class="n">end</span> <span class="o">=</span> <span class="s1">&#39;2021-01-01&#39;</span>
+<span class="n">timeseries_df</span> <span class="o">=</span> <span class="n">messari</span><span class="o">.</span><span class="n">get_metric_timeseries</span><span class="p">(</span><span class="n">asset_slugs</span><span class="o">=</span><span class="n">assets</span><span class="p">,</span> <span class="n">asset_metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end</span><span class="p">)</span>
+<span class="n">timeseries_df</span>
 </pre></div>
 </div>
 </div>
