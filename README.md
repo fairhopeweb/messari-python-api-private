@@ -9,6 +9,21 @@ Features in the library may or may not be 100% ready for release to the public b
 For any bugs, feature//integration requests, or asssistance reach out to:
 Roberto Talamas or Michael Kremer on slack.
 
+---
+## Integrations
+* Messari API
+* DeFi Llama API
+* Token Terminal API
+* Deep DAO API
+* EVM Block Explorers APIs: Etherscan, Polygonscan, Arbiscan, FTMscan, BSCscan, & SnowTrace
+* Solscan API
+* Upshot API
+* NonFungible API
+* OpenSea API
+* NFT Floor Price API
+* EVM Live Event Monitoring
+
+---
 ## Remote Install
 To install the messari package remotely run this inside of any unix terminal:
 
@@ -17,6 +32,7 @@ $> pip install git+https://github.com/messari/messari-python-api-private.git
 ```
 
 
+---
 ## Local Install
 To install the messari package from the source:
 ```
@@ -26,6 +42,7 @@ messari-python-api-private$> python -m pip install -r requirements.txt
 messari-python-api-private$> python setup.py install
 ```
 
+---
 ## Quickstart
 For a quick demo, you can try the following:
 ```
@@ -42,6 +59,7 @@ markets_df = messari.get_all_markets()
 markets_df.head()
 ```
 
+---
 ## Docs
 To open the offical docs go [here](https://zen-villani-1ab617.netlify.app/).
 
