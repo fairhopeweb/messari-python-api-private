@@ -1,3 +1,5 @@
+"""Unit Tests for the TokenTerminal class"""
+
 import unittest
 from messari.tokenterminal import TokenTerminal
 from typing import List

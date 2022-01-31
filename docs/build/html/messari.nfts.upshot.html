@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>messari.nfts.upshot package &mdash; Messari  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Messari
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Messari%20API%20Tutorial.html">Messari Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/DeFiLlama%20API%20Tutorial.html">DeFi Llama Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/TokenTerminal%20API%20Tutorial.html">Token Terminal Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/DeepDAO%20API%20Tutorial.html">DeepDAO Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Etherscan%20API%20Tutorial.html">EVM Blockexplorer API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Solscan%20API%20Tutorial.html">Solscan API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Upshot%20API%20Tutorial.html">Upshot Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/OpenSea%20API%20Tutorial.html">OpenSea Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/NonFungible%20API%20Tutorial.html">NonFungible Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/NFT%20Price%20Floor%20API%20Tutorial.html">NFT Price Floor Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Event%20Monitor%20Tutorial.html">Event Monitor Tutorial</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Messari</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>messari.nfts.upshot package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/messari.nfts.upshot.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="messari-nfts-upshot-package">
+<h1>messari.nfts.upshot package<a class="headerlink" href="#messari-nfts-upshot-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-messari.nfts.upshot.helpers">
+<span id="messari-nfts-upshot-helpers-module"></span><h2>messari.nfts.upshot.helpers module<a class="headerlink" href="#module-messari.nfts.upshot.helpers" title="Permalink to this headline"></a></h2>
+<p>This module is dedicated to helpers for the Upshot class</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="messari.nfts.upshot.helpers.format_df">
+<span class="sig-prename descclassname"><span class="pre">messari.nfts.upshot.helpers.</span></span><span class="sig-name descname"><span class="pre">format_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.upshot.helpers.format_df" title="Permalink to this definition"></a></dt>
+<dd><p>format a typical DF from Upshot, replace date &amp; drop duplicates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>df_in: pd.DataFrame</strong></dt><dd><p>input DataFrame</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>formated pandas DataFrame</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-messari.nfts.upshot.upshot">
+<span id="messari-nfts-upshot-upshot-module"></span><h2>messari.nfts.upshot.upshot module<a class="headerlink" href="#module-messari.nfts.upshot.upshot" title="Permalink to this headline"></a></h2>
+<p>This module is meant to contain the Upshot class</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="messari.nfts.upshot.upshot.Upshot">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">messari.nfts.upshot.upshot.</span></span><span class="sig-name descname"><span class="pre">Upshot</span></span><a class="headerlink" href="#messari.nfts.upshot.upshot.Upshot" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="messari.html#messari.dataloader.DataLoader" title="messari.dataloader.DataLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">messari.dataloader.DataLoader</span></code></a></p>
+<p>This class is a wrapper around the Upshot API</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.nfts.upshot.upshot.Upshot.get_asset" title="messari.nfts.upshot.upshot.Upshot.get_asset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_asset</span></code></a>(contract_address[, asset_id, ...])</p></td>
+<td><p>retrieve upshot asset data</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.nfts.upshot.upshot.Upshot.get_asset_events" title="messari.nfts.upshot.upshot.Upshot.get_asset_events"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_asset_events</span></code></a>(contract_address, asset_id)</p></td>
+<td><p>retrieve the event history for a given asset</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.nfts.upshot.upshot.Upshot.get_pricing" title="messari.nfts.upshot.upshot.Upshot.get_pricing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_pricing</span></code></a>(contract_address, asset_id[, ...])</p></td>
+<td><p>Returns all the price history for given asset(s) Parameters ----------     contract_address: str, List         single address in or list of addresses in      asset_id: int, List         single asset id in or list of asset ids in     from_time: int         unix time for starting time     to_time: int         unix time for ending time     confidence: str         Only return pricings above the provided confidence level. 0.1 is the minimum and 1 is the highest, with a default level of 0.1     source: str         A pricing can be one of the following types:              - MARKET: open-market transactions (always a confidence level of 1)             - UPSHOT: sourced from Upshot's proprietary machine learning models.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.nfts.upshot.upshot.Upshot.get_pricing_current" title="messari.nfts.upshot.upshot.Upshot.get_pricing_current"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_pricing_current</span></code></a>(contract_address, asset_id)</p></td>
+<td><p>Returns an asset's most recent price information.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_response</span></code>(endpoint_url[, params, headers])</p></td>
+<td><p>Gets response from endpoint and checks for HTTP errors when requesting data.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_api_dict</span></code>(api_dict)</p></td>
+<td><p>Sets a new dictionary to be used as an API key pair</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_taxonomy_dict</span></code>(taxonomy_dict)</p></td>
+<td><p>Sets a new dictionary to be used for taxonomy translations</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code>(input_slugs)</p></td>
+<td><p>Wrapper around messari.utils.validate_input, validate input &amp; check if it's supported by DeFi Llama</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.nfts.upshot.upshot.Upshot.get_asset">
+<span class="sig-name descname"><span class="pre">get_asset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contract_address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.upshot.upshot.Upshot.get_asset" title="Permalink to this definition"></a></dt>
+<dd><p>retrieve upshot asset data</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>contract_address: str, List</strong></dt><dd><blockquote>
+<div><p>single address in or list of addresses in</p>
+</div></blockquote>
+<dl class="simple">
+<dt>asset_id: int, List</dt><dd><p>single asset id in or list of asset ids in</p>
+</dd>
+<dt>limit: int</dt><dd><p>if no asset_id is given, set number of assets to get from contracts</p>
+</dd>
+<dt>offset: int</dt><dd><p>for pagination</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame containing information about asset(s)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.nfts.upshot.upshot.Upshot.get_asset_events">
+<span class="sig-name descname"><span class="pre">get_asset_events</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contract_address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">market_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.upshot.upshot.Upshot.get_asset_events" title="Permalink to this definition"></a></dt>
+<dd><p>retrieve the event history for a given asset</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>contract_address: str, List</strong></dt><dd><blockquote>
+<div><p>single address in or list of addresses in</p>
+</div></blockquote>
+<dl class="simple">
+<dt>asset_id: int, List</dt><dd><p>single asset id in or list of asset ids in</p>
+</dd>
+<dt>market_type: str</dt><dd><dl class="simple">
+<dt>filter the events based on the market in which it occurred</dt><dd><ul class="simple">
+<li><p>‘PRIMARY’</p></li>
+<li><p>‘SECONDARY’</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>event_type: str</dt><dd><dl class="simple">
+<dt>Filter events by the event type:</dt><dd><ul class="simple">
+<li><p>‘BID’</p></li>
+<li><p>‘ASK’</p></li>
+<li><p>‘SALE’</p></li>
+<li><p>‘TRANSFER’</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame containing events for given asset(s)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.nfts.upshot.upshot.Upshot.get_pricing">
+<span class="sig-name descname"><span class="pre">get_pricing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contract_address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'UPSHOT'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.upshot.upshot.Upshot.get_pricing" title="Permalink to this definition"></a></dt>
+<dd><p>Returns all the price history for given asset(s)
+Parameters
+———-</p>
+<blockquote>
+<div><dl class="simple">
+<dt>contract_address: str, List</dt><dd><p>single address in or list of addresses in</p>
+</dd>
+<dt>asset_id: int, List</dt><dd><p>single asset id in or list of asset ids in</p>
+</dd>
+<dt>from_time: int</dt><dd><p>unix time for starting time</p>
+</dd>
+<dt>to_time: int</dt><dd><p>unix time for ending time</p>
+</dd>
+<dt>confidence: str</dt><dd><p>Only return pricings above the provided confidence level.
+0.1 is the minimum and 1 is the highest, with a default level of 0.1</p>
+</dd>
+<dt>source: str</dt><dd><dl class="simple">
+<dt>A pricing can be one of the following types: </dt><dd><ul class="simple">
+<li><p>MARKET: open-market transactions (always a confidence level of 1)</p></li>
+<li><p>UPSHOT: sourced from Upshot’s proprietary machine learning models</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>DataFrame</dt><dd><p>timeseries DataFrame with price history</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.nfts.upshot.upshot.Upshot.get_pricing_current">
+<span class="sig-name descname"><span class="pre">get_pricing_current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contract_address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'UPSHOT'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.upshot.upshot.Upshot.get_pricing_current" title="Permalink to this definition"></a></dt>
+<dd><p>Returns an asset’s most recent price information.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>contract_address: str, List</strong></dt><dd><blockquote>
+<div><p>single address in or list of addresses in</p>
+</div></blockquote>
+<dl class="simple">
+<dt>asset_id: int, List</dt><dd><p>single asset id in or list of asset ids in</p>
+</dd>
+<dt>confidence: str</dt><dd><p>Only return pricings above the provided confidence level.
+0.1 is the minimum and 1 is the highest, with a default level of 0.1</p>
+</dd>
+<dt>source: str</dt><dd><dl class="simple">
+<dt>A pricing can be one of the following types: </dt><dd><ul class="simple">
+<li><p>MARKET: open-market transactions (always a confidence level of 1)</p></li>
+<li><p>UPSHOT: sourced from Upshot’s proprietary machine learning models</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame containing recent price information</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-messari.nfts.upshot">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-messari.nfts.upshot" title="Permalink to this headline"></a></h2>
+<p>Module to handle initialization, imports, for Upshot class</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Roberto Talamas.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -31,7 +31,8 @@ build/*
 dist/*
 
 # Ignore pycache
-messari/__pycache__/*
+*/__pycache__/*
+**.pyc
 
 unit_testing/_env
 

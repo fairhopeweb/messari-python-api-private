@@ -1,0 +1,3801 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EVM Blockexplorer API Tutorial &mdash; Messari  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Solscan API Tutorial" href="Solscan%20API%20Tutorial.html" />
+    <link rel="prev" title="DeepDAO Python API Tutorial" href="DeepDAO%20API%20Tutorial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Messari
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Messari%20API%20Tutorial.html">Messari Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DeFiLlama%20API%20Tutorial.html">DeFi Llama Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenTerminal%20API%20Tutorial.html">Token Terminal Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DeepDAO%20API%20Tutorial.html">DeepDAO Python API Tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">EVM Blockexplorer API Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#API-Structure">API Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Accounts">Accounts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get_account_ether_balance">get_account_ether_balance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_account_normal_transactions">get_account_normal_transactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_account_internal_transactions">get_account_internal_transactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_transaction_internal_transactions">get_transaction_internal_transactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_block_range_internal_transactions">get_block_range_internal_transactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_account_token_transfers">get_account_token_transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_account_nft_transfers">get_account_nft_transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_account_blocks_mined">get_account_blocks_mined</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Contracts">Contracts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get_contract_abi">get_contract_abi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_contract_source_code">get_contract_source_code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Transactions">Transactions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get_contract_execution_status-–-busted-on-Etherscan-backend">get_contract_execution_status – busted on Etherscan backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_transaction_execution_status-–-busted-on-Etherscan-backend">get_transaction_execution_status – busted on Etherscan backend</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Blocks">Blocks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get_block_reward">get_block_reward</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_block_countdown">get_block_countdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_block_by_timestamp">get_block_by_timestamp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Logs">Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Geth/Parity-Proxy">Geth/Parity Proxy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get_eth_block_number">get_eth_block_number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_eth_block">get_eth_block</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_eth_uncle">get_eth_uncle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_eth_block_transaction_count">get_eth_block_transaction_count</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_eth_transaction_by_hash">get_eth_transaction_by_hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_eth_transaction_by_block_index">get_eth_transaction_by_block_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_eth_account_transaction_count">get_eth_account_transaction_count</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_eth_transaction_receipt">get_eth_transaction_receipt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_eth_gas_price">get_eth_gas_price</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Tokens">Tokens</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get_token_total_supply">get_token_total_supply</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_token_account_balance">get_token_account_balance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Gas-Tracker">Gas Tracker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get_est_confirmation">get_est_confirmation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_gas_oracle">get_gas_oracle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Stats">Stats</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get_eth_total_supply">get_eth_total_supply</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_eth2_total_supply">get_eth2_total_supply</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_last_eth_price">get_last_eth_price</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_nodes_size">get_nodes_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_total_nodes_count">get_total_nodes_count</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Solscan%20API%20Tutorial.html">Solscan API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upshot%20API%20Tutorial.html">Upshot Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OpenSea%20API%20Tutorial.html">OpenSea Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NonFungible%20API%20Tutorial.html">NonFungible Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NFT%20Price%20Floor%20API%20Tutorial.html">NFT Price Floor Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Event%20Monitor%20Tutorial.html">Event Monitor Tutorial</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Messari</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>EVM Blockexplorer API Tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/Etherscan API Tutorial.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="EVM-Blockexplorer-API-Tutorial">
+<h1>EVM Blockexplorer API Tutorial<a class="headerlink" href="#EVM-Blockexplorer-API-Tutorial" title="Permalink to this headline"></a></h1>
+<p>This tutorial aims to be a quick guide to get you started using the Etherscan API integrated into messari’s python library.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span> <span class="c1">#need to sleep to stop rate limiting</span>
+<span class="c1">#from messari.blockexplorers.etherscan import Etherscan</span>
+<span class="kn">from</span> <span class="nn">messari.blockexplorers</span> <span class="kn">import</span> <span class="n">Etherscan</span>
+<span class="n">API_KEY</span><span class="o">=</span><span class="s1">&#39;your_api_key&#39;</span>
+<span class="n">es</span> <span class="o">=</span> <span class="n">Etherscan</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">API_KEY</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="API-Structure">
+<h2>API Structure<a class="headerlink" href="#API-Structure" title="Permalink to this headline"></a></h2>
+<p>The Deep DAO Python client contains a number of functions that wrap some of Deep DAO’s API endpoints. These include:</p>
+<p>Accounts</p>
+<ul class="simple">
+<li><p>get_account_ether_balance</p></li>
+<li><p>get_account_normal_transactions</p></li>
+<li><p>get_account_internal_transactions</p></li>
+<li><p>get_transaction_internal_transactions</p></li>
+<li><p>get_block_range_internal_transactions</p></li>
+<li><p>get_account_token_transfers</p></li>
+<li><p>get_account_nft_transfers</p></li>
+<li><p>get_account_blocks_mined</p></li>
+</ul>
+<p>Contracts</p>
+<ul class="simple">
+<li><p>get_contract_abi</p></li>
+<li><p>get_contract_source_code</p></li>
+</ul>
+<p>Transactions</p>
+<ul class="simple">
+<li><p>get_contract_execution_status</p></li>
+<li><p>get_transaction_execution_status</p></li>
+</ul>
+<p>Blocks</p>
+<ul class="simple">
+<li><p>get_block_reward</p></li>
+<li><p>get_block_countdown</p></li>
+<li><p>get_block_by_timestamp</p></li>
+</ul>
+<p>Logs</p>
+<ul class="simple">
+<li><p>get_logs</p></li>
+</ul>
+<p>Geth/Parity Proxy</p>
+<ul class="simple">
+<li><p>get_eth_block_number</p></li>
+<li><p>get_eth_block</p></li>
+<li><p>get_eth_uncle</p></li>
+<li><p>get_eth_block_transaction_count</p></li>
+<li><p>get_eth_transaction_by_hash</p></li>
+<li><p>get_eth_transaction_by_block_index</p></li>
+<li><p>get_eth_account_transaction_count</p></li>
+<li><p>get_eth_transaction_reciept</p></li>
+<li><p>get_eth_gas_price</p></li>
+</ul>
+<p>Tokens</p>
+<ul class="simple">
+<li><p>get_token_total_supply</p></li>
+<li><p>get_token_account_balance</p></li>
+</ul>
+<p>Gas Tracker</p>
+<ul class="simple">
+<li><p>get_est_confirmation</p></li>
+<li><p>get_gas_oracle</p></li>
+</ul>
+<p>Stats</p>
+<ul class="simple">
+<li><p>get_total_eth_supply</p></li>
+<li><p>get_total_eth2_supply</p></li>
+<li><p>get_last_eth_price</p></li>
+<li><p>get_nodes_size</p></li>
+<li><p>get_total_nodes_count</p></li>
+</ul>
+<p>Below are a few examples to showcase the functionality and types of data each function generates.</p>
+</section>
+<section id="Accounts">
+<h2>Accounts<a class="headerlink" href="#Accounts" title="Permalink to this headline"></a></h2>
+<p>Functions to return info about given account(s)</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accounts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;0xBa19BdFF99065d9ABF3dF8CE942390B97fd71B12&#39;</span><span class="p">,</span> <span class="s1">&#39;0x503e4bfe8299D486701BC7bc7F2Ea94f50035daC&#39;</span><span class="p">]</span>
+<span class="n">txns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;0x29f2df8ce6a0e2a93bddacdfcceb9fd847630dcd1d25ad1ec3402cc449fa1eb6&#39;</span><span class="p">,</span> <span class="s1">&#39;0x0bd7f9af4f8ddb18a321ab0120a2389046b39feb67561d17378e0d4dc062decc&#39;</span><span class="p">,</span> <span class="s1">&#39;0x1815a03dd8a1ce7da5a7a4304fa5fae1a8f4f3c20787e341eea230614e49ff61&#39;</span><span class="p">]</span>
+<span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;0x1f9840a85d5af5bf1d1762f925bdaddc4201f984&#39;</span><span class="p">,</span> <span class="s1">&#39;0xc18360217d8f7ab5e7c516566761ea12ce7f9d72&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<section id="get_account_ether_balance">
+<h3>get_account_ether_balance<a class="headerlink" href="#get_account_ether_balance" title="Permalink to this headline"></a></h3>
+<p>Returns the Ether (wei) balance of a given address</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">account_balances</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_account_native_balance</span><span class="p">(</span><span class="n">accounts</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">account_balances</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>balances</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0xBa19BdFF99065d9ABF3dF8CE942390B97fd71B12</th>
+      <td>976947792508781600</td>
+    </tr>
+    <tr>
+      <th>0x503e4bfe8299D486701BC7bc7F2Ea94f50035daC</th>
+      <td>2239319013287287</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="get_account_normal_transactions">
+<h3>get_account_normal_transactions<a class="headerlink" href="#get_account_normal_transactions" title="Permalink to this headline"></a></h3>
+<p>Returns the list of transactions performed by an address, with optional pagination</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">account_normal</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_account_normal_transactions</span><span class="p">(</span><span class="n">accounts</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">account_normal</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="10" halign="left">0xBa19BdFF99065d9ABF3dF8CE942390B97fd71B12</th>
+      <th>...</th>
+      <th colspan="10" halign="left">0x503e4bfe8299D486701BC7bc7F2Ea94f50035daC</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>blockNumber</th>
+      <th>timeStamp</th>
+      <th>hash</th>
+      <th>nonce</th>
+      <th>blockHash</th>
+      <th>transactionIndex</th>
+      <th>from</th>
+      <th>to</th>
+      <th>value</th>
+      <th>gas</th>
+      <th>...</th>
+      <th>value</th>
+      <th>gas</th>
+      <th>gasPrice</th>
+      <th>isError</th>
+      <th>txreceipt_status</th>
+      <th>input</th>
+      <th>contractAddress</th>
+      <th>cumulativeGasUsed</th>
+      <th>gasUsed</th>
+      <th>confirmations</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>12150458</td>
+      <td>1617238173</td>
+      <td>0x1d3e049fcaeb7e02dbd1c796852fd2a0accb584eb621...</td>
+      <td>34</td>
+      <td>0xc5a9897f311d4310e0d6701ed50d24d81640a96fa54b...</td>
+      <td>113</td>
+      <td>0x503e4bfe8299d486701bc7bc7f2ea94f50035dac</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>150000000000000000</td>
+      <td>21000</td>
+      <td>...</td>
+      <td>200000000000000000</td>
+      <td>21000</td>
+      <td>100000000000</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0x</td>
+      <td></td>
+      <td>12485187</td>
+      <td>21000</td>
+      <td>1766673</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>12150499</td>
+      <td>1617238663</td>
+      <td>0x7be0198fc6afc4227aa63eed7b04e3c2e1cb845f77b7...</td>
+      <td>10</td>
+      <td>0x32b9419d095d0d6031498dac7b86844536db45b210be...</td>
+      <td>161</td>
+      <td>0xe35e8e145745df95d38d2ae1d2091c9097962e0d</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>150000000000000000</td>
+      <td>21000</td>
+      <td>...</td>
+      <td>170000000000000000</td>
+      <td>170000</td>
+      <td>122200966918</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0x7ff36ab5000000000000000000000000000000000000...</td>
+      <td></td>
+      <td>2220434</td>
+      <td>124771</td>
+      <td>1766661</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>12150534</td>
+      <td>1617239068</td>
+      <td>0xfc70483d8711be918fbf2b78d37d27ec46c7dc7338dc...</td>
+      <td>0</td>
+      <td>0xa70a5f5aaf4d389b9c6150b850a20041077c7ff757c0...</td>
+      <td>42</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>0x4678f0a6958e4d2bc4f1baf7bc52e8f3564f3fe4</td>
+      <td>0</td>
+      <td>918027</td>
+      <td>...</td>
+      <td>1000000000000000000</td>
+      <td>21000</td>
+      <td>117000000000</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0x</td>
+      <td></td>
+      <td>11686985</td>
+      <td>21000</td>
+      <td>1766520</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>12150547</td>
+      <td>1617239178</td>
+      <td>0x409ddb1a7f518fef0d1225e118166cc05c7cd28e369a...</td>
+      <td>1</td>
+      <td>0x7c2c028e6c4dfbdaaf9364c75a10efc92a4a7e1168bb...</td>
+      <td>44</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>0x2260fac5e5542a773aa44fbcfedf7c193bc2c599</td>
+      <td>0</td>
+      <td>70165</td>
+      <td>...</td>
+      <td>990000000000000000</td>
+      <td>170000</td>
+      <td>124772370792</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0x7ff36ab5000000000000000000000000000000000000...</td>
+      <td></td>
+      <td>316200</td>
+      <td>109771</td>
+      <td>1766494</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>12150591</td>
+      <td>1617239881</td>
+      <td>0x091bfeb699eb8822e68b7c572a458e72cd5bd23b8e53...</td>
+      <td>12</td>
+      <td>0x5dfd2dc6544b3928053da118dd744159c77785d42792...</td>
+      <td>105</td>
+      <td>0xe35e8e145745df95d38d2ae1d2091c9097962e0d</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>100000000000000000</td>
+      <td>21000</td>
+      <td>...</td>
+      <td>4900000000000000000</td>
+      <td>21000</td>
+      <td>115000000000</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0x</td>
+      <td></td>
+      <td>8774834</td>
+      <td>21000</td>
+      <td>1754228</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 36 columns</p>
+</div></div>
+</div>
+</section>
+<section id="get_account_internal_transactions">
+<h3>get_account_internal_transactions<a class="headerlink" href="#get_account_internal_transactions" title="Permalink to this headline"></a></h3>
+<p>Returns the list of internal transactions performed by an address, with optional pagination</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">account_internal</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_account_internal_transactions</span><span class="p">(</span><span class="n">accounts</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">account_internal</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="10" halign="left">0xBa19BdFF99065d9ABF3dF8CE942390B97fd71B12</th>
+      <th>...</th>
+      <th colspan="10" halign="left">0x503e4bfe8299D486701BC7bc7F2Ea94f50035daC</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>blockNumber</th>
+      <th>timeStamp</th>
+      <th>hash</th>
+      <th>from</th>
+      <th>to</th>
+      <th>value</th>
+      <th>contractAddress</th>
+      <th>input</th>
+      <th>type</th>
+      <th>gas</th>
+      <th>...</th>
+      <th>to</th>
+      <th>value</th>
+      <th>contractAddress</th>
+      <th>input</th>
+      <th>type</th>
+      <th>gas</th>
+      <th>gasUsed</th>
+      <th>traceId</th>
+      <th>isError</th>
+      <th>errCode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>12163335</td>
+      <td>1617409597</td>
+      <td>0x68141c1316d922ed5113e265a5d636f1ec6b090e7ea7...</td>
+      <td>0x283af0b28c62c092c9727f1ee09c02ca627eb7f5</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>1132216169560432</td>
+      <td></td>
+      <td></td>
+      <td>call</td>
+      <td>2300</td>
+      <td>...</td>
+      <td>0x503e4bfe8299d486701bc7bc7f2ea94f50035dac</td>
+      <td>1378007072137347</td>
+      <td></td>
+      <td></td>
+      <td>call</td>
+      <td>2300</td>
+      <td>0</td>
+      <td>10</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>12290519</td>
+      <td>1619100967</td>
+      <td>0x82785446d28889f99d95139610abc5bdd0362be3f302...</td>
+      <td>0xe68fff06277508259b1229d284120488d4ded390</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>195917915000000000</td>
+      <td></td>
+      <td></td>
+      <td>call</td>
+      <td>9445</td>
+      <td>...</td>
+      <td>0x503e4bfe8299d486701bc7bc7f2ea94f50035dac</td>
+      <td>1269277206626259375</td>
+      <td></td>
+      <td></td>
+      <td>call</td>
+      <td>44313</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>12358348</td>
+      <td>1620006583</td>
+      <td>0xd86114bde57cd4587d98ca24be129299a3d29d60bca7...</td>
+      <td>0x0f92496ff3997d8911b42dc87cd71c29493c2efa</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>1500000000000000000</td>
+      <td></td>
+      <td></td>
+      <td>call</td>
+      <td>2300</td>
+      <td>...</td>
+      <td>0x503e4bfe8299d486701bc7bc7f2ea94f50035dac</td>
+      <td>924987209833558520</td>
+      <td></td>
+      <td></td>
+      <td>call</td>
+      <td>17389</td>
+      <td>0</td>
+      <td>4</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>12361579</td>
+      <td>1620049473</td>
+      <td>0xec5a0beb745af0dc51f85c767f5267308501c991091a...</td>
+      <td>0x7a250d5630b4cf539739df2c5dacb4c659f2488d</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>1000000000000000000</td>
+      <td></td>
+      <td></td>
+      <td>call</td>
+      <td>26093</td>
+      <td>...</td>
+      <td>0x503e4bfe8299d486701bc7bc7f2ea94f50035dac</td>
+      <td>2915551216325263181</td>
+      <td></td>
+      <td></td>
+      <td>call</td>
+      <td>29846</td>
+      <td>0</td>
+      <td>0_4</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>12361931</td>
+      <td>1620054041</td>
+      <td>0xcffe026fe4efb0d0fbb71ef0a23f756d33d41878e2fb...</td>
+      <td>0x1db681925786441ba82adefac7bf492089665ca0</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>632281841566148913</td>
+      <td></td>
+      <td></td>
+      <td>call</td>
+      <td>2300</td>
+      <td>...</td>
+      <td>0x503e4bfe8299d486701bc7bc7f2ea94f50035dac</td>
+      <td>1124184601060627798</td>
+      <td></td>
+      <td></td>
+      <td>call</td>
+      <td>2300</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 28 columns</p>
+</div></div>
+</div>
+</section>
+<section id="get_transaction_internal_transactions">
+<h3>get_transaction_internal_transactions<a class="headerlink" href="#get_transaction_internal_transactions" title="Permalink to this headline"></a></h3>
+<p>Returns the list of internal transactions performed within a transaction</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">int_txn</span> <span class="o">=</span> <span class="s1">&#39;0x40eb908387324f2b575b4879cd9d7188f69c8fc9d87c901b9e2daaea4b442170&#39;</span>
+<span class="n">transaction_internals</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_transaction_internal_transactions</span><span class="p">(</span><span class="n">int_txn</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">transaction_internals</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="12" halign="left">0x40eb908387324f2b575b4879cd9d7188f69c8fc9d87c901b9e2daaea4b442170</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>blockNumber</th>
+      <th>timeStamp</th>
+      <th>from</th>
+      <th>to</th>
+      <th>value</th>
+      <th>contractAddress</th>
+      <th>input</th>
+      <th>type</th>
+      <th>gas</th>
+      <th>gasUsed</th>
+      <th>isError</th>
+      <th>errCode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1743059</td>
+      <td>1466489498</td>
+      <td>0x2cac6e4b11d6b58f6d3c1c9d5fe8faa89f60e5a2</td>
+      <td>0x66a1c3eaf0f1ffc28d209c0763ed0ca614f3b002</td>
+      <td>7106740000000000</td>
+      <td></td>
+      <td></td>
+      <td>call</td>
+      <td>2300</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="get_block_range_internal_transactions">
+<h3>get_block_range_internal_transactions<a class="headerlink" href="#get_block_range_internal_transactions" title="Permalink to this headline"></a></h3>
+<p>Returns the list of internal transactions performed within a block range, with optional pagination</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">block_range_internals</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_block_range_internal_transactions</span><span class="p">(</span><span class="mi">10000000</span><span class="p">,</span><span class="mi">10001000</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">block_range_internals</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>blockNumber</th>
+      <th>timeStamp</th>
+      <th>hash</th>
+      <th>from</th>
+      <th>to</th>
+      <th>value</th>
+      <th>contractAddress</th>
+      <th>input</th>
+      <th>type</th>
+      <th>gas</th>
+      <th>gasUsed</th>
+      <th>traceId</th>
+      <th>isError</th>
+      <th>errCode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>10000000</td>
+      <td>1588598533</td>
+      <td>0xc2f74145a896b6a5b938216d130f5c382d3d77d5d501...</td>
+      <td>0xf0542ed44d268c85875b3b84b0e7ce0773e9aeef</td>
+      <td>0x35e4876102389f13d78381d317ff4612412a56c9</td>
+      <td>50000000000000000</td>
+      <td></td>
+      <td></td>
+      <td>call</td>
+      <td>2300</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10000000</td>
+      <td>1588598533</td>
+      <td>0xa9b04ff42f93868886c1258ba59967ceb6aafa011865...</td>
+      <td>0x8a91c9a16cd62693649d80afa85a09dbbdcb8508</td>
+      <td></td>
+      <td>0</td>
+      <td>0xbce5fe052b25e422550f6012fdd1941f9353f001</td>
+      <td></td>
+      <td>create</td>
+      <td>1499696</td>
+      <td>64779</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>10000000</td>
+      <td>1588598533</td>
+      <td>0xc96ee63d87a2d21b1dccff4d3de50726887cadbf010c...</td>
+      <td>0x8a91c9a16cd62693649d80afa85a09dbbdcb8508</td>
+      <td></td>
+      <td>0</td>
+      <td>0x1f52775214e2b3d099eb82b6e9e9025c490157ad</td>
+      <td></td>
+      <td>create</td>
+      <td>1877196</td>
+      <td>64779</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>10000000</td>
+      <td>1588598533</td>
+      <td>0x46a9ce0dbc787533c6bda878ff3c4f2354b86301bf4f...</td>
+      <td>0x8a91c9a16cd62693649d80afa85a09dbbdcb8508</td>
+      <td></td>
+      <td>0</td>
+      <td>0x2858e866c5fdcefea13bedf13948a785b5c8b040</td>
+      <td></td>
+      <td>create</td>
+      <td>1877196</td>
+      <td>64779</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>10000000</td>
+      <td>1588598533</td>
+      <td>0x9dab17b59a0612347929fe03bb82d6a03f8a0880ac62...</td>
+      <td>0x8a91c9a16cd62693649d80afa85a09dbbdcb8508</td>
+      <td></td>
+      <td>0</td>
+      <td>0x903171964ee615dc99f350bd29ea747b887ae3f4</td>
+      <td></td>
+      <td>create</td>
+      <td>1897522</td>
+      <td>64779</td>
+      <td>1</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="get_account_token_transfers">
+<h3>get_account_token_transfers<a class="headerlink" href="#get_account_token_transfers" title="Permalink to this headline"></a></h3>
+<p>Returns the list of ERC-20 tokens transferred by an address, with optional filtering by token contract</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">account_token_transfers</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_account_token_transfers</span><span class="p">(</span><span class="n">accounts</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">account_token_transfers</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="10" halign="left">0xBa19BdFF99065d9ABF3dF8CE942390B97fd71B12</th>
+      <th>...</th>
+      <th colspan="10" halign="left">0x503e4bfe8299D486701BC7bc7F2Ea94f50035daC</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>blockNumber</th>
+      <th>timeStamp</th>
+      <th>hash</th>
+      <th>nonce</th>
+      <th>blockHash</th>
+      <th>from</th>
+      <th>contractAddress</th>
+      <th>to</th>
+      <th>value</th>
+      <th>tokenName</th>
+      <th>...</th>
+      <th>tokenName</th>
+      <th>tokenSymbol</th>
+      <th>tokenDecimal</th>
+      <th>transactionIndex</th>
+      <th>gas</th>
+      <th>gasPrice</th>
+      <th>gasUsed</th>
+      <th>cumulativeGasUsed</th>
+      <th>input</th>
+      <th>confirmations</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>12150499</td>
+      <td>1617238663</td>
+      <td>0x1680acc117e0a9bfa7e24553c11a6ca133a1c708a677...</td>
+      <td>35</td>
+      <td>0x32b9419d095d0d6031498dac7b86844536db45b210be...</td>
+      <td>0x503e4bfe8299d486701bc7bc7f2ea94f50035dac</td>
+      <td>0x2260fac5e5542a773aa44fbcfedf7c193bc2c599</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>25282582</td>
+      <td>Wrapped BTC</td>
+      <td>...</td>
+      <td>DefiPulse Index</td>
+      <td>DPI</td>
+      <td>18</td>
+      <td>29</td>
+      <td>170000</td>
+      <td>122200966918</td>
+      <td>124771</td>
+      <td>2220434</td>
+      <td>deprecated</td>
+      <td>1766661</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>12150506</td>
+      <td>1617238752</td>
+      <td>0x42595019ce981395f8e92ebf645989527a8537d71aab...</td>
+      <td>11</td>
+      <td>0x4eb37fcc85990d4eebd746e9a78b014d3093a49aaf56...</td>
+      <td>0xe35e8e145745df95d38d2ae1d2091c9097962e0d</td>
+      <td>0x2260fac5e5542a773aa44fbcfedf7c193bc2c599</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>8604978</td>
+      <td>Wrapped BTC</td>
+      <td>...</td>
+      <td>DefiPulse Index</td>
+      <td>DPI</td>
+      <td>18</td>
+      <td>7</td>
+      <td>170000</td>
+      <td>124772370792</td>
+      <td>109771</td>
+      <td>316200</td>
+      <td>deprecated</td>
+      <td>1766494</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>12150615</td>
+      <td>1617240099</td>
+      <td>0x23ea85829b0d9f78ce79ae543411252793a60ac93e67...</td>
+      <td>2</td>
+      <td>0xd0e73d1b266d43c767a5ff9989da25fda414b9a40326...</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>0x2260fac5e5542a773aa44fbcfedf7c193bc2c599</td>
+      <td>0x0f92496ff3997d8911b42dc87cd71c29493c2efa</td>
+      <td>33880000</td>
+      <td>Wrapped BTC</td>
+      <td>...</td>
+      <td>Interest Bearing ETH</td>
+      <td>ibETH</td>
+      <td>18</td>
+      <td>89</td>
+      <td>137074</td>
+      <td>117000000000</td>
+      <td>91383</td>
+      <td>7411688</td>
+      <td>deprecated</td>
+      <td>1754195</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>12150615</td>
+      <td>1617240099</td>
+      <td>0x23ea85829b0d9f78ce79ae543411252793a60ac93e67...</td>
+      <td>2</td>
+      <td>0xd0e73d1b266d43c767a5ff9989da25fda414b9a40326...</td>
+      <td>0x0000000000000000000000000000000000000000</td>
+      <td>0x6b175474e89094c44da98b954eedeac495271d0f</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>10000000000000000000000</td>
+      <td>Dai Stablecoin</td>
+      <td>...</td>
+      <td>Interest Bearing ETH</td>
+      <td>ibETH</td>
+      <td>18</td>
+      <td>77</td>
+      <td>114058</td>
+      <td>130000000000</td>
+      <td>76039</td>
+      <td>8219729</td>
+      <td>deprecated</td>
+      <td>1748600</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>12150678</td>
+      <td>1617240821</td>
+      <td>0xcb1d2301f1ca5d697c150539276eb914ada713211011...</td>
+      <td>4</td>
+      <td>0x207f158eb9443f3867dbb8ea7d28cf7732d6393472b7...</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>0x6b175474e89094c44da98b954eedeac495271d0f</td>
+      <td>0xa478c2975ab1ea89e8196811f51a7b7ade33eb11</td>
+      <td>10000000000000000000000</td>
+      <td>Dai Stablecoin</td>
+      <td>...</td>
+      <td>Curve DAO Token</td>
+      <td>CRV</td>
+      <td>18</td>
+      <td>149</td>
+      <td>164925</td>
+      <td>131500000000</td>
+      <td>124363</td>
+      <td>10406728</td>
+      <td>deprecated</td>
+      <td>1721161</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 38 columns</p>
+</div></div>
+</div>
+</section>
+<section id="get_account_nft_transfers">
+<h3>get_account_nft_transfers<a class="headerlink" href="#get_account_nft_transfers" title="Permalink to this headline"></a></h3>
+<p>Returns the list of ERC-721 ( NFT ) tokens transferred by an address, with optional filtering by token contract</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">account_nft_transfers</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_account_nft_transfers</span><span class="p">(</span><span class="n">accounts</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">account_nft_transfers</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="10" halign="left">0xBa19BdFF99065d9ABF3dF8CE942390B97fd71B12</th>
+      <th>...</th>
+      <th colspan="10" halign="left">0x503e4bfe8299D486701BC7bc7F2Ea94f50035daC</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>blockNumber</th>
+      <th>timeStamp</th>
+      <th>hash</th>
+      <th>nonce</th>
+      <th>blockHash</th>
+      <th>from</th>
+      <th>contractAddress</th>
+      <th>to</th>
+      <th>tokenID</th>
+      <th>tokenName</th>
+      <th>...</th>
+      <th>tokenName</th>
+      <th>tokenSymbol</th>
+      <th>tokenDecimal</th>
+      <th>transactionIndex</th>
+      <th>gas</th>
+      <th>gasPrice</th>
+      <th>gasUsed</th>
+      <th>cumulativeGasUsed</th>
+      <th>input</th>
+      <th>confirmations</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>12163335</td>
+      <td>1617409597</td>
+      <td>0x68141c1316d922ed5113e265a5d636f1ec6b090e7ea7...</td>
+      <td>7</td>
+      <td>0x50410977c4200551881195a8a82dc774f1ad856d1486...</td>
+      <td>0x283af0b28c62c092c9727f1ee09c02ca627eb7f5</td>
+      <td>0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>4330337349596085516852643297037585621539016595...</td>
+      <td>Ethereum Name Service</td>
+      <td>...</td>
+      <td>Ethereum Name Service</td>
+      <td>ENS</td>
+      <td>0</td>
+      <td>141</td>
+      <td>316737</td>
+      <td>104000000000</td>
+      <td>274305</td>
+      <td>9723492</td>
+      <td>deprecated</td>
+      <td>1733496</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>13105774</td>
+      <td>1630044146</td>
+      <td>0xafeac0a71b170dc37ee03b12b6b063c930de3008986f...</td>
+      <td>154</td>
+      <td>0x06a55da3c1917d3401d32386e2e0ba931301363d2f63...</td>
+      <td>0x0000000000000000000000000000000000000000</td>
+      <td>0xdc8bed466ee117ebff8ee84896d6acd42170d4bb</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>1014</td>
+      <td>Non-Fungible Soup</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>13105774</td>
+      <td>1630044146</td>
+      <td>0xafeac0a71b170dc37ee03b12b6b063c930de3008986f...</td>
+      <td>154</td>
+      <td>0x06a55da3c1917d3401d32386e2e0ba931301363d2f63...</td>
+      <td>0x0000000000000000000000000000000000000000</td>
+      <td>0xdc8bed466ee117ebff8ee84896d6acd42170d4bb</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>1585</td>
+      <td>Non-Fungible Soup</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>13105774</td>
+      <td>1630044146</td>
+      <td>0xafeac0a71b170dc37ee03b12b6b063c930de3008986f...</td>
+      <td>154</td>
+      <td>0x06a55da3c1917d3401d32386e2e0ba931301363d2f63...</td>
+      <td>0x0000000000000000000000000000000000000000</td>
+      <td>0xdc8bed466ee117ebff8ee84896d6acd42170d4bb</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>108</td>
+      <td>Non-Fungible Soup</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>13108127</td>
+      <td>1630076779</td>
+      <td>0xa63f272d0089e3c0f3af4f11a817dacda9a203e35bb1...</td>
+      <td>155</td>
+      <td>0xa9e53c0bc8f6abb2c5e1a8c73d5ea7e7b4528d872834...</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>0xdc8bed466ee117ebff8ee84896d6acd42170d4bb</td>
+      <td>0x07bbf9fdb156f298bec53cefa3652954a0738ed1</td>
+      <td>1585</td>
+      <td>Non-Fungible Soup</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 38 columns</p>
+</div></div>
+</div>
+</section>
+<section id="get_account_blocks_mined">
+<h3>get_account_blocks_mined<a class="headerlink" href="#get_account_blocks_mined" title="Permalink to this headline"></a></h3>
+<p>Returns the list of blocks mined by an address</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ethermine pubkey, F2Pool Old pubkey</span>
+<span class="n">miners</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;0xEA674fdDe714fd979de3EdF0F56AA9716B898ec8&#39;</span><span class="p">,</span> <span class="s1">&#39;0x829BD824B016326A401d083B33D092293333A830&#39;</span><span class="p">]</span>
+<span class="n">account_blocks_mined</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_account_blocks_mined</span><span class="p">(</span><span class="n">miners</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">account_blocks_mined</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="3" halign="left">0xEA674fdDe714fd979de3EdF0F56AA9716B898ec8</th>
+      <th colspan="3" halign="left">0x829BD824B016326A401d083B33D092293333A830</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>blockNumber</th>
+      <th>timeStamp</th>
+      <th>blockReward</th>
+      <th>blockNumber</th>
+      <th>timeStamp</th>
+      <th>blockReward</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>13930693</td>
+      <td>1641188358</td>
+      <td>2082764318928026917</td>
+      <td>13930692</td>
+      <td>1641188354</td>
+      <td>2026197939084862035</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>13930687</td>
+      <td>1641188310</td>
+      <td>2000000000000000000</td>
+      <td>13930688</td>
+      <td>1641188311</td>
+      <td>2137050444256578152</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>13930685</td>
+      <td>1641188282</td>
+      <td>2044603599365499508</td>
+      <td>13930686</td>
+      <td>1641188295</td>
+      <td>2087861421208960766</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>13930680</td>
+      <td>1641188228</td>
+      <td>2071377567715645856</td>
+      <td>13930684</td>
+      <td>1641188266</td>
+      <td>2163025280071299245</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>13930678</td>
+      <td>1641188174</td>
+      <td>2257598001084298849</td>
+      <td>13930672</td>
+      <td>1641188138</td>
+      <td>2023575067970603989</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+</section>
+<section id="Contracts">
+<h2>Contracts<a class="headerlink" href="#Contracts" title="Permalink to this headline"></a></h2>
+<p>Functions to return information about contracts</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sushiswap Router, Ygov Contract</span>
+<span class="n">contracts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F&#39;</span><span class="p">,</span> <span class="s1">&#39;0x0001FB050Fe7312791bF6475b96569D83F695C9f&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<section id="get_contract_abi">
+<h3>get_contract_abi<a class="headerlink" href="#get_contract_abi" title="Permalink to this headline"></a></h3>
+<p>Returns the Contract Application Binary Interface (ABI) of a verified smart contract</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">abis</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_contract_abi</span><span class="p">(</span><span class="n">contracts</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">abis</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F&#39;: &#39;[{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;_factory&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;_WETH&#34;,&#34;type&#34;:&#34;address&#34;}],&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;constructor&#34;},{&#34;inputs&#34;:[],&#34;name&#34;:&#34;WETH&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;&#34;,&#34;type&#34;:&#34;address&#34;}],&#34;stateMutability&#34;:&#34;view&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;tokenA&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;tokenB&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountADesired&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountBDesired&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountAMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountBMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;to&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;deadline&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;addLiquidity&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountA&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountB&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;liquidity&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;token&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountTokenDesired&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountTokenMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountETHMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;to&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;deadline&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;addLiquidityETH&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountToken&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountETH&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;liquidity&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;stateMutability&#34;:&#34;payable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[],&#34;name&#34;:&#34;factory&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;&#34;,&#34;type&#34;:&#34;address&#34;}],&#34;stateMutability&#34;:&#34;view&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountOut&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;reserveIn&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;reserveOut&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;getAmountIn&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountIn&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;stateMutability&#34;:&#34;pure&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountIn&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;reserveIn&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;reserveOut&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;getAmountOut&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountOut&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;stateMutability&#34;:&#34;pure&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountOut&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;address[]&#34;,&#34;name&#34;:&#34;path&#34;,&#34;type&#34;:&#34;address[]&#34;}],&#34;name&#34;:&#34;getAmountsIn&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256[]&#34;,&#34;name&#34;:&#34;amounts&#34;,&#34;type&#34;:&#34;uint256[]&#34;}],&#34;stateMutability&#34;:&#34;view&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountIn&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;address[]&#34;,&#34;name&#34;:&#34;path&#34;,&#34;type&#34;:&#34;address[]&#34;}],&#34;name&#34;:&#34;getAmountsOut&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256[]&#34;,&#34;name&#34;:&#34;amounts&#34;,&#34;type&#34;:&#34;uint256[]&#34;}],&#34;stateMutability&#34;:&#34;view&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountA&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;reserveA&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;reserveB&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;quote&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountB&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;stateMutability&#34;:&#34;pure&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;tokenA&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;tokenB&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;liquidity&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountAMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountBMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;to&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;deadline&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;removeLiquidity&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountA&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountB&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;token&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;liquidity&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountTokenMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountETHMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;to&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;deadline&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;removeLiquidityETH&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountToken&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountETH&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;token&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;liquidity&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountTokenMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountETHMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;to&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;deadline&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;removeLiquidityETHSupportingFeeOnTransferTokens&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountETH&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;token&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;liquidity&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountTokenMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountETHMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;to&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;deadline&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;bool&#34;,&#34;name&#34;:&#34;approveMax&#34;,&#34;type&#34;:&#34;bool&#34;},{&#34;internalType&#34;:&#34;uint8&#34;,&#34;name&#34;:&#34;v&#34;,&#34;type&#34;:&#34;uint8&#34;},{&#34;internalType&#34;:&#34;bytes32&#34;,&#34;name&#34;:&#34;r&#34;,&#34;type&#34;:&#34;bytes32&#34;},{&#34;internalType&#34;:&#34;bytes32&#34;,&#34;name&#34;:&#34;s&#34;,&#34;type&#34;:&#34;bytes32&#34;}],&#34;name&#34;:&#34;removeLiquidityETHWithPermit&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountToken&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountETH&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;token&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;liquidity&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountTokenMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountETHMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;to&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;deadline&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;bool&#34;,&#34;name&#34;:&#34;approveMax&#34;,&#34;type&#34;:&#34;bool&#34;},{&#34;internalType&#34;:&#34;uint8&#34;,&#34;name&#34;:&#34;v&#34;,&#34;type&#34;:&#34;uint8&#34;},{&#34;internalType&#34;:&#34;bytes32&#34;,&#34;name&#34;:&#34;r&#34;,&#34;type&#34;:&#34;bytes32&#34;},{&#34;internalType&#34;:&#34;bytes32&#34;,&#34;name&#34;:&#34;s&#34;,&#34;type&#34;:&#34;bytes32&#34;}],&#34;name&#34;:&#34;removeLiquidityETHWithPermitSupportingFeeOnTransferTokens&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountETH&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;tokenA&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;tokenB&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;liquidity&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountAMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountBMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;to&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;deadline&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;bool&#34;,&#34;name&#34;:&#34;approveMax&#34;,&#34;type&#34;:&#34;bool&#34;},{&#34;internalType&#34;:&#34;uint8&#34;,&#34;name&#34;:&#34;v&#34;,&#34;type&#34;:&#34;uint8&#34;},{&#34;internalType&#34;:&#34;bytes32&#34;,&#34;name&#34;:&#34;r&#34;,&#34;type&#34;:&#34;bytes32&#34;},{&#34;internalType&#34;:&#34;bytes32&#34;,&#34;name&#34;:&#34;s&#34;,&#34;type&#34;:&#34;bytes32&#34;}],&#34;name&#34;:&#34;removeLiquidityWithPermit&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountA&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountB&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountOut&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;address[]&#34;,&#34;name&#34;:&#34;path&#34;,&#34;type&#34;:&#34;address[]&#34;},{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;to&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;deadline&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;swapETHForExactTokens&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256[]&#34;,&#34;name&#34;:&#34;amounts&#34;,&#34;type&#34;:&#34;uint256[]&#34;}],&#34;stateMutability&#34;:&#34;payable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountOutMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;address[]&#34;,&#34;name&#34;:&#34;path&#34;,&#34;type&#34;:&#34;address[]&#34;},{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;to&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;deadline&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;swapExactETHForTokens&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256[]&#34;,&#34;name&#34;:&#34;amounts&#34;,&#34;type&#34;:&#34;uint256[]&#34;}],&#34;stateMutability&#34;:&#34;payable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountOutMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;address[]&#34;,&#34;name&#34;:&#34;path&#34;,&#34;type&#34;:&#34;address[]&#34;},{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;to&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;deadline&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;swapExactETHForTokensSupportingFeeOnTransferTokens&#34;,&#34;outputs&#34;:[],&#34;stateMutability&#34;:&#34;payable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountIn&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountOutMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;address[]&#34;,&#34;name&#34;:&#34;path&#34;,&#34;type&#34;:&#34;address[]&#34;},{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;to&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;deadline&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;swapExactTokensForETH&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256[]&#34;,&#34;name&#34;:&#34;amounts&#34;,&#34;type&#34;:&#34;uint256[]&#34;}],&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountIn&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountOutMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;address[]&#34;,&#34;name&#34;:&#34;path&#34;,&#34;type&#34;:&#34;address[]&#34;},{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;to&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;deadline&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;swapExactTokensForETHSupportingFeeOnTransferTokens&#34;,&#34;outputs&#34;:[],&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountIn&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountOutMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;address[]&#34;,&#34;name&#34;:&#34;path&#34;,&#34;type&#34;:&#34;address[]&#34;},{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;to&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;deadline&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;swapExactTokensForTokens&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256[]&#34;,&#34;name&#34;:&#34;amounts&#34;,&#34;type&#34;:&#34;uint256[]&#34;}],&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountIn&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountOutMin&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;address[]&#34;,&#34;name&#34;:&#34;path&#34;,&#34;type&#34;:&#34;address[]&#34;},{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;to&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;deadline&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;swapExactTokensForTokensSupportingFeeOnTransferTokens&#34;,&#34;outputs&#34;:[],&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountOut&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountInMax&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;address[]&#34;,&#34;name&#34;:&#34;path&#34;,&#34;type&#34;:&#34;address[]&#34;},{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;to&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;deadline&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;swapTokensForExactETH&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256[]&#34;,&#34;name&#34;:&#34;amounts&#34;,&#34;type&#34;:&#34;uint256[]&#34;}],&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountOut&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amountInMax&#34;,&#34;type&#34;:&#34;uint256&#34;},{&#34;internalType&#34;:&#34;address[]&#34;,&#34;name&#34;:&#34;path&#34;,&#34;type&#34;:&#34;address[]&#34;},{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;to&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;deadline&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;swapTokensForExactTokens&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256[]&#34;,&#34;name&#34;:&#34;amounts&#34;,&#34;type&#34;:&#34;uint256[]&#34;}],&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;stateMutability&#34;:&#34;payable&#34;,&#34;type&#34;:&#34;receive&#34;}]&#39;,
+ &#39;0x0001FB050Fe7312791bF6475b96569D83F695C9f&#39;: &#39;[{&#34;anonymous&#34;:false,&#34;inputs&#34;:[{&#34;indexed&#34;:true,&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;previousOwner&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;indexed&#34;:true,&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;newOwner&#34;,&#34;type&#34;:&#34;address&#34;}],&#34;name&#34;:&#34;OwnershipTransferred&#34;,&#34;type&#34;:&#34;event&#34;},{&#34;anonymous&#34;:false,&#34;inputs&#34;:[{&#34;indexed&#34;:false,&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;reward&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;RewardAdded&#34;,&#34;type&#34;:&#34;event&#34;},{&#34;anonymous&#34;:false,&#34;inputs&#34;:[{&#34;indexed&#34;:true,&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;user&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;indexed&#34;:false,&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;reward&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;RewardPaid&#34;,&#34;type&#34;:&#34;event&#34;},{&#34;anonymous&#34;:false,&#34;inputs&#34;:[{&#34;indexed&#34;:true,&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;user&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;indexed&#34;:false,&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amount&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;Staked&#34;,&#34;type&#34;:&#34;event&#34;},{&#34;anonymous&#34;:false,&#34;inputs&#34;:[{&#34;indexed&#34;:true,&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;user&#34;,&#34;type&#34;:&#34;address&#34;},{&#34;indexed&#34;:false,&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amount&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;Withdrawn&#34;,&#34;type&#34;:&#34;event&#34;},{&#34;constant&#34;:true,&#34;inputs&#34;:[],&#34;name&#34;:&#34;DURATION&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;view&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:true,&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;account&#34;,&#34;type&#34;:&#34;address&#34;}],&#34;name&#34;:&#34;balanceOf&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;view&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:true,&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;account&#34;,&#34;type&#34;:&#34;address&#34;}],&#34;name&#34;:&#34;earned&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;view&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:false,&#34;inputs&#34;:[],&#34;name&#34;:&#34;exit&#34;,&#34;outputs&#34;:[],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:false,&#34;inputs&#34;:[],&#34;name&#34;:&#34;getReward&#34;,&#34;outputs&#34;:[],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:true,&#34;inputs&#34;:[],&#34;name&#34;:&#34;isOwner&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;bool&#34;,&#34;name&#34;:&#34;&#34;,&#34;type&#34;:&#34;bool&#34;}],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;view&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:true,&#34;inputs&#34;:[],&#34;name&#34;:&#34;lastTimeRewardApplicable&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;view&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:true,&#34;inputs&#34;:[],&#34;name&#34;:&#34;lastUpdateTime&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;view&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:false,&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;reward&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;notifyRewardAmount&#34;,&#34;outputs&#34;:[],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:true,&#34;inputs&#34;:[],&#34;name&#34;:&#34;owner&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;&#34;,&#34;type&#34;:&#34;address&#34;}],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;view&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:true,&#34;inputs&#34;:[],&#34;name&#34;:&#34;periodFinish&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;view&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:false,&#34;inputs&#34;:[],&#34;name&#34;:&#34;renounceOwnership&#34;,&#34;outputs&#34;:[],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:true,&#34;inputs&#34;:[],&#34;name&#34;:&#34;rewardPerToken&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;view&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:true,&#34;inputs&#34;:[],&#34;name&#34;:&#34;rewardPerTokenStored&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;view&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:true,&#34;inputs&#34;:[],&#34;name&#34;:&#34;rewardRate&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;view&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:true,&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;&#34;,&#34;type&#34;:&#34;address&#34;}],&#34;name&#34;:&#34;rewards&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;view&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:false,&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;_rewardDistribution&#34;,&#34;type&#34;:&#34;address&#34;}],&#34;name&#34;:&#34;setRewardDistribution&#34;,&#34;outputs&#34;:[],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:false,&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amount&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;stake&#34;,&#34;outputs&#34;:[],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:true,&#34;inputs&#34;:[],&#34;name&#34;:&#34;totalSupply&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;view&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:false,&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;newOwner&#34;,&#34;type&#34;:&#34;address&#34;}],&#34;name&#34;:&#34;transferOwnership&#34;,&#34;outputs&#34;:[],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:true,&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;address&#34;,&#34;name&#34;:&#34;&#34;,&#34;type&#34;:&#34;address&#34;}],&#34;name&#34;:&#34;userRewardPerTokenPaid&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;view&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:false,&#34;inputs&#34;:[{&#34;internalType&#34;:&#34;uint256&#34;,&#34;name&#34;:&#34;amount&#34;,&#34;type&#34;:&#34;uint256&#34;}],&#34;name&#34;:&#34;withdraw&#34;,&#34;outputs&#34;:[],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;nonpayable&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:true,&#34;inputs&#34;:[],&#34;name&#34;:&#34;y&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;contract IERC20&#34;,&#34;name&#34;:&#34;&#34;,&#34;type&#34;:&#34;address&#34;}],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;view&#34;,&#34;type&#34;:&#34;function&#34;},{&#34;constant&#34;:true,&#34;inputs&#34;:[],&#34;name&#34;:&#34;yfi&#34;,&#34;outputs&#34;:[{&#34;internalType&#34;:&#34;contract IERC20&#34;,&#34;name&#34;:&#34;&#34;,&#34;type&#34;:&#34;address&#34;}],&#34;payable&#34;:false,&#34;stateMutability&#34;:&#34;view&#34;,&#34;type&#34;:&#34;function&#34;}]&#39;}
+</pre></div></div>
+</div>
+</section>
+<section id="get_contract_source_code">
+<h3>get_contract_source_code<a class="headerlink" href="#get_contract_source_code" title="Permalink to this headline"></a></h3>
+<p>Returns the Solidity source code of a verified smart contract</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">source_code</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_contract_source_code</span><span class="p">(</span><span class="n">contracts</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">source_code</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="10" halign="left">0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F</th>
+      <th>...</th>
+      <th colspan="10" halign="left">0x0001FB050Fe7312791bF6475b96569D83F695C9f</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>SourceCode</th>
+      <th>ABI</th>
+      <th>ContractName</th>
+      <th>CompilerVersion</th>
+      <th>OptimizationUsed</th>
+      <th>Runs</th>
+      <th>ConstructorArguments</th>
+      <th>EVMVersion</th>
+      <th>Library</th>
+      <th>LicenseType</th>
+      <th>...</th>
+      <th>CompilerVersion</th>
+      <th>OptimizationUsed</th>
+      <th>Runs</th>
+      <th>ConstructorArguments</th>
+      <th>EVMVersion</th>
+      <th>Library</th>
+      <th>LicenseType</th>
+      <th>Proxy</th>
+      <th>Implementation</th>
+      <th>SwarmSource</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>// File: contracts/uniswapv2/interfaces/IUnisw...</td>
+      <td>[{"inputs":[{"internalType":"address","name":"...</td>
+      <td>UniswapV2Router02</td>
+      <td>v0.6.12+commit.27d51765</td>
+      <td>1</td>
+      <td>200</td>
+      <td>000000000000000000000000c0aee478e3658e2610c5f7...</td>
+      <td>Default</td>
+      <td></td>
+      <td>None</td>
+      <td>...</td>
+      <td>v0.5.16+commit.9c3226ce</td>
+      <td>0</td>
+      <td>200</td>
+      <td></td>
+      <td>Default</td>
+      <td></td>
+      <td>MIT</td>
+      <td>0</td>
+      <td></td>
+      <td>bzzr://e51af10bf74bebc919ec3e43a0470cbc7433a40...</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 26 columns</p>
+</div></div>
+</div>
+</section>
+</section>
+<section id="Transactions">
+<h2>Transactions<a class="headerlink" href="#Transactions" title="Permalink to this headline"></a></h2>
+<p>Functions to return information about transactions</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">txns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;0x29f2df8ce6a0e2a93bddacdfcceb9fd847630dcd1d25ad1ec3402cc449fa1eb6&#39;</span><span class="p">,</span> <span class="s1">&#39;0x0bd7f9af4f8ddb18a321ab0120a2389046b39feb67561d17378e0d4dc062decc&#39;</span><span class="p">,</span> <span class="s1">&#39;0x1815a03dd8a1ce7da5a7a4304fa5fae1a8f4f3c20787e341eea230614e49ff61&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<section id="get_contract_execution_status-–-busted-on-Etherscan-backend">
+<h3>get_contract_execution_status – busted on Etherscan backend<a class="headerlink" href="#get_contract_execution_status-–-busted-on-Etherscan-backend" title="Permalink to this headline"></a></h3>
+<p>Returns the status code of a contract execution</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">contract_execution_status</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_contract_execution_status</span><span class="p">(</span><span class="n">txns</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">contract_execution_status</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>transactions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0x29f2df8ce6a0e2a93bddacdfcceb9fd847630dcd1d25ad1ec3402cc449fa1eb6</th>
+      <td>Error! Missing Or invalid Action name</td>
+    </tr>
+    <tr>
+      <th>0x0bd7f9af4f8ddb18a321ab0120a2389046b39feb67561d17378e0d4dc062decc</th>
+      <td>Error! Missing Or invalid Action name</td>
+    </tr>
+    <tr>
+      <th>0x1815a03dd8a1ce7da5a7a4304fa5fae1a8f4f3c20787e341eea230614e49ff61</th>
+      <td>Error! Missing Or invalid Action name</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="get_transaction_execution_status-–-busted-on-Etherscan-backend">
+<h3>get_transaction_execution_status – busted on Etherscan backend<a class="headerlink" href="#get_transaction_execution_status-–-busted-on-Etherscan-backend" title="Permalink to this headline"></a></h3>
+<p>Returns the status code of a transaction execution.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transaction_execution_status</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_transaction_execution_status</span><span class="p">(</span><span class="n">txns</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">transaction_execution_status</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>transactions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0x29f2df8ce6a0e2a93bddacdfcceb9fd847630dcd1d25ad1ec3402cc449fa1eb6</th>
+      <td>Error! Missing Or invalid Action name</td>
+    </tr>
+    <tr>
+      <th>0x0bd7f9af4f8ddb18a321ab0120a2389046b39feb67561d17378e0d4dc062decc</th>
+      <td>Error! Missing Or invalid Action name</td>
+    </tr>
+    <tr>
+      <th>0x1815a03dd8a1ce7da5a7a4304fa5fae1a8f4f3c20787e341eea230614e49ff61</th>
+      <td>Error! Missing Or invalid Action name</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+</section>
+<section id="Blocks">
+<h2>Blocks<a class="headerlink" href="#Blocks" title="Permalink to this headline"></a></h2>
+<p>Functions to return information about given block(s)</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">blocks</span> <span class="o">=</span> <span class="p">[</span><span class="mi">13188647</span><span class="p">,</span> <span class="mi">13088500</span><span class="p">]</span>
+<span class="n">far_out_block</span> <span class="o">=</span> <span class="mi">50000000</span>
+<span class="n">timestamp</span> <span class="o">=</span> <span class="mi">1638767557</span>
+</pre></div>
+</div>
+</div>
+<section id="get_block_reward">
+<h3>get_block_reward<a class="headerlink" href="#get_block_reward" title="Permalink to this headline"></a></h3>
+<p>Returns the block reward and ‘Uncle’ block rewards</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">block_rewards</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_block_reward</span><span class="p">(</span><span class="n">blocks</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">block_rewards</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>13188647</th>
+      <th>13088500</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>blockNumber</th>
+      <td>13188647</td>
+      <td>13088500</td>
+    </tr>
+    <tr>
+      <th>timeStamp</th>
+      <td>1631151375</td>
+      <td>1629814354</td>
+    </tr>
+    <tr>
+      <th>blockMiner</th>
+      <td>0x5a0b54d5dc17e0aadc383d2db43b0a0d3e029c4c</td>
+      <td>0x1ad91ee08f21be3de0ba2ba6918e714da6b45836</td>
+    </tr>
+    <tr>
+      <th>blockReward</th>
+      <td>2747824941203436716</td>
+      <td>2431595650457815561</td>
+    </tr>
+    <tr>
+      <th>uncles</th>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+    <tr>
+      <th>uncleInclusionReward</th>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="get_block_countdown">
+<h3>get_block_countdown<a class="headerlink" href="#get_block_countdown" title="Permalink to this headline"></a></h3>
+<p>Returns the estimated time remaining, in seconds, until a certain block is mined</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">block_countdown</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_block_countdown</span><span class="p">(</span><span class="n">far_out_block</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">block_countdown</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>CurrentBlock</th>
+      <th>CountdownBlock</th>
+      <th>RemainingBlock</th>
+      <th>EstimateTimeInSec</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>13761567</td>
+      <td>50000000</td>
+      <td>36238433</td>
+      <td>496466547.1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="get_block_by_timestamp">
+<h3>get_block_by_timestamp<a class="headerlink" href="#get_block_by_timestamp" title="Permalink to this headline"></a></h3>
+<p>Returns the block number that was mined at a certain timestamp (in unix)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">block_at_time</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_block_by_timestamp</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">block_at_time</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>13750384</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+</section>
+<section id="Logs">
+<h2>Logs<a class="headerlink" href="#Logs" title="Permalink to this headline"></a></h2>
+<p>This function is a wrapper around the Etherscan API which is a wrapper around the native eth_getLogs. Please check out their documentation for a more in depth explanation: <a class="reference external" href="https://docs.etherscan.io/api-endpoints/logs">https://docs.etherscan.io/api-endpoints/logs</a></p>
+<p>Below are the list of supported filter parameters: * fromBlock, toBlock, address * topic0, topic1, topic2, topic3 (32 Bytes per topic) * topic0_1_opr (and|or between topic0 &amp; topic1), topic1_2_opr (and|or between topic1 &amp; topic2), topic2_3_opr (and|or between topic2 &amp; topic3), topic0_2_opr (and|or between topic0 &amp; topic2), topic0_3_opr (and|or between topic0 &amp; topic3), topic1_3_opr (and|or between topic1 &amp; topic3)</p>
+<p>Some parameters to take note of: * FromBlock &amp; ToBlock accepts the blocknumber (integer, NOT hex) or ‘latest’ (earliest &amp; pending is NOT supported yet) * Topic Operator (opr) choices are either ‘and’ or ‘or’ and are restricted to the above choices only * FromBlock &amp; ToBlock parameters are required * An address and/or topic(X) parameters are required, when multiple topic(X) parameters are used the topicX_X_opr (and|or operator) is also required</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">address</span> <span class="o">=</span> <span class="s1">&#39;0x33990122638b9132ca29c723bdf037f1a891a70c&#39;</span>
+<span class="n">fromBlock</span><span class="o">=</span><span class="mi">379224</span>
+<span class="n">toBlock</span><span class="o">=</span><span class="s1">&#39;latest&#39;</span>
+<span class="n">topic0</span><span class="o">=</span><span class="s1">&#39;0xf63780e752c6a54a94fc52715dbc5518a3b4c3c2833d301a204226548a2a8545&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">logs</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_logs</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">fromBlock</span><span class="p">,</span> <span class="n">to_block</span><span class="o">=</span><span class="n">toBlock</span><span class="p">,</span> <span class="n">topic0</span><span class="o">=</span><span class="n">topic0</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">logs</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>address</th>
+      <th>topics</th>
+      <th>data</th>
+      <th>blockNumber</th>
+      <th>timeStamp</th>
+      <th>gasPrice</th>
+      <th>gasUsed</th>
+      <th>logIndex</th>
+      <th>transactionHash</th>
+      <th>transactionIndex</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0x33990122638b9132ca29c723bdf037f1a891a70c</td>
+      <td>[0xf63780e752c6a54a94fc52715dbc5518a3b4c3c2833...</td>
+      <td>0x</td>
+      <td>0x5c958</td>
+      <td>0x561d688c</td>
+      <td>0xba43b7400</td>
+      <td>0x10682</td>
+      <td>0x</td>
+      <td>0x0b03498648ae2da924f961dda00dc6bb0a8df1551926...</td>
+      <td>0x</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0x33990122638b9132ca29c723bdf037f1a891a70c</td>
+      <td>[0xf63780e752c6a54a94fc52715dbc5518a3b4c3c2833...</td>
+      <td>0x</td>
+      <td>0x5c965</td>
+      <td>0x561d6930</td>
+      <td>0xba43b7400</td>
+      <td>0x105c2</td>
+      <td>0x</td>
+      <td>0x8c72ea19b48947c4339077bd9c9c09a780dfbdb1cafe...</td>
+      <td>0x</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0x33990122638b9132ca29c723bdf037f1a891a70c</td>
+      <td>[0xf63780e752c6a54a94fc52715dbc5518a3b4c3c2833...</td>
+      <td>0x</td>
+      <td>0x6664c</td>
+      <td>0x56281247</td>
+      <td>0xba43b7400</td>
+      <td>0x105c2</td>
+      <td>0x</td>
+      <td>0xf9c4f7843dc1f9bf6d248ebe0033b2c51398255eb897...</td>
+      <td>0x1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0x33990122638b9132ca29c723bdf037f1a891a70c</td>
+      <td>[0xf63780e752c6a54a94fc52715dbc5518a3b4c3c2833...</td>
+      <td>0x</td>
+      <td>0x66650</td>
+      <td>0x5628125d</td>
+      <td>0xba43b7400</td>
+      <td>0x10642</td>
+      <td>0x</td>
+      <td>0xb190139d14140cf98035c5b78fe3b2629db2787ef234...</td>
+      <td>0x</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0x33990122638b9132ca29c723bdf037f1a891a70c</td>
+      <td>[0xf63780e752c6a54a94fc52715dbc5518a3b4c3c2833...</td>
+      <td>0x</td>
+      <td>0x6aff6</td>
+      <td>0x562cf696</td>
+      <td>0xba43b7400</td>
+      <td>0x104c2</td>
+      <td>0x</td>
+      <td>0x27d96550f2b41e9bc3da7d6e2f2a333ce11c128d425b...</td>
+      <td>0x1</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>364</th>
+      <td>0x33990122638b9132ca29c723bdf037f1a891a70c</td>
+      <td>[0xf63780e752c6a54a94fc52715dbc5518a3b4c3c2833...</td>
+      <td></td>
+      <td>0x17f0b1</td>
+      <td>0x5742bd78</td>
+      <td>0x4a817c800</td>
+      <td>0x107c2</td>
+      <td>0x</td>
+      <td>0x647676db70d8d17d4d59f27afcd048181f2dd0d6e20d...</td>
+      <td>0x</td>
+    </tr>
+    <tr>
+      <th>365</th>
+      <td>0x33990122638b9132ca29c723bdf037f1a891a70c</td>
+      <td>[0xf63780e752c6a54a94fc52715dbc5518a3b4c3c2833...</td>
+      <td></td>
+      <td>0x18df11</td>
+      <td>0x57502078</td>
+      <td>0x4a817c800</td>
+      <td>0x104c2</td>
+      <td>0x</td>
+      <td>0xe8b0588b803621a50d4eccbb71e2f9463c0d6c267e6d...</td>
+      <td>0x</td>
+    </tr>
+    <tr>
+      <th>366</th>
+      <td>0x33990122638b9132ca29c723bdf037f1a891a70c</td>
+      <td>[0xf63780e752c6a54a94fc52715dbc5518a3b4c3c2833...</td>
+      <td></td>
+      <td>0x19741f</td>
+      <td>0x5758741d</td>
+      <td>0x4a817c800</td>
+      <td>0x10502</td>
+      <td>0x1</td>
+      <td>0x84d0668ff085c81379e0b36aa6eaf54d5d387e93084d...</td>
+      <td>0x1</td>
+    </tr>
+    <tr>
+      <th>367</th>
+      <td>0x33990122638b9132ca29c723bdf037f1a891a70c</td>
+      <td>[0xf63780e752c6a54a94fc52715dbc5518a3b4c3c2833...</td>
+      <td></td>
+      <td>0x19749b</td>
+      <td>0x57587a9f</td>
+      <td>0x4a817c800</td>
+      <td>0xca6a</td>
+      <td>0x3</td>
+      <td>0xbb60625e9c4df3cd1c66f77fb673e478c81b58deccb1...</td>
+      <td>0x5</td>
+    </tr>
+    <tr>
+      <th>368</th>
+      <td>0x33990122638b9132ca29c723bdf037f1a891a70c</td>
+      <td>[0xf63780e752c6a54a94fc52715dbc5518a3b4c3c2833...</td>
+      <td>0x</td>
+      <td>0x2399ec</td>
+      <td>0x57e9bb5c</td>
+      <td>0xba43b7400</td>
+      <td>0x10682</td>
+      <td>0x</td>
+      <td>0x980742edcf7b5cc9e1fdb2ddd71df20a176454c09be5...</td>
+      <td>0x</td>
+    </tr>
+  </tbody>
+</table>
+<p>369 rows × 10 columns</p>
+</div></div>
+</div>
+</section>
+<section id="Geth/Parity-Proxy">
+<h2>Geth/Parity Proxy<a class="headerlink" href="#Geth/Parity-Proxy" title="Permalink to this headline"></a></h2>
+<p>Functions to emulate a Geth/Parity Ethereum client through Etherscan</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accounts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;0xBa19BdFF99065d9ABF3dF8CE942390B97fd71B12&#39;</span><span class="p">,</span> <span class="s1">&#39;0x503e4bfe8299D486701BC7bc7F2Ea94f50035daC&#39;</span><span class="p">]</span>
+<span class="n">blocks</span> <span class="o">=</span> <span class="p">[</span><span class="mi">13188647</span><span class="p">,</span> <span class="mi">13088500</span><span class="p">]</span>
+<span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">txns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;0x29f2df8ce6a0e2a93bddacdfcceb9fd847630dcd1d25ad1ec3402cc449fa1eb6&#39;</span><span class="p">,</span> <span class="s1">&#39;0x0bd7f9af4f8ddb18a321ab0120a2389046b39feb67561d17378e0d4dc062decc&#39;</span><span class="p">,</span> <span class="s1">&#39;0x1815a03dd8a1ce7da5a7a4304fa5fae1a8f4f3c20787e341eea230614e49ff61&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<section id="get_eth_block_number">
+<h3>get_eth_block_number<a class="headerlink" href="#get_eth_block_number" title="Permalink to this headline"></a></h3>
+<p>Returns the number of most recent block</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">blockNo</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_eth_block_number</span><span class="p">()</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">blockNo</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+13761569
+</pre></div></div>
+</div>
+</section>
+<section id="get_eth_block">
+<h3>get_eth_block<a class="headerlink" href="#get_eth_block" title="Permalink to this headline"></a></h3>
+<p>Returns information about a block by block number</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eth_block</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_eth_block</span><span class="p">(</span><span class="n">blocks</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">eth_block</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>13188647</th>
+      <th>13088500</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>baseFeePerGas</th>
+      <td>0x134742b51d</td>
+      <td>0x1355623da4</td>
+    </tr>
+    <tr>
+      <th>difficulty</th>
+      <td>0x1f7f67443cdcec</td>
+      <td>0x1cb13c9b887d19</td>
+    </tr>
+    <tr>
+      <th>extraData</th>
+      <td>0xd883010a08846765746888676f312e31362e37856c69...</td>
+      <td>0x486976656f6e2063612d68656176792068734541</td>
+    </tr>
+    <tr>
+      <th>gasLimit</th>
+      <td>0x1c9c380</td>
+      <td>0x1c9c380</td>
+    </tr>
+    <tr>
+      <th>gasUsed</th>
+      <td>0x1c9a61f</td>
+      <td>0xa325ef</td>
+    </tr>
+    <tr>
+      <th>hash</th>
+      <td>0x39d5dd282cb927a8a4d48067753d65d4e94cf91f161d...</td>
+      <td>0x94fbba5b586bb7b9790fc5300f9fc3ecad1d4f5d1c94...</td>
+    </tr>
+    <tr>
+      <th>logsBloom</th>
+      <td>0xde213faebf5f4f69f195cfdbf44572ee7cf3d5d2a869...</td>
+      <td>0x78bd33838112301d69e010cca0029a8108b0975a0084...</td>
+    </tr>
+    <tr>
+      <th>miner</th>
+      <td>0x5a0b54d5dc17e0aadc383d2db43b0a0d3e029c4c</td>
+      <td>0x1ad91ee08f21be3de0ba2ba6918e714da6b45836</td>
+    </tr>
+    <tr>
+      <th>mixHash</th>
+      <td>0x294e8047712619a370ea19ff5a4a16cd6516f508bcd8...</td>
+      <td>0x9f9143206f0c1e3ea0ced8be5c2fd55b5a5609503bd9...</td>
+    </tr>
+    <tr>
+      <th>nonce</th>
+      <td>0x12b95eb00f016147</td>
+      <td>0xacfd53f2a607601b</td>
+    </tr>
+    <tr>
+      <th>number</th>
+      <td>0xc93e27</td>
+      <td>0xc7b6f4</td>
+    </tr>
+    <tr>
+      <th>parentHash</th>
+      <td>0xe8bf0a48d5df068791f30aa3e5a51a512a6e6d33ad8d...</td>
+      <td>0x6adc782254d0d211cb7260fdf921649ee990a5309d0d...</td>
+    </tr>
+    <tr>
+      <th>receiptsRoot</th>
+      <td>0x18eec39ae671cdae2d92f3cdc0e1cb873eb20cd5265f...</td>
+      <td>0x243cb4383ddaf0b8fee03763efb69a0102e489cd6689...</td>
+    </tr>
+    <tr>
+      <th>sha3Uncles</th>
+      <td>0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a...</td>
+      <td>0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a...</td>
+    </tr>
+    <tr>
+      <th>size</th>
+      <td>0x1e409</td>
+      <td>0xb1a1</td>
+    </tr>
+    <tr>
+      <th>stateRoot</th>
+      <td>0xf0c8a65fc4d8913f249ab6c3269f4f14a893822f58f1...</td>
+      <td>0xe88177015f6ef1601cda322d8830f308b33890250802...</td>
+    </tr>
+    <tr>
+      <th>timestamp</th>
+      <td>0x6139650f</td>
+      <td>0x6124fe52</td>
+    </tr>
+    <tr>
+      <th>totalDifficulty</th>
+      <td>0x66ac2eb3acc46c324f5</td>
+      <td>0x63cd38d475da8174737</td>
+    </tr>
+    <tr>
+      <th>transactions</th>
+      <td>[{'blockHash': '0x39d5dd282cb927a8a4d48067753d...</td>
+      <td>[{'blockHash': '0x94fbba5b586bb7b9790fc5300f9f...</td>
+    </tr>
+    <tr>
+      <th>transactionsRoot</th>
+      <td>0x980df7fe6c8beb9bfab65e6414a490dce743e9b55e93...</td>
+      <td>0x93fb6db0b7354678be1b08a4769a65875d77fef756c6...</td>
+    </tr>
+    <tr>
+      <th>uncles</th>
+      <td>[]</td>
+      <td>[]</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="get_eth_uncle">
+<h3>get_eth_uncle<a class="headerlink" href="#get_eth_uncle" title="Permalink to this headline"></a></h3>
+<p>Returns information about a uncle by block number and index</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">uncle</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_eth_uncle</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">uncle</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="get_eth_block_transaction_count">
+<h3>get_eth_block_transaction_count<a class="headerlink" href="#get_eth_block_transaction_count" title="Permalink to this headline"></a></h3>
+<p>Returns the number of transactions in a block</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">block_transaction_count</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_eth_block_transaction_count</span><span class="p">(</span><span class="n">blocks</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">block_transaction_count</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>transaction_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0xc93e27</th>
+      <td>275</td>
+    </tr>
+    <tr>
+      <th>0xc7b6f4</th>
+      <td>193</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="get_eth_transaction_by_hash">
+<h3>get_eth_transaction_by_hash<a class="headerlink" href="#get_eth_transaction_by_hash" title="Permalink to this headline"></a></h3>
+<p>Returns the information about a transaction requested by transaction hash</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">txns_by_hash</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_eth_transaction_by_hash</span><span class="p">(</span><span class="n">txns</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">txns_by_hash</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0x29f2df8ce6a0e2a93bddacdfcceb9fd847630dcd1d25ad1ec3402cc449fa1eb6</th>
+      <th>0x0bd7f9af4f8ddb18a321ab0120a2389046b39feb67561d17378e0d4dc062decc</th>
+      <th>0x1815a03dd8a1ce7da5a7a4304fa5fae1a8f4f3c20787e341eea230614e49ff61</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>blockHash</th>
+      <td>0xe3bfc6bb26456cc452d15fe2de6ed3931e9a0fa289dd...</td>
+      <td>0xc26af31bcee63e11ae42d069b407f2813a7cea39669e...</td>
+      <td>0x3ee98c172be82e1389c92f31124b5bda97e13cf4471b...</td>
+    </tr>
+    <tr>
+      <th>blockNumber</th>
+      <td>0xd09183</td>
+      <td>0xbd338a</td>
+      <td>0xbe978e</td>
+    </tr>
+    <tr>
+      <th>from</th>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+    </tr>
+    <tr>
+      <th>gas</th>
+      <td>0x20983</td>
+      <td>0x72abd</td>
+      <td>0x71541</td>
+    </tr>
+    <tr>
+      <th>gasPrice</th>
+      <td>0x1b348f74bf</td>
+      <td>0x14419aa600</td>
+      <td>0x3286353a00</td>
+    </tr>
+    <tr>
+      <th>maxFeePerGas</th>
+      <td>0x205185d7df</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>maxPriorityFeePerGas</th>
+      <td>0x59682f00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>hash</th>
+      <td>0x29f2df8ce6a0e2a93bddacdfcceb9fd847630dcd1d25...</td>
+      <td>0x0bd7f9af4f8ddb18a321ab0120a2389046b39feb6756...</td>
+      <td>0x1815a03dd8a1ce7da5a7a4304fa5fae1a8f4f3c20787...</td>
+    </tr>
+    <tr>
+      <th>input</th>
+      <td>0x3015a5b5000000000000000000000000ba19bdff9906...</td>
+      <td>0x415565b00000000000000000000000001f9840a85d5a...</td>
+      <td>0xf6216495000000000000000000000000dcd90c7f6324...</td>
+    </tr>
+    <tr>
+      <th>nonce</th>
+      <td>0xd4</td>
+      <td>0x68</td>
+      <td>0x79</td>
+    </tr>
+    <tr>
+      <th>to</th>
+      <td>0xd569d3cce55b71a8a3f3c418c329a66e5f714431</td>
+      <td>0xdef1c0ded9bec7f1a1670819833240f027b25eff</td>
+      <td>0xc5b49abf8b164472be9486767af6b1a5586b5609</td>
+    </tr>
+    <tr>
+      <th>transactionIndex</th>
+      <td>0xea</td>
+      <td>0x86</td>
+      <td>0x28</td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td>0x0</td>
+      <td>0x0</td>
+      <td>0x0</td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td>0x2</td>
+      <td>0x0</td>
+      <td>0x0</td>
+    </tr>
+    <tr>
+      <th>accessList</th>
+      <td>[]</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>chainId</th>
+      <td>0x1</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>v</th>
+      <td>0x1</td>
+      <td>0x25</td>
+      <td>0x26</td>
+    </tr>
+    <tr>
+      <th>r</th>
+      <td>0xc903a46590ec28f688f32855702ce4ba93dc41abfea7...</td>
+      <td>0x18faa03917f1f7933e61e1d18468ff06c661e315d866...</td>
+      <td>0x94567659a313430951a53d93a218259e6f556964e012...</td>
+    </tr>
+    <tr>
+      <th>s</th>
+      <td>0x8112d963da3427e774f159e86dba2284af135f35fbcd...</td>
+      <td>0x58d5808e701496ee978b9c5801f49e76199dfda12a44...</td>
+      <td>0x5f20b4c0fe585feb938907cdcc1ef7faf6dad65b0f73...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="get_eth_transaction_by_block_index">
+<h3>get_eth_transaction_by_block_index<a class="headerlink" href="#get_eth_transaction_by_block_index" title="Permalink to this headline"></a></h3>
+<p>Returns information about a transaction by block number and transaction index position</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">txn_info</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_eth_transaction_by_block_index</span><span class="p">(</span><span class="n">blocks</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">index</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">txn_info</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>transaction_info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>blockHash</th>
+      <td>0x39d5dd282cb927a8a4d48067753d65d4e94cf91f161d...</td>
+    </tr>
+    <tr>
+      <th>blockNumber</th>
+      <td>0xc93e27</td>
+    </tr>
+    <tr>
+      <th>from</th>
+      <td>0xa06c0c2b2ce1918a148e5c6ea9f32a374ef44ba8</td>
+    </tr>
+    <tr>
+      <th>gas</th>
+      <td>0x5208</td>
+    </tr>
+    <tr>
+      <th>gasPrice</th>
+      <td>0x22ecb25c00</td>
+    </tr>
+    <tr>
+      <th>hash</th>
+      <td>0xc340f61db160cba7c5052b8e48672848d204fe8e3d1f...</td>
+    </tr>
+    <tr>
+      <th>input</th>
+      <td>0x</td>
+    </tr>
+    <tr>
+      <th>nonce</th>
+      <td>0x4f7</td>
+    </tr>
+    <tr>
+      <th>to</th>
+      <td>0x398226801b7f0fd8c3c846b7d99ccdc4298dc2f6</td>
+    </tr>
+    <tr>
+      <th>transactionIndex</th>
+      <td>0x0</td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td>0x6f05b59d3b20000</td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td>0x0</td>
+    </tr>
+    <tr>
+      <th>v</th>
+      <td>0x26</td>
+    </tr>
+    <tr>
+      <th>r</th>
+      <td>0xda78de4032212d9b2f660e5bc7922e345d7f413768d3...</td>
+    </tr>
+    <tr>
+      <th>s</th>
+      <td>0x7cc3f475382011d09f74c733e5845ee74716e7a7c0ea...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="get_eth_account_transaction_count">
+<h3>get_eth_account_transaction_count<a class="headerlink" href="#get_eth_account_transaction_count" title="Permalink to this headline"></a></h3>
+<p>Returns the number of transactions performed by an address</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transaction_count</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_eth_account_transaction_count</span><span class="p">(</span><span class="n">accounts</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">transaction_count</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>transaction_count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0xBa19BdFF99065d9ABF3dF8CE942390B97fd71B12</th>
+      <td>213</td>
+    </tr>
+    <tr>
+      <th>0x503e4bfe8299D486701BC7bc7F2Ea94f50035daC</th>
+      <td>70</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="get_eth_transaction_receipt">
+<h3>get_eth_transaction_receipt<a class="headerlink" href="#get_eth_transaction_receipt" title="Permalink to this headline"></a></h3>
+<p>Returns the receipt of a transaction by transaction hash</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">receipts</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_eth_transaction_receipt</span><span class="p">(</span><span class="n">txns</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">receipts</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="10" halign="left">0x29f2df8ce6a0e2a93bddacdfcceb9fd847630dcd1d25ad1ec3402cc449fa1eb6</th>
+      <th>...</th>
+      <th colspan="10" halign="left">0x1815a03dd8a1ce7da5a7a4304fa5fae1a8f4f3c20787e341eea230614e49ff61</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>blockHash</th>
+      <th>blockNumber</th>
+      <th>contractAddress</th>
+      <th>cumulativeGasUsed</th>
+      <th>effectiveGasPrice</th>
+      <th>from</th>
+      <th>gasUsed</th>
+      <th>logs</th>
+      <th>logsBloom</th>
+      <th>status</th>
+      <th>...</th>
+      <th>effectiveGasPrice</th>
+      <th>from</th>
+      <th>gasUsed</th>
+      <th>logs</th>
+      <th>logsBloom</th>
+      <th>status</th>
+      <th>to</th>
+      <th>transactionHash</th>
+      <th>transactionIndex</th>
+      <th>type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0xe3bfc6bb26456cc452d15fe2de6ed3931e9a0fa289dd...</td>
+      <td>0xd09183</td>
+      <td>None</td>
+      <td>0x137614c</td>
+      <td>0x1b348f74bf</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>0x1e384</td>
+      <td>{'address': '0xee2ebccb7cdb34a8a822b589f9e8427...</td>
+      <td>0x00000000000000000000000000000000040000000000...</td>
+      <td>0x1</td>
+      <td>...</td>
+      <td>0x3286353a00</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>0x495ba</td>
+      <td>{'address': '0xdcd90c7f6324cfa40d7169ef80b1203...</td>
+      <td>0x00000000000000000000000000000002000000000000...</td>
+      <td>0x1</td>
+      <td>0xc5b49abf8b164472be9486767af6b1a5586b5609</td>
+      <td>0x1815a03dd8a1ce7da5a7a4304fa5fae1a8f4f3c20787...</td>
+      <td>0x28</td>
+      <td>0x0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0xe3bfc6bb26456cc452d15fe2de6ed3931e9a0fa289dd...</td>
+      <td>0xd09183</td>
+      <td>None</td>
+      <td>0x137614c</td>
+      <td>0x1b348f74bf</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>0x1e384</td>
+      <td>{'address': '0xd569d3cce55b71a8a3f3c418c329a66...</td>
+      <td>0x00000000000000000000000000000000040000000000...</td>
+      <td>0x1</td>
+      <td>...</td>
+      <td>0x3286353a00</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>0x495ba</td>
+      <td>{'address': '0xdcd90c7f6324cfa40d7169ef80b1203...</td>
+      <td>0x00000000000000000000000000000002000000000000...</td>
+      <td>0x1</td>
+      <td>0xc5b49abf8b164472be9486767af6b1a5586b5609</td>
+      <td>0x1815a03dd8a1ce7da5a7a4304fa5fae1a8f4f3c20787...</td>
+      <td>0x28</td>
+      <td>0x0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>0x3286353a00</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>0x495ba</td>
+      <td>{'address': '0xdcd90c7f6324cfa40d7169ef80b1203...</td>
+      <td>0x00000000000000000000000000000002000000000000...</td>
+      <td>0x1</td>
+      <td>0xc5b49abf8b164472be9486767af6b1a5586b5609</td>
+      <td>0x1815a03dd8a1ce7da5a7a4304fa5fae1a8f4f3c20787...</td>
+      <td>0x28</td>
+      <td>0x0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>0x3286353a00</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>0x495ba</td>
+      <td>{'address': '0x06325440d014e39736583c165c2963b...</td>
+      <td>0x00000000000000000000000000000002000000000000...</td>
+      <td>0x1</td>
+      <td>0xc5b49abf8b164472be9486767af6b1a5586b5609</td>
+      <td>0x1815a03dd8a1ce7da5a7a4304fa5fae1a8f4f3c20787...</td>
+      <td>0x28</td>
+      <td>0x0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>0x3286353a00</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>0x495ba</td>
+      <td>{'address': '0x06325440d014e39736583c165c2963b...</td>
+      <td>0x00000000000000000000000000000002000000000000...</td>
+      <td>0x1</td>
+      <td>0xc5b49abf8b164472be9486767af6b1a5586b5609</td>
+      <td>0x1815a03dd8a1ce7da5a7a4304fa5fae1a8f4f3c20787...</td>
+      <td>0x28</td>
+      <td>0x0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>0x3286353a00</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>0x495ba</td>
+      <td>{'address': '0x06325440d014e39736583c165c2963b...</td>
+      <td>0x00000000000000000000000000000002000000000000...</td>
+      <td>0x1</td>
+      <td>0xc5b49abf8b164472be9486767af6b1a5586b5609</td>
+      <td>0x1815a03dd8a1ce7da5a7a4304fa5fae1a8f4f3c20787...</td>
+      <td>0x28</td>
+      <td>0x0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>0x3286353a00</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>0x495ba</td>
+      <td>{'address': '0x06325440d014e39736583c165c2963b...</td>
+      <td>0x00000000000000000000000000000002000000000000...</td>
+      <td>0x1</td>
+      <td>0xc5b49abf8b164472be9486767af6b1a5586b5609</td>
+      <td>0x1815a03dd8a1ce7da5a7a4304fa5fae1a8f4f3c20787...</td>
+      <td>0x28</td>
+      <td>0x0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>0x3286353a00</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>0x495ba</td>
+      <td>{'address': '0x06325440d014e39736583c165c2963b...</td>
+      <td>0x00000000000000000000000000000002000000000000...</td>
+      <td>0x1</td>
+      <td>0xc5b49abf8b164472be9486767af6b1a5586b5609</td>
+      <td>0x1815a03dd8a1ce7da5a7a4304fa5fae1a8f4f3c20787...</td>
+      <td>0x28</td>
+      <td>0x0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>0x3286353a00</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>0x495ba</td>
+      <td>{'address': '0xdc24316b9ae028f1497c275eb9192a3...</td>
+      <td>0x00000000000000000000000000000002000000000000...</td>
+      <td>0x1</td>
+      <td>0xc5b49abf8b164472be9486767af6b1a5586b5609</td>
+      <td>0x1815a03dd8a1ce7da5a7a4304fa5fae1a8f4f3c20787...</td>
+      <td>0x28</td>
+      <td>0x0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>0x3286353a00</td>
+      <td>0xba19bdff99065d9abf3df8ce942390b97fd71b12</td>
+      <td>0x495ba</td>
+      <td>{'address': '0x4ae9e68bd76eba868be20376eea343e...</td>
+      <td>0x00000000000000000000000000000002000000000000...</td>
+      <td>0x1</td>
+      <td>0xc5b49abf8b164472be9486767af6b1a5586b5609</td>
+      <td>0x1815a03dd8a1ce7da5a7a4304fa5fae1a8f4f3c20787...</td>
+      <td>0x28</td>
+      <td>0x0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>12 rows × 42 columns</p>
+</div></div>
+</div>
+</section>
+<section id="get_eth_gas_price">
+<h3>get_eth_gas_price<a class="headerlink" href="#get_eth_gas_price" title="Permalink to this headline"></a></h3>
+<p>Returns the current price per gas in wei</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gas_price</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_eth_gas_price</span><span class="p">()</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">gas_price</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+63488530079
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Tokens">
+<h2>Tokens<a class="headerlink" href="#Tokens" title="Permalink to this headline"></a></h2>
+<p>Functions to return information about tokens</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#pickle, xSushi</span>
+<span class="n">tokens</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;0x429881672B9AE42b8EbA0E26cD9C73711b891Ca5&#39;</span><span class="p">,</span> <span class="s1">&#39;0x8798249c2E607446EfB7Ad49eC89dD1865Ff4272&#39;</span><span class="p">]</span>
+<span class="c1"># One account w/ the above tokens, one account w/out the above tokens</span>
+<span class="n">accounts</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;0xBa19BdFF99065d9ABF3dF8CE942390B97fd71B12&#39;</span><span class="p">,</span> <span class="s1">&#39;0x503e4bfe8299D486701BC7bc7F2Ea94f50035daC&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<section id="get_token_total_supply">
+<h3>get_token_total_supply<a class="headerlink" href="#get_token_total_supply" title="Permalink to this headline"></a></h3>
+<p>Returns the current amount of an ERC-20 token(s) in circulation</p>
+<p>NOTE: supply is not adjusted for decimals of token(s)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_supply</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_token_total_supply</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">total_supply</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>supply</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0x429881672B9AE42b8EbA0E26cD9C73711b891Ca5</th>
+      <td>1848976414779307269364005</td>
+    </tr>
+    <tr>
+      <th>0x8798249c2E607446EfB7Ad49eC89dD1865Ff4272</th>
+      <td>53738914806120315201730649</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="get_token_account_balance">
+<h3>get_token_account_balance<a class="headerlink" href="#get_token_account_balance" title="Permalink to this headline"></a></h3>
+<p>Returns the current balance of an ERC-20 token(s) of an address(es).</p>
+<p>NOTE: balance is not adjusted for decimals of token(s)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">account_balance</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_token_account_balance</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">accounts</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">account_balance</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0xBa19BdFF99065d9ABF3dF8CE942390B97fd71B12</th>
+      <th>0x503e4bfe8299D486701BC7bc7F2Ea94f50035daC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0x429881672B9AE42b8EbA0E26cD9C73711b891Ca5</th>
+      <td>3032297953281047468</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>0x8798249c2E607446EfB7Ad49eC89dD1865Ff4272</th>
+      <td>1898359331077965312</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+</section>
+<section id="Gas-Tracker">
+<h2>Gas Tracker<a class="headerlink" href="#Gas-Tracker" title="Permalink to this headline"></a></h2>
+<p>Functions to return information about gas</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gas_price_wei</span><span class="o">=</span><span class="mi">2000000000</span>
+</pre></div>
+</div>
+</div>
+<section id="get_est_confirmation">
+<h3>get_est_confirmation<a class="headerlink" href="#get_est_confirmation" title="Permalink to this headline"></a></h3>
+<p>Returns the estimated time, in seconds, for a transaction to be confirmed on the blockchain gas price in wei</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">est_confirmation</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_est_confirmation</span><span class="p">(</span><span class="n">gas_price_wei</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">est_confirmation</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;3615&#39;
+</pre></div></div>
+</div>
+</section>
+<section id="get_gas_oracle">
+<h3>get_gas_oracle<a class="headerlink" href="#get_gas_oracle" title="Permalink to this headline"></a></h3>
+<p>Returns the current Safe, Proposed and Fast gas prices</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gas_oracle</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_gas_oracle</span><span class="p">()</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">gas_oracle</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gas_oracle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>LastBlock</th>
+      <td>13761570</td>
+    </tr>
+    <tr>
+      <th>SafeGasPrice</th>
+      <td>71</td>
+    </tr>
+    <tr>
+      <th>ProposeGasPrice</th>
+      <td>71</td>
+    </tr>
+    <tr>
+      <th>FastGasPrice</th>
+      <td>71</td>
+    </tr>
+    <tr>
+      <th>suggestBaseFee</th>
+      <td>70.125539676</td>
+    </tr>
+    <tr>
+      <th>gasUsedRatio</th>
+      <td>0.673301292438634,0.390934289089044,0.16035321...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+</section>
+<section id="Stats">
+<h2>Stats<a class="headerlink" href="#Stats" title="Permalink to this headline"></a></h2>
+<p>Functions to return statistics supported by Etherscan</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start_date</span><span class="o">=</span><span class="s1">&#39;2021-01-01&#39;</span>
+<span class="n">end_date</span><span class="o">=</span><span class="s1">&#39;2021-01-05&#39;</span>
+</pre></div>
+</div>
+</div>
+<section id="get_eth_total_supply">
+<h3>get_eth_total_supply<a class="headerlink" href="#get_eth_total_supply" title="Permalink to this headline"></a></h3>
+<p>Returns the current amount of Ether in circulation</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_eth_supply</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_total_eth_supply</span><span class="p">()</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">total_eth_supply</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;118647896311500000000000000&#39;
+</pre></div></div>
+</div>
+</section>
+<section id="get_eth2_total_supply">
+<h3>get_eth2_total_supply<a class="headerlink" href="#get_eth2_total_supply" title="Permalink to this headline"></a></h3>
+<p>Returns the current amount of Ether in circulation, ETH2 Staking rewards and EIP1559 burnt fees statistics</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_eth2_supply</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_total_eth2_supply</span><span class="p">()</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">total_eth2_supply</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>eth2_supply</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>EthSupply</th>
+      <td>118647896311500000000000000</td>
+    </tr>
+    <tr>
+      <th>Eth2Staking</th>
+      <td>352534008030225000000000</td>
+    </tr>
+    <tr>
+      <th>BurntFees</th>
+      <td>1133291322548617997182297</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="get_last_eth_price">
+<h3>get_last_eth_price<a class="headerlink" href="#get_last_eth_price" title="Permalink to this headline"></a></h3>
+<p>Returns the latest price of 1 ETH in BTC &amp; USD</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">last_eth_price</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_last_eth_price</span><span class="p">()</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">last_eth_price</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>eth_price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>btc</th>
+      <td>0.08512</td>
+    </tr>
+    <tr>
+      <th>usd</th>
+      <td>4309.29</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="get_nodes_size">
+<h3>get_nodes_size<a class="headerlink" href="#get_nodes_size" title="Permalink to this headline"></a></h3>
+<p>Returns the size of the Ethereum blockchain, in bytes, over a date range</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nodes_size</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_nodes_size</span><span class="p">(</span><span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">nodes_size</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>blockNumber</th>
+      <th>chainTimeStamp</th>
+      <th>chainSize</th>
+      <th>clientType</th>
+      <th>syncMode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>11565064</td>
+      <td>2021-01-01</td>
+      <td>6451682486621</td>
+      <td>Geth</td>
+      <td>Archive</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>11571611</td>
+      <td>2021-01-02</td>
+      <td>6458928956583</td>
+      <td>Geth</td>
+      <td>Archive</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>11578201</td>
+      <td>2021-01-03</td>
+      <td>6469047014437</td>
+      <td>Geth</td>
+      <td>Archive</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>11584682</td>
+      <td>2021-01-04</td>
+      <td>6476583029570</td>
+      <td>Geth</td>
+      <td>Archive</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>11591201</td>
+      <td>2021-01-05</td>
+      <td>6486626025242</td>
+      <td>Geth</td>
+      <td>Archive</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="get_total_nodes_count">
+<h3>get_total_nodes_count<a class="headerlink" href="#get_total_nodes_count" title="Permalink to this headline"></a></h3>
+<p>Returns the total number of discoverable Ethereum nodes</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_nodes_count</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get_total_nodes_count</span><span class="p">()</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">total_nodes_count</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;2543&#39;
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="DeepDAO%20API%20Tutorial.html" class="btn btn-neutral float-left" title="DeepDAO Python API Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Solscan%20API%20Tutorial.html" class="btn btn-neutral float-right" title="Solscan API Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Roberto Talamas.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

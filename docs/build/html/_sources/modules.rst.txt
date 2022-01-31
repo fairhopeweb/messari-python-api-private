@@ -2,6 +2,6 @@ messari
 =======
 
 .. toctree::
-   :maxdepth: 5
+   :maxdepth: 4
 
    messari

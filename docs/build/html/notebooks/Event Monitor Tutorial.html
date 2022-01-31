@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Monitor Tutorial &mdash; Messari  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="NFT Price Floor Python API Tutorial" href="NFT%20Price%20Floor%20API%20Tutorial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Messari
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Messari%20API%20Tutorial.html">Messari Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DeFiLlama%20API%20Tutorial.html">DeFi Llama Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenTerminal%20API%20Tutorial.html">Token Terminal Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DeepDAO%20API%20Tutorial.html">DeepDAO Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Etherscan%20API%20Tutorial.html">EVM Blockexplorer API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Solscan%20API%20Tutorial.html">Solscan API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upshot%20API%20Tutorial.html">Upshot Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OpenSea%20API%20Tutorial.html">OpenSea Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NonFungible%20API%20Tutorial.html">NonFungible Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NFT%20Price%20Floor%20API%20Tutorial.html">NFT Price Floor Python API Tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Event Monitor Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Monitor-Structure">Monitor Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Event-Monitor">Event Monitor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#start_monitor">start_monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stop_monitor">stop_monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_monitor_status">get_monitor_status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#monitor">monitor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Event-Sync">Event Sync</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#start_sync">start_sync</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stop_sync">stop_sync</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#watch_sync">watch_sync</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_sync_status">get_sync_status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sync">sync</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Event-Handler">Event Handler</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#start_event_handler">start_event_handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stop_event_handler">stop_event_handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_event_handler_status">get_event_handler_status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#event_handler">event_handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#handle_event">handle_event</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Helpers">Helpers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get_events_df">get_events_df</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_events_list">get_events_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_queue_size">get_queue_size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_contract_events">get_contract_events</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Messari</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Event Monitor Tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/notebooks/Event Monitor Tutorial.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="Event-Monitor-Tutorial">
+<h1>Event Monitor Tutorial<a class="headerlink" href="#Event-Monitor-Tutorial" title="Permalink to this headline"></a></h1>
+<section id="Monitor-Structure">
+<h2>Monitor Structure<a class="headerlink" href="#Monitor-Structure" title="Permalink to this headline"></a></h2>
+<p>Description here</p>
+<p>Event Monitor</p>
+<ul class="simple">
+<li><p>start_monitor</p></li>
+<li><p>stop_monitor</p></li>
+<li><p>get_monitor_status</p></li>
+<li><p>monitor</p></li>
+</ul>
+<p>Event Sync</p>
+<ul class="simple">
+<li><p>start_sync</p></li>
+<li><p>stop_sync</p></li>
+<li><p>watch_sync</p></li>
+<li><p>get_sync_status</p></li>
+<li><p>sync</p></li>
+</ul>
+<p>Event Handler</p>
+<ul class="simple">
+<li><p>start_event_handler</p></li>
+<li><p>stop_event_handler</p></li>
+<li><p>get_event_handler_status</p></li>
+<li><p>event_handler</p></li>
+<li><p>handle_event</p></li>
+</ul>
+<p>Helpers</p>
+<ul class="simple">
+<li><p>get_events_df</p></li>
+<li><p>get_events_list</p></li>
+<li><p>get_queue_size</p></li>
+<li><p>get_contract_events</p></li>
+</ul>
+</section>
+<section id="Setup">
+<h2>Setup<a class="headerlink" href="#Setup" title="Permalink to this headline"></a></h2>
+<p>The event monitor requires a blockexplorer for initialization. The purpose of this blockexplorer is to get the contract source code so that contract interactions (Data &amp; Logs) can be decoded into human readable events.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">messari.blockexplorers</span> <span class="kn">import</span> <span class="n">Etherscan</span>
+
+<span class="n">API_KEY</span> <span class="o">=</span> <span class="s1">&#39;YOUR_API_KEY&#39;</span>
+<span class="n">ES</span> <span class="o">=</span> <span class="n">Etherscan</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">API_KEY</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The event monitor also requires the endpoint for an RPC. This should belong to the same network as the blockexplorer.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">messari.eventmonitor</span> <span class="kn">import</span> <span class="n">EventMonitor</span>
+
+<span class="n">rpc_url</span> <span class="o">=</span> <span class="s1">&#39;YOUR_RPC_URL&#39;</span>
+</pre></div>
+</div>
+</div>
+<p>Finally the event monitor must be initialized with the adress to monitor for events.</p>
+<p>NOTE: The source code for this contract must be verified on the selected blockexplorer or else the event monitor will not be able to decode events for the given contract</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DAI</span> <span class="o">=</span> <span class="s1">&#39;0x6B175474E89094C44Da98b954EedeAC495271d0F&#39;</span>
+</pre></div>
+</div>
+</div>
+<p>Initalize with contract(s), blockexplorer, &amp; RPC</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dai_monitor</span> <span class="o">=</span> <span class="n">EventMonitor</span><span class="p">(</span><span class="n">DAI</span><span class="p">,</span> <span class="n">ES</span><span class="p">,</span> <span class="n">rpc_url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Event-Monitor">
+<h2>Event Monitor<a class="headerlink" href="#Event-Monitor" title="Permalink to this headline"></a></h2>
+<section id="start_monitor">
+<h3>start_monitor<a class="headerlink" href="#start_monitor" title="Permalink to this headline"></a></h3>
+<p>Start the event monitor in a dedicated thread. The monitor thread will continue to run until <code class="docutils literal notranslate"><span class="pre">stop_monitor()</span></code> is called. The monitor thread can be accessed with <code class="docutils literal notranslate"><span class="pre">EventMonitor.monitor_thread</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dai_monitor</span><span class="o">.</span><span class="n">start_monitor</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="stop_monitor">
+<h3>stop_monitor<a class="headerlink" href="#stop_monitor" title="Permalink to this headline"></a></h3>
+<p>Stop the event monitor thread. This function will set an internal flag in the <code class="docutils literal notranslate"><span class="pre">EventMonitor</span></code> which tells the monitor thread to exit its loop. The monitor thread will not stop until it finishes the current loop and reaches the top again.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dai_monitor</span><span class="o">.</span><span class="n">stop_monitor</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="get_monitor_status">
+<h3>get_monitor_status<a class="headerlink" href="#get_monitor_status" title="Permalink to this headline"></a></h3>
+<p>Returns the operating status of the event monitor - RUNNING: event monitor is running - STOPPING: event monitor is stopping. If the monitor takes too long to stop then something is likely wrong - CRASH: event monitor thread crashed. - DEAD: event monitor is dead/stopped.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">monitor_status</span> <span class="o">=</span> <span class="n">dai_monitor</span><span class="o">.</span><span class="n">get_monitor_status</span><span class="p">()</span>
+<span class="n">monitor_status</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;RUNNING&#39;
+</pre></div></div>
+</div>
+</section>
+<section id="monitor">
+<h3>monitor<a class="headerlink" href="#monitor" title="Permalink to this headline"></a></h3>
+<p>This function runs the main loop for live event monitoring</p>
+<p>WARNING: It is highly recomended that you only interact with this function through the <code class="docutils literal notranslate"><span class="pre">start_monitor()</span></code> and <code class="docutils literal notranslate"><span class="pre">stop_monitor()</span></code> functions, not directly. However if you are inclined, feel free to read the source code for the EventMonitor class and experiment with this function in your own flow/script.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># dai_monitor.monitor()</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="Event-Sync">
+<h2>Event Sync<a class="headerlink" href="#Event-Sync" title="Permalink to this headline"></a></h2>
+<section id="start_sync">
+<h3>start_sync<a class="headerlink" href="#start_sync" title="Permalink to this headline"></a></h3>
+<p>Start the event sync in a dedicated thread. The sync thread will find and submit all events in the given block range to the event handler. The sync thread will continue to run until <code class="docutils literal notranslate"><span class="pre">stop_sync()</span></code> is called or the sync is finished. The sync thread can be accessed with <code class="docutils literal notranslate"><span class="pre">self.sync_thread</span></code>.</p>
+<p>The parameters for this function are: * start: starting block, default is 0 * end: ending block, default is ‘latest’</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dai_monitor</span><span class="o">.</span><span class="n">start_sync</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="stop_sync">
+<h3>stop_sync<a class="headerlink" href="#stop_sync" title="Permalink to this headline"></a></h3>
+<p>Stop the event sync thread. This function will set an internal flag in the <code class="docutils literal notranslate"><span class="pre">EventMonitor</span></code> which tells the sync thread to exit its loop. The sync thread will not stop until it finishes the current loop and reaches the top again.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dai_monitor</span><span class="o">.</span><span class="n">stop_sync</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="watch_sync">
+<h3>watch_sync<a class="headerlink" href="#watch_sync" title="Permalink to this headline"></a></h3>
+<p>This function can be used to watch the status of any given sync. Every 10 seconds this function will print an update on the progress of a sync.</p>
+<p>NOTE: This is a a blocking function meaning it will be run on the main thread until concluding. ie if there is 10 minutes left in a sync and you call this function, you’ll be watching this function for the next 10 minutes</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dai_monitor</span><span class="o">.</span><span class="n">watch_sync</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (5697662 - 10144606), Goal: 13896705, Increment: 4446944
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (7921135 - 9022420), Goal: 13896705, Increment: 1101285
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (7921135 - 8471777), Goal: 13896705, Increment: 550642
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (8471778 - 8976000), Goal: 13896705, Increment: 504222
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (8976001 - 9412808), Goal: 13896705, Increment: 436807
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (9412809 - 9767845), Goal: 13896705, Increment: 355036
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (9767846 - 10029223), Goal: 13896705, Increment: 261377
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (10029224 - 10210828), Goal: 13896705, Increment: 181604
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (10333122 - 10409835), Goal: 13896705, Increment: 76713
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (10454936 - 10480489), Goal: 13896705, Increment: 25553
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (10509427 - 10543235), Goal: 13896705, Increment: 33808
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (10618299 - 10657258), Goal: 13896705, Increment: 38959
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (10728739 - 10757282), Goal: 13896705, Increment: 28543
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (10840419 - 10853032), Goal: 13896705, Increment: 12613
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (10955197 - 11011578), Goal: 13896705, Increment: 56381
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11050341 - 11078194), Goal: 13896705, Increment: 27853
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11112939 - 11123410), Goal: 13896705, Increment: 10471
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11148370 - 11161635), Goal: 13896705, Increment: 13265
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11170081 - 11181350), Goal: 13896705, Increment: 11269
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11209103 - 11221012), Goal: 13896705, Increment: 11909
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11221534 - 11227821), Goal: 13896705, Increment: 6287
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11227822 - 11234248), Goal: 13896705, Increment: 6426
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11252363 - 11258387), Goal: 13896705, Increment: 6024
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11276990 - 11284276), Goal: 13896705, Increment: 7286
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11301454 - 11306157), Goal: 13896705, Increment: 4703
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11317118 - 11323434), Goal: 13896705, Increment: 6316
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11347309 - 11356812), Goal: 13896705, Increment: 9503
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11380420 - 11396898), Goal: 13896705, Increment: 16478
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11438003 - 11443404), Goal: 13896705, Increment: 5401
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11451059 - 11461085), Goal: 13896705, Increment: 10026
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11473170 - 11487031), Goal: 13896705, Increment: 13861
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11538404 - 11559897), Goal: 13896705, Increment: 21493
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11604070 - 11623525), Goal: 13896705, Increment: 19455
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11642682 - 11662231), Goal: 13896705, Increment: 19549
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11704082 - 11725601), Goal: 13896705, Increment: 21519
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11786634 - 11806992), Goal: 13896705, Increment: 20358
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11881481 - 11915394), Goal: 13896705, Increment: 33913
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (11954531 - 11999019), Goal: 13896705, Increment: 44488
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (12048340 - 12101150), Goal: 13896705, Increment: 52810
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (12155144 - 12206263), Goal: 13896705, Increment: 51119
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (12250094 - 12283877), Goal: 13896705, Increment: 33783
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (12283878 - 12308600), Goal: 13896705, Increment: 24722
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (12325472 - 12337803), Goal: 13896705, Increment: 12331
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (12365342 - 12374016), Goal: 13896705, Increment: 8674
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (12430868 - 12460147), Goal: 13896705, Increment: 29279
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (12460148 - 12499832), Goal: 13896705, Increment: 39684
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (12493730 - 12513183), Goal: 13896705, Increment: 19453
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (12539967 - 12575137), Goal: 13896705, Increment: 35170
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (12622709 - 12652726), Goal: 13896705, Increment: 30017
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (12668291 - 12685323), Goal: 13896705, Increment: 17032
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (12723853 - 12742160), Goal: 13896705, Increment: 18307
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (12759322 - 12776135), Goal: 13896705, Increment: 16813
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (12852826 - 12877615), Goal: 13896705, Increment: 24789
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (12937121 - 12972959), Goal: 13896705, Increment: 35838
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (13012798 - 13055415), Goal: 13896705, Increment: 42617
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (13184458 - 13224001), Goal: 13896705, Increment: 39543
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (13260374 - 13295552), Goal: 13896705, Increment: 35178
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (13398430 - 13436224), Goal: 13896705, Increment: 37794
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (13585524 - 13651296), Goal: 13896705, Increment: 65772
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c6fef26394f4c03821c4f, Range: (13809698 - 13896483), Goal: 13896705, Increment: 86785
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (7921135 - 10136157), Goal: 13896705, Increment: 2215022
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (7921135 - 9028646), Goal: 13896705, Increment: 1107511
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (9028647 - 9527912), Goal: 13896705, Increment: 499265
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (9527913 - 10381756), Goal: 13896705, Increment: 853843
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (9954835 - 10291120), Goal: 13896705, Increment: 336285
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (10291121 - 10545957), Goal: 13896705, Increment: 254836
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (10545958 - 10722941), Goal: 13896705, Increment: 176983
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (10915298 - 11009681), Goal: 13896705, Increment: 94383
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (11091454 - 11103066), Goal: 13896705, Increment: 11612
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (11146197 - 11163678), Goal: 13896705, Increment: 17481
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (11192180 - 11203058), Goal: 13896705, Increment: 10878
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (11192180 - 11203058), Goal: 13896705, Increment: 10878
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (11223764 - 11234786), Goal: 13896705, Increment: 11022
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (11248889 - 11256555), Goal: 13896705, Increment: 7666
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (11277593 - 11289018), Goal: 13896705, Increment: 11425
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (11298998 - 11307513), Goal: 13896705, Increment: 8515
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (11325773 - 11328397), Goal: 13896705, Increment: 2624
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (11341862 - 11351383), Goal: 13896705, Increment: 9521
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (11424539 - 11469166), Goal: 13896705, Increment: 44627
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (11481110 - 11505047), Goal: 13896705, Increment: 23937
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (11561907 - 11591556), Goal: 13896705, Increment: 29649
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (11618983 - 11643089), Goal: 13896705, Increment: 24106
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (11697032 - 11708298), Goal: 13896705, Increment: 11266
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (11747234 - 11759799), Goal: 13896705, Increment: 12565
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (11832186 - 11879022), Goal: 13896705, Increment: 46836
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (11911247 - 11957235), Goal: 13896705, Increment: 45988
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (12016156 - 12084502), Goal: 13896705, Increment: 68346
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (12156362 - 12221206), Goal: 13896705, Increment: 64844
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (12270009 - 12300529), Goal: 13896705, Increment: 30520
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (12343822 - 12347340), Goal: 13896705, Increment: 3518
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (12362904 - 12373535), Goal: 13896705, Increment: 10631
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (12456620 - 12470443), Goal: 13896705, Increment: 13823
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (12524393 - 12566007), Goal: 13896705, Increment: 41614
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (12589728 - 12617754), Goal: 13896705, Increment: 28026
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (12681864 - 12699016), Goal: 13896705, Increment: 17152
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (12726999 - 12738822), Goal: 13896705, Increment: 11823
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (12798988 - 12822097), Goal: 13896705, Increment: 23109
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (12849464 - 12883046), Goal: 13896705, Increment: 33582
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (12922762 - 12967495), Goal: 13896705, Increment: 44733
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (13014726 - 13060075), Goal: 13896705, Increment: 45349
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (13192084 - 13216055), Goal: 13896705, Increment: 23971
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (13261273 - 13287233), Goal: 13896705, Increment: 25960
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (13318599 - 13359077), Goal: 13896705, Increment: 40478
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (13411578 - 13480120), Goal: 13896705, Increment: 68542
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (13480121 - 13563468), Goal: 13896705, Increment: 83347
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (13658618 - 13759075), Goal: 13896705, Increment: 100457
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (13759076 - 13854811), Goal: 13896705, Increment: 95735
+Contract: 0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5, Topic: 0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c59768edb53f4ec31a929, Range: (13759076 - 13854811), Goal: 13896705, Increment: 95735
+</pre></div></div>
+</div>
+</section>
+<section id="get_sync_status">
+<h3>get_sync_status<a class="headerlink" href="#get_sync_status" title="Permalink to this headline"></a></h3>
+<p>Returns the operating status of the event sync - RUNNING: event sync is running - STOPPING: event sync is stopping. If the sync takes too long to stop then something is likely wrong - CRASH: event sync thread crashed. - DEAD: event sync is dead/stopped.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sync_status</span> <span class="o">=</span> <span class="n">dai_monitor</span><span class="o">.</span><span class="n">get_sync_status</span><span class="p">()</span>
+<span class="n">sync_status</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;DEAD&#39;
+</pre></div></div>
+</div>
+</section>
+<section id="sync">
+<h3>sync<a class="headerlink" href="#sync" title="Permalink to this headline"></a></h3>
+<p>This function runs the main loop for syncing</p>
+<p>WARNING: It is highly recomended that you only interact with this function through the <code class="docutils literal notranslate"><span class="pre">start_sync()</span></code> and <code class="docutils literal notranslate"><span class="pre">stop_sync()</span></code> functions, not directly. However if you are inclined, feel free to read the source code for the EventMonitor class and experiment with this function in your own flow/script.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># dai_monitor.sync(0, 100)</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="Event-Handler">
+<h2>Event Handler<a class="headerlink" href="#Event-Handler" title="Permalink to this headline"></a></h2>
+<section id="start_event_handler">
+<h3>start_event_handler<a class="headerlink" href="#start_event_handler" title="Permalink to this headline"></a></h3>
+<p>Start the event handler in a dedicated thread. The handler thread will continue to run until <code class="docutils literal notranslate"><span class="pre">stop_handler()</span></code> is called. The handler thread can be accessed with <code class="docutils literal notranslate"><span class="pre">self.handler_thread</span></code>.</p>
+<p>NOTE: this is automatically called with the <code class="docutils literal notranslate"><span class="pre">start_monitor()</span></code> and <code class="docutils literal notranslate"><span class="pre">start_sync()</span></code> functions. You should not have to call this function</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dai_monitor</span><span class="o">.</span><span class="n">start_event_handler</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="stop_event_handler">
+<h3>stop_event_handler<a class="headerlink" href="#stop_event_handler" title="Permalink to this headline"></a></h3>
+<p>Stop the event handler thread. This function will set an internal flag in the <code class="docutils literal notranslate"><span class="pre">EventMonitor</span></code> which tells the handler thread to exit its loop. The sync thread will not stop until it finishes the current loop and reaches the top again.</p>
+<p>NOTE: The event handler thread will run until all events have been handled, you should be able to let this thread run until completion</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dai_monitor</span><span class="o">.</span><span class="n">stop_event_handler</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="get_event_handler_status">
+<h3>get_event_handler_status<a class="headerlink" href="#get_event_handler_status" title="Permalink to this headline"></a></h3>
+<p>Returns the operating status of the event handler</p>
+<ul class="simple">
+<li><p>RUNNING: event handler is running</p></li>
+<li><p>STOPPING: event handler is stopping. If the handler takes too long to stop then something is likely wrong</p></li>
+<li><p>CRASH: event handler thread crashed.</p></li>
+<li><p>DEAD: event handler is dead/stopped.</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event_handler_status</span> <span class="o">=</span> <span class="n">dai_monitor</span><span class="o">.</span><span class="n">get_event_handler_status</span><span class="p">()</span>
+<span class="n">event_handler_status</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;DEAD&#39;
+</pre></div></div>
+</div>
+</section>
+<section id="event_handler">
+<h3>event_handler<a class="headerlink" href="#event_handler" title="Permalink to this headline"></a></h3>
+<p>This function runs the main loop for event handling</p>
+<p>WARNING: It is highly recomended that you only interact with this function through the <code class="docutils literal notranslate"><span class="pre">start_event_handler()</span></code> and <code class="docutils literal notranslate"><span class="pre">stop_event_handler()</span></code> functions, not directly. However if you are inclined, feel free to read the source code for the EventMonitor class and experiment with this function in your own flow/script.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># dai_monitor.event_handler()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="handle_event">
+<h3>handle_event<a class="headerlink" href="#handle_event" title="Permalink to this headline"></a></h3>
+<p>WARNING: It is highly recomended that you do not interact with this function. However if you so chose, this function could be overridden to define custom behavior for handling events</p>
+<p>NOTE: expecting returns from functions called on a w3.eth.filter class</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># dai_monitor.handle_event(event)</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="Helpers">
+<h2>Helpers<a class="headerlink" href="#Helpers" title="Permalink to this headline"></a></h2>
+<section id="get_events_df">
+<h3>get_events_df<a class="headerlink" href="#get_events_df" title="Permalink to this headline"></a></h3>
+<p>Returns processed events as a DataFrame</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">events_df</span> <span class="o">=</span> <span class="n">dai_monitor</span><span class="o">.</span><span class="n">get_events_df</span><span class="p">()</span>
+<span class="n">events_df</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>args</th>
+      <th>event</th>
+      <th>transaction</th>
+      <th>log_index</th>
+      <th>transaction_index</th>
+      <th>address</th>
+      <th>block_number</th>
+      <th>block</th>
+    </tr>
+    <tr>
+      <th>block_number</th>
+      <th>log_index</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>7710833</th>
+      <th>69</th>
+      <td>{'minter': '0x502CB8985B2C92a8d4bf309cDAa89DE9...</td>
+      <td>Mint</td>
+      <td>0xa1b27194b198762eaa631564fea76008b363c157a1cc...</td>
+      <td>69</td>
+      <td>104</td>
+      <td>0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5</td>
+      <td>7710833</td>
+      <td>0x0ed263de26d3c6dc118d44e8d2b75a8aa9684fbccc13...</td>
+    </tr>
+    <tr>
+      <th>7710847</th>
+      <th>27</th>
+      <td>{'minter': '0xC8355D0E2C265B2Fe495EbBC0fc9AD99...</td>
+      <td>Mint</td>
+      <td>0x1d2000c49507d94ef42ec995e1ea59b41e61bf0c63d4...</td>
+      <td>27</td>
+      <td>53</td>
+      <td>0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5</td>
+      <td>7710847</td>
+      <td>0x973c89bdf256cea02cf6eef18fe04e9c4c709939ef38...</td>
+    </tr>
+    <tr>
+      <th>7711094</th>
+      <th>64</th>
+      <td>{'minter': '0x502CB8985B2C92a8d4bf309cDAa89DE9...</td>
+      <td>Mint</td>
+      <td>0x0eda39d1cb1844e8c2f659219f5a414c0b8261e6dee5...</td>
+      <td>64</td>
+      <td>32</td>
+      <td>0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5</td>
+      <td>7711094</td>
+      <td>0x8a239157dd06e0514690b8a833f1b2408368f9f049c5...</td>
+    </tr>
+    <tr>
+      <th>7711797</th>
+      <th>87</th>
+      <td>{'minter': '0x2025A9196d6Fa1011080845c6877f646...</td>
+      <td>Mint</td>
+      <td>0x48ee0eb7b79498b39616c0b8453a15c6dfc04573a08d...</td>
+      <td>87</td>
+      <td>140</td>
+      <td>0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5</td>
+      <td>7711797</td>
+      <td>0x752b239a445dd274c0971babd6b84944d379a39f3622...</td>
+    </tr>
+    <tr>
+      <th>7712563</th>
+      <th>79</th>
+      <td>{'minter': '0xBD9ED130A53CFaFcf81502e4D35329A6...</td>
+      <td>Mint</td>
+      <td>0xc440184b091bcc099a18880caecbcb7d5c94228da33e...</td>
+      <td>79</td>
+      <td>118</td>
+      <td>0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5</td>
+      <td>7712563</td>
+      <td>0x52cc53ce83b7b561a61041322e1c9d3d43d4e9055557...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>8246652</th>
+      <th>34</th>
+      <td>{'minter': '0xE82941E727d84F99329b94381E67A945...</td>
+      <td>Mint</td>
+      <td>0x88864e21d8377a179cb90999a332c6fecee3e6051e77...</td>
+      <td>34</td>
+      <td>45</td>
+      <td>0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5</td>
+      <td>8246652</td>
+      <td>0xf53b11b5ef4b70f57682facdb97f9b9543ec19995648...</td>
+    </tr>
+    <tr>
+      <th>8246722</th>
+      <th>76</th>
+      <td>{'minter': '0xAB61719309Bf30Cda379B45ac33326B2...</td>
+      <td>Mint</td>
+      <td>0x88c292a8a4169383e0f5cefb0f98fb62e1754eef22fa...</td>
+      <td>76</td>
+      <td>89</td>
+      <td>0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5</td>
+      <td>8246722</td>
+      <td>0xed71868e646b8a438d237d1b495730e7704b4a426228...</td>
+    </tr>
+    <tr>
+      <th>8246729</th>
+      <th>118</th>
+      <td>{'minter': '0xB435871B0959561226b4d903b1abf795...</td>
+      <td>Mint</td>
+      <td>0x2fa76eefb5f261ddb6f2d6c905324f7080cee69194d0...</td>
+      <td>118</td>
+      <td>48</td>
+      <td>0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5</td>
+      <td>8246729</td>
+      <td>0x68f79c3f252ae2534b9837fdfe78eeae5b3085feaa38...</td>
+    </tr>
+    <tr>
+      <th>8246795</th>
+      <th>41</th>
+      <td>{'minter': '0x23D6F869C4A64F1E8BE35c777fDc523c...</td>
+      <td>Mint</td>
+      <td>0xfb432a1a866d437a3c0750ae21a05208a19438ebc229...</td>
+      <td>41</td>
+      <td>71</td>
+      <td>0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5</td>
+      <td>8246795</td>
+      <td>0x34ec0ffc36284a6a32e15a7836ddcf34bd2bd80dd6aa...</td>
+    </tr>
+    <tr>
+      <th>8246822</th>
+      <th>53</th>
+      <td>{'minter': '0x23D6F869C4A64F1E8BE35c777fDc523c...</td>
+      <td>Mint</td>
+      <td>0x33d4dac9341215e18a9c8fa27c9690ab1430b407d854...</td>
+      <td>53</td>
+      <td>64</td>
+      <td>0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5</td>
+      <td>8246822</td>
+      <td>0x4944f98a016863441798622dbe3283a162be4362b65b...</td>
+    </tr>
+  </tbody>
+</table>
+<p>7569 rows × 8 columns</p>
+</div></div>
+</div>
+</section>
+<section id="get_events_list">
+<h3>get_events_list<a class="headerlink" href="#get_events_list" title="Permalink to this headline"></a></h3>
+<p>Returns process events as a List</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">events_list</span> <span class="o">=</span> <span class="n">dai_monitor</span><span class="o">.</span><span class="n">get_events_list</span><span class="p">()</span>
+<span class="n">events_list</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[{&#39;args&#39;: {&#39;src&#39;: &#39;0xe3eF4F25F436be04Bb45613cC0101b60251996D5&#39;,
+   &#39;dst&#39;: &#39;0x27239549DD40E1D60F5B80B0C4196923745B1FD2&#39;,
+   &#39;wad&#39;: 7536618188544577904079},
+  &#39;event&#39;: &#39;Transfer&#39;,
+  &#39;transaction&#39;: &#39;0x0cb8e8ddf2c09e27d57b7a70ec8582958f1463518d6668d4d03ff424690ced6a&#39;,
+  &#39;log_index&#39;: 319,
+  &#39;transaction_index&#39;: 219,
+  &#39;address&#39;: &#39;0x6f40d4A6237C257fff2dB00FA0510DeEECd303eb&#39;,
+  &#39;block_number&#39;: 13896436,
+  &#39;block&#39;: &#39;0xbec26c962fe2fc4b75233b426882b3006ecf1035bf731cca308df333cec26de6&#39;},
+ {&#39;args&#39;: {&#39;src&#39;: &#39;0xCba27C8e7115b4Eb50Aa14999BC0866674a96eCB&#39;,
+   &#39;dst&#39;: &#39;0x27239549DD40E1D60F5B80B0C4196923745B1FD2&#39;,
+   &#39;wad&#39;: 5979084303158062514},
+  &#39;event&#39;: &#39;Transfer&#39;,
+  &#39;transaction&#39;: &#39;0x0cb8e8ddf2c09e27d57b7a70ec8582958f1463518d6668d4d03ff424690ced6a&#39;,
+  &#39;log_index&#39;: 320,
+  &#39;transaction_index&#39;: 219,
+  &#39;address&#39;: &#39;0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2&#39;,
+  &#39;block_number&#39;: 13896436,
+  &#39;block&#39;: &#39;0xbec26c962fe2fc4b75233b426882b3006ecf1035bf731cca308df333cec26de6&#39;}]
+</pre></div></div>
+</div>
+</section>
+<section id="get_queue_size">
+<h3>get_queue_size<a class="headerlink" href="#get_queue_size" title="Permalink to this headline"></a></h3>
+<p>Returns the size of the event handler queue. This number represents the amounts of unprocessed events which will be processed so long as <code class="docutils literal notranslate"><span class="pre">EventMonitor.get_handler_status()</span> <span class="pre">==</span> <span class="pre">'RUNNING'</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">event_queue_size</span> <span class="o">=</span> <span class="n">dai_monitor</span><span class="o">.</span><span class="n">get_queue_size</span><span class="p">()</span>
+<span class="n">event_queue_size</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1278015
+</pre></div></div>
+</div>
+</section>
+<section id="get_contract_events">
+<h3>get_contract_events<a class="headerlink" href="#get_contract_events" title="Permalink to this headline"></a></h3>
+<p>This function is used internally for mapping ethereum event topics (HEX) to human readable event names. It can be interesting to see the kinds of events for contracts used to initalize the <code class="docutils literal notranslate"><span class="pre">EventMonitor</span></code> class</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">contract_events</span> <span class="o">=</span> <span class="n">dai_monitor</span><span class="o">.</span><span class="n">get_contract_events</span><span class="p">()</span>
+<span class="n">contract_events</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="4" halign="left">0x4Ddc2D193948926D02f9B1fE9e1daa0718270ED5</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>name</th>
+      <th>text</th>
+      <th>keccak</th>
+      <th>inputs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AccrueInterest</td>
+      <td>AccrueInterest(uint256,uint256,uint256)</td>
+      <td>0x875352fb3fadeb8c0be7cbbe8ff761b308fa7033470c...</td>
+      <td>[{'indexed': False, 'name': 'interestAccumulat...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Mint</td>
+      <td>Mint(address,uint256,uint256)</td>
+      <td>0x4c209b5fc8ad50758f13e2e1088ba56a560dff690a1c...</td>
+      <td>[{'indexed': False, 'name': 'minter', 'type': ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Redeem</td>
+      <td>Redeem(address,uint256,uint256)</td>
+      <td>0xe5b754fb1abb7f01b499791d0b820ae3b6af3424ac1c...</td>
+      <td>[{'indexed': False, 'name': 'redeemer', 'type'...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Borrow</td>
+      <td>Borrow(address,uint256,uint256,uint256)</td>
+      <td>0x13ed6866d4e1ee6da46f845c46d7e54120883d75c5ea...</td>
+      <td>[{'indexed': False, 'name': 'borrower', 'type'...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>RepayBorrow</td>
+      <td>RepayBorrow(address,address,uint256,uint256,ui...</td>
+      <td>0x1a2a22cb034d26d1854bdc6666a5b91fe25efbbb5dca...</td>
+      <td>[{'indexed': False, 'name': 'payer', 'type': '...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>LiquidateBorrow</td>
+      <td>LiquidateBorrow(address,address,uint256,addres...</td>
+      <td>0x298637f684da70674f26509b10f07ec2fbc77a335ab1...</td>
+      <td>[{'indexed': False, 'name': 'liquidator', 'typ...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>NewPendingAdmin</td>
+      <td>NewPendingAdmin(address,address)</td>
+      <td>0xca4f2f25d0898edd99413412fb94012f9e54ec8142f9...</td>
+      <td>[{'indexed': False, 'name': 'oldPendingAdmin',...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>NewAdmin</td>
+      <td>NewAdmin(address,address)</td>
+      <td>0xf9ffabca9c8276e99321725bcb43fb076a6c66a54b7f...</td>
+      <td>[{'indexed': False, 'name': 'oldAdmin', 'type'...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>NewComptroller</td>
+      <td>NewComptroller(address,address)</td>
+      <td>0x7ac369dbd14fa5ea3f473ed67cc9d598964a77501540...</td>
+      <td>[{'indexed': False, 'name': 'oldComptroller', ...</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>NewMarketInterestRateModel</td>
+      <td>NewMarketInterestRateModel(address,address)</td>
+      <td>0xedffc32e068c7c95dfd4bdfd5c4d939a084d6b11c419...</td>
+      <td>[{'indexed': False, 'name': 'oldInterestRateMo...</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>NewReserveFactor</td>
+      <td>NewReserveFactor(uint256,uint256)</td>
+      <td>0xaaa68312e2ea9d50e16af5068410ab56e1a1fd06037b...</td>
+      <td>[{'indexed': False, 'name': 'oldReserveFactorM...</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>ReservesReduced</td>
+      <td>ReservesReduced(address,uint256,uint256)</td>
+      <td>0x3bad0c59cf2f06e7314077049f48a93578cd16f5ef92...</td>
+      <td>[{'indexed': False, 'name': 'admin', 'type': '...</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Failure</td>
+      <td>Failure(uint256,uint256,uint256)</td>
+      <td>0x45b96fe442630264581b197e84bbada861235052c5a1...</td>
+      <td>[{'indexed': False, 'name': 'error', 'type': '...</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Transfer</td>
+      <td>Transfer(address,address,uint256)</td>
+      <td>0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4...</td>
+      <td>[{'indexed': True, 'name': 'from', 'type': 'ad...</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Approval</td>
+      <td>Approval(address,address,uint256)</td>
+      <td>0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2...</td>
+      <td>[{'indexed': True, 'name': 'owner', 'type': 'a...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="NFT%20Price%20Floor%20API%20Tutorial.html" class="btn btn-neutral float-left" title="NFT Price Floor Python API Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Roberto Talamas.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

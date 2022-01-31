@@ -39,7 +39,7 @@ def convert_flatten(response_json: Union[Dict, MutableMapping],
     return dict(items)
 
 
-def validate_input(asset_input: Union[str, List]):
+def validate_input(asset_input: Union[str, List]) -> List[str]:
     """Checks if input is list.
 
     :param asset_input: str, list
@@ -54,6 +54,21 @@ def validate_input(asset_input: Union[str, List]):
     else:
         raise ValueError("Input should be of type string or list")
 
+
+def validate_int(int_input: Union[int, List]) -> List[int]:
+    """Checks if input is list.
+
+    :param asset_input: int, list
+        Single int or list of ints
+    :return List of ints.
+    :raises ValueError if input is neither a int or list
+    """
+    if isinstance(int_input, int):
+        return [int_input]
+    elif isinstance(int_input, list):
+        return int_input
+    else:
+        raise ValueError("Input should be of type int or list")
 
 DATETIME_FORMAT = "%Y-%m-%d"
 

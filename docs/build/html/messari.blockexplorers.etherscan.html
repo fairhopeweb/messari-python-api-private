@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>messari.blockexplorers.etherscan package &mdash; Messari  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Messari
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Messari%20API%20Tutorial.html">Messari Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/DeFiLlama%20API%20Tutorial.html">DeFi Llama Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/TokenTerminal%20API%20Tutorial.html">Token Terminal Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/DeepDAO%20API%20Tutorial.html">DeepDAO Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Etherscan%20API%20Tutorial.html">EVM Blockexplorer API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Solscan%20API%20Tutorial.html">Solscan API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Upshot%20API%20Tutorial.html">Upshot Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/OpenSea%20API%20Tutorial.html">OpenSea Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/NonFungible%20API%20Tutorial.html">NonFungible Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/NFT%20Price%20Floor%20API%20Tutorial.html">NFT Price Floor Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Event%20Monitor%20Tutorial.html">Event Monitor Tutorial</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Messari</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>messari.blockexplorers.etherscan package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/messari.blockexplorers.etherscan.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="messari-blockexplorers-etherscan-package">
+<h1>messari.blockexplorers.etherscan package<a class="headerlink" href="#messari-blockexplorers-etherscan-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-messari.blockexplorers.etherscan.etherscan">
+<span id="messari-blockexplorers-etherscan-etherscan-module"></span><h2>messari.blockexplorers.etherscan.etherscan module<a class="headerlink" href="#module-messari.blockexplorers.etherscan.etherscan" title="Permalink to this headline"></a></h2>
+<p>This module is meant to contain the Etherscan class</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="messari.blockexplorers.etherscan.etherscan.Etherscan">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">messari.blockexplorers.etherscan.etherscan.</span></span><span class="sig-name descname"><span class="pre">Etherscan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#messari.blockexplorers.etherscan.etherscan.Etherscan" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="messari.blockexplorers.html#messari.blockexplorers.scanner.Scanner" title="messari.blockexplorers.scanner.Scanner"><code class="xref py py-class docutils literal notranslate"><span class="pre">messari.blockexplorers.scanner.Scanner</span></code></a></p>
+<p>This class is a wrapper around the Etherscan API</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_account_blocks_mined</span></code>(accounts_in[, ...])</p></td>
+<td><p>Returns the list of blocks mined by an address</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_account_internal_transactions</span></code>(accounts_in)</p></td>
+<td><p>Returns the list of internal transactions performed by an address</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_account_native_balance</span></code>(accounts_in)</p></td>
+<td><p>Returns the native token balance of a given address</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_account_nft_transfers</span></code>(accounts_in[, ...])</p></td>
+<td><p>Returns the list of ERC-721 ( NFT ) tokens transferred by an address, with optional filtering by token contract</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_account_normal_transactions</span></code>(accounts_in)</p></td>
+<td><p>Returns the list of transactions performed by an address, with optional pagination</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_account_token_transfers</span></code>(accounts_in[, ...])</p></td>
+<td><p>Returns the list of ERC-20 tokens transferred by an address, with optional filtering by token contract</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_block_by_timestamp</span></code>(times_in[, before])</p></td>
+<td><p>Returns the block number that was mined at a certain timestamp (in unix)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_block_countdown</span></code>(blocks_in)</p></td>
+<td><p>Returns the estimated time remaining, in seconds, until a certain block is mined</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_block_range_internal_transactions</span></code>(...[, ...])</p></td>
+<td><p>Returns the list of internal transactions performed within a block range Parameters ----------     start_block: int         block to start search     end_block: int         block to end search     page: int         Page number starting at 0. Increment value to paginate through results     offset: int         Offset starting at 0. Increment value to offset paginated results     ascending: bool         return results ascending or descending (default True).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_block_reward</span></code>(blocks_in)</p></td>
+<td><p>Returns the block reward and 'Uncle' block rewards</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_contract_abi</span></code>(contracts_in)</p></td>
+<td><p>Returns the Contract Application Binary Interface (ABI) of a verified smart contract</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_contract_execution_status</span></code>(transactions_in)</p></td>
+<td><p>Returns the status code of a contract execution</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_contract_source_code</span></code>(contracts_in)</p></td>
+<td><p>Returns the Solidity source code of a verified smart contract</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_est_confirmation</span></code>(gas_price)</p></td>
+<td><p>Returns the estimated time, in seconds, for a transaction to be confirmed on the blockchain gas price in wei</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_eth_account_transaction_count</span></code>(accounts_in)</p></td>
+<td><p>Returns the number of transactions performed by an address</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_eth_block</span></code>(blocks_in)</p></td>
+<td><p>Returns information about a block by block number</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_eth_block_number</span></code>()</p></td>
+<td><p>Returns the number of most recent block</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_eth_block_transaction_count</span></code>(blocks_in)</p></td>
+<td><p>Returns the number of transactions in a block</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_eth_gas_price</span></code>()</p></td>
+<td><p>Returns the current price per gas in wei</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_eth_transaction_by_block_index</span></code>(block, index)</p></td>
+<td><p>Returns information about a transaction by block number and transaction index position</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_eth_transaction_by_hash</span></code>(transactions_in)</p></td>
+<td><p>Returns the information about a transaction requested by transaction hash</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_eth_transaction_receipt</span></code>(transactions_in)</p></td>
+<td><p>Returns the receipt of a transaction by transaction hash</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_eth_uncle</span></code>(block, index)</p></td>
+<td><p>Returns information about an uncle by block number and index</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_gas_oracle</span></code>()</p></td>
+<td><p>Returns the current Safe, Proposed and Fast gas prices</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.blockexplorers.etherscan.etherscan.Etherscan.get_last_eth_price" title="messari.blockexplorers.etherscan.etherscan.Etherscan.get_last_eth_price"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_last_eth_price</span></code></a>()</p></td>
+<td><p>Returns the latest price of 1 ETH in BTC &amp; USD</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_logs</span></code>(address, from_block[, to_block, ...])</p></td>
+<td><p>This function is a wrapper around the Etherscan API which is a wrapper around the native eth_getLogs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.blockexplorers.etherscan.etherscan.Etherscan.get_nodes_size" title="messari.blockexplorers.etherscan.etherscan.Etherscan.get_nodes_size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_nodes_size</span></code></a>(start_date, end_date[, ...])</p></td>
+<td><p>Returns the size of the Ethereum blockchain, in bytes, over a date range</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_response</span></code>(endpoint_url[, params, headers])</p></td>
+<td><p>Gets response from endpoint and checks for HTTP errors when requesting data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_token_account_balance</span></code>(tokens_in, accounts_in)</p></td>
+<td><p>Returns the current balance of an ERC-20 token of an address</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_token_total_supply</span></code>(tokens_in)</p></td>
+<td><p>Returns the current amount of an ERC-20 token in circulation</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.blockexplorers.etherscan.etherscan.Etherscan.get_total_eth2_supply" title="messari.blockexplorers.etherscan.etherscan.Etherscan.get_total_eth2_supply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_total_eth2_supply</span></code></a>()</p></td>
+<td><p>Returns the current amount of Ether in circulation, ETH2 Staking rewards and EIP1559 burnt fees statistics</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.blockexplorers.etherscan.etherscan.Etherscan.get_total_eth_supply" title="messari.blockexplorers.etherscan.etherscan.Etherscan.get_total_eth_supply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_total_eth_supply</span></code></a>()</p></td>
+<td><p>Returns the current amount of Ether in circulation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.blockexplorers.etherscan.etherscan.Etherscan.get_total_nodes_count" title="messari.blockexplorers.etherscan.etherscan.Etherscan.get_total_nodes_count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_total_nodes_count</span></code></a>()</p></td>
+<td><p>Returns the total number of discoverable Ethereum nodes</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_transaction_execution_status</span></code>(transactions_in)</p></td>
+<td><p>Returns the status code of a transaction execution.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_transaction_internal_transactions</span></code>(...)</p></td>
+<td><p>Returns the list of internal transactions performed within a transaction Parameters ----------     transactions_in: str, List         single transaction in or list of transactions in</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_api_dict</span></code>(api_dict)</p></td>
+<td><p>Sets a new dictionary to be used as an API key pair</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_taxonomy_dict</span></code>(taxonomy_dict)</p></td>
+<td><p>Sets a new dictionary to be used for taxonomy translations</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code>(input_slugs)</p></td>
+<td><p>Wrapper around messari.utils.validate_input, validate input &amp; check if it's supported by DeFi Llama</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.etherscan.etherscan.Etherscan.get_last_eth_price">
+<span class="sig-name descname"><span class="pre">get_last_eth_price</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.etherscan.etherscan.Etherscan.get_last_eth_price" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the latest price of 1 ETH in BTC &amp; USD</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with current eth price</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.etherscan.etherscan.Etherscan.get_nodes_size">
+<span class="sig-name descname"><span class="pre">get_nodes_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">datetime.datetime</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">datetime.datetime</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'geth'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sync_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'archive'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ascending</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.etherscan.etherscan.Etherscan.get_nodes_size" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the size of the Ethereum blockchain, in bytes, over a date range</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>start_date: str, datetime.datetime</strong></dt><dd><blockquote>
+<div><p>starting date for node</p>
+</div></blockquote>
+<dl class="simple">
+<dt>end_date: str, datetime.datetime</dt><dd><p>ending date for node</p>
+</dd>
+<dt>client_type: str (default ‘geth’)</dt><dd><p>type of client (‘geth’, ‘parity’)</p>
+</dd>
+<dt>sync_mode: str (default ‘archive’)</dt><dd><p>type of node (‘default’, ‘archive’)</p>
+</dd>
+<dt>ascending: bool</dt><dd><p>return results ascending or descending (default True)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with information about node size for given period &amp; node type</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.etherscan.etherscan.Etherscan.get_total_eth2_supply">
+<span class="sig-name descname"><span class="pre">get_total_eth2_supply</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.blockexplorers.etherscan.etherscan.Etherscan.get_total_eth2_supply" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the current amount of Ether in circulation,
+ETH2 Staking rewards and EIP1559 burnt fees statistics</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with current amount of eth2 circulating</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.etherscan.etherscan.Etherscan.get_total_eth_supply">
+<span class="sig-name descname"><span class="pre">get_total_eth_supply</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#messari.blockexplorers.etherscan.etherscan.Etherscan.get_total_eth_supply" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the current amount of Ether in circulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with current amount of eth circulating</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.blockexplorers.etherscan.etherscan.Etherscan.get_total_nodes_count">
+<span class="sig-name descname"><span class="pre">get_total_nodes_count</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#messari.blockexplorers.etherscan.etherscan.Etherscan.get_total_nodes_count" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the total number of discoverable Ethereum nodes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>int</dt><dd><p>number of discoverable nodes</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-messari.blockexplorers.etherscan">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-messari.blockexplorers.etherscan" title="Permalink to this headline"></a></h2>
+<p>Module to handle initialization, imports, for Etherscan class</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Roberto Talamas.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

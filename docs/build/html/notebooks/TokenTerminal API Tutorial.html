@@ -16,11 +16,12 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="DeepDAO Python API Tutorial" href="DeepDAO%20API%20Tutorial.html" />
     <link rel="prev" title="DeFi Llama Python API Tutorial" href="DeFiLlama%20API%20Tutorial.html" /> 
 </head>
 
@@ -51,6 +52,14 @@
 <li class="toctree-l2"><a class="reference internal" href="#Get-historical-metric-data">Get historical metric data</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="DeepDAO%20API%20Tutorial.html">DeepDAO Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Etherscan%20API%20Tutorial.html">EVM Blockexplorer API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Solscan%20API%20Tutorial.html">Solscan API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upshot%20API%20Tutorial.html">Upshot Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="OpenSea%20API%20Tutorial.html">OpenSea Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NonFungible%20API%20Tutorial.html">NonFungible Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NFT%20Price%20Floor%20API%20Tutorial.html">NFT Price Floor Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Event%20Monitor%20Tutorial.html">Event Monitor Tutorial</a></li>
 </ul>
 
         </div>
@@ -287,7 +296,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt a.copybtn {
+.prompt .copybtn {
     display: none;
 }
 
@@ -356,10 +365,9 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>from messari.tokenterminal import TokenTerminal
-API_KEY = &#39;YOUR_API_KEY&#39;
-tt = TokenTerminal(api_key=API_KEY)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">messari.tokenterminal</span> <span class="kn">import</span> <span class="n">TokenTerminal</span>
+<span class="n">API_KEY</span> <span class="o">=</span> <span class="s1">&#39;YOUR_API_KEY&#39;</span>
+<span class="n">tt</span> <span class="o">=</span> <span class="n">TokenTerminal</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">API_KEY</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -381,9 +389,8 @@ tt = TokenTerminal(api_key=API_KEY)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>project_ids = tt.get_project_ids()
-print(project_ids)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">project_ids</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">get_project_ids</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">project_ids</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -403,9 +410,8 @@ print(project_ids)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>all_protocol_data = tt.get_all_protocol_data()
-all_protocol_data
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_protocol_data</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">get_all_protocol_data</span><span class="p">()</span>
+<span class="n">all_protocol_data</span>
 </pre></div>
 </div>
 </div>
@@ -733,12 +739,11 @@ all_protocol_data
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>protocols = [&#39;uniswap&#39;]
-start_date = &quot;2021-10-01&quot;
-end_date = &quot;2021-10-10&quot;
-protocol_data = tt.get_protocol_data(protocols, start_date=start_date, end_date=end_date)
-protocol_data
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">protocols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;uniswap&#39;</span><span class="p">]</span>
+<span class="n">start_date</span> <span class="o">=</span> <span class="s2">&quot;2021-10-01&quot;</span>
+<span class="n">end_date</span> <span class="o">=</span> <span class="s2">&quot;2021-10-10&quot;</span>
+<span class="n">protocol_data</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">get_protocol_data</span><span class="p">(</span><span class="n">protocols</span><span class="p">,</span> <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">)</span>
+<span class="n">protocol_data</span>
 </pre></div>
 </div>
 </div>
@@ -1043,10 +1048,9 @@ protocol_data
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>protocols = [&#39;uniswap&#39;, &#39;compound&#39;]
-protocols_data = tt.get_protocol_data(protocols, start_date=start_date, end_date=end_date)
-protocols_data
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">protocols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;uniswap&#39;</span><span class="p">,</span> <span class="s1">&#39;compound&#39;</span><span class="p">]</span>
+<span class="n">protocols_data</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">get_protocol_data</span><span class="p">(</span><span class="n">protocols</span><span class="p">,</span> <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">)</span>
+<span class="n">protocols_data</span>
 </pre></div>
 </div>
 </div>
@@ -1353,8 +1357,7 @@ protocols_data
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>protocols_data[&#39;compound&#39;]
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">protocols_data</span><span class="p">[</span><span class="s1">&#39;compound&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1662,11 +1665,10 @@ protocols_data
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>metric =  &quot;market_cap&quot;
-historical_mktcap = tt.get_historical_metric_data(protocols, metric=metric,
-                                                  start_date=start_date, end_date=end_date)
-historical_mktcap
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metric</span> <span class="o">=</span>  <span class="s2">&quot;market_cap&quot;</span>
+<span class="n">historical_mktcap</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">get_historical_metric_data</span><span class="p">(</span><span class="n">protocols</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span>
+                                                  <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">)</span>
+<span class="n">historical_mktcap</span>
 </pre></div>
 </div>
 </div>
@@ -1760,6 +1762,7 @@ historical_mktcap
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="DeFiLlama%20API%20Tutorial.html" class="btn btn-neutral float-left" title="DeFi Llama Python API Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="DeepDAO%20API%20Tutorial.html" class="btn btn-neutral float-right" title="DeepDAO Python API Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

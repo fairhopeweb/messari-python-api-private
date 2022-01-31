@@ -1,26 +1,43 @@
 messari package
-***************
-
-Messari Class
-=============
-
-.. autoclass:: messari.messari.messari.Messari
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-DeFiLlama Class
 ===============
 
-.. autoclass:: messari.defillama.defillama.DeFiLlama
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   messari.blockexplorers
+   messari.deepdao
+   messari.defillama
+   messari.eventmonitor
+   messari.messari
+   messari.nfts
+   messari.tokenterminal
+
+Submodules
+----------
+
+messari.dataloader module
+-------------------------
+
+.. automodule:: messari.dataloader
    :members:
    :undoc-members:
    :show-inheritance:
 
-TokenTerminal Class
-===================
+messari.utils module
+--------------------
 
-.. autoclass:: messari.tokenterminal.tokenterminal.TokenTerminal
+.. automodule:: messari.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: messari
    :members:
    :undoc-members:
    :show-inheritance:

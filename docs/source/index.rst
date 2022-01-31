@@ -59,6 +59,31 @@ Once you generate an API key, import messari then set your API key by running::
 
       pip install jupyterlab
 
+Integrations
+============
+Messari API
+ Data aggregator
+DeFi Llama API
+ Data for chain & protocol TVL
+Token Terminal API
+ Crypto Analytics Platform with Advanced Metrics & Tools
+Deep DAO API
+ DAO analytics insights for a decentralized world
+Etherscan, Polygonscan, Arbiscan, FTMscan, BSCscan, & SnowTrace
+ EVM Block Explorers
+Solscan API
+ Solana Block Explorer
+Upshot API
+ Where NFTs meet DeFi
+NonFungible API
+ Real time digital asset tracking to help you to navigate NFT markets with transparency and confidence
+OpenSea API
+ A peer-to-peer marketplace for NFTs, rare digital items and crypto collectibles
+NFT Floor Price API
+ Track top NFT collections: price floor, historical price chart, sales data & trade volume
+EVM Live Event Monitoring
+ Monitor and gather on-chain events
+
 Usage
 =====
 
@@ -73,6 +98,14 @@ Check out our examples `here <https://github.com/messari/messari-python-api/blob
    notebooks/Messari API Tutorial.ipynb
    notebooks/DeFiLlama API Tutorial.ipynb
    notebooks/TokenTerminal API Tutorial.ipynb
+   notebooks/DeepDAO API Tutorial.ipynb
+   notebooks/Etherscan API Tutorial.ipynb
+   notebooks/Solscan API Tutorial.ipynb
+   notebooks/Upshot API Tutorial.ipynb
+   notebooks/OpenSea API Tutorial.ipynb
+   notebooks/NonFungible API Tutorial.ipynb
+   notebooks/NFT Price Floor API Tutorial.ipynb
+   notebooks/Event Monitor Tutorial.ipynb
 
 
 Indices and tables

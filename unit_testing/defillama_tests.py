@@ -1,3 +1,5 @@
+"""Unit Tests for the DeFiLlama class"""
+
 import unittest
 from messari.defillama import DeFiLlama
 import pandas as pd

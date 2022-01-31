@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>messari.defillama package &mdash; Messari  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Messari
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Messari%20API%20Tutorial.html">Messari Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/DeFiLlama%20API%20Tutorial.html">DeFi Llama Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/TokenTerminal%20API%20Tutorial.html">Token Terminal Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/DeepDAO%20API%20Tutorial.html">DeepDAO Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Etherscan%20API%20Tutorial.html">EVM Blockexplorer API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Solscan%20API%20Tutorial.html">Solscan API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Upshot%20API%20Tutorial.html">Upshot Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/OpenSea%20API%20Tutorial.html">OpenSea Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/NonFungible%20API%20Tutorial.html">NonFungible Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/NFT%20Price%20Floor%20API%20Tutorial.html">NFT Price Floor Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Event%20Monitor%20Tutorial.html">Event Monitor Tutorial</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Messari</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>messari.defillama package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/messari.defillama.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="messari-defillama-package">
+<h1>messari.defillama package<a class="headerlink" href="#messari-defillama-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-messari.defillama.defillama">
+<span id="messari-defillama-defillama-module"></span><h2>messari.defillama.defillama module<a class="headerlink" href="#module-messari.defillama.defillama" title="Permalink to this headline"></a></h2>
+<p>This module is meant to contain the DeFiLlama class</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="messari.defillama.defillama.DeFiLlama">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">messari.defillama.defillama.</span></span><span class="sig-name descname"><span class="pre">DeFiLlama</span></span><a class="headerlink" href="#messari.defillama.defillama.DeFiLlama" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="messari.html#messari.dataloader.DataLoader" title="messari.dataloader.DataLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">messari.dataloader.DataLoader</span></code></a></p>
+<p>This class is a wrapper around the DeFi Llama API</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.defillama.defillama.DeFiLlama.get_chain_tvl_timeseries" title="messari.defillama.defillama.DeFiLlama.get_chain_tvl_timeseries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_chain_tvl_timeseries</span></code></a>(chains_in[, ...])</p></td>
+<td><p>Retrive timeseries TVL for a given chain</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.defillama.defillama.DeFiLlama.get_current_tvl" title="messari.defillama.defillama.DeFiLlama.get_current_tvl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_current_tvl</span></code></a>(asset_slugs)</p></td>
+<td><p>Retrive current protocol tvl for an asset</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.defillama.defillama.DeFiLlama.get_global_tvl_timeseries" title="messari.defillama.defillama.DeFiLlama.get_global_tvl_timeseries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_global_tvl_timeseries</span></code></a>([start_date, end_date])</p></td>
+<td><p>Returns timeseries TVL from total of all Defi Llama supported protocols</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.defillama.defillama.DeFiLlama.get_protocol_tvl_timeseries" title="messari.defillama.defillama.DeFiLlama.get_protocol_tvl_timeseries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_protocol_tvl_timeseries</span></code></a>(asset_slugs[, ...])</p></td>
+<td><p>Returns times TVL of a protocol with token amounts as a pandas DataFrame.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.defillama.defillama.DeFiLlama.get_protocols" title="messari.defillama.defillama.DeFiLlama.get_protocols"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_protocols</span></code></a>()</p></td>
+<td><p>Returns basic information on all listed protocols, their current TVL and the changes to it in the last hour/day/week</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_response</span></code>(endpoint_url[, params, headers])</p></td>
+<td><p>Gets response from endpoint and checks for HTTP errors when requesting data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_api_dict</span></code>(api_dict)</p></td>
+<td><p>Sets a new dictionary to be used as an API key pair</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_taxonomy_dict</span></code>(taxonomy_dict)</p></td>
+<td><p>Sets a new dictionary to be used for taxonomy translations</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code>(input_slugs)</p></td>
+<td><p>Wrapper around messari.utils.validate_input, validate input &amp; check if it's supported by DeFi Llama</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.defillama.defillama.DeFiLlama.get_chain_tvl_timeseries">
+<span class="sig-name descname"><span class="pre">get_chain_tvl_timeseries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chains_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">datetime.datetime</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">datetime.datetime</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.defillama.defillama.DeFiLlama.get_chain_tvl_timeseries" title="Permalink to this definition"></a></dt>
+<dd><p>Retrive timeseries TVL for a given chain</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>chains_in: str, list</strong></dt><dd><blockquote>
+<div><p>Single asset slug string or list of asset slugs (i.e. bitcoin)</p>
+</div></blockquote>
+<dl class="simple">
+<dt>start_date: str, datetime.datetime</dt><dd><p>Optional start date to set filter for tvl timeseries (“YYYY-MM-DD”)</p>
+</dd>
+<dt>end_date: str, datetime.datetime</dt><dd><p>Optional end date to set filter for tvl timeseries (“YYYY-MM-DD”)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame containing timeseries tvl data for each chain</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.defillama.defillama.DeFiLlama.get_current_tvl">
+<span class="sig-name descname"><span class="pre">get_current_tvl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asset_slugs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#messari.defillama.defillama.DeFiLlama.get_current_tvl" title="Permalink to this definition"></a></dt>
+<dd><p>Retrive current protocol tvl for an asset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>asset_slugs: str, list</strong></dt><dd><p>Single asset slug string or list of asset slugs (i.e. bitcoin)</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>Pandas Series for tvl indexed by each slug {slug: tvl, …}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.defillama.defillama.DeFiLlama.get_global_tvl_timeseries">
+<span class="sig-name descname"><span class="pre">get_global_tvl_timeseries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">datetime.datetime</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">datetime.datetime</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.defillama.defillama.DeFiLlama.get_global_tvl_timeseries" title="Permalink to this definition"></a></dt>
+<dd><p>Returns timeseries TVL from total of all Defi Llama supported protocols</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>start_date: str, datetime.datetime</strong></dt><dd><blockquote>
+<div><p>Optional start date to set filter for tvl timeseries (“YYYY-MM-DD”)</p>
+</div></blockquote>
+<dl class="simple">
+<dt>end_date: str, datetime.datetime</dt><dd><p>Optional end date to set filter for tvl timeseries (“YYYY-MM-DD”)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame containing timeseries tvl data for every protocol</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.defillama.defillama.DeFiLlama.get_protocol_tvl_timeseries">
+<span class="sig-name descname"><span class="pre">get_protocol_tvl_timeseries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asset_slugs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">datetime.datetime</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">datetime.datetime</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.defillama.defillama.DeFiLlama.get_protocol_tvl_timeseries" title="Permalink to this definition"></a></dt>
+<dd><p>Returns times TVL of a protocol with token amounts as a pandas DataFrame.
+Returned DataFrame is indexed by df[protocol][chain][asset].</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>asset_slugs: str, list</strong></dt><dd><blockquote>
+<div><p>Single asset slug string or list of asset slugs (i.e. bitcoin)</p>
+</div></blockquote>
+<dl class="simple">
+<dt>start_date: str, datetime.datetime</dt><dd><p>Optional start date to set filter for tvl timeseries (“YYYY-MM-DD”)</p>
+</dd>
+<dt>end_date: str, datetime.datetime</dt><dd><p>Optional end date to set filter for tvl timeseries (“YYYY-MM-DD”)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>pandas DataFrame of protocol TVL, indexed by df[protocol][chain][asset]
+to look at total tvl across all chains, index with chain=’all’
+to look at total tvl across all tokens of a chain, asset=’totalLiquidityUSD’
+tokens can be indexed by asset=’tokenName’ or by asset=’tokenName_usd’</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="messari.defillama.defillama.DeFiLlama.get_protocols">
+<span class="sig-name descname"><span class="pre">get_protocols</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.defillama.defillama.DeFiLlama.get_protocols" title="Permalink to this definition"></a></dt>
+<dd><p>Returns basic information on all listed protocols, their current TVL
+and the changes to it in the last hour/day/week</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with one column per DeFi Llama supported protocol</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-messari.defillama.helpers">
+<span id="messari-defillama-helpers-module"></span><h2>messari.defillama.helpers module<a class="headerlink" href="#module-messari.defillama.helpers" title="Permalink to this headline"></a></h2>
+<p>This module is dedicated to helpers for the DeFiLlama class</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="messari.defillama.helpers.format_df">
+<span class="sig-prename descclassname"><span class="pre">messari.defillama.helpers.</span></span><span class="sig-name descname"><span class="pre">format_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.defillama.helpers.format_df" title="Permalink to this definition"></a></dt>
+<dd><p>format a typical DF from DL, replace date &amp; drop duplicates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>df_in: pd.DataFrame</strong></dt><dd><p>input DataFrame</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>formated pandas DataFrame</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-messari.defillama">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-messari.defillama" title="Permalink to this headline"></a></h2>
+<p>Module to handle initialization, imports, for DeFiLlama class</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Roberto Talamas.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
