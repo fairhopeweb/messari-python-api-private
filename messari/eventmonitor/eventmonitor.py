@@ -200,16 +200,31 @@ class EventMonitor:
 
             # logs is a tuple
             for log in logs:
-                event_dict = {'args': dict(log['args']),
-                              'event': log['event'],
-                              'transaction': log['transactionHash'].hex(),
-                              'log_index': log['logIndex'],
-                              'transaction_index': log['transactionIndex'],
-                              'address': log['address'],
-                              'block_number': log['blockNumber'],
-                              'block': log['blockHash'].hex()}
-                self.events_list.append(event_dict)
-                self.event_tuples.append(event_tuple)
+                #### filter by topic
+                if hasattr(self, 'event_names'):
+                    if log['event'] in self.event_names:
+                        event_dict = {'args': dict(log['args']),
+                                      'event': log['event'],
+                                      'transaction': log['transactionHash'].hex(),
+                                      'log_index': log['logIndex'],
+                                      'transaction_index': log['transactionIndex'],
+                                      'address': log['address'],
+                                      'block_number': log['blockNumber'],
+                                      'block': log['blockHash'].hex()}
+                        self.events_list.append(event_dict)
+                        self.event_tuples.append(event_tuple)
+                else:
+                    event_dict = {'args': dict(log['args']),
+                                  'event': log['event'],
+                                  'transaction': log['transactionHash'].hex(),
+                                  'log_index': log['logIndex'],
+                                  'transaction_index': log['transactionIndex'],
+                                  'address': log['address'],
+                                  'block_number': log['blockNumber'],
+                                  'block': log['blockHash'].hex()}
+                    self.events_list.append(event_dict)
+                    self.event_tuples.append(event_tuple)
+
         # TODO get type for this except clause
         except: # pylint: disable=bare-except
             logging.error('event handler error')

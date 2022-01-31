@@ -10,7 +10,7 @@ For any bugs, feature//integration requests, or asssistance reach out to:
 Roberto Talamas or Michael Kremer on slack.
 
 ---
-## Integrations
+### Integrations
 * Messari API
 * DeFi Llama API
 * Token Terminal API
@@ -24,7 +24,7 @@ Roberto Talamas or Michael Kremer on slack.
 * EVM Live Event Monitoring
 
 ---
-## Remote Install
+### Remote Install
 To install the messari package remotely run this inside of any unix terminal:
 
 ```
@@ -33,7 +33,7 @@ $> pip install git+https://github.com/messari/messari-python-api-private.git
 
 
 ---
-## Local Install
+### Local Install
 To install the messari package from the source:
 ```
 $> git clone https://github.com/messari/messari-python-api-private.git
@@ -43,7 +43,7 @@ messari-python-api-private$> python setup.py install
 ```
 
 ---
-## Quickstart
+### Quickstart
 For a quick demo, you can try the following:
 ```
 $> python
@@ -60,7 +60,7 @@ markets_df.head()
 ```
 
 ---
-## Docs
+### Docs
 To open the offical docs go [here](https://zen-villani-1ab617.netlify.app/).
 
 Examples can be found in [this](https://github.com/messari/messari-python-api-private/blob/master/examples/Messari%20API%20Tutorial.ipynb) Jupyter Notebook. 
