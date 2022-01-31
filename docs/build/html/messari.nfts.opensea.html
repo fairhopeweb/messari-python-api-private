@@ -41,7 +41,7 @@
 <li class="toctree-l1"><a class="reference internal" href="notebooks/Messari%20API%20Tutorial.html">Messari Python API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/DeFiLlama%20API%20Tutorial.html">DeFi Llama Python API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/TokenTerminal%20API%20Tutorial.html">Token Terminal Python API Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/DeepDAO%20API%20Tutorial.html">Deep DAO Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/DeepDAO%20API%20Tutorial.html">DeepDAO Python API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/Etherscan%20API%20Tutorial.html">EVM Blockexplorer API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/Solscan%20API%20Tutorial.html">Solscan API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/Upshot%20API%20Tutorial.html">Upshot Python API Tutorial</a></li>
@@ -122,34 +122,25 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#messari.nfts.opensea.opensea.OpenSea.get_asset" title="messari.nfts.opensea.opensea.OpenSea.get_asset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_asset</span></code></a>(contracts_in, assets_in[, account])</p></td>
 <td><p>Used to fetch more in-depth information about an individual asset</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#messari.nfts.opensea.opensea.OpenSea.get_bundle" title="messari.nfts.opensea.opensea.OpenSea.get_bundle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_bundle</span></code></a>()</p></td>
-<td><p>Bundles are groups of items for sale on OpenSea.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#messari.nfts.opensea.opensea.OpenSea.get_collection" title="messari.nfts.opensea.opensea.OpenSea.get_collection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_collection</span></code></a>(collections_in)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.nfts.opensea.opensea.OpenSea.get_collection" title="messari.nfts.opensea.opensea.OpenSea.get_collection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_collection</span></code></a>(collections_in)</p></td>
 <td><p>Used for retrieving more in-depth information about individual collections, including real time statistics like floor price</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#messari.nfts.opensea.opensea.OpenSea.get_collection_stats" title="messari.nfts.opensea.opensea.OpenSea.get_collection_stats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_collection_stats</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#messari.nfts.opensea.opensea.OpenSea.get_collection_stats" title="messari.nfts.opensea.opensea.OpenSea.get_collection_stats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_collection_stats</span></code></a>(collections_in)</p></td>
 <td><p>fetch stats for a specific collection, including realtime floor price statistics</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#messari.nfts.opensea.opensea.OpenSea.get_contract" title="messari.nfts.opensea.opensea.OpenSea.get_contract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_contract</span></code></a>(contracts_in)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#messari.nfts.opensea.opensea.OpenSea.get_contract" title="messari.nfts.opensea.opensea.OpenSea.get_contract"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_contract</span></code></a>(contracts_in)</p></td>
 <td><p>Used to fetch more in-depth information about an contract asset</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#messari.nfts.opensea.opensea.OpenSea.get_events" title="messari.nfts.opensea.opensea.OpenSea.get_events"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_events</span></code></a>()</p></td>
-<td><p>provides a list of events that occur on the assets that OpenSea tracks</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#messari.nfts.opensea.opensea.OpenSea.get_orders" title="messari.nfts.opensea.opensea.OpenSea.get_orders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_orders</span></code></a>()</p></td>
-<td><p>fetch orders from the OpenSea system</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_response</span></code>(endpoint_url[, params, headers])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_response</span></code>(endpoint_url[, params, headers])</p></td>
 <td><p>Gets response from endpoint and checks for HTTP errors when requesting data.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_api_dict</span></code>(api_dict)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_api_dict</span></code>(api_dict)</p></td>
 <td><p>Sets a new dictionary to be used as an API key pair</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_taxonomy_dict</span></code>(taxonomy_dict)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_taxonomy_dict</span></code>(taxonomy_dict)</p></td>
 <td><p>Sets a new dictionary to be used for taxonomy translations</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code>(input_slugs)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code>(input_slugs)</p></td>
 <td><p>Wrapper around messari.utils.validate_input, validate input &amp; check if it's supported by DeFi Llama</p></td>
 </tr>
 </tbody>
@@ -158,15 +149,20 @@
 <dt class="sig sig-object py" id="messari.nfts.opensea.opensea.OpenSea.get_asset">
 <span class="sig-name descname"><span class="pre">get_asset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contracts_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assets_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">account</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.opensea.opensea.OpenSea.get_asset" title="Permalink to this definition"></a></dt>
 <dd><p>Used to fetch more in-depth information about an individual asset</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="messari.nfts.opensea.opensea.OpenSea.get_bundle">
-<span class="sig-name descname"><span class="pre">get_bundle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.opensea.opensea.OpenSea.get_bundle" title="Permalink to this definition"></a></dt>
-<dd><p>Bundles are groups of items for sale on OpenSea.
-You can buy them all at once in one transaction,
-and you can create them without any transactions or gas,
-as long as you’ve already approved the assets inside.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>contracts_in: str, List</strong></dt><dd><p>single contract address in or list of contract addresses</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with asset info</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -174,30 +170,60 @@ as long as you’ve already approved the assets inside.</p>
 <span class="sig-name descname"><span class="pre">get_collection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collections_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.opensea.opensea.OpenSea.get_collection" title="Permalink to this definition"></a></dt>
 <dd><p>Used for retrieving more in-depth information about individual collections,
 including real time statistics like floor price</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>collections_in: str, List</strong></dt><dd><p>single collection name in or list of collection names</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with collection info</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="messari.nfts.opensea.opensea.OpenSea.get_collection_stats">
-<span class="sig-name descname"><span class="pre">get_collection_stats</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.opensea.opensea.OpenSea.get_collection_stats" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_collection_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collections_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.opensea.opensea.OpenSea.get_collection_stats" title="Permalink to this definition"></a></dt>
 <dd><p>fetch stats for a specific collection, including realtime floor price statistics</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>collections_in: str, List</strong></dt><dd><p>single collection name in or list of collection names</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with collection stats</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="messari.nfts.opensea.opensea.OpenSea.get_contract">
 <span class="sig-name descname"><span class="pre">get_contract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contracts_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.opensea.opensea.OpenSea.get_contract" title="Permalink to this definition"></a></dt>
 <dd><p>Used to fetch more in-depth information about an contract asset</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="messari.nfts.opensea.opensea.OpenSea.get_events">
-<span class="sig-name descname"><span class="pre">get_events</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.opensea.opensea.OpenSea.get_events" title="Permalink to this definition"></a></dt>
-<dd><p>provides a list of events that occur on the assets that OpenSea tracks</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="messari.nfts.opensea.opensea.OpenSea.get_orders">
-<span class="sig-name descname"><span class="pre">get_orders</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pandas.core.frame.DataFrame</span></span></span><a class="headerlink" href="#messari.nfts.opensea.opensea.OpenSea.get_orders" title="Permalink to this definition"></a></dt>
-<dd><p>fetch orders from the OpenSea system</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>contracts_in: str, List</strong></dt><dd><p>single contract address in or list of contract addresses</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>DataFrame</dt><dd><p>DataFrame with contract info</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

@@ -45,7 +45,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Messari%20API%20Tutorial.html">Messari Python API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DeFiLlama%20API%20Tutorial.html">DeFi Llama Python API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="TokenTerminal%20API%20Tutorial.html">Token Terminal Python API Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="DeepDAO%20API%20Tutorial.html">Deep DAO Python API Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DeepDAO%20API%20Tutorial.html">DeepDAO Python API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Etherscan%20API%20Tutorial.html">EVM Blockexplorer API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Solscan%20API%20Tutorial.html">Solscan API Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Upshot%20API%20Tutorial.html">Upshot Python API Tutorial</a></li>
@@ -55,10 +55,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#get_asset">get_asset</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#get_contract">get_contract</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#get_collection">get_collection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#get_events">get_events</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#get_bundle">get_bundle</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#get_collection_stats">get_collection_stats</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#get_orders">get_orders</a></li>
 </ul>
 </li>
 </ul>
@@ -375,7 +372,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collections</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;doodles-official&#39;</span><span class="p">,</span><span class="s1">&#39;phrocks&#39;</span><span class="p">]</span>
@@ -1494,7 +1491,7 @@ div.rendered_html tbody tr:hover {
 <h3>get_collection<a class="headerlink" href="#get_collection" title="Permalink to this headline"></a></h3>
 <p>Used for retrieving more in-depth information about individual collections, including real time statistics like floor price</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collection</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">get_collection</span><span class="p">(</span><span class="n">collections_in</span><span class="o">=</span><span class="n">collections</span><span class="p">)</span>
@@ -1503,7 +1500,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -1652,8 +1649,8 @@ div.rendered_html tbody tr:hover {
     </tr>
     <tr>
       <th>payment_tokens</th>
-      <td>[{'id': 13689077, 'symbol': 'ETH', 'address': ...</td>
-      <td>[{'id': 13689077, 'symbol': 'ETH', 'address': ...</td>
+      <td>[{'id': 4645681, 'symbol': 'WETH', 'address': ...</td>
+      <td>[{'id': 4645681, 'symbol': 'WETH', 'address': ...</td>
     </tr>
     <tr>
       <th>payout_address</th>
@@ -1687,8 +1684,8 @@ div.rendered_html tbody tr:hover {
     </tr>
     <tr>
       <th>stats</th>
-      <td>{'one_day_volume': 4390.5320999999985, 'one_da...</td>
-      <td>{'one_day_volume': 0.0, 'one_day_change': 0.0,...</td>
+      <td>{'one_day_volume': 1854.2732000000003, 'one_da...</td>
+      <td>{'one_day_volume': 0.95, 'one_day_change': 0.0...</td>
     </tr>
     <tr>
       <th>telegram_url</th>
@@ -1715,56 +1712,154 @@ div.rendered_html tbody tr:hover {
 </div></div>
 </div>
 </section>
-<section id="get_events">
-<h3>get_events<a class="headerlink" href="#get_events" title="Permalink to this headline"></a></h3>
-<p>provides a list of events that occur on the assets that OpenSea tracks</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">events</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">get_events</span><span class="p">()</span>
-<span class="n">events</span>
-</pre></div>
-</div>
-</div>
-</section>
-<section id="get_bundle">
-<h3>get_bundle<a class="headerlink" href="#get_bundle" title="Permalink to this headline"></a></h3>
-<p>Bundles are groups of items for sale on OpenSea. You can buy them all at once in one transaction, and you can create them without any transactions or gas, as long as you’ve already approved the assets inside.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bundle</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">get_bundle</span><span class="p">()</span>
-<span class="n">bundle</span>
-</pre></div>
-</div>
-</div>
-</section>
 <section id="get_collection_stats">
 <h3>get_collection_stats<a class="headerlink" href="#get_collection_stats" title="Permalink to this headline"></a></h3>
 <p>Fetch stats for a specific collection, including realtime floor price statistics</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collection_stats</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">get_collection_stats</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collection_stats</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">get_collection_stats</span><span class="p">(</span><span class="n">collections</span><span class="p">)</span>
 <span class="n">collection_stats</span>
 </pre></div>
 </div>
 </div>
-</section>
-<section id="get_orders">
-<h3>get_orders<a class="headerlink" href="#get_orders" title="Permalink to this headline"></a></h3>
-<p>Fetch orders from the OpenSea system</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orders</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">get_orders</span><span class="p">()</span>
-<span class="n">orders</span>
-</pre></div>
-</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>doodles-official</th>
+      <th>phrocks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>average_price</th>
+      <td>3.818139</td>
+      <td>4.665000</td>
+    </tr>
+    <tr>
+      <th>count</th>
+      <td>10000.000000</td>
+      <td>78.000000</td>
+    </tr>
+    <tr>
+      <th>floor_price</th>
+      <td>14.150000</td>
+      <td>0.490000</td>
+    </tr>
+    <tr>
+      <th>market_cap</th>
+      <td>130241.020634</td>
+      <td>74.100000</td>
+    </tr>
+    <tr>
+      <th>num_owners</th>
+      <td>5933.000000</td>
+      <td>60.000000</td>
+    </tr>
+    <tr>
+      <th>num_reports</th>
+      <td>6.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>one_day_average_price</th>
+      <td>16.409497</td>
+      <td>0.950000</td>
+    </tr>
+    <tr>
+      <th>one_day_change</th>
+      <td>0.056728</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>one_day_sales</th>
+      <td>113.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>one_day_volume</th>
+      <td>1854.273200</td>
+      <td>0.950000</td>
+    </tr>
+    <tr>
+      <th>seven_day_average_price</th>
+      <td>13.024102</td>
+      <td>0.950000</td>
+    </tr>
+    <tr>
+      <th>seven_day_change</th>
+      <td>0.662375</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>seven_day_sales</th>
+      <td>473.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>seven_day_volume</th>
+      <td>6160.400276</td>
+      <td>0.950000</td>
+    </tr>
+    <tr>
+      <th>thirty_day_average_price</th>
+      <td>12.509946</td>
+      <td>0.950000</td>
+    </tr>
+    <tr>
+      <th>thirty_day_change</th>
+      <td>1.850069</td>
+      <td>1.878788</td>
+    </tr>
+    <tr>
+      <th>thirty_day_sales</th>
+      <td>2685.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>thirty_day_volume</th>
+      <td>33589.205642</td>
+      <td>0.950000</td>
+    </tr>
+    <tr>
+      <th>total_sales</th>
+      <td>18732.000000</td>
+      <td>8.000000</td>
+    </tr>
+    <tr>
+      <th>total_supply</th>
+      <td>10000.000000</td>
+      <td>78.000000</td>
+    </tr>
+    <tr>
+      <th>total_volume</th>
+      <td>71521.375860</td>
+      <td>37.320000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
 </div>
 </section>
 </section>
